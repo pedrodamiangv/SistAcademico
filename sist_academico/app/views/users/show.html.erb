@@ -1,0 +1,28 @@
+<% provide(:title, @user.nombre) %>
+<div class="row">
+<div class="span6 offset3">
+  <div class="cabezera">
+    <aside>
+      <section>
+        <h1>
+          Datos del Usuario
+        </h1>
+      </section>
+      <section>
+        <h1>
+          <%= @user.nombre %>
+        </h1>
+      </section>
+    </aside>
+  </div>
+  <div class="datos">
+    <p>Apellido: <%= @user.apellido %></p>
+    <p>Sexo: <%= @user.sexo %></p>
+    <p>Telefono: <%= @user.telefono %></p>
+    <p>Fecha de Nacimiento: <%= @user.fecha_nacimiento %></p>
+    <p>Lugar de Nacimiento<%= @user.lugar_nacimiento %></p>
+    <p>Direccion: <%= @user.direccion %></p>
+    <p>Edad: <%= @user.edad %></p>
+  </div>
+</div>
+</div>

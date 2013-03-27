@@ -1,0 +1,4 @@
+== Sistema Academico
+
+Para bundle usar: 
+bundle install --path .bundle

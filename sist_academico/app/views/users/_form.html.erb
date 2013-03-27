@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@user) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.label :nombre %>
+      <%= f.text_field :nombre %>
+
+      <%= f.label :apellido %>
+      <%= f.text_field :apellido %>
+
+      <%= f.label :sexo %>
+      <%= f.text_field :sexo %>
+
+      <%= f.label :telefono %>
+      <%= f.text_field :telefono %>
+
+      <%= f.label :fecha_nacimiento %>
+      <%= f.text_field :fecha_nacimiento %>
+
+      <%= f.label :lugar_nacimiento %>
+      <%= f.text_field :lugar_nacimiento %>
+
+      <%= f.label :direccion %>
+      <%= f.text_field :direccion %>
+
+      <%= f.label :edad %>
+      <%= f.text_field :edad %>
+
+      <%= f.label :username %>
+      <%= f.text_field :username %>
+
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+
+      <%= f.label :password_confirmation, "Confirmación" %>
+      <%= f.password_field :password_confirmation %>
+
+      <%= f.submit "Guardar", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>
