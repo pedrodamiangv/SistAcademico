@@ -1,0 +1,6 @@
+<%= form_for(@country) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <%= f.label :pais %><br />
+  <%= f.text_field :pais %>
+  <%= f.submit %>
+<% end %>

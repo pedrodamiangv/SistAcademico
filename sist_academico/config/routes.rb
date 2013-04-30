@@ -4,6 +4,9 @@ SistAcademico::Application.routes.draw do
   get "signup" => "users#new", :as => "signup"
   resources :users
   resources :sessions
+  resources :addresses
+  resources :cities
+  resources :countries
 
   match '/help',    to: 'static_pages#help'
   match '/about',   to: 'static_pages#about'

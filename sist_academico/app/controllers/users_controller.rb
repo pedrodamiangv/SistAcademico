@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
+  before_filter :require_login, :only => :secret
   def new
   	@user = User.new
+    @cities = City.find(:all)
+    @addresses = Address.find(:all)
 	end
 
 	def create

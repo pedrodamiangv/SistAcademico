@@ -10,7 +10,7 @@
       <%= f.text_field :apellido %>
 
       <%= f.label :sexo %>
-      <%= f.text_field :sexo %>
+      <%= f.collection_select :sexo, @option = { 1 => 'Masculino', 2 => 'Femenino'}, :key, :val %>
 
       <%= f.label :telefono %>
       <%= f.text_field :telefono %>
@@ -19,10 +19,11 @@
       <%= f.text_field :fecha_nacimiento %>
 
       <%= f.label :lugar_nacimiento %>
-      <%= f.text_field :lugar_nacimiento %>
+      <%= f.collection_select :lugar_nacimiento ,@addresses.cities, :id, :city %>
 
       <%= f.label :direccion %>
-      <%= f.text_field :direccion %>
+      <%= f.collection_select :address_id ,@addresses,:id,:direccion %>
+
 
       <%= f.label :edad %>
       <%= f.text_field :edad %>
