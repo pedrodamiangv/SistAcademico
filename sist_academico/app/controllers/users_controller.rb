@@ -9,6 +9,7 @@ class UsersController < ApplicationController
 
 	def create
 	  @user = User.new(params[:user])
+    @user.edad = calcular_edad @user
 	  if @user.save
 	    redirect_to root_url, :notice => "Signed up!"
 	  else
@@ -45,4 +46,12 @@ class UsersController < ApplicationController
       end
       return cities_city
     end
+
+    def calcular_edad user
+      ano_nacimiento = user.fecha_nacimiento.slice(6,user.fecha_nacimiento.length);
+      ano_actual = Date.today.to_s.slice(0,4);
+      edad = ano_actual.to_i - ano_nacimiento.to_i;
+      return edad;
+    end
+
 end

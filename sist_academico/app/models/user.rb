@@ -18,5 +18,5 @@ class User < ActiveRecord::Base
   validates :fecha_nacimiento, presence: true, length: { maximum: 50 }
   validates :lugar_nacimiento, presence: true
   validates :address_id, presence: true, length: { maximum: 50 }
-  validates :edad, presence: true
+
 end
