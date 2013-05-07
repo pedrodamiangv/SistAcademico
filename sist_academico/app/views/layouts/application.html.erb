@@ -3,7 +3,19 @@
 <head>
   <title>Sistema Academico | <%= yield(:title) %></title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "application", :media => "all" %>
+  <%= javascript_include_tag "jquery.min", "jquery-ui.min", "calendar"  %>
+  <script type="text/javascript">
+
+  $(document).ready(function() {
+		$("#fecha").datepicker({
+		changeMonth: true,
+		changeYear: true,
+		onSelect: function(dateText, inst) {}
+		});
+	});
+
+  </script>
   <%= csrf_meta_tags %>
   <%= render 'layouts/shim' %> 
 </head>

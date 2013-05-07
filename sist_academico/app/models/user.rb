@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   validates :sexo, presence: true, length: { maximum: 2 }
   validates :telefono, presence: true, length: { maximum: 50 }
   validates :fecha_nacimiento, presence: true, length: { maximum: 50 }
-  validates :lugar_nacimiento, presence: true, length: { maximum: 50 }
+  validates :lugar_nacimiento, presence: true
   validates :address_id, presence: true, length: { maximum: 50 }
   validates :edad, presence: true
 end

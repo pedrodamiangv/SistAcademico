@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
   before_filter :require_login, :only => :secret
+
   def new
   	@user = User.new
-    @cities = City.find(:all)
+    @cities_city = cities
     @addresses = Address.find(:all)
 	end
 
@@ -11,7 +12,9 @@ class UsersController < ApplicationController
 	  if @user.save
 	    redirect_to root_url, :notice => "Signed up!"
 	  else
-	    render :new
+      @addresses = Address.find(:all)
+      @cities_city = cities
+      render :new
 	  end
 	end
 
@@ -32,4 +35,14 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
   end
+
+  private
+    def cities
+      cities_city = []
+      cities = City.find(:all)
+      cities.each do |city|
+        cities_city << city.city
+      end
+      return cities_city
+    end
 end

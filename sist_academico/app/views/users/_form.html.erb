@@ -10,17 +10,19 @@
       <%= f.text_field :apellido %>
 
       <%= f.label :sexo %>
-      <%= f.collection_select :sexo, @option = { 1 => 'Masculino', 2 => 'Femenino'}, :key, :val %>
+      <%= f.select(:sexo, ['M', 'F' ])%>
 
       <%= f.label :telefono %>
       <%= f.text_field :telefono %>
 
-      <%= f.label :fecha_nacimiento %>
-      <%= f.text_field :fecha_nacimiento %>
+      <%= f.label :fecha_nacimiento %> 
+      <%= f.text_field :fecha_nacimiento, :id=> "fecha" %>
 
       <%= f.label :lugar_nacimiento %>
-      <%= f.collection_select :lugar_nacimiento ,@addresses.cities, :id, :city %>
+      <%= f.select( :lugar_nacimiento ,@cities_city) %>
 
+
+      <a href="#" class="direccion" onclick="apprise('Verify your name', {'input':'Direccion', 'input':'Barrio' , 'textOk':'Correct'});">Ingresar nueva direccion</a>
       <%= f.label :direccion %>
       <%= f.collection_select :address_id ,@addresses,:id,:direccion %>
 
