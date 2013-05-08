@@ -48,6 +48,7 @@ class CitiesController < ApplicationController
         format.html { redirect_to @city, notice: 'City was successfully created.' }
         format.json { render json: @city, status: :created, location: @city }
       else
+        @countries = Country.find(:all)
         format.html { render action: "new" }
         format.json { render json: @city.errors, status: :unprocessable_entity }
       end

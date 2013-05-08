@@ -16,6 +16,7 @@ class UsersController < ApplicationController
 	  else
       @addresses = Address.find(:all)
       @cities_city = cities
+      addresses_new
       render :new
 	  end
 	end
