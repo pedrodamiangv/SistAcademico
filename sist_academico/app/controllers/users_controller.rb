@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   	@user = User.new
     @cities_city = cities
     @addresses = Address.find(:all)
+    addresses_new
 	end
 
 	def create
@@ -52,6 +53,16 @@ class UsersController < ApplicationController
       ano_actual = Date.today.to_s.slice(0,4);
       edad = ano_actual.to_i - ano_nacimiento.to_i;
       return edad;
+    end
+
+    def addresses_new
+      @address = Address.new
+      @cities = City.find(:all)
+    end
+
+    def addresses_create
+      @address = Address.new(params[:address])
+      @address.save
     end
 
 end

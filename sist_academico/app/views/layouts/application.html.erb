@@ -5,6 +5,7 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application", :media => "all" %>
   <%= javascript_include_tag "jquery.min", "jquery-ui.min", "calendar"  %>
+  <%= javascript_include_tag "modal-jquery.min", "bootstrap-modal" %>
   <script type="text/javascript">
 
   $(document).ready(function() {
@@ -14,7 +15,6 @@
 		onSelect: function(dateText, inst) {}
 		});
 	});
-
   </script>
   <%= csrf_meta_tags %>
   <%= render 'layouts/shim' %> 

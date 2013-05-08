@@ -18,5 +18,5 @@ class User < ActiveRecord::Base
   validates :fecha_nacimiento, presence: true, length: { maximum: 50 }
   validates :lugar_nacimiento, presence: true
   validates :address_id, presence: true, length: { maximum: 50 }
-
+  validates_format_of :fecha_nacimiento, :with => /\A\d{2}(\/|-)\d{2}(\/|-)\d{4}\Z/i, :message => "tiene formato incorrecto"
 end
