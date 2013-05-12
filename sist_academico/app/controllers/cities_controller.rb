@@ -36,6 +36,7 @@ class CitiesController < ApplicationController
   # GET /cities/1/edit
   def edit
     @city = City.find(params[:id])
+    @countries = Country.find(:all)
   end
 
   # POST /cities
@@ -59,12 +60,12 @@ class CitiesController < ApplicationController
   # PUT /cities/1.json
   def update
     @city = City.find(params[:id])
-
     respond_to do |format|
       if @city.update_attributes(params[:city])
         format.html { redirect_to @city, notice: 'City was successfully updated.' }
         format.json { head :no_content }
       else
+        @countries = Country.find(:all)
         format.html { render action: "edit" }
         format.json { render json: @city.errors, status: :unprocessable_entity }
       end

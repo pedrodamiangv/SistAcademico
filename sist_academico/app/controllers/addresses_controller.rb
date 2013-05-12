@@ -36,6 +36,7 @@ class AddressesController < ApplicationController
   # GET /addresses/1/edit
   def edit
     @address = Address.find(params[:id])
+    @cities = City.find(:all)
   end
 
   # POST /addresses
@@ -56,12 +57,12 @@ class AddressesController < ApplicationController
   # PUT /addresses/1.json
   def update
     @address = Address.find(params[:id])
-
     respond_to do |format|
       if @address.update_attributes(params[:address])
         format.html { redirect_to @address, notice: 'La direccion ha sido actualizada.' }
         format.json { head :no_content }
       else
+        @cities = City.find(:all)
         format.html { render action: "edit" }
         format.json { render json: @address.errors, status: :unprocessable_entity }
       end
