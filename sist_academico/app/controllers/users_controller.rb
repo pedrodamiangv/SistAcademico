@@ -50,6 +50,16 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+
+    respond_to do |format|
+      format.html { redirect_to users_url }
+      format.json { head :no_content }
+    end
+  end
+
   def addresses_create
       @direccion = Address.new(params[:direccion])
       if @direccion.save
@@ -57,7 +67,7 @@ class UsersController < ApplicationController
       else
         flash[:notice] = "Hubo Problemas, no guardo"
       end
-    end
+  end
 
   private
     def cities

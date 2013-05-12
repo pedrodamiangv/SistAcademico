@@ -15,7 +15,7 @@
         <td><%= country.pais %></td>
         <td><%= link_to 'Mostrar', country %></td>
         <td><%= link_to 'Editar', edit_country_path(country) %></td>
-        <td><%= link_to 'Eliminar', country, method: :delete, data: { confirm: 'Estas deguro?' } %></td>
+        <td><%= link_to 'Destroy', country, method: :delete, :onclick => "return confirm('Are you sure you want to delete this post?')" %></td>
       </tr>
     <% end %>
     </table>

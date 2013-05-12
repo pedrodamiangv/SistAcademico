@@ -74,11 +74,15 @@ class CountriesController < ApplicationController
   # DELETE /countries/1.json
   def destroy
     @country = Country.find(params[:id])
-    @country.destroy
 
     respond_to do |format|
+    if @country.destroy
       format.html { redirect_to countries_url }
       format.json { head :no_content }
+    else
+      format.html { redirect_to country }
+      format.json { head :no_content }
     end
+  end
   end
 end
