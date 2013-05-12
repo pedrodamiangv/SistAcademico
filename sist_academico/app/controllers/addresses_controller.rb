@@ -42,16 +42,13 @@ class AddressesController < ApplicationController
   # POST /addresses.json
   def create
     @address = Address.new(params[:address])
-
-    respond_to do |format|
-      if @address.save
-        format.html { redirect_to @address, notice: ' La direccion ha sido guardada. ' }
-        format.json { render json: @address, status: :created, location: @address }
-      else
-        @cities = City.find(:all)
-        format.html { render action: "new" }
-        format.json { render json: @address.errors, status: :unprocessable_entity }
-      end
+    if @address.save
+      flash[:notice] = "Guardado"
+      render :new
+    else
+      @cities = City.find(:all)
+      flash[:error] = "No estan correctos los datos"
+      render :new
     end
   end
 

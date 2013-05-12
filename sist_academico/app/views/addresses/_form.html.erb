@@ -1,11 +1,11 @@
-<p id="notice"><%= notice %></p>
 <%= form_for(@address) do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
-  <%= f.label :direccion %><br />
+  <p id="notice"><%= notice %></p>
+   <p class="error"><%= flash[:error] %></p>
+  <%= f.label :direccion %>
   <%= f.text_field :direccion %>
-  <%= f.label :barrio %><br />
+  <%= f.label :barrio %>
   <%= f.text_field :barrio %>
   <%= f.label :city %>
-  <%= f.collection_select :city_id ,@cities,:id,:city %><br/>
-  <%= f.submit %>
+  <%= f.collection_select :city_id ,@cities,:id,:city %>
+  <%= f.submit "Guardar", class: "btn btn-large btn-primary" %>
 <% end %>

@@ -49,18 +49,19 @@
   </div>  
   <div class="modal-body">  
     <p id="notice"><%= notice %></p>
-    <%= form_for(@address) do |f| %>
+    <%= form_for(@direccion) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
       <%= f.label :direccion %><br />
       <%= f.text_field :direccion %>
       <%= f.label :barrio %><br />
       <%= f.text_field :barrio %>
       <%= f.label :city %>
-      <%= f.collection_select :city_id ,@cities,:id,:city %><br/>
-    <% end %>
+      <%= f.collection_select :city_id ,@cities,:id,:city %>
   </div>  
-  <div class="modal-footer">  
-    <a href="#" class="btn btn-success">Call to action</a>  
+  <div class="modal-footer"> 
+    <%= f.submit :class => 'btn btn-success', :controller => 'users_controller', :action =>
+'addresses_create' %> 
     <a href="#" class="btn" data-dismiss="modal">Close</a>  
   </div>  
+      <% end %>
 </div> 

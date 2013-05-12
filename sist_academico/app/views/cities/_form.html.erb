@@ -4,5 +4,5 @@
   <%= f.text_field :city %><br/>
   <%= f.label :country %>
   <%= f.collection_select :country_id ,@countries,:id,:pais %><br/>
-  <%= submit_tag "Save" %>
+  <%= submit_tag "Guardar", class: "btn btn-large btn-primary" %>
 <% end %>

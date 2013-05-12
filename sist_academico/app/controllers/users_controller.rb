@@ -39,6 +39,15 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def addresses_create
+      @direccion = Address.new(params[:direccion])
+      if @direccion.save
+        flash[:notice] = "Guardado"
+      else
+        flash[:notice] = "Hubo Problemas, no guardo"
+      end
+    end
+
   private
     def cities
       cities_city = []
@@ -57,13 +66,8 @@ class UsersController < ApplicationController
     end
 
     def addresses_new
-      @address = Address.new
+      @direccion = Address.new
       @cities = City.find(:all)
-    end
-
-    def addresses_create
-      @address = Address.new(params[:address])
-      @address.save
     end
 
 end

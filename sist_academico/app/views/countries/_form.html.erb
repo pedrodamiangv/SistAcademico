@@ -1,7 +1,6 @@
-<p id="notice"><%= notice %></p>
 <%= form_for(@country) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <%= f.label :pais %><br />
   <%= f.text_field :pais %>
-  <%= f.submit %>
+  <%= f.submit "Guardar", class: "btn btn-large btn-primary" %>
 <% end %>
