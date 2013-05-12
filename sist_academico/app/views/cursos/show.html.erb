@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Curso:</b>
+  <%= @curso.curso %>
+</p>
+
+<p>
+  <b>Turno:</b>
+  <%= @curso.turno %>
+</p>
+
+<p>
+  <b>Nivel:</b>
+  <%= @curso.nivel %>
+</p>
+
+<p>
+  <b>Enfasis:</b>
+  <%= @curso.enfasis %>
+</p>
+
+
+<%= link_to 'Editar', edit_curso_path(@curso) %> |
+<%= link_to 'Atras', cursos_path %>

@@ -1,0 +1,12 @@
+<%= form_for(@curso) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <%= f.label :curso %>
+  <%= f.text_field :curso %>
+  <%= f.label :turno %>
+  <%= f.text_field :turno %>
+  <%= f.label :nivel %>
+  <%= f.text_field :nivel %>
+  <%= f.label :enfasis %>
+  <%= f.text_field :enfasis %>
+   <%= f.submit "Guardar", class: "btn btn-large btn-primary" %>
+<% end %>
