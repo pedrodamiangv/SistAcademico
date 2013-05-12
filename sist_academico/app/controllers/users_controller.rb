@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   before_filter :require_login, :only => :secret
 
+  def index
+    @users = User.paginate(:page => params[:page], :per_page => 10)
+  end
+
   def new
   	@user = User.new
     @cities_city = cities

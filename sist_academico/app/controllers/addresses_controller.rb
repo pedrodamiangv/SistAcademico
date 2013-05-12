@@ -3,7 +3,7 @@ class AddressesController < ApplicationController
   # GET /addresses
   # GET /addresses.json
   def index
-    @addresses = Address.all
+    @addresses = Address.paginate(:page => params[:page], :per_page => 10)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -45,7 +45,7 @@ class AddressesController < ApplicationController
     @address = Address.new(params[:address])
     if @address.save
       flash[:notice] = "Guardado"
-      render :new
+      redirect_to @address
     else
       @cities = City.find(:all)
       flash[:error] = "No estan correctos los datos"
