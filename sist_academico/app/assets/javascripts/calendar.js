@@ -10,11 +10,12 @@ dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sá
 dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
 dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
 weekHeader: 'Sm',
-dateFormat: 'dd-mm-yy',
+dateFormat: 'dd/mm/yy',
 firstDay: 1,
 numberOfMonths: 1,
 isRTL: false,
 showMonthAfterYear: false,
+yearRange:'-40:-03',
 yearSuffix: ''};
 $.datepicker.setDefaults($.datepicker.regional['es']);
 });
