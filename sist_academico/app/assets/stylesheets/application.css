@@ -16,7 +16,16 @@
 }
 
 .seguido{
+    float: left;
+}
+
+.seguido-espaciado{
 	float: left;
+    margin-left: 20px;
+}
+
+.abajo{
+    clear: both;
 }
 
 #lean_overlay {

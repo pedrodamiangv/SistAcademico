@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="span9 offset3">
+    <h1>Listando alumnos</h1>
+
+    <table class="table table-bordered">
+      <tr class="table-title">
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>CINro</th>
+        <th>Curso</th>
+        <th>Nivel</th>
+        <th>Cedula</th>
+        <th>Cert. estudios</th>
+        <th>Foto Carnet</th>
+        <th>Cert. nacimiento</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+
+    <% @alumnos.each do |alumno| %>
+      <tr>
+        <td><%= alumno.user.nombre %></td>
+        <td><%= alumno.user.apellido %></td>
+        <td><%= alumno.user.CINro %></td>
+        <td><%= alumno.curso.curso %></td>
+        <td><%= alumno.curso.nivel %></td>
+        <td><%= alumno.doc_cedula %></td>
+        <td><%= alumno.doc_cert_estudios %></td>
+        <td><%= alumno.doc_foto %></td>
+        <td><%= alumno.doc_cert_nacimiento %></td>
+        <td><%= link_to 'Mostrar', alumno %></td>
+        <td><%= link_to 'Editar', edit_alumno_path(alumno) %></td>
+        <td><%= link_to 'Destruit', alumno, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
+      </tr>
+    <% end %>
+    </table>
+    <%= will_paginate @alumnos %>
+  </div>
+</div>
+
+<%= link_to 'Nuevo Alumno', new_alumno_path %>

@@ -1,0 +1,27 @@
+<%= form_for(@alumno) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <%= f.label :user_id %>
+    <%= f.collection_select :user_id ,@users,:id,:CINro %>
+    <%= f.label :curso_id %>
+    <%= f.collection_select :curso_id ,@cursos,:id, :curso  %>
+    <%= f.label "Documentos del alumno", class: "label label-info" %>
+      <div class="seguido">
+        <%= f.label "Fotocopia de cedula", class: "seguido" %>
+        <%= f.check_box :doc_cedula, class: "seguido" %>
+      </div>
+      <div class="seguido">
+        <%= f.label "Fotocopia de Certificado de estudio", class: "seguido-espaciado" %>
+        <%= f.check_box :doc_cert_estudios, class: "seguido" %>
+      </div>
+      <div class="abajo">
+        <%= f.label "Foto tipo carnet", class: "seguido" %>
+        <%= f.check_box :doc_foto, class: "seguido-espaciado" %>
+      </div>
+      <div class="seguido">
+        <%= f.label "Certificado de Nacimiento", class: "seguido-espaciado" %>
+        <%= f.check_box :doc_cert_nacimiento, class: "seguido" %>
+      </div>
+    <div class="abajo">
+      <%= f.submit "Guardar", class: "btn btn-large btn-primary" %>
+    </div>
+<% end %>

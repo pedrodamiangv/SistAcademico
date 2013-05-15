@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @alumno.user_id %>
+</p>
+
+<p>
+  <b>Curso:</b>
+  <%= @alumno.curso_id %>
+</p>
+
+<p>
+  <b>Doc cedula:</b>
+  <%= @alumno.doc_cedula %>
+</p>
+
+<p>
+  <b>Doc cert estudios:</b>
+  <%= @alumno.doc_cert_estudios %>
+</p>
+
+<p>
+  <b>Doc foto:</b>
+  <%= @alumno.doc_foto %>
+</p>
+
+<p>
+  <b>Doc cert nacimiento:</b>
+  <%= @alumno.doc_cert_nacimiento %>
+</p>
+
+
+<%= link_to 'Mostrar', edit_alumno_path(@alumno) %> |
+<%= link_to 'Atras', alumnos_path %>

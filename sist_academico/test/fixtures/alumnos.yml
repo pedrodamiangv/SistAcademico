@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  curso_id: 1
+  doc_cedula: false
+  doc_cert_estudios: false
+  doc_foto: false
+  doc_cert_nacimiento: false
+
+two:
+  user_id: 1
+  curso_id: 1
+  doc_cedula: false
+  doc_cert_estudios: false
+  doc_foto: false
+  doc_cert_nacimiento: false
