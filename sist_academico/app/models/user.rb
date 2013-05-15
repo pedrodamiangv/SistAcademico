@@ -1,10 +1,11 @@
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
   
-  attr_accessible :nombre, :apellido, :sexo, :telefono, :fecha_nacimiento, :lugar_nacimiento, :edad, :username, :email, :password, :password_confirmation, :address_id
+  attr_accessible :CINro, :nombre, :apellido, :sexo, :telefono, :fecha_nacimiento, :lugar_nacimiento, :edad, :username, :email, :password, :password_confirmation, :address_id
   belongs_to :address
   before_save { |user| user.email = email.downcase }
   validates :username, presence: true, length: { maximum: 50 }
+  validates :CINro, presence: true, length: { maximum: 9 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence:   true,
                     format:     { with: VALID_EMAIL_REGEX },
