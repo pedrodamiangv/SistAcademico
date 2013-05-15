@@ -1,0 +1,34 @@
+<% provide(:title, @administrativo.user.nombre) %>
+<p id="notice"><%= notice %></p>
+<div class="row">
+<div class="span8 offset3">
+  <div class="cabezera">
+    <aside>
+      <section>
+        <h1>
+          Datos del administrativo
+        </h1>
+      </section>
+      <section>
+        <h1>
+          <%= @administrativo.user.nombre %>
+        </h1>
+      </section>
+    </aside>
+  </div>
+  <div class="datos">
+    <p>Apellido: <%= @administrativo.user.apellido %></p>
+    <p>Sexo: <%= @administrativo.user.sexo %></p>
+    <p>Telefono: <%= @administrativo.user.telefono %></p>
+    <p>Fecha de Nacimiento: <%= @administrativo.user.fecha_nacimiento %></p>
+    <p>Lugar de Nacimiento: <%= @administrativo.user.lugar_nacimiento %></p>
+    <p>Direccion: <%= @administrativo.user.address.direccion %></p>
+    <p>Edad: <%= @administrativo.user.edad %></p>
+    <p>Cargo: <%= @administrativo.cargo %></p>
+    <p>Titulo del Administrativo: <%= @administrativo.titulo %></p>
+  </div>
+</div>
+</div>
+
+<%= link_to 'Editar', edit_administrativo_path(@administrativo) %> |
+<%= link_to 'Atras', administrativos_path %>

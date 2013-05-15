@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@administrativo) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <%= f.label :user_id %>
+      <%= f.collection_select :user_id ,@users,:id,:CINro %>
+      <%= f.label :cargo %>
+      <%= f.text_field :cargo %>
+      <%= f.label :titulo %>
+      <%= f.text_field :titulo %>
+      <%= f.submit "Guardar", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

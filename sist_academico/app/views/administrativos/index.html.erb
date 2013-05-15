@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="span11 offset2">
+    <h1>Lista de Administrativos</h1>
+
+    <table class="table table-bordered">
+      <tr class="table-title">
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Cargo</th>
+        <th>Telefono</th>
+        <th>Titulo</th>
+        <th>Fecha de contrato</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+
+    <% @administrativos.each do |administrativo| %>
+      <tr>
+        <td><%= administrativo.user.nombre %></td>
+        <td><%= administrativo.user.apellido %></td>
+        <td><%= administrativo.cargo %></td>
+        <td><%= administrativo.user.telefono %></td>
+        <td><%= administrativo.titulo %></td>
+        <td><%= administrativo.created_at %></td>
+        <td><%= link_to 'Mostrar', administrativo %></td>
+        <td><%= link_to 'Editar', edit_administrativo_path(administrativo) %></td>
+        <td><%= link_to 'Eliminar', administrativo, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
+      </tr>
+    <% end %>
+    </table>
+    <%= will_paginate @administrativos %>
+  </div>
+</div>
+
+<%= link_to 'Registrar nuevo Administrativo', new_administrativo_path %>
