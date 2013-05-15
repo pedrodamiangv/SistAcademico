@@ -1,35 +1,43 @@
+<% provide(:title, @alumno.user.nombre) %>
 <p id="notice"><%= notice %></p>
-
-<p>
-  <b>User:</b>
-  <%= @alumno.user_id %>
-</p>
-
-<p>
-  <b>Curso:</b>
-  <%= @alumno.curso_id %>
-</p>
-
-<p>
-  <b>Doc cedula:</b>
-  <%= @alumno.doc_cedula %>
-</p>
-
-<p>
-  <b>Doc cert estudios:</b>
-  <%= @alumno.doc_cert_estudios %>
-</p>
-
-<p>
-  <b>Doc foto:</b>
-  <%= @alumno.doc_foto %>
-</p>
-
-<p>
-  <b>Doc cert nacimiento:</b>
-  <%= @alumno.doc_cert_nacimiento %>
-</p>
-
+<div class="row">
+<div class="span6 offset3">
+  <div class="cabezera">
+    <aside>
+      <section>
+        <h1>
+          Datos del Alumno
+        </h1>
+      </section>
+      <section>
+        <h1>
+          <%= @alumno.user.nombre %>
+        </h1>
+      </section>
+    </aside>
+  </div>
+  <div class="datos">
+    <p>Apellido: <%= @alumno.user.apellido %></p>
+    <p>Sexo: <%= @alumno.user.sexo %></p>
+    <p>Telefono: <%= @alumno.user.telefono %></p>
+    <p>Fecha de Nacimiento: <%= @alumno.user.fecha_nacimiento %></p>
+    <p>Lugar de Nacimiento: <%= @alumno.user.lugar_nacimiento %></p>
+    <p>Direccion: <%= @alumno.user.address.direccion %></p>
+    <p>Edad: <%= @alumno.user.edad %></p>
+    <hr>
+    <p>Curso: <%= @alumno.curso.curso %></p>
+    <p>Nivel: <%= @alumno.curso.nivel %></p>
+    <p>Enfasis: <%= @alumno.curso.enfasis %></p>
+    <p>Turno: <%= @alumno.curso.turno %></p>
+    <hr>
+    <p> Documentos: <p/>
+    <p>  &nbsp;&nbsp;-Fotocopia de cedula: <%= @alumno.doc_cedula %> <p/>
+    <p>  &nbsp;&nbsp;-Foto tipo carnet: <%= @alumno.doc_foto %> <p/>
+    <p>  &nbsp;&nbsp;-Certificado de Nacimiento: <%= @alumno.doc_cert_nacimiento %> <p/>
+    <p>  &nbsp;&nbsp;-Certificados de estudios: <%= @alumno.doc_cert_estudios %></p>
+  </div>
+</div>
+</div>
 
 <%= link_to 'Mostrar', edit_alumno_path(@alumno) %> |
 <%= link_to 'Atras', alumnos_path %>

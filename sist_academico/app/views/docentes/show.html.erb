@@ -1,0 +1,33 @@
+<% provide(:title, @docente.user.nombre) %>
+<p id="notice"><%= notice %></p>
+<div class="row">
+<div class="span6 offset3">
+  <div class="cabezera">
+    <aside>
+      <section>
+        <h1>
+          Datos del Docente
+        </h1>
+      </section>
+      <section>
+        <h1>
+          <%= @docente.user.nombre %>
+        </h1>
+      </section>
+    </aside>
+  </div>
+  <div class="datos">
+    <p>Apellido: <%= @docente.user.apellido %></p>
+    <p>Sexo: <%= @docente.user.sexo %></p>
+    <p>Telefono: <%= @docente.user.telefono %></p>
+    <p>Fecha de Nacimiento: <%= @docente.user.fecha_nacimiento %></p>
+    <p>Lugar de Nacimiento: <%= @docente.user.lugar_nacimiento %></p>
+    <p>Direccion: <%= @docente.user.address.direccion %></p>
+    <p>Edad: <%= @docente.user.edad %></p>
+    <p>Matricula: <%= @docente.matricula %></p>
+    <p>Titulo: <%= @docente.titulo %></p>
+  </div>
+</div>
+</div>
+<%= link_to 'Editar', edit_docente_path(@docente) %> |
+<%= link_to 'Atras', docentes_path %>

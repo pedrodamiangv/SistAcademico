@@ -1,0 +1,10 @@
+<%= form_for(@docente) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <%= f.label :user_id %><br />
+  <%= f.collection_select :user_id ,@users,:id,:CINro %>
+  <%= f.label :matricula %><br />
+  <%= f.number_field :matricula %>
+  <%= f.label :titulo %><br />
+  <%= f.text_field :titulo %>
+  <%= f.submit "Guardar", class: "btn btn-large btn-primary" %>
+<% end %>
