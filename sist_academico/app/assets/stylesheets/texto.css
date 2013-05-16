@@ -10,4 +10,19 @@
 }
 
 
+.texto-historial{
+	text-align: justify;
+	font-size: 20px;
+	font-family: Times New Roman;
+	color: black;
+	margin-left: 100px;
+	margin-right: 100px;
+	line-height:60pt;
+	-moz-column-count: 3;
+	-moz-column-gap: 20px;
+	-moz-column-rule: 1px dashed #000000;
+	-webkit-column-count: 3;
+	-webkit-column-gap: 20px;
+	-webkit-column-rule: 1px dashed #000000;
 
+}
