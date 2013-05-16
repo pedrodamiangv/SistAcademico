@@ -1,13 +1,24 @@
-<% provide(:title, 'Home') %>
+<% provide(:title, 'Inicio') %>
 <div class="center hero-unit">
-    <h1>Sistema Academico</h1>
+</br></br>
+    <h1>Bienvenidos</h1>
+    
 
-    <h2>
-      Sistema Académico que permite el registro de los principales miembros de 
+<div class="texto">
+      <p>
+      </br>Sistema Académico que permite el registro de los principales miembros de 
       la institución: alumnos, docentes y personales administrativos. Además,
       de permitir el registro de puntajes y calificaciones de cada uno de los
-      alumnos; planificación de tareas y examenes.
-    </h2>
+      alumnos por parte de los docentes; establecer y planificar fecha de entrega
+      de tareas y también de examenes.
+      </p></br></br></br>
+</div>
+
+
+<script>document.write("Hoy es"+ day);
+document.write(myweekday+" de "+month+"");
+</script> 
+
 
     <%= link_to "Registrate Ahora!", signup_path, 
                                 class: "btn btn-large btn-primary" %>

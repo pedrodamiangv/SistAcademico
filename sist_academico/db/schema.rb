@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(:version => 20130516010203) do
     t.string   "telefono"
     t.string   "fecha_nacimiento"
     t.string   "lugar_nacimiento"
+    t.string   "direccion"
     t.integer  "edad"
     t.string   "username",                     :null => false
     t.string   "email"
