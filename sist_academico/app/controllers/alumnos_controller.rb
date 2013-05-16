@@ -45,9 +45,11 @@ class AlumnosController < ApplicationController
   # POST /alumnos.json
   def create
     @alumno = Alumno.new(params[:alumno])
-
+    user = @alumno.user
     respond_to do |format|
       if @alumno.save
+        user.alumno = @alumno
+        user.update_attribute(:is_alumno, true )
         format.html { redirect_to @alumno, notice: 'El alumno ha sido registrado.' }
         format.json { render json: @alumno, status: :created, location: @alumno }
       else

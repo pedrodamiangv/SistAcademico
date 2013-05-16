@@ -43,9 +43,11 @@ class DocentesController < ApplicationController
   # POST /docentes.json
   def create
     @docente = Docente.new(params[:docente])
-
+    user = @docente.user
     respond_to do |format|
       if @docente.save
+        user.docente = @docente
+        user.update_attribute(:is_docente, true )
         format.html { redirect_to @docente, notice: 'El Docente ha sido guardado.' }
         format.json { render json: @docente, status: :created, location: @docente }
       else

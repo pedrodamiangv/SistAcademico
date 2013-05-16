@@ -42,9 +42,11 @@ class AdministrativosController < ApplicationController
   # POST /administrativos.json
   def create
     @administrativo = Administrativo.new(params[:administrativo])
-
+    user = @administrativo.user
     respond_to do |format|
       if @administrativo.save
+        user.administrativo = @administrativo
+        user.update_attribute(:is_administrativo, true )
         format.html { redirect_to @administrativo, notice: 'El administrativo ha sido creado.' }
         format.json { render json: @administrativo, status: :created, location: @administrativo }
       else
