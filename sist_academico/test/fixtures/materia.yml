@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  materia: MyString
+  area: MyString
+  curso_id: 1
+  docente_id: 1
+
+two:
+  materia: MyString
+  area: MyString
+  curso_id: 1
+  docente_id: 1

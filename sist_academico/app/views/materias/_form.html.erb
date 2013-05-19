@@ -1,0 +1,12 @@
+<%= form_for(@materia) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <%= f.label :materia %>
+  <%= f.text_field :materia %>
+  <%= f.label :area %>
+  <%= f.text_field :area %>
+  <%= f.label :curso_id %>
+  <%= f.collection_select :curso_id ,@cursos,:id,:curso %>
+  <%= f.label :docente_id %>
+  <%= f.select :docente_id,  @docentes.map {|d| [d.user.nombre + ' ' + d.user.apellido  ,d.id] }  %>
+  <%= f.submit "Guardar", class: "btn btn-large btn-primary" %>
+<% end %>

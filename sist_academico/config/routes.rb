@@ -1,13 +1,8 @@
 SistAcademico::Application.routes.draw do
+  resources :materias
   resources :administrativos
-
-
   resources :docentes
-
-
   resources :alumnos
-
-
   resources :cursos
 
 

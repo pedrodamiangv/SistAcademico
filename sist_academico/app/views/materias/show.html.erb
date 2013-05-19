@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="span6 offset3">
+	<p id="notice"><%= notice %></p>
+
+	<p>
+	  <b>Materia:</b>
+	  <%= @materia.materia %>
+	</p>
+
+	<p>
+	  <b>Area:</b>
+	  <%= @materia.area %>
+	</p>
+
+	<p>
+	  <b>Curso:</b>
+	  <%= @materia.curso.curso %>
+	</p>
+
+	<p>
+	  <b>Docente:</b>
+	  <%= @materia.docente.user.nombre %> <%= @materia.docente.user.apellido %>
+	</p>
+
+
+	<%= link_to 'Editar', edit_materia_path(@materia) %> |
+	<%= link_to 'Atras', materias_path %>
+  </div>
+</div>

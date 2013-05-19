@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="span11 offset3">
+    <h1>Lista de Materias</h1>
+
+    <table class="table table-bordered">
+      <tr class="table-title">
+        <th>Materia</th>
+        <th>Area</th>
+        <th>Curso</th>
+        <th>Docente</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+
+    <% @materias.each do |materia| %>
+      <tr>
+        <td><%= materia.materia %></td>
+        <td><%= materia.area %></td>
+        <td><%= materia.curso.curso %></td>
+        <td><%= materia.docente.user.nombre + ' ' + materia.docente.user.apellido %></td>
+        <td><%= link_to 'Mostrar', materia %></td>
+        <td><%= link_to 'Editar', edit_materia_path(materia) %></td>
+        <td><%= link_to 'Eliminar', materia, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
+      </tr>
+    <% end %>
+    </table>
+
+    <%= will_paginate @materias %>
+
+    <%= link_to 'Registrar Nueva Materia', new_materia_path %>
+  </div>
+</div>
