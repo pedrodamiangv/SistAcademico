@@ -1,4 +1,6 @@
 class MateriasController < ApplicationController
+  before_filter :require_login
+  before_filter :admin_user, only: [:destroy, :edit, :update]
   # GET /materia
   # GET /materia.json
   def index

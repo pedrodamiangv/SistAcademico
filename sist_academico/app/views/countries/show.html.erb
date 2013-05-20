@@ -5,6 +5,7 @@
   <%= @country.pais %>
 </p>
 
-
-<%= link_to 'Editar', edit_country_path(@country) %> |
-<%= link_to 'Atras', countries_path %>
+<% if current_user.is_administrativo %>
+  <%= link_to 'Editar', edit_country_path(@country) %> |
+<% end %>
+<%= link_to 'Listar', countries_path %>

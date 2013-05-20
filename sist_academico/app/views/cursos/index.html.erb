@@ -8,24 +8,29 @@
         <th>Turno</th>
         <th>Nivel</th>
         <th>Enfasis</th>
-        <th></th>
-        <th></th>
-        <th></th>
+        <% if current_user.is_administrativo %>
+          <th></th>
+          <th></th>
+        <% end %>
       </tr>
 
     <% @cursos.each do |curso| %>
       <tr>
-        <td><%= curso.curso %></td>
+        <td><%= link_to curso.curso, curso %></td>
         <td><%= curso.turno %></td>
         <td><%= curso.nivel %></td>
         <td><%= curso.enfasis %></td>
-        <td><%= link_to 'Mostrar', curso %></td>
-        <td><%= link_to 'Editar', edit_curso_path(curso) %></td>
-        <td><%= link_to 'Eliminar', curso, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
+        <% if current_user.is_administrativo %>
+          <td><%= link_to 'Editar', edit_curso_path(curso) %></td>
+          <td><%= link_to 'Eliminar', curso, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
+        <% end %>
       </tr>
     <% end %>
     </table>
     <%= will_paginate @cursos %>
   </div>
 </div>
-<%= link_to 'Registrar Curso', new_curso_path %>
+
+<% if current_user.is_administrativo %>
+  <%= link_to 'Registrar Curso', new_curso_path %>
+<% end %>

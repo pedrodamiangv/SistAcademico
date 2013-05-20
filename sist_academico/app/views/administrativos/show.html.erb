@@ -22,7 +22,7 @@
     <p>Telefono: <%= @administrativo.user.telefono %></p>
     <p>Fecha de Nacimiento: <%= @administrativo.user.fecha_nacimiento %></p>
     <p>Lugar de Nacimiento: <%= @administrativo.user.lugar_nacimiento %></p>
-    <p>Direccion: <%= @administrativo.user.address.direccion %></p>
+    <p>Direccion: <%= link_to @administrativo.user.address.direccion, @administrativo.user.address %></p>
     <p>Edad: <%= @administrativo.user.edad %></p>
     <p>Cargo: <%= @administrativo.cargo %></p>
     <p>Titulo del Administrativo: <%= @administrativo.titulo %></p>
@@ -30,5 +30,7 @@
 </div>
 </div>
 
-<%= link_to 'Editar', edit_administrativo_path(@administrativo) %> |
-<%= link_to 'Atras', administrativos_path %>
+<% if current_user.is_administrativo %>
+  <%= link_to 'Editar', edit_administrativo_path(@administrativo) %> |
+<% end %>
+<%= link_to 'Listar', administrativos_path %>

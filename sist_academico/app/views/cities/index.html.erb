@@ -5,18 +5,20 @@
     <tr class="table-title">
       <th>Ciudad</th>
       <th>Pais</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <% if current_user.is_administrativo %>
+        <th></th>
+        <th></th>
+      <% end %>
     </tr>
 
   <% @cities.each do |city| %>
     <tr>
       <td><%= city.city %></td>
       <td><%= city.country.pais %></td>
-      <td><%= link_to 'Mostrar', city %></td>
-      <td><%= link_to 'Editar', edit_city_path(city) %></td>
-      <td><%= link_to 'Eliminar', city, :action => 'destroy', method: :delete , data: { confirm: 'Estas seguro?' } %></td>
+      <% if current_user.is_administrativo %>
+        <td><%= link_to 'Editar', edit_city_path(city) %></td>
+        <td><%= link_to 'Eliminar', city, :action => 'destroy', method: :delete , data: { confirm: 'Estas seguro?' } %></td>
+      <% end %>
     </tr>
   <% end %>
   </table>
@@ -24,4 +26,7 @@
   </div>
 </div>
 
-<%= link_to 'Registrar nuevo', new_city_path %>
+<% if current_user.is_administrativo %>
+  <%= link_to 'Registrar nuevo', new_city_path %>
+<% end %>
+

@@ -1,5 +1,6 @@
 class CitiesController < ApplicationController
   before_filter :require_login
+  before_filter :admin_user, only: [:destroy, :edit, :update, :new, :create]
   # GET /cities
   # GET /cities.json
   def index

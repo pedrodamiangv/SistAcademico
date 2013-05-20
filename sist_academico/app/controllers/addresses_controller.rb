@@ -1,5 +1,6 @@
 class AddressesController < ApplicationController
   before_filter :require_login
+  before_filter :admin_user, only: [:destroy, :edit, :update, :new, :create]
   # GET /addresses
   # GET /addresses.json
   def index
@@ -80,4 +81,5 @@ class AddressesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
 end

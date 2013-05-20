@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_filter :require_login, :only => :index
+  before_filter :admin_user, only: [:destroy, :index, :new, :create]
+  before_filter :correct_user,   only: [:edit, :update, :show]
 
   def index
     @users = User.paginate(:page => params[:page], :per_page => 10)

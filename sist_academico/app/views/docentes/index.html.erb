@@ -9,25 +9,30 @@
         <th>Telefono</th>
         <th>Matricula numero</th>
         <th>Titulo</th>
-        <th></th>
-        <th></th>
-        <th></th>
+        <% if current_user.is_administrativo %>
+          <th></th>
+          <th></th>
+        <% end %>
       </tr>
 
     <% @docentes.each do |docente| %>
       <tr>
-        <td><%= docente.user.nombre %></td>
+        <td><%= link_to docente.user.nombre, docente %></td>
         <td><%= docente.user.apellido %></td>
         <td><%= docente.user.telefono %></td>
         <td><%= docente.matricula %></td>
         <td><%= docente.titulo %></td>
-        <td><%= link_to 'Mostrar', docente %></td>
-        <td><%= link_to 'Editar', edit_docente_path(docente) %></td>
-        <td><%= link_to 'Eliminar', docente, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
+        <% if current_user.is_administrativo %>
+          <td><%= link_to 'Editar', edit_docente_path(docente) %></td>
+          <td><%= link_to 'Eliminar', docente, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
+        <% end %>
       </tr>
     <% end %>
     </table>
     <%= will_paginate @docentes %>
   </div>
 </div>
-<%= link_to 'Registrar nuevo Docente', new_docente_path %>
+
+<% if current_user.is_administrativo %>
+  <%= link_to 'Registrar nuevo Docente', new_docente_path %>
+<% end %>

@@ -12,9 +12,10 @@
 
 <p>
   <b>City:</b>
-  <%= @address.city.city %>
+  <%= link_to @address.city.city, @address.city %>
 </p>
 
-
-<%= link_to 'Edit', edit_address_path(@address) %> |
-<%= link_to 'Back', addresses_path %>
+<% if current_user.is_administrativo %>
+<%= link_to 'Editar', edit_address_path(@address) %> |
+<% end %>
+<%= link_to 'Listar', addresses_path %>

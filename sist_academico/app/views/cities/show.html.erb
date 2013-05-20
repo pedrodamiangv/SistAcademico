@@ -10,6 +10,7 @@
   <%= @city.country.pais %>
 </p>
 
-
-<%= link_to 'Editar', edit_city_path(@city) %> |
-<%= link_to 'Atras', cities_path %>
+<% if current_user.is_administrativo %>
+  <%= link_to 'Editar', edit_city_path(@city) %> |
+<% end %>
+<%= link_to 'Listar', cities_path %>

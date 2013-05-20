@@ -22,12 +22,15 @@
     <p>Telefono: <%= @docente.user.telefono %></p>
     <p>Fecha de Nacimiento: <%= @docente.user.fecha_nacimiento %></p>
     <p>Lugar de Nacimiento: <%= @docente.user.lugar_nacimiento %></p>
-    <p>Direccion: <%= @docente.user.address.direccion %></p>
+    <p>Direccion: <%= link_to @docente.user.address.direccion, @docente.user.address %></p>
     <p>Edad: <%= @docente.user.edad %></p>
     <p>Matricula: <%= @docente.matricula %></p>
     <p>Titulo: <%= @docente.titulo %></p>
   </div>
 </div>
 </div>
-<%= link_to 'Editar', edit_docente_path(@docente) %> |
-<%= link_to 'Atras', docentes_path %>
+
+<% if current_user.is_administrativo %>
+  <%= link_to 'Editar', edit_docente_path(@docente) %> |
+<% end %>
+<%= link_to 'Listar', docentes_path %>

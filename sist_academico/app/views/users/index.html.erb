@@ -13,14 +13,15 @@
         <th>Direccion</th>
         <th>Username</th>
         <th>Email</th>
-        <th></th>
-        <th></th>
-        <th></th>
+        <% if current_user.is_administrativo %>
+          <th></th>
+          <th></th>
+        <% end %>
       </tr>
 
     <% @users.each do |user| %>
       <tr>
-        <td><%= user.nombre %></td>
+        <td><%= link_to user.nombre, user %></td>
         <td><%= user.apellido %></td>
         <td><%= user.sexo %></td>
         <td><%= user.telefono %></td>
@@ -29,14 +30,16 @@
         <td><%= user.address.direccion %></td>
         <td><%= user.username %></td>
         <td><%= user.email %></td>
-        <td><%= link_to 'Mostrar', user %></td>
-        <td><%= link_to 'Editar', edit_user_path(user) %></td>
-        <td><%= link_to 'Eliminar', user, method: :delete, data: { confirm: 'Estas seguro?'} %></td>
+        <% if current_user.is_administrativo %>
+          <td><%= link_to 'Editar', edit_user_path(user) %></td>
+          <td><%= link_to 'Eliminar', user, method: :delete, data: { confirm: 'Estas seguro?'} %></td>
+        <% end %>
       </tr>
     <% end %>
     </table>
     <%= will_paginate @users %>
   </div>
 </div>
-
-<%= link_to 'Registrar nuevo', new_user_path %>
+<% if current_user.is_administrativo %>
+  <%= link_to 'Registrar nuevo', new_user_path %>
+<% end %>

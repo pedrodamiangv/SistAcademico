@@ -14,16 +14,18 @@
 
 	<p>
 	  <b>Curso:</b>
-	  <%= @materia.curso.curso %>
+	  <%= link_to @materia.curso.curso, @materia.curso %>
 	</p>
 
 	<p>
 	  <b>Docente:</b>
-	  <%= @materia.docente.user.nombre %> <%= @materia.docente.user.apellido %>
+	  <%= link_to @materia.docente.user.nombre + ' ' + @materia.docente.user.apellido, @materia.docente %>
+	 
 	</p>
 
-
-	<%= link_to 'Editar', edit_materia_path(@materia) %> |
-	<%= link_to 'Atras', materias_path %>
+	<% if current_user.is_administrativo %>
+	  <%= link_to 'Editar', edit_materia_path(@materia) %> |
+	<% end %>
+	<%= link_to 'Listar', materias_path %>
   </div>
 </div>

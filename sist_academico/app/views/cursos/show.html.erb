@@ -1,25 +1,55 @@
 <p id="notice"><%= notice %></p>
+<% provide(:title, @curso.curso) %>
+<div class="row">
+<div class="span10 offset3">
+  <div class="cabezera">
+    <aside>
+      <section>
+        <h1>
+          <%= @curso.curso %>
+        </h1>
+      </section>
+      <section>
+        <p>
+		  <b>Turno:</b>
+		  <%= @curso.turno %>
+		</p>
+        <p>
+		  <b>Nivel:</b>
+		  <%= @curso.nivel %>
+		</p>
+		<p>
+		  <b>Enfasis:</b>
+		  <%= @curso.enfasis %>
+		</p>
+      </section>
+    </aside>
+  </div>
+  <div class="datos">
+    
+  	<table class="table table-bordered">
+      <tr>
+        <th>Materia</th>
+        <th>Area</th>
+        <th>Docente</th>
+      </tr>
 
-<p>
-  <b>Curso:</b>
-  <%= @curso.curso %>
-</p>
+    <% @curso.materias.each do |materia| %>
+      <tr>
+        <td><%= link_to materia.materia, materia %><%=  %></td>
+        <td><%= materia.area %></td>
+        <td><%= materia.docente.user.nombre + ' ' + materia.docente.user.apellido %></td>
+      </tr>
+    <% end %>
+    </table>
 
-<p>
-  <b>Turno:</b>
-  <%= @curso.turno %>
-</p>
+  </div>
+</div>
+</div>
 
-<p>
-  <b>Nivel:</b>
-  <%= @curso.nivel %>
-</p>
-
-<p>
-  <b>Enfasis:</b>
-  <%= @curso.enfasis %>
-</p>
+<% if current_user.is_administrativo %>
+  <%= link_to 'Editar', edit_curso_path(@curso) %> |
+<% end %>
+<%= link_to 'Listar', cursos_path %>
 
 
-<%= link_to 'Editar', edit_curso_path(@curso) %> |
-<%= link_to 'Atras', cursos_path %>

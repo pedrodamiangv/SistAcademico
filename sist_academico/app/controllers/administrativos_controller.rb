@@ -1,4 +1,6 @@
 class AdministrativosController < ApplicationController
+  before_filter :require_login
+  before_filter :admin_user
   # GET /administrativos
   # GET /administrativos.json
   def index

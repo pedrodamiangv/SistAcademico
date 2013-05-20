@@ -1,5 +1,6 @@
 class CursosController < ApplicationController
   before_filter :require_login
+  before_filter :admin_user, only: [:destroy, :edit, :update, :new, :create]
   # GET /cursos
   # GET /cursos.json
   def index

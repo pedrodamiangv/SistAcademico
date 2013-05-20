@@ -13,14 +13,15 @@
         <th>Cert. estudios</th>
         <th>Foto Carnet</th>
         <th>Cert. nacimiento</th>
-        <th></th>
-        <th></th>
-        <th></th>
+        <% if current_user.is_administrativo %>
+          <th></th>
+          <th></th>
+        <% end %>
       </tr>
 
     <% @alumnos.each do |alumno| %>
       <tr>
-        <td><%= alumno.user.nombre %></td>
+        <td><%= link_to alumno.user.nombre, alumno %></td>
         <td><%= alumno.user.apellido %></td>
         <td><%= alumno.user.CINro %></td>
         <td><%= alumno.curso.curso %></td>
@@ -29,9 +30,10 @@
         <td><%= alumno.doc_cert_estudios %></td>
         <td><%= alumno.doc_foto %></td>
         <td><%= alumno.doc_cert_nacimiento %></td>
-        <td><%= link_to 'Mostrar', alumno %></td>
-        <td><%= link_to 'Editar', edit_alumno_path(alumno) %></td>
-        <td><%= link_to 'Destruit', alumno, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
+        <% if current_user.is_administrativo %>
+          <td><%= link_to 'Editar', edit_alumno_path(alumno) %></td>
+          <td><%= link_to 'Destruit', alumno, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
+        <% end %>
       </tr>
     <% end %>
     </table>
@@ -39,4 +41,7 @@
   </div>
 </div>
 
-<%= link_to 'Nuevo Alumno', new_alumno_path %>
+<% if current_user.is_administrativo %>
+  <%= link_to 'Nuevo Alumno', new_alumno_path %>
+<% end %>
+

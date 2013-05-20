@@ -7,19 +7,21 @@
         <th>Direccion</th>
         <th>Barrio</th>
         <th>Ciudad</th>
-        <th></th>
-        <th></th>
-        <th></th>
+        <% if current_user.is_administrativo %>
+          <th></th>
+          <th></th>
+        <% end %>
       </tr>
 
     <% @addresses.each do |address| %>
       <tr>
-        <td><%= address.direccion %></td>
+        <td><%= link_to address.direccion, address %></td>
         <td><%= address.barrio %></td>
         <td><%= address.city.city %></td>
-        <td><%= link_to 'Mostrar', address %></td>
-        <td><%= link_to 'Editar', edit_address_path(address) %></td>
-        <td><%= link_to 'Eliminar', address, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
+        <% if current_user.is_administrativo %>
+          <td><%= link_to 'Editar', edit_address_path(address) %></td>
+          <td><%= link_to 'Eliminar', address, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
+        <% end %>
       </tr>
     <% end %>
     </table>
@@ -27,4 +29,6 @@
   </div>
 </div>
 
+<% if current_user.is_administrativo %>
 <%= link_to 'Registrar nuevo', new_address_path %>
+<% end %>

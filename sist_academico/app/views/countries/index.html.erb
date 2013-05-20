@@ -5,17 +5,19 @@
     <table class="table table-bordered">
       <tr class="table-title">
         <th>Pais</th>
-        <th></th>
-        <th></th>
-        <th></th>
+        <% if current_user.is_administrativo %>
+          <th></th>
+          <th></th>
+        <% end %>
       </tr>
 
     <% @countries.each do |country| %>
       <tr>
-        <td><%= country.pais %></td>
-        <td><%= link_to 'Mostrar', country %></td>
-        <td><%= link_to 'Editar', edit_country_path(country) %></td>
-        <td><%= link_to 'Destroy', country, method: :delete, :onclick => "return confirm('Are you sure you want to delete this post?')" %></td>
+        <td><%= link_to country.pais, country %></td>
+        <% if current_user.is_administrativo %>
+          <td><%= link_to 'Editar', edit_country_path(country) %></td>
+          <td><%= link_to 'Eliminar', country, method: :delete, :onclick => "return confirm('Estas Seguro?')" %></td>
+        <% end %>
       </tr>
     <% end %>
     </table>
@@ -23,4 +25,7 @@
   </div>
 </div>
 
-<%= link_to 'Registrar Nuevo', new_country_path %>
+<% if current_user.is_administrativo %>
+  <%= link_to 'Registrar Nuevo', new_country_path %>
+<% end %>
+

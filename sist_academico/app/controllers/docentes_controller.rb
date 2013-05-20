@@ -1,5 +1,7 @@
 class DocentesController < ApplicationController
   before_filter :require_login
+  before_filter :admin_user, only: [:destroy, :index, :new, :create]
+  before_filter :correct_user,   only: [:edit, :update, :show]
   # GET /docentes
   # GET /docentes.json
   def index
