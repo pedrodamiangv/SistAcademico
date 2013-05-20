@@ -4,6 +4,10 @@
     <%= f.collection_select :user_id ,@users,:id,:CINro %>
     <%= f.label :curso_id %>
     <%= f.collection_select :curso_id ,@cursos,:id, :curso  %>
+    <%= f.label :responsable %>
+    <%= f.text_field :responsable %>
+    <%= f.label :telefono_responsable %>
+    <%= f.text_field :telefono_responsable %>
     <%= f.label "Documentos del alumno", class: "label label-info" %>
       <div class="seguido">
         <%= f.label "Fotocopia de cedula", class: "seguido" %>
