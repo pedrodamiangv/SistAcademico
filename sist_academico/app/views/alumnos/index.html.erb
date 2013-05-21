@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="span9 offset3">
+  <div class="span12 offset2">
     <h1>Listando alumnos</h1>
 
     <table class="table table-bordered">
@@ -9,6 +9,8 @@
         <th>CINro</th>
         <th>Curso</th>
         <th>Nivel</th>
+        <th>Responsable</th>
+        <th>Telefono del responsable</th>
         <th>Cedula</th>
         <th>Cert. estudios</th>
         <th>Foto Carnet</th>
@@ -26,6 +28,8 @@
         <td><%= alumno.user.CINro %></td>
         <td><%= alumno.curso.curso %></td>
         <td><%= alumno.curso.nivel %></td>
+        <td><%= alumno.responsable %></td>
+        <td><%= alumno.telefono_responsable %></td>
         <td><%= alumno.doc_cedula %></td>
         <td><%= alumno.doc_cert_estudios %></td>
         <td><%= alumno.doc_foto %></td>
