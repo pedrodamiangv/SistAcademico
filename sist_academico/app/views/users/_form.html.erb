@@ -24,6 +24,7 @@
         <%= f.label :lugar_nacimiento %>
         <%= f.select( :lugar_nacimiento ,@cities_city) %>
 
+        <%= link_to "Ingresar Nueva Direccion", :popup => ['example', 'direccion'] %>
         <a data-toggle="modal" href="#example" class="direccion">Ingresar nueva direccion</a>
         <%= f.label :direccion %>
         <%= f.collection_select :address_id ,@addresses,:id,:direccion %>
@@ -53,7 +54,7 @@
   </div>  
   <div class="modal-body">  
     <p id="notice"><%= notice %></p>
-    <%= form_for(@direccion) do |f| %>
+    <%= form_for @direccion do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
       <%= f.label :direccion %><br />
       <%= f.text_field :direccion %>
@@ -63,8 +64,8 @@
       <%= f.collection_select :city_id ,@cities,:id,:city %>
   </div>  
   <div class="modal-footer"> 
-    <%= f.submit :class => 'btn btn-success', :controller => 'users_controller', :action =>
-'addresses_create' %> 
+    <%= f.button :class => 'btn btn-success', :onclick => 'alert("Please no!")' %>
+    <input type="button" class="btn btn-success" onclick = "guardar_address("<% @user %>", "<% @direccion %>");"/> 
     <a href="#" class="btn" data-dismiss="modal">Close</a>  
   </div>  
       <% end %>

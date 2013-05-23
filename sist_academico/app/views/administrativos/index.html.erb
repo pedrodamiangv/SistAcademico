@@ -1,39 +1,45 @@
-<div class="row">
-  <div class="span12 offset2">
+<div class="container">
+  <div class="row">
     <h1>Lista de Administrativos</h1>
-
-    <table class="table table-bordered">
-      <tr class="table-title">
-        <th>Nombre</th>
-        <th>Apellido</th>
-        <th>Cargo</th>
-        <th>Telefono</th>
-        <th>Titulo</th>
-        <th>Fecha de Registro</th>
-        <% if current_user.is_administrativo %>
-          <th></th>
-          <th></th>
-        <% end %>
-      </tr>
-
-    <% @administrativos.each do |administrativo| %>
-      <tr>
-        <td><%= link_to administrativo.user.nombre, administrativo %></td>
-        <td><%= administrativo.user.apellido %></td>
-        <td><%= administrativo.cargo %></td>
-        <td><%= administrativo.user.telefono %></td>
-        <td><%= administrativo.titulo %></td>
-        <td><%= administrativo.created_at.to_s.slice(0,10); %></td>
-        <% if current_user.is_administrativo %>
-          <td><%= link_to 'Editar', edit_administrativo_path(administrativo) %></td>
-          <td><%= link_to 'Eliminar', administrativo, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
-        <% end %>
-      </tr>
-    <% end %>
-    </table>
-    <%= will_paginate @administrativos %>
+    <div class="row" align="right">
+      Search:<input type="text" id="kwd_search" value="" class="span3 seguido"/> 
+    </div>
+    <div class="row">
+      <table id="my-table" class="table table-bordered">
+        <thead class="table-title">
+          <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Cargo</th>
+            <th>Telefono</th>
+            <th>Titulo</th>
+            <th>Fecha de Registro</th>
+            <% if current_user.is_administrativo %>
+              <th></th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <% @administrativos.each do |administrativo| %>
+            <tr>
+              <td><%= link_to administrativo.user.nombre, administrativo %></td>
+              <td><%= administrativo.user.apellido %></td>
+              <td><%= administrativo.cargo %></td>
+              <td><%= administrativo.user.telefono %></td>
+              <td><%= administrativo.titulo %></td>
+              <td><%= administrativo.created_at.to_s.slice(0,10); %></td>
+              <% if current_user.is_administrativo %>
+                <td><%= link_to 'Editar', edit_administrativo_path(administrativo) %>
+                <%= link_to 'Eliminar', administrativo, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= will_paginate @administrativos %>
+      <% if current_user.is_administrativo %>
+        <%= link_to 'Registrar nuevo Administrativo', new_administrativo_path %>
+      <% end %>
+    </div>
   </div>
 </div>
-<% if current_user.is_administrativo %>
-  <%= link_to 'Registrar nuevo Administrativo', new_administrativo_path %>
-<% end %>

@@ -13,3 +13,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+function guardar_address(user, direccion){
+	//alert('Hola');
+	<% if user.guardar_address(direccion) do %>
+		alert('Guardo');
+	<% end %>
+}
+

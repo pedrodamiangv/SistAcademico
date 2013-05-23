@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :require_login, :only => :index
-  before_filter :admin_user, only: [:destroy, :index, :new, :create]
+  before_filter :require_login
+  before_filter :admin_user
   before_filter :correct_user,   only: [:edit, :update, :show]
 
   def index
@@ -62,12 +62,19 @@ class UsersController < ApplicationController
     end
   end
 
-  def addresses_create
+  def addresses_new
+      @direccion = Address.new
+      @cities = City.find(:all)
+    end
+
+  def self.addresses_create
       @direccion = Address.new(params[:direccion])
       if @direccion.save
         flash[:notice] = "Guardado"
+        return true
       else
         flash[:notice] = "Hubo Problemas, no guardo"
+        return false
       end
   end
 
@@ -86,11 +93,6 @@ class UsersController < ApplicationController
       ano_actual = Date.today.to_s.slice(0,4);
       edad = ano_actual.to_i - ano_nacimiento.to_i;
       return edad;
-    end
-
-    def addresses_new
-      @direccion = Address.new
-      @cities = City.find(:all)
     end
 
 end
