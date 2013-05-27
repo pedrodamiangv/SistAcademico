@@ -1,7 +1,7 @@
 <% provide(:title, @alumno.user.nombre) %>
 <p id="notice"><%= notice %></p>
+<div class="container">
 <div class="row">
-<div class="span8 offset3">
   <div class="cabezera">
     <aside>
       <section>
@@ -13,6 +13,15 @@
         <h1>
           <%= @alumno.user.nombre %>
         </h1>
+        <br/>
+        <div>
+          <label class="label">Materias</label>
+          <% @alumno.curso.materias.each do |materia| %>
+            <tr>
+              <td><%= link_to materia.materia, materia %></td> 
+            </tr>
+          <% end %>
+        </div>
       </section>
     </aside>
   </div>

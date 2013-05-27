@@ -3,8 +3,8 @@
   <%= f.label :user_id %>
   <%= f.collection_select :user_id ,@users,:id,:CINro %>
   <%= f.label :matricula %>
-  <%= f.number_field :matricula %>
+  <%= f.number_field :matricula, :maxlength => 30 %>
   <%= f.label :titulo %>
-  <%= f.text_field :titulo %>
+  <%= f.text_field :titulo, :maxlength => 40 %>
   <%= f.submit "Guardar", class: "btn btn-large btn-primary" %>
 <% end %>

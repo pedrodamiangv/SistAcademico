@@ -1,31 +1,44 @@
 <%= form_for(@alumno) do |f| %>
-    <%= render 'shared/error_messages', object: f.object %>
-    <%= f.label :user_id %>
-    <%= f.collection_select :user_id ,@users,:id,:CINro %>
-    <%= f.label :curso_id %>
-    <%= f.collection_select :curso_id ,@cursos,:id, :curso  %>
-    <%= f.label :responsable %>
-    <%= f.text_field :responsable %>
-    <%= f.label :telefono_responsable %>
-    <%= f.text_field :telefono_responsable %>
-    <%= f.label "Documentos del alumno", class: "label label-info" %>
-      <div class="seguido">
-        <%= f.label "Fotocopia de cedula", class: "seguido" %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="row">
+    <div class="span4">
+      <%= f.label :user_id %>
+      <%= f.collection_select :user_id ,@users,:id,:CINro %>
+      <%= f.label :responsable %>
+      <%= f.text_field :responsable, :maxlength => 40 %>
+    </div>
+    <div class="span4">
+      <%= f.label :curso_id %>
+      <%= f.collection_select :curso_id ,@cursos,:id, :curso  %>
+      <%= f.label :telefono_responsable %>
+      <%= f.text_field :telefono_responsable, :maxlength => 15 %>
+    </div>
+  
+  <div class="span4">
+    <div class="">
+      <%= f.label "Documentos del alumno", class: "label label-info" %>
+    </div>
+      <div class="abajo">
         <%= f.check_box :doc_cedula, class: "seguido" %>
-      </div>
-      <div class="seguido">
-        <%= f.label "Fotocopia de Certificado de estudio", class: "seguido-espaciado" %>
-        <%= f.check_box :doc_cert_estudios, class: "seguido" %>
+        <%= f.label "Fotocopia de cedula", class: "seguido-espaciado" %>
       </div>
       <div class="abajo">
-        <%= f.label "Foto tipo carnet", class: "seguido" %>
-        <%= f.check_box :doc_foto, class: "seguido-espaciado" %>
+        <%= f.check_box :doc_cert_estudios, class: "seguido" %>
+        <%= f.label "Fotocopia de Certificado de estudio", class: "seguido-espaciado" %>
       </div>
-      <div class="seguido">
-        <%= f.label "Certificado de Nacimiento", class: "seguido-espaciado" %>
+      <div class="abajo">
+        <%= f.check_box :doc_foto, class: "seguido" %>
+        <%= f.label "Foto tipo carnet", class: "seguido-espaciado" %>
+      </div>
+      <div class="abajo">
         <%= f.check_box :doc_cert_nacimiento, class: "seguido" %>
+        <%= f.label "Certificado de Nacimiento", class: "seguido-espaciado" %>
       </div>
-    <div class="abajo">
+      </div>
+      </div>
+    <div class="abajo" align="center">
       <%= f.submit "Guardar", class: "btn btn-large btn-primary" %>
     </div>
+
+  
 <% end %>

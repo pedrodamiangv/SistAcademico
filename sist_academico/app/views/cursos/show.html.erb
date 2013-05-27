@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 <% provide(:title, @curso.curso) %>
+<div class="container">
 <div class="row">
-<div class="span10 offset3">
-  <div class="cabezera">
+  <div class="cabezera span3">
     <aside>
       <section>
         <h1>
@@ -25,22 +25,25 @@
       </section>
     </aside>
   </div>
-  <div class="datos">
+  <div class="datos span8">
     
-  	<table class="table table-bordered">
-      <tr>
-        <th>Materia</th>
-        <th>Area</th>
-        <th>Docente</th>
-      </tr>
-
-    <% @curso.materias.each do |materia| %>
-      <tr>
-        <td><%= link_to materia.materia, materia %><%=  %></td>
-        <td><%= materia.area %></td>
-        <td><%= materia.docente.user.nombre + ' ' + materia.docente.user.apellido %></td>
-      </tr>
-    <% end %>
+    <table id="my-table" class="table table-bordered">
+      <thead class="table-title">
+        <tr>
+          <th>Materia</th>
+          <th>Area</th>
+          <th>Docente</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @curso.materias.each do |materia| %>
+          <tr>
+            <td><%= link_to materia.materia, materia %><%=  %></td>
+            <td><%= materia.area %></td>
+            <td><%= materia.docente.user.nombre + ' ' + materia.docente.user.apellido %></td>
+          </tr>
+        <% end %>
+      </tbody>
     </table>
 
   </div>

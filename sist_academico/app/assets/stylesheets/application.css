@@ -11,6 +11,16 @@
  *= require_self
  *= require_tree .
  */
+ .field_with_errors {  
+  display: inline;  
+}  
+  
+.field_with_errors .message {  
+  color: #D00;  
+  padding-left: 5px;  
+  font-size: 12px;  
+}
+
 .direccion{
 	float: right;
 }
@@ -47,6 +57,10 @@ input#kwd_search{
 
 .h1{
     font-family: 'Chela One', cursive;
+    /*font-family: 'Jockey One', sans-serif;*/
+    font-size: 28px;
+    font-weight: bold;
+    text-transform:uppercase;
 }
 
 /* 

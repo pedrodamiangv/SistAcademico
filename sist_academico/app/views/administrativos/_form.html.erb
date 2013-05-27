@@ -4,10 +4,10 @@
       <%= render 'shared/error_messages', object: f.object %>
       <%= f.label :user_id %>
       <%= f.collection_select :user_id ,@users,:id,:CINro %>
-      <%= f.label :cargo %>
+      <%= f.label :cargo, :maxlength => 30 %>
       <%= f.text_field :cargo %>
       <%= f.label :titulo %>
-      <%= f.text_field :titulo %>
+      <%= f.text_field :titulo, :maxlength => 30 %>
       <%= f.submit "Guardar", class: "btn btn-large btn-primary" %>
     <% end %>
   </div>

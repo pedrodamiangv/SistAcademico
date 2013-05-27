@@ -1,9 +1,9 @@
 <%= form_for(@materia) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <%= f.label :materia %>
-  <%= f.text_field :materia %>
+  <%= f.text_field :materia, :maxlength => 30 %>
   <%= f.label :area %>
-  <%= f.text_field :area %>
+  <%= f.text_field :area, :maxlength => 30 %>
   <%= f.label :curso_id %>
   <%= f.collection_select :curso_id ,@cursos,:id,:curso %>
   <%= f.label :docente_id %>

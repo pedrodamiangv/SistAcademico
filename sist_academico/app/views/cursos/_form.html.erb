@@ -1,12 +1,12 @@
 <%= form_for(@curso) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <%= f.label :curso %>
-  <%= f.text_field :curso %>
+  <%= f.text_field :curso, :size => 40, :maxlength => 20 %>
   <%= f.label :turno %>
-  <%= f.text_field :turno %>
+  <%= f.select(:turno, ['Mañana', 'Tarde', 'Noche' ])%>
   <%= f.label :nivel %>
-  <%= f.text_field :nivel %>
+  <%= f.select(:nivel, ['Educación Escolar Básica', 'Educación Media' ])%>
   <%= f.label :enfasis %>
-  <%= f.text_field :enfasis %>
+  <%= f.select(:nivel, ['Ciencias Sociales', 'Ciencias Básicas', 'Técnico en Informática', 'Técnico en Contabilidad', 'Técnico en Administración', 'Otro' ])%>
    <%= f.submit "Guardar", class: "btn btn-large btn-primary" %>
 <% end %>
