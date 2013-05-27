@@ -26,3 +26,11 @@
 	-webkit-column-rule: 1px dashed #000000;
 
 }
+
+.textoTitulo {
+	text-align: center;
+	font-family: 'Abril Fatface', cursive;
+	color: black;
+	font-size: 14px;
+}
+
