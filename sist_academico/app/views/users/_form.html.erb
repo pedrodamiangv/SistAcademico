@@ -30,16 +30,16 @@
         <%= f.collection_select :address_id ,@addresses,:id,:direccion %>
       <% end %>
 
-      <%= f.label :username %>
+      <%= f.label :username, "Nombre de Usuario" %>
       <%= f.text_field :username, :maxlength => 30 %>
 
-      <%= f.label :email %>
+      <%= f.label :email, "Correo Electrónico" %>
       <%= f.text_field :email, :maxlength => 30 %>
 
-      <%= f.label :password %>
+      <%= f.label :password, "Contraseña" %>
       <%= f.password_field :password, :maxlength => 30 %>
 
-      <%= f.label :password_confirmation, "Confirmación" %>
+      <%= f.label :password_confirmation, "Confirmación de Contraseña" %>
       <%= f.password_field :password_confirmation, :maxlength => 30 %>
 
       <%= f.submit "Guardar", class: "btn btn-large btn-primary" %>

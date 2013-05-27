@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(:version => 20130520233801) do
 
   create_table "materias", :force => true do |t|
     t.string   "materia",    :limit => 30, :null => false
-    t.string   "area",       :limit => 30, :null => false
+    t.string   "area",       :limit => 70, :null => false
     t.integer  "curso_id",                 :null => false
     t.integer  "docente_id",               :null => false
     t.datetime "created_at",               :null => false

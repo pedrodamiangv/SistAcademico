@@ -5,7 +5,7 @@
   <%= f.text_field :direccion, :maxlength => 50 %>
   <%= f.label :barrio %>
   <%= f.text_field :barrio, :maxlength => 30 %>
-  <%= f.label :city %>
+  <%= f.label :ciudad %>
   <%= f.collection_select :city_id ,@cities,:id,:city %>
   <%= f.submit "Guardar", class: "btn btn-large btn-primary" %>
 <% end %>
