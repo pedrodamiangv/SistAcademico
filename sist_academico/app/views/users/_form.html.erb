@@ -1,8 +1,10 @@
 <div class="row">
-  <div class="span6 offset3">
+  
     <%= form_for(@user) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
       <% if current_user.is_administrativo %>
+
+      <div class="span3 ">
         <%= f.label :nombre %>
         <%= f.text_field :nombre, :maxlength => 30 %>
 
@@ -13,38 +15,48 @@
         <%= f.text_field :CINro, :maxlength => 12 %>
 
         <%= f.label :sexo %>
-        <%= f.select(:sexo, ['M', 'F' ])%>
+        <%= f.select(:sexo, ['Masculino', 'Femenino' ])%>
+        
+      </div>
 
+      <div class="span3 offset1">
         <%= f.label :telefono %>
         <%= f.text_field :telefono, :maxlength => 12 %>
+
+        <%= f.label :email, "Correo Electrónico" %>
+        <%= f.text_field :email, :maxlength => 30 %>
 
         <%= f.label :fecha_nacimiento %> 
         <%= f.text_field :fecha_nacimiento, :id=> "fecha" %>
 
         <%= f.label :lugar_nacimiento %>
         <%= f.select( :lugar_nacimiento ,@cities_city) %>
+      </br></br></br>
+        <div class="offset1">
+          <%= f.submit "Guardar", class: "btn btn-large btn-inverse" %>
+        </div>
+      </div>
 
-        <%= link_to "Ingresar Nueva Direccion", :popup => ['example', 'direccion'] %>
-        <a data-toggle="modal" href="#example" class="direccion">Ingresar nueva direccion</a>
+      <div class="span3 offset1">
+        <%= f.label :username, "Nombre de Usuario" %>
+        <%= f.text_field :username, :maxlength => 30 %>
+
+        <%= f.label :password, "Contraseña" %>
+        <%= f.password_field :password, :maxlength => 30 %>
+
+        <%= f.label :password_confirmation, "Confirmación de Contraseña" %>
+        <%= f.password_field :password_confirmation, :maxlength => 30 %>
+
         <%= f.label :direccion %>
         <%= f.collection_select :address_id ,@addresses,:id,:direccion %>
-      <% end %>
+        <a data-toggle="modal" href="#example" class="direccion">Ingresar nueva direccion</a>
+        <% end %>
+      </div>
 
-      <%= f.label :username, "Nombre de Usuario" %>
-      <%= f.text_field :username, :maxlength => 30 %>
 
-      <%= f.label :email, "Correo Electrónico" %>
-      <%= f.text_field :email, :maxlength => 30 %>
-
-      <%= f.label :password, "Contraseña" %>
-      <%= f.password_field :password, :maxlength => 30 %>
-
-      <%= f.label :password_confirmation, "Confirmación de Contraseña" %>
-      <%= f.password_field :password_confirmation, :maxlength => 30 %>
-
-      <%= f.submit "Guardar", class: "btn btn-large btn-primary" %>
+      
     <% end %>
-  </div>
+  
 </div>
  
 <div id="example" class="modal hide fade in" style="display: none; ">  
