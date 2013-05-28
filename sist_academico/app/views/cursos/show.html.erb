@@ -29,6 +29,9 @@
           <b>Cantidad de Alumnos:</b>
           <%= @curso.alumnos.count %>
         </p>
+        <p>
+          <b><%= link_to 'Registrar nueva Materia', new_materia_path %></b>
+        </p>
         <label class="label">Materias</label>
           <ul class="nav nav-tabs nav-stacked ul">
             <% @curso.materias.each do |materia| %>
