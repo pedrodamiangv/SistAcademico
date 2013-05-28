@@ -1,6 +1,6 @@
 <%= form_for(@country) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-  <%= f.label :pais %><br />
+  <%= f.label :pais %>
   <%= f.text_field :pais, :maxlength => 30 %>
-  <%= f.submit "Guardar", class: "btn btn-large btn-primary" %>
+  <%= f.submit "Guardar", class: "btn btn-large btn-inverse" %>
 <% end %>

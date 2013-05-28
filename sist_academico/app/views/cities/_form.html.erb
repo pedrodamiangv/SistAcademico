@@ -1,8 +1,8 @@
 <%= form_for(@city) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-  <%= f.label :city %>
+  <%= f.label :ciudad %>
   <%= f.text_field :city, :maxlength => 30 %><br/>
-  <%= f.label :country %>
+  <%= f.label :pais %>
   <%= f.collection_select :country_id ,@countries,:id,:pais %><br/>
-  <%= submit_tag "Guardar", class: "btn btn-large btn-primary" %>
+  <%= submit_tag "Guardar", class: "btn btn-large btn-inverse" %>
 <% end %>
