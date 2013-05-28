@@ -89,9 +89,9 @@ class UsersController < ApplicationController
     end
 
     def calcular_edad user
-      ano_nacimiento = user.fecha_nacimiento.slice(6,user.fecha_nacimiento.length);
-      ano_actual = Date.today.to_s.slice(0,4);
-      edad = ano_actual.to_i - ano_nacimiento.to_i;
+      fecha1 = Date.strptime(user.fecha_nacimiento, "%d/%m/%y")
+      fecha2 = Date.today;
+      edad = fecha1.year - fecha2.year;
       return edad;
     end
 

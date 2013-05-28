@@ -1,7 +1,9 @@
 <% if object.errors.any? %>
-  <div id="error_explanation">
-    <div class="alert alert-error">
-      El formulario contiene <%= pluralize(object.errors.count, "error") %>.
-    </div>
+  <div class="alert alert-block">
+    <strong>Atencion! </strong>
+    El formulario contiene <%= pluralize(object.errors.count, "error") %>.
+    <% object.errors.each do |attr, msg| %>
+	  <%= "#{attr} #{msg}" if object.errors[attr].first == msg %> 
+	<% end %>
   </div>
 <% end %>

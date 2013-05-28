@@ -41,14 +41,38 @@
     <p>Nombre del Responsable: <%= @alumno.responsable %> </p>
     <p>Telefono del Responsable: <%= @alumno.telefono_responsable %> </p>
     <hr>
-    <p> Documentos: <p/>
-    <p>  &nbsp;&nbsp;-Fotocopia de cedula: <%= @alumno.doc_cedula %> <p/>
-    <p>  &nbsp;&nbsp;-Foto tipo carnet: <%= @alumno.doc_foto %> <p/>
-    <p>  &nbsp;&nbsp;-Certificado de Nacimiento: <%= @alumno.doc_cert_nacimiento %> <p/>
-    <p>  &nbsp;&nbsp;-Certificados de estudios: <%= @alumno.doc_cert_estudios %></p>
+    <% if @alumno.doc_cedula || @alumno.doc_foto || @alumno.doc_cert_nacimiento || @alumno.doc_cert_estudios %>
+      <p> Documentos Traidos: <p/>
+      <% if @alumno.doc_cedula %> 
+        <p>  &nbsp;&nbsp;-Fotocopia de cedula <p/>
+      <% end %>
+      <% if @alumno.doc_foto %> 
+        <p>  &nbsp;&nbsp;-Foto tipo carnet <p/>
+      <% end %>
+      <% if @alumno.doc_cert_nacimiento %> 
+        <p>  &nbsp;&nbsp;-Certificado de Nacimiento <p/>
+      <% end %>
+      <% if @alumno.doc_cert_estudios %> 
+        <p>  &nbsp;&nbsp;-Certificados de estudios </p>
+      <% end %>
+       <% if !@alumno.doc_cedula || !@alumno.doc_foto || !@alumno.doc_cert_nacimiento || !@alumno.doc_cert_estudios %>
+        <p> Documentos Faltantes: <p/>
+        <% if !@alumno.doc_cedula %> 
+          <p>  &nbsp;&nbsp;-Fotocopia de cedula <p/>
+        <% end %>
+        <% if !@alumno.doc_foto %> 
+          <p>  &nbsp;&nbsp;-Foto tipo carnet <p/>
+        <% end %>
+        <% if !@alumno.doc_cert_nacimiento %> 
+          <p>  &nbsp;&nbsp;-Certificado de Nacimiento <p/>
+        <% end %>
+        <% if !@alumno.doc_cert_estudios %> 
+          <p>  &nbsp;&nbsp;-Certificados de estudios </p>
+        <% end %>
+       <% end %>
+    <% else %>
+       <p class="label label-important"> No trajo ningun documento aun. <p/>
+    <% end %>
   </div>
 </div>
 </div>
-
-<%= link_to 'Mostrar', edit_alumno_path(@alumno) %> |
-<%= link_to 'Listar', alumnos_path %>

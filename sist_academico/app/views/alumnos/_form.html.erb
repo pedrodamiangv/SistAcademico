@@ -1,44 +1,114 @@
 <%= form_for(@alumno) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-  <div class="row">
-    <div class="span4">
-      <%= f.label :user_id %>
-      <%= f.collection_select :user_id ,@users,:id,:CINro %>
-      <%= f.label :responsable %>
-      <%= f.text_field :responsable, :maxlength => 40 %>
-    </div>
-    <div class="span4">
-      <%= f.label :curso_id %>
-      <%= f.collection_select :curso_id ,@cursos,:id, :curso  %>
-      <%= f.label :telefono_responsable %>
-      <%= f.text_field :telefono_responsable, :maxlength => 15 %>
-    </div>
-  
-  <div class="span4">
-    <div class="">
-      <%= f.label "Documentos del alumno", class: "label label-info" %>
-    </div>
-      <div class="abajo">
-        <%= f.check_box :doc_cedula, class: "seguido" %>
-        <%= f.label "Fotocopia de cedula", class: "seguido-espaciado" %>
-      </div>
-      <div class="abajo">
-        <%= f.check_box :doc_cert_estudios, class: "seguido" %>
-        <%= f.label "Fotocopia de Certificado de estudio", class: "seguido-espaciado" %>
-      </div>
-      <div class="abajo">
-        <%= f.check_box :doc_foto, class: "seguido" %>
-        <%= f.label "Foto tipo carnet", class: "seguido-espaciado" %>
-      </div>
-      <div class="abajo">
-        <%= f.check_box :doc_cert_nacimiento, class: "seguido" %>
-        <%= f.label "Certificado de Nacimiento", class: "seguido-espaciado" %>
-      </div>
-      </div>
-      </div>
-    <div class="abajo" align="center">
-      <%= f.submit "Guardar", class: "btn btn-large btn-primary" %>
-    </div>
+  <div class="container">
+    <div class="row">
+      <%= f.label "Datos Personales", class: "label" %>
+      <%= f.fields_for :user do |d| %>
+        <div class="span3">
+          <%= d.label :nombre %>
+          <%= d.text_field :nombre, :maxlength => 30 %>
 
+          <%= d.label :apellido %>
+          <%= d.text_field :apellido, :maxlength => 30 %>
+
+          <%= d.label :CINro, "Cedula de Identidad Numero" %>
+          <%= d.text_field :CINro, :maxlength => 12 %>
+
+          <%= d.label :sexo %>
+          <%= d.select(:sexo, ['M', 'F' ])%>
+        </div>
+        <div class="span3 offset1">
+          <%= d.label :telefono %>
+          <%= d.text_field :telefono, :maxlength => 12 %>
+
+          <%= d.label :fecha_nacimiento %> 
+          <%= d.text_field :fecha_nacimiento, :id=> "fecha" %>
+
+          <%= d.label :email %>
+          <%= d.text_field :email, :maxlength => 30 %>
+
+          <%= d.label :lugar_nacimiento %>
+          <%= d.select( :lugar_nacimiento ,@cities_city) %>
+        </div>
+        <div class="span4 offset1">
+          <%= d.label :username %>
+          <%= d.text_field :username, :maxlength => 30 %>
+
+          <%= d.label :password %>
+          <%= d.password_field :password, :maxlength => 30 %>
+
+          <%= d.label :password_confirmation, "Confirmación" %>
+          <%= d.password_field :password_confirmation, :maxlength => 30 %>
+
+          <a data-toggle="modal" href="#example" class="direccion">Ingresar nueva direccion</a>
+          <%= d.label :direccion %>
+          <%= d.collection_select :address_id ,@addresses,:id,:direccion %>
+        </div>
+      <% end %>
+    </div>
+    <div class="row">
+      <%= f.label "Datos del Alumno", class: "label" %>
+      <div class="span4">
+        <%= f.label :responsable %>
+        <%= f.text_field :responsable, :maxlength => 40 %>
+        <%= f.label :telefono_responsable %>
+        <%= f.text_field :telefono_responsable, :maxlength => 15 %>
+      </div>
+      <div class="span4">
+        <%= f.label :curso_id %>
+        <%= f.collection_select :curso_id ,@cursos,:id, :curso  %>
+      </div>
+      <div class="span4">
+        <div class="">
+          <%= f.label "Documentos del alumno", class: "label" %>
+        </div>
+        <div class="abajo">
+          <%= f.check_box :doc_cedula, class: "seguido" %>
+          <%= f.label "Fotocopia de cedula", class: "seguido-espaciado" %>
+        </div>
+        <div class="abajo">
+          <%= f.check_box :doc_cert_estudios, class: "seguido" %>
+          <%= f.label "Fotocopia de Certificado de estudio", class: "seguido-espaciado" %>
+        </div>
+        <div class="abajo">
+          <%= f.check_box :doc_foto, class: "seguido" %>
+          <%= f.label "Foto tipo carnet", class: "seguido-espaciado" %>
+        </div>
+        <div class="abajo">
+         <%= f.check_box :doc_cert_nacimiento, class: "seguido" %>
+          <%= f.label "Certificado de Nacimiento", class: "seguido-espaciado" %>
+        </div>
+      </div>
+    </div>
+    <div class="abajo" align="center">
+      <%= f.submit "Guardar", class: "btn btn-large btn-inverse" %>
+    </div>
+  </div>
   
 <% end %>
+
+
+
+<div id="example" class="modal hide fade in" style="display: none; ">  
+  <div class="modal-header">  
+    <a class="close" data-dismiss="modal">×</a>  
+    <h3>Registrar Direccion</h3>  
+  </div>  
+  <div class="modal-body">  
+    <p id="notice"><%= notice %></p>
+    <%= form_for @direccion do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <%= f.label :direccion %><br />
+      <%= f.text_field :direccion %>
+      <%= f.label :barrio %><br />
+      <%= f.text_field :barrio %>
+      <%= f.label :city %>
+      <%= f.collection_select :city_id ,@cities,:id,:city %>
+  </div>  
+  <div class="modal-footer"> 
+    <%= f.button :class => 'btn btn-success', :onclick => 'alert("Please no!")' %>
+    <input type="button" class="btn btn-success" onclick = "guardar_address("<% @user %>", "<% @direccion %>");"/> 
+    <a href="#" class="btn" data-dismiss="modal">Close</a>  
+  </div>  
+      <% end %>
+</div> 

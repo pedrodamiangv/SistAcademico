@@ -8,39 +8,55 @@
         <h1>
           <%= @curso.curso %>
         </h1>
+        <% if current_user.is_administrativo %>
+          <span><%= link_to '(Editar)', edit_curso_path(@curso) %> </span>
+        <% end %>
       </section>
       <section>
         <p>
-		  <b>Turno:</b>
-		  <%= @curso.turno %>
-		</p>
+    		  <b>Turno:</b>
+    		  <%= @curso.turno %>
+    		</p>
+            <p>
+    		  <b>Nivel:</b>
+    		  <%= @curso.nivel %>
+    		</p>
+    		<p>
+    		  <b>Enfasis:</b>
+    		  <%= @curso.enfasis %>
+    		</p>
         <p>
-		  <b>Nivel:</b>
-		  <%= @curso.nivel %>
-		</p>
-		<p>
-		  <b>Enfasis:</b>
-		  <%= @curso.enfasis %>
-		</p>
+          <b>Cantidad de Alumnos:</b>
+          <%= @curso.alumnos.count %>
+        </p>
+        <label class="label">Materias</label>
+          <ul class="nav nav-tabs nav-stacked ul">
+            <% @curso.materias.each do |materia| %>
+              <li class="li"><%= link_to materia.materia + " | " + materia.docente.user.nombre + ' ' + materia.docente.user.apellido , materia%> </li>
+            <% end %>
+          </ul>
       </section>
     </aside>
   </div>
   <div class="datos span8">
-    
+    <label class="label">Lista de Alumnos del <%= @curso.curso %> </label>
+    <div align="right">
+      Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido"/> 
+    </div>
     <table id="my-table" class="table table-bordered">
       <thead class="table-title">
         <tr>
-          <th>Materia</th>
-          <th>Area</th>
-          <th>Docente</th>
+          <th>Alumnos</th>
+          <th>Edad</th>
+          <th>Fecha de Inscripcion</th>
         </tr>
       </thead>
       <tbody>
-        <% @curso.materias.each do |materia| %>
+        <% @curso.alumnos.each do |alumno| %>
           <tr>
-            <td><%= link_to materia.materia, materia %><%=  %></td>
-            <td><%= materia.area %></td>
-            <td><%= materia.docente.user.nombre + ' ' + materia.docente.user.apellido %></td>
+            <td><%= link_to alumno.user.nombre + " " + alumno.user.apellido, alumno %></td>
+            <td><%= alumno.user.edad %> </td>
+            <td><%= alumno.user.created_at.strftime("%d/%m/%Y") %></td>
           </tr>
         <% end %>
       </tbody>
@@ -50,9 +66,5 @@
 </div>
 </div>
 
-<% if current_user.is_administrativo %>
-  <%= link_to 'Editar', edit_curso_path(@curso) %> |
-<% end %>
-<%= link_to 'Listar', cursos_path %>
 
 

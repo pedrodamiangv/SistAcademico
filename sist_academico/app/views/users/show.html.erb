@@ -1,6 +1,6 @@
 <% provide(:title, @user.nombre) %>
 <div class="row">
-<div class="span6 offset3">
+<div class="span6">
   <div class="cabezera">
     <aside>
       <section>
@@ -12,6 +12,7 @@
         <h1>
           <%= @user.nombre %>
         </h1>
+        <%= link_to 'Editar', edit_user_path(@user) %>
       </section>
     </aside>
   </div>

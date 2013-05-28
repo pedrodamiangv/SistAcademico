@@ -33,9 +33,6 @@
         </tbody>
       </table>
       <%= will_paginate @materias %>
-      <% if current_user.is_administrativo %>
-        <%= link_to 'Registrar Nueva Materia', new_materia_path %>
-      <% end %>
     </div>
   </div>
 </div>

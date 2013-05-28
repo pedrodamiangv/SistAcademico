@@ -89,6 +89,9 @@ caption { border:1px solid #5C443A;
 td, th { color:#363636;
  font:normal 10px verdana, arial, helvetica, sans-serif;
 }
+.ul, .li { color:#363636;
+ font:normal 10px verdana, arial, helvetica, sans-serif;
+}
 tr { border:1px dotted gray;
 }
 thead th, tfoot th { background:#424242;

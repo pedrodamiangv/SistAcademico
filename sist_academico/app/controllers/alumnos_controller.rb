@@ -28,8 +28,8 @@ class AlumnosController < ApplicationController
   # GET /alumnos/new.json
   def new
     @alumno = Alumno.new
-    @cursos = Curso.find(:all)
-    @users = User.find(:all)
+    @alumno.build_user
+    atributos
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @alumno }
@@ -39,27 +39,24 @@ class AlumnosController < ApplicationController
   # GET /alumnos/1/edit
   def edit
     @alumno = Alumno.find(params[:id])
-    @cursos = Curso.find(:all)
-    @users = User.find(:all)
+    atributos
   end
 
   # POST /alumnos
   # POST /alumnos.json
   def create
     @alumno = Alumno.new(params[:alumno])
-    user = @alumno.user
+    @alumno.user.edad = calcular_edad @alumno.user
     respond_to do |format|
-      if @alumno.save
-        user.alumno = @alumno
-        user.update_attribute(:is_alumno, true )
-        format.html { redirect_to @alumno, notice: 'El alumno ha sido registrado.' }
-        format.json { render json: @alumno, status: :created, location: @alumno }
-      else
-        @cursos = Curso.find(:all)
-        @users = User.find(:all)
-        format.html { render action: "new" }
-        format.json { render json: @alumno.errors, status: :unprocessable_entity }
-      end
+        if @alumno.save
+          @alumno.user.update_attribute(:is_alumno, true )
+          format.html { redirect_to @alumno, notice: 'El alumno ha sido registrado.' }
+          format.json { render json: @alumno, status: :created, location: @alumno }
+        else
+         atributos
+          format.html { render action: "new" }
+          format.json { render json: @alumno.errors, status: :unprocessable_entity }
+        end
     end
   end
 
@@ -73,8 +70,7 @@ class AlumnosController < ApplicationController
         format.html { redirect_to @alumno, notice: 'El alumno ha sido actualizado.' }
         format.json { head :no_content }
       else
-        @cursos = Curso.find(:all)
-        @users = User.find(:all)
+        atributos
         format.html { render action: "edit" }
         format.json { render json: @alumno.errors, status: :unprocessable_entity }
       end
@@ -92,4 +88,30 @@ class AlumnosController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+    def atributos
+      @addresses = Address.find(:all)
+      cities_city = []
+      ciudades = City.find(:all)
+      ciudades.each do |city|
+        cities_city << city.city
+      end
+      @cities_city= cities_city
+      @cursos = Curso.find(:all)
+      @users = User.find(:all)
+      addresses_new
+    end
+
+    def addresses_new
+      @direccion = Address.new
+      @cities = City.find(:all)
+    end
+
+    def calcular_edad user
+      fecha1 = Date.strptime(user.fecha_nacimiento, "%d/%m/%y")
+      fecha2 = Date.today;
+      edad = fecha1.year - fecha2.year;
+      return edad;
+    end
 end

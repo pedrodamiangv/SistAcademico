@@ -1,0 +1,6 @@
+<ul class="nav nav-tabs nav-stacked">
+  <% if current_user.is_administrativo %>
+    <li><%= link_to 'Listar', materias_path %></li>
+    <li><%= link_to 'Registrar Nueva Materia', new_materia_path %></li>
+  <% end %>
+</ul>
