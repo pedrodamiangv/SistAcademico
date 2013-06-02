@@ -1,0 +1,89 @@
+-<header class="navbar navbar-fixed-top navbar-inverse">
+-  <div class="navbar-inner">
+-    <div class="container">
+-      <%= link_to "Colegio Mons. Juan Wiesen", root_path, id: "logo" %>
+-      <nav>
+-        <ul class="nav pull-right">
+-          <li><%= link_to "Inicio",  root_path %></li>
+-          <li><%= link_to "Ayuda",  help_path %></li>
+-          <% if current_user %>
+-             <% if current_user.is_administrativo %>
+-                <li class="dropdown" data-dropdown="dropdown" >
+-                  <a href="#" class="dropdown-toggle">Cursos<b class="caret"></b></a>
+-                  <ul class="dropdown-menu">
+-                    <li><%= link_to "Listar Cursos", cursos_path %></li>
+-                    <li><%= link_to "Registrar Nuevo Curso", new_curso_path %></li>
+-                  </ul>
+-                </li>
+-                <li class="dropdown" data-dropdown="dropdown" >
+-                  <a href="#" class="dropdown-toggle">Usuarios<b class="caret"></b></a>
+-                  <ul class="dropdown-menu">
+-                    <li class="dropdown-submenu">
+-                      <a tabindex="-1" href="#">Nuevo</a>
+-                      <ul class="dropdown-menu">
+-                        <li><%= link_to "Alumno", new_alumno_path %></li>
+-                        <li><%= link_to "Docente", new_docente_path %></li>
+-                        <li><%= link_to "Administrativo", new_administrativo_path %></li>
+-                      </ul>
+-                    </li>
+-                    
+-                    <li><%= link_to "Listar", users_path %></li>
+-                    <li class="divider"></li>
+-                    <li class="dropdown-submenu">
+-                      <a tabindex="-1" href="#">Direcciones</a>
+-                      <ul class="dropdown-menu">
+-                        <li class="dropdown-submenu">
+-                          <a tabindex="-1" href="#">Direccion</a>
+-                          <ul class="dropdown-menu">
+-                            <li><%= link_to "Agregar Direccion", new_address_path %></li>
+-                            <li><%= link_to "Listar Direcciones", addresses_path %></li>
+-                          </ul>
+-                        </li>
+-                        <li class="dropdown-submenu">
+-                          <a tabindex="-1" href="#">Ciudad</a>
+-                          <ul class="dropdown-menu">
+-                            <li><%= link_to "Agregar Ciudad", new_city_path %></li>
+-                            <li><%= link_to "Listar Ciudades", cities_path %></li>
+-                          </ul>
+-                        </li>
+-                        <li class="dropdown-submenu">
+-                          <a tabindex="-1" href="#">Pais</a>
+-                          <ul class="dropdown-menu">
+-                            <li><%= link_to "Agregar Pais", new_country_path %></li>
+-                            <li><%= link_to "Listar Paises", countries_path %></li>
+-                          </ul>
+-                        </li>
+-                      </ul>
+-                    </li>
+-                  </ul>
+-                </li>
+-              <% end %>
+-
+-              <li class="dropdown" data-dropdown="dropdown" >
+-                <a href="#" class="dropdown-toggle">Cuenta<b class="caret"></b></a>
+-                <ul class="dropdown-menu">
+-                  <% if current_user.is_alumno %>
+-                    <li><%= link_to "Perfil", current_user.alumno %></li>
+-                  <% end %>
+-                  <% if current_user.is_administrativo %>
+-                    <li><%= link_to "Perfil", current_user.administrativo %></li>
+-                  <% end %>
+-                  <% if current_user.is_docente %>
+-                    <li><%= link_to "Perfil", current_user.docente %></li>
+-                  <% end %>
+-                  <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+-                  <li class="divider"></li>
+-                  <li>
+-                    <%= link_to "Cerrar Sesion", logout_path %>
+-                  </li>
+-                </ul>
+-              </li>
+-
+-          <% else %>
+-            <li><%= link_to "Sesión", login_path %></li>
+-          <% end %>
+-        </ul>
+-      </nav>
+-    </div>
+-  </div>
+-</header>
