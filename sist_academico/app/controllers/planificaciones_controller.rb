@@ -1,6 +1,6 @@
 class PlanificacionesController < ApplicationController
   before_filter :require_login
-  before_filter :correct_user_is_docente,  only: [:new, :create] || :admin_user
+  #before_filter :correct_user_is_docente,  only: [:new, :create] || :admin_user
   before_filter :correct_user,   only: [:edit, :update, :show] || :admin_user
 
   # GET /planificaciones
@@ -28,11 +28,12 @@ class PlanificacionesController < ApplicationController
   # GET /planificaciones/new
   # GET /planificaciones/new.json
   def new
-    @planificacion = Planificacion.new
+     @materia = Materia.find(params[:id])
+     @planificacion = @materia.build_planificacion
     
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @planificacion }
+      format.json { render json: @materia }
     end
   end
 
@@ -44,15 +45,14 @@ class PlanificacionesController < ApplicationController
   # POST /planificaciones
   # POST /planificaciones.json
   def create
-    @planificacion = Planificacion.new(params[:planificacion])
-
-    respond_to do |format|
+    if params[:test_button]
+      @materia = Materia.find(params[:materia_id])
+      @planificacion = @materia.planificaciones.build(params[:planificacion])
       if @planificacion.save
-        format.html { redirect_to @planificacion, notice: 'Planificacion was successfully created.' }
-        format.json { render json: @planificacion, status: :created, location: @planificacion }
+        redirect_to @materia, notice: 'La planificacion se ha guardado. '
       else
-        format.html { render action: "new" }
-        format.json { render json: @planificacion.errors, status: :unprocessable_entity }
+        flash[:error] = 'No pudo guardarse la tarea. ' 
+        redirect_to @materia
       end
     end
   end
@@ -64,7 +64,7 @@ class PlanificacionesController < ApplicationController
 
     respond_to do |format|
       if @planificacion.update_attributes(params[:planificacion])
-        format.html { redirect_to @planificacion, notice: 'Planificacion was successfully updated.' }
+        format.html { redirect_to @planificacion, notice: 'La planificacion ha sido actualizada.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -77,12 +77,9 @@ class PlanificacionesController < ApplicationController
   # DELETE /planificaciones/1.json
   def destroy
     @planificacion = Planificacion.find(params[:id])
+    @materia = @planificacion.materia
     @planificacion.destroy
-
-    respond_to do |format|
-      format.html { redirect_to planificaciones_url }
-      format.json { head :no_content }
-    end
+    redirect_to @materia, notice: 'Tarea eliminada.'
   end
 
   private

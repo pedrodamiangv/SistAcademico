@@ -1,7 +1,6 @@
 <%= form_for(@planificacion) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-  <% @planificacion.materia = materia %>
-  <label class="label">Materia: <%= materia.materia %></label>
+  <label class="label">Materia: <%= @planificacion.materia_materia %></label>
   <%= f.label :tarea %>
   <%= f.text_field :tarea, class: 'search-query', :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;' %>
   <%= f.label :etapa %>
