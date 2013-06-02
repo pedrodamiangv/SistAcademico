@@ -16,8 +16,8 @@ class UsersController < ApplicationController
 
 	def create
 	  @user = User.new(params[:user])
-    @user.edad = calcular_edad @user
 	  if @user.save
+      @user.edad = calcular_edad @user
 	    redirect_to root_url, :notice => "Signed up!"
 	  else
       @addresses = Address.find(:all)
@@ -88,11 +88,9 @@ class UsersController < ApplicationController
       return cities_city
     end
 
-    def calcular_edad user
-      fecha1 = Date.strptime(user.fecha_nacimiento, "%d/%m/%y")
-      fecha2 = Date.today;
-      edad = fecha1.year - fecha2.year;
-      return edad;
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to(root_path) unless (current_user == @user || current_user.is_administrativo?)
     end
 
 end

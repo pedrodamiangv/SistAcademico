@@ -1,0 +1,16 @@
+<%= form_for(@planificacion) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <% @planificacion.materia = materia %>
+  <label class="label">Materia: <%= materia.materia %></label>
+  <%= f.label :tarea %>
+  <%= f.text_field :tarea, class: 'search-query', :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;' %>
+  <%= f.label :etapa %>
+  <%= f.text_field :etapa, class: 'search-query', :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;' %>
+  <%= f.label :fecha_entrega %>
+  <%= f.text_field :fecha_entrega, class: 'search-query', :id=> "fecha", :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;' %>
+  <%= f.label :total_puntos %>
+  <%= f.text_field :total_puntos, class: 'input-medium', :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;' %>
+  <%= f.label :descripcion %>
+  <%= f.text_area :descripcion, rows: 3 %>
+  <%= f.submit "Guardar", class: "btn btn-large btn-inverse" %>
+<% end %>

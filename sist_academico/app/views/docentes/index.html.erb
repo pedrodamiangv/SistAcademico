@@ -2,7 +2,7 @@
   <div class="row">
     <h1 class="h1">Lista de Docentes</h1>
     <div class="row" align="right">
-      Search:<input type="text" id="kwd_search" value="" class="span3 seguido"/> 
+      Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido"/> 
     </div>
     <div class="row">
       <table id="my-table" class="table table-bordered">
@@ -21,9 +21,9 @@
         <tbody>
           <% @docentes.each do |docente| %>
             <tr>
-              <td><%= link_to docente.user.nombre, docente %></td>
-              <td><%= docente.user.apellido %></td>
-              <td><%= docente.user.telefono %></td>
+              <td><%= link_to docente.user_nombre, docente %></td>
+              <td><%= docente.user_apellido %></td>
+              <td><%= docente.user_telefono %></td>
               <td><%= docente.matricula %></td>
               <td><%= docente.titulo %></td>
               <% if current_user.is_administrativo %>

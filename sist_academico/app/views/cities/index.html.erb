@@ -2,7 +2,7 @@
   <div class="row">
     <h1 class="h1">Lista de Ciudades</h1>
     <div class="row" align="right">
-      Search:<input type="text" id="kwd_search" value="" class="span3 seguido"/> 
+      Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido"/> 
     </div>
     <div class="row">
       <table id="my-table" class="table table-bordered">
@@ -19,7 +19,7 @@
           <% @cities.each do |city| %>
             <tr>
               <td><%= city.city %></td>
-              <td><%= city.country.pais %></td>
+              <td><%= city.country_pais %></td>
               <% if current_user.is_administrativo %>
                 <td><%= link_to 'Editar', edit_city_path(city) %> |
                 <%= link_to 'Eliminar', city, :action => 'destroy', method: :delete , data: { confirm: 'Estas seguro?' } %></td>

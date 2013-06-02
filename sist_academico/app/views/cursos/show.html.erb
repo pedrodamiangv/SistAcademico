@@ -29,13 +29,15 @@
           <b>Cantidad de Alumnos:</b>
           <%= @curso.alumnos.count %>
         </p>
-        <p>
-          <b><%= link_to 'Registrar nueva Materia', new_materia_path %></b>
-        </p>
+        <% if current_user.is_administrativo %>
+          <p>
+            <b><%= link_to 'Registrar nueva Materia', new_materia_path %></b>
+          </p>
+        <% end %>
         <label class="label">Materias</label>
           <ul class="nav nav-tabs nav-stacked ul">
             <% @curso.materias.each do |materia| %>
-              <li class="li"><%= link_to materia.materia + " | " + materia.docente.user.nombre + ' ' + materia.docente.user.apellido , materia%> </li>
+              <li class="li"><%= link_to materia.materia + " | " + materia.docente.user_nombre + ' ' + materia.docente.user_apellido , materia%> </li>
             <% end %>
           </ul>
       </section>
@@ -55,11 +57,11 @@
         </tr>
       </thead>
       <tbody>
-        <% @curso.alumnos.each do |alumno| %>
+        <% @curso.alumnos.order("created_at desc").each do |alumno| %>
           <tr>
-            <td><%= link_to alumno.user.nombre + " " + alumno.user.apellido, alumno %></td>
-            <td><%= alumno.user.edad %> </td>
-            <td><%= alumno.user.created_at.strftime("%d/%m/%Y") %></td>
+            <td><%= link_to alumno.user_nombre + " " + alumno.user_apellido, alumno %></td>
+            <td><%= alumno.user_edad %> </td>
+            <td><%= alumno.user_created_at.strftime("%d/%m/%Y") %></td>
           </tr>
         <% end %>
       </tbody>

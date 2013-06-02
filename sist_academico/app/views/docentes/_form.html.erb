@@ -1,10 +1,68 @@
 <%= form_for(@docente) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-  <%= f.label :user_id %>
-  <%= f.collection_select :user_id ,@users,:id,:CINro %>
-  <%= f.label :matricula %>
-  <%= f.number_field :matricula, :maxlength => 30 %>
-  <%= f.label :titulo %>
-  <%= f.text_field :titulo, :maxlength => 40 %>
-  <%= f.submit "Guardar", class: "btn btn-large btn-inverse" %>
+  <div class="container">
+    <div class="row">
+      <%= f.label "Datos Personales", class: "label" %>
+      <%= f.fields_for :user do |d| %>
+        <div class="span3">
+          <%= d.label :nombre %>
+          <%= d.text_field :nombre, :maxlength => 30 %>
+
+          <%= d.label :apellido %>
+          <%= d.text_field :apellido, :maxlength => 30 %>
+
+          <%= d.label :CINro, "Cedula de Identidad Numero" %>
+          <%= d.text_field :CINro, :maxlength => 12 %>
+
+          <%= d.label :sexo %>
+          <%= d.select(:sexo, ['M', 'F' ])%>
+        </div>
+        <div class="span3 offset1">
+          <%= d.label :telefono %>
+          <%= d.text_field :telefono, :maxlength => 12 %>
+
+          <%= d.label :fecha_nacimiento %> 
+          <%= d.text_field :fecha_nacimiento, :id=> "fecha" %>
+
+          <%= d.label :email %>
+          <%= d.text_field :email, :maxlength => 30 %>
+
+          <%= d.label :lugar_nacimiento %>
+          <%= d.select( :lugar_nacimiento ,@cities_city) %>
+        </div>
+        <div class="span4 offset1">
+          <%= d.label :username %>
+          <%= d.text_field :username, :maxlength => 30 %>
+
+          <%= d.label :password %>
+          <%= d.password_field :password, :maxlength => 30 %>
+
+          <%= d.label :password_confirmation, "Confirmación" %>
+          <%= d.password_field :password_confirmation, :maxlength => 30 %>
+
+          <a data-toggle="modal" href="#example" class="direccion">Ingresar nueva direccion</a>
+          <%= d.label :direccion %>
+          <%= d.collection_select :address_id ,@addresses,:id,:direccion %>
+        </div>
+      <% end %>
+    </div>
+    <div class="row">
+      <%= f.label "Datos del Administrativo", class: "label" %>
+      <div class="span4 offset1">
+        <%= f.label :matricula %>
+        <%= f.number_field :matricula, :maxlength => 25 %>
+      </div>
+      <div class="span4 offset1">
+        <%= f.label :titulo %>
+        <%= f.text_field :titulo, :maxlength => 30 %>
+      </div>
+    </div>
+    <div class="row" align="center">
+        <%= f.submit "Guardar", class: "btn btn-large btn-inverse" %>
+    </div>
+  </div>
 <% end %>
+  
+<div id="example" class="modal hide fade in" style="display: none; ">  
+  <%= render 'shared/popup' %>
+</div> 

@@ -16,7 +16,7 @@ class MateriasController < ApplicationController
   # GET /materia/1.json
   def show
     @materia = Materia.find(params[:id])
-
+    @planificacion = @materia.planificaciones.build(params[:planificacion])
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @materia }
@@ -87,6 +87,20 @@ class MateriasController < ApplicationController
     respond_to do |format|
       format.html { redirect_to materia_url }
       format.json { head :no_content }
+    end
+  end
+
+  def create_planificacion
+    @planificacion = Planificacion.new(params[:planificacion])
+
+    respond_to do |format|
+      if @planificacion.save
+        format.html { redirect_to @planificacion, notice: 'Planificacion was successfully created.' }
+        format.json { render json: @planificacion, status: :created, location: @planificacion }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @planificacion.errors, status: :unprocessable_entity }
+      end
     end
   end
 end

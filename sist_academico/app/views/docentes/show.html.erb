@@ -1,7 +1,7 @@
-<% provide(:title, @docente.user.nombre) %>
+<% provide(:title, @docente.user_nombre) %>
 <p id="notice"><%= notice %></p>
+<div class="container">
 <div class="row">
-<div class="span6 offset3">
   <div class="cabezera">
     <aside>
       <section>
@@ -11,26 +11,32 @@
       </section>
       <section>
         <h1>
-          <%= @docente.user.nombre %>
+          <%= @docente.user_nombre %>
         </h1>
+        <% if current_user.is_administrativo %>
+          <%= link_to 'Editar', edit_docente_path(@docente) %>
+        <% end %>
+        <br/>
+        <br/>
+        <label class="label">Materias</label>
+        <ul id="ul" class="nav nav-tabs nav-stacked ul">
+          <% @docente.materias.each do |materia| %>
+            <li class="li"><%= link_to materia.materia, materia%> </li>
+          <% end %>
+        </ul>
       </section>
     </aside>
   </div>
   <div class="datos">
-    <p>Apellido: <%= @docente.user.apellido %></p>
-    <p>Sexo: <%= @docente.user.sexo %></p>
-    <p>Telefono: <%= @docente.user.telefono %></p>
-    <p>Fecha de Nacimiento: <%= @docente.user.fecha_nacimiento %></p>
-    <p>Lugar de Nacimiento: <%= @docente.user.lugar_nacimiento %></p>
+    <p>Apellido: <%= @docente.user_apellido %></p>
+    <p>Sexo: <%= @docente.user_sexo %></p>
+    <p>Telefono: <%= @docente.user_telefono %></p>
+    <p>Fecha de Nacimiento: <%= @docente.user_fecha_nacimiento %></p>
+    <p>Lugar de Nacimiento: <%= @docente.user_lugar_nacimiento %></p>
     <p>Direccion: <%= link_to @docente.user.address.direccion, @docente.user.address %></p>
-    <p>Edad: <%= @docente.user.edad %></p>
+    <p>Edad: <%= @docente.user_edad %></p>
     <p>Matricula: <%= @docente.matricula %></p>
     <p>Titulo: <%= @docente.titulo %></p>
   </div>
 </div>
 </div>
-
-<% if current_user.is_administrativo %>
-  <%= link_to 'Editar', edit_docente_path(@docente) %> |
-<% end %>
-<%= link_to 'Listar', docentes_path %>

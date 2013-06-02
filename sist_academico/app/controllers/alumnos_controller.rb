@@ -46,14 +46,16 @@ class AlumnosController < ApplicationController
   # POST /alumnos.json
   def create
     @alumno = Alumno.new(params[:alumno])
-    @alumno.user.edad = calcular_edad @alumno.user
     respond_to do |format|
         if @alumno.save
-          @alumno.user.update_attribute(:is_alumno, true )
+          user = @alumno.user
+          edad = calcular_edad user
+          user.update_attribute(:is_alumno, true)
+          user.update_attribute(:edad, edad )
           format.html { redirect_to @alumno, notice: 'El alumno ha sido registrado.' }
           format.json { render json: @alumno, status: :created, location: @alumno }
         else
-         atributos
+          atributos
           format.html { render action: "new" }
           format.json { render json: @alumno.errors, status: :unprocessable_entity }
         end
@@ -108,10 +110,8 @@ class AlumnosController < ApplicationController
       @cities = City.find(:all)
     end
 
-    def calcular_edad user
-      fecha1 = Date.strptime(user.fecha_nacimiento, "%d/%m/%y")
-      fecha2 = Date.today;
-      edad = fecha1.year - fecha2.year;
-      return edad;
+    def correct_user
+      @user = Alumno.find(params[:id]).user
+      redirect_to(root_path) unless (current_user == @user || current_user.is_administrativo?)
     end
 end

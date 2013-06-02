@@ -90,25 +90,5 @@
 
 
 <div id="example" class="modal hide fade in" style="display: none; ">  
-  <div class="modal-header">  
-    <a class="close" data-dismiss="modal">×</a>  
-    <h3>Registrar Direccion</h3>  
-  </div>  
-  <div class="modal-body">  
-    <p id="notice"><%= notice %></p>
-    <%= form_for @direccion do |f| %>
-      <%= render 'shared/error_messages', object: f.object %>
-      <%= f.label :direccion %><br />
-      <%= f.text_field :direccion %>
-      <%= f.label :barrio %><br />
-      <%= f.text_field :barrio %>
-      <%= f.label :city %>
-      <%= f.collection_select :city_id ,@cities,:id,:city %>
-  </div>  
-  <div class="modal-footer"> 
-    <%= f.button :class => 'btn btn-success', :onclick => 'alert("Please no!")' %>
-    <input type="button" class="btn btn-success" onclick = "guardar_address("<% @user %>", "<% @direccion %>");"/> 
-    <a href="#" class="btn" data-dismiss="modal">Close</a>  
-  </div>  
-      <% end %>
+  <%= render 'shared/popup' %>
 </div> 

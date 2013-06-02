@@ -2,7 +2,7 @@
   <div class="row">
     <h1 class="h1">Lista de Direcciones</h1>
     <div class="row" align="right">
-      Search:<input type="text" id="kwd_search" value="" class="span3 seguido"/> 
+      Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido"/> 
     </div>
     <div class="row">
       <table id="my-table" class="table table-bordered">
@@ -21,7 +21,7 @@
             <tr>
               <td><%= link_to address.direccion, address %></td>
               <td><%= address.barrio %></td>
-              <td><%= address.city.city %></td>
+              <td><%= address.city_city %></td>
               <% if current_user.is_administrativo %>
                 <td><%= link_to 'Editar', edit_address_path(address) %>
                 <%= link_to 'Eliminar', address, method: :delete, data: { confirm: 'Estas seguro?' } %></td>

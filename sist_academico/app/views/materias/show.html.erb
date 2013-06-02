@@ -1,31 +1,48 @@
+<% provide(:title, @materia.materia) %>
+<p id="notice"><%= notice %></p>
+<div class="container">
 <div class="row">
-  <div class="span6 offset3">
-	<p id="notice"><%= notice %></p>
-
-	<p>
-	  <b>Materia:</b>
-	  <%= @materia.materia %>
-	</p>
-
-	<p>
-	  <b>Area:</b>
-	  <%= @materia.area %>
-	</p>
-
-	<p>
-	  <b>Curso:</b>
-	  <%= link_to @materia.curso.curso, @materia.curso %>
-	</p>
-
-	<p>
-	  <b>Docente:</b>
-	  <%= link_to @materia.docente.user.nombre + ' ' + @materia.docente.user.apellido, @materia.docente %>
-	 
-	</p>
-
-	<% if current_user.is_administrativo %>
-	  <%= link_to 'Editar', edit_materia_path(@materia) %> |
-	<% end %>
-	<%= link_to 'Listar', materias_path %>
+  <div class="span3">
+    <aside>
+      <section>
+        <h1>
+          <%= @materia.materia.capitalize %>
+        </h1>
+      </section>
+      <section>
+        <p><b>
+          <%= link_to @materia.docente.user_nombre.capitalize + ' ' + @materia.docente.user_apellido.capitalize, @materia.docente %>
+        </b></p>
+        <% if current_user.is_administrativo %>
+          <%= link_to 'Editar', edit_materia_path(@administrativo) %>
+        <% end %>
+        <br/>
+        <p>Area: <%= @materia.area %></p>
+        <p>Curso: <%= link_to @materia.curso_curso, @materia.curso %></p>
+        <br/>
+      </section>
+    </aside>
+    <a href="#" onclick="muestra_oculta('contenido_a_mostrar');">Nueva Tarea</a></br>
+    </br><div id="contenido_a_mostrar" style="display: none; ">  
+  	  <%= form_for @planificacion do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+        <label class="label">Materia: <%= @materia.materia %></label>
+        <%= f.label :tarea %>
+        <%= f.text_field :tarea, class: 'search-query', :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;' %>
+        <%= f.label :etapa %>
+        <%= f.text_field :etapa, class: 'search-query', :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;' %>
+        <%= f.label :fecha_entrega %>
+        <%= f.text_field :fecha_entrega, class: 'search-query', :id=> "fecha", :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;' %>
+        <%= f.label :total_puntos %>
+        <%= f.text_field :total_puntos, class: 'input-medium', :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;' %>
+        <%= f.label :descripcion %>
+        <%= f.text_area :descripcion, rows: 3 %>
+        <%= f.submit "Guardar", class: "btn btn-large btn-inverse" %>
+      <% end %>
+    </div> 
   </div>
+  <div class="span8">
+    
+  </div>
+</div>
 </div>

@@ -15,7 +15,7 @@ firstDay: 1,
 numberOfMonths: 1,
 isRTL: false,
 showMonthAfterYear: false,
-yearRange:'-40:-03',
+yearRange:'-40:+0',
 yearSuffix: ''};
 $.datepicker.setDefaults($.datepicker.regional['es']);
 });

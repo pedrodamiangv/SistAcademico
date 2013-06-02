@@ -1,4 +1,7 @@
 SistAcademico::Application.routes.draw do
+  resources :planificaciones
+
+
   resources :materias
   resources :administrativos
   resources :docentes

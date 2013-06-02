@@ -1,4 +1,4 @@
-<% provide(:title, @alumno.user.nombre) %>
+<% provide(:title, @alumno.user_nombre) %>
 <p id="notice"><%= notice %></p>
 <div class="container">
 <div class="row">
@@ -11,8 +11,11 @@
       </section>
       <section>
         <h1>
-          <%= @alumno.user.nombre %>
+          <%= @alumno.user_nombre %>
         </h1>
+        <% if current_user.is_administrativo %>
+          <%= link_to 'Editar', edit_alumno_path(@alumno) %>
+        <% end %>
         <br/>
         <div>
           <label class="label">Materias</label>
@@ -26,18 +29,18 @@
     </aside>
   </div>
   <div class="datos">
-    <p>Apellido: <%= @alumno.user.apellido %></p>
-    <p>Sexo: <%= @alumno.user.sexo %></p>
-    <p>Telefono: <%= @alumno.user.telefono %></p>
-    <p>Fecha de Nacimiento: <%= @alumno.user.fecha_nacimiento %></p>
-    <p>Lugar de Nacimiento: <%= @alumno.user.lugar_nacimiento %></p>
+    <p>Apellido: <%= @alumno.user_apellido %></p>
+    <p>Sexo: <%= @alumno.user_sexo %></p>
+    <p>Telefono: <%= @alumno.user_telefono %></p>
+    <p>Fecha de Nacimiento: <%= @alumno.user_fecha_nacimiento %></p>
+    <p>Lugar de Nacimiento: <%= @alumno.user_lugar_nacimiento %></p>
     <p>Direccion: <%= @alumno.user.address.direccion %></p>
-    <p>Edad: <%= @alumno.user.edad %></p>
+    <p>Edad: <%= @alumno.user_edad %></p>
     <hr>
-    <p>Curso: <%= @alumno.curso.curso %></p>
-    <p>Nivel: <%= @alumno.curso.nivel %></p>
-    <p>Enfasis: <%= @alumno.curso.enfasis %></p>
-    <p>Turno: <%= @alumno.curso.turno %></p>
+    <p>Curso: <%= @alumno.curso_curso %></p>
+    <p>Nivel: <%= @alumno.curso_nivel %></p>
+    <p>Enfasis: <%= @alumno.curso_enfasis %></p>
+    <p>Turno: <%= @alumno.curso_turno %></p>
     <p>Nombre del Responsable: <%= @alumno.responsable %> </p>
     <p>Telefono del Responsable: <%= @alumno.telefono_responsable %> </p>
     <hr>

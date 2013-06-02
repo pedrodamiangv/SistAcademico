@@ -2,7 +2,7 @@
   <div class="row">
     <h1 class="h1">Listando alumnos</h1>
     <div class="row" align="right">
-      Search:<input type="text" id="kwd_search" value="" class="span3 seguido"/> 
+      Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido"/> 
     </div>
     <div class="row">
       <table id="my-table" class="table table-bordered">
@@ -26,11 +26,11 @@
         <tbody>
           <% @alumnos.each do |alumno| %>
             <tr>
-              <td><%= link_to alumno.user.nombre, alumno %></td>
-              <td><%= alumno.user.apellido %></td>
-              <td><%= alumno.user.CINro %></td>
-              <td><%= alumno.curso.curso.split(' ')[0] %></td>
-              <td><%= alumno.curso.nivel %></td>
+              <td><%= link_to alumno.user_nombre, alumno %></td>
+              <td><%= alumno.user_apellido %></td>
+              <td><%= alumno.user_CINro %></td>
+              <td><%= alumno.curso_curso.split(' ')[0] %></td>
+              <td><%= alumno.curso_nivel %></td>
               <td><%= alumno.responsable %> | <%= alumno.telefono_responsable %></td>
               <td><%= alumno.doc_cedula %></td>
               <td><%= alumno.doc_cert_estudios %></td>

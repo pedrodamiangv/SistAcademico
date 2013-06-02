@@ -55,6 +55,12 @@ input#kwd_search{
     font:normal 9px verdana, arial, helvetica, sans-serif;
 }
 
+input.input2 {
+    padding: 5px;
+    margin: 0 0 5px 0;
+    font:normal 9px verdana, arial, helvetica, sans-serif;
+}
+
 .h1{
     font-family: 'Chela One', cursive;
     /*font-family: 'Jockey One', sans-serif;*/
@@ -89,8 +95,10 @@ caption { border:1px solid #5C443A;
 td, th { color:#363636;
  font:normal 10px verdana, arial, helvetica, sans-serif;
 }
-.ul, .li { color:#363636;
- font:normal 10px verdana, arial, helvetica, sans-serif;
+.li { 
+    height: 9px;
+    color:#363636;
+    font:normal 9px verdana, arial, helvetica, sans-serif;
 }
 tr { border:1px dotted gray;
 }

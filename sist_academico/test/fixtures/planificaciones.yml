@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  materia_id: 1
+  tarea: MyString
+  descripcion: MyString
+  etapa: MyString
+  curso_id: 1
+  fecha_entrega: 2013-05-29
+  total_puntos: 1
+
+two:
+  materia_id: 1
+  tarea: MyString
+  descripcion: MyString
+  etapa: MyString
+  curso_id: 1
+  fecha_entrega: 2013-05-29
+  total_puntos: 1

@@ -27,7 +27,8 @@ class AdministrativosController < ApplicationController
   # GET /administrativos/new.json
   def new
     @administrativo = Administrativo.new
-    @users = User.find(:all)
+    @administrativo.build_user
+    atributos
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @administrativo }
@@ -37,22 +38,23 @@ class AdministrativosController < ApplicationController
   # GET /administrativos/1/edit
   def edit
     @administrativo = Administrativo.find(params[:id])
-    @users = User.find(:all)
+    atributos
   end
 
   # POST /administrativos
   # POST /administrativos.json
   def create
     @administrativo = Administrativo.new(params[:administrativo])
-    user = @administrativo.user
     respond_to do |format|
       if @administrativo.save
-        user.administrativo = @administrativo
-        user.update_attribute(:is_administrativo, true )
+          user = @administrativo.user
+          edad = calcular_edad user
+          user.update_attribute(:is_administrativo, true)
+          user.update_attribute(:edad, edad )
         format.html { redirect_to @administrativo, notice: 'El administrativo ha sido creado.' }
         format.json { render json: @administrativo, status: :created, location: @administrativo }
       else
-        @users = User.find(:all)
+        atributos
         format.html { render action: "new" }
         format.json { render json: @administrativo.errors, status: :unprocessable_entity }
       end
@@ -69,7 +71,7 @@ class AdministrativosController < ApplicationController
         format.html { redirect_to @administrativo, notice: 'El administrativo ha sido actualizado.' }
         format.json { head :no_content }
       else
-        @users = User.find(:all)
+        atributos
         format.html { render action: "edit" }
         format.json { render json: @administrativo.errors, status: :unprocessable_entity }
       end
@@ -87,4 +89,23 @@ class AdministrativosController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+    def atributos
+      @addresses = Address.find(:all)
+      cities_city = []
+      ciudades = City.find(:all)
+      ciudades.each do |city|
+        cities_city << city.city
+      end
+      @cities_city= cities_city
+      @cursos = Curso.find(:all)
+      @users = User.find(:all)
+      addresses_new
+    end
+
+    def addresses_new
+      @direccion = Address.new
+      @cities = City.find(:all)
+    end
 end

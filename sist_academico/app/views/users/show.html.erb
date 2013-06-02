@@ -12,7 +12,9 @@
         <h1>
           <%= @user.nombre %>
         </h1>
-        <%= link_to 'Editar', edit_user_path(@user) %>
+        <% if current_user.is_administrativo %>
+          <%= link_to 'Editar', edit_user_path(@user) %>
+        <% end %>
       </section>
     </aside>
   </div>

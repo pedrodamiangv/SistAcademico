@@ -1,7 +1,7 @@
-<% provide(:title, @administrativo.user.nombre) %>
+<% provide(:title, @administrativo.user_nombre) %>
 <p id="notice"><%= notice %></p>
+<div class="container">
 <div class="row">
-<div class="span8 offset3">
   <div class="cabezera">
     <aside>
       <section>
@@ -11,26 +11,24 @@
       </section>
       <section>
         <h1>
-          <%= @administrativo.user.nombre %>
+          <%= @administrativo.user_nombre %>
         </h1>
+        <% if current_user.is_administrativo %>
+          <%= link_to 'Editar', edit_administrativo_path(@administrativo) %>
+        <% end %>
       </section>
     </aside>
   </div>
   <div class="datos">
-    <p>Apellido: <%= @administrativo.user.apellido %></p>
-    <p>Sexo: <%= @administrativo.user.sexo %></p>
-    <p>Telefono: <%= @administrativo.user.telefono %></p>
-    <p>Fecha de Nacimiento: <%= @administrativo.user.fecha_nacimiento %></p>
-    <p>Lugar de Nacimiento: <%= @administrativo.user.lugar_nacimiento %></p>
+    <p>Apellido: <%= @administrativo.user_apellido %></p>
+    <p>Sexo: <%= @administrativo.user_sexo %></p>
+    <p>Telefono: <%= @administrativo.user_telefono %></p>
+    <p>Fecha de Nacimiento: <%= @administrativo.user_fecha_nacimiento %></p>
+    <p>Lugar de Nacimiento: <%= @administrativo.user_lugar_nacimiento %></p>
     <p>Direccion: <%= link_to @administrativo.user.address.direccion, @administrativo.user.address %></p>
-    <p>Edad: <%= @administrativo.user.edad %></p>
+    <p>Edad: <%= @administrativo.user_edad %></p>
     <p>Cargo: <%= @administrativo.cargo %></p>
     <p>Titulo del Administrativo: <%= @administrativo.titulo %></p>
   </div>
 </div>
 </div>
-
-<% if current_user.is_administrativo %>
-  <%= link_to 'Editar', edit_administrativo_path(@administrativo) %> |
-<% end %>
-<%= link_to 'Listar', administrativos_path %>
