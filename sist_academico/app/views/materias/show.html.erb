@@ -14,7 +14,7 @@
           <%= link_to @materia.docente.user_nombre.capitalize + ' ' + @materia.docente.user_apellido.capitalize, @materia.docente %>
         </b></p>
         <% if current_user.is_administrativo %>
-          <%= link_to 'Editar', edit_materia_path(@administrativo) %>
+          <%= link_to 'Editar', edit_materia_path(@materia) %>
         <% end %>
         <br/>
         <p>Area: <%= @materia.area %></p>

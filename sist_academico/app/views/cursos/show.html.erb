@@ -35,7 +35,7 @@
           </p>
         <% end %>
         <label class="label">Materias</label>
-          <ul class="nav nav-tabs nav-stacked ul">
+          <ul class="nav nav-tabs nav-stacked">
             <% @curso.materias.each do |materia| %>
               <li class="li"><%= link_to materia.materia + " | " + materia.docente.user_nombre + ' ' + materia.docente.user_apellido , materia%> </li>
             <% end %>
