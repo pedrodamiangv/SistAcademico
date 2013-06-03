@@ -16,6 +16,11 @@
 ActiveSupport::Inflector.inflections do |inflect|
 	inflect.irregular 'materia', 'materias'
 	inflect.irregular 'error', 'errores'
+<<<<<<< HEAD
 	inflect.irregular 'planificacion', 'planificaciones'
 	inflect.irregular 'dia', 'dias'
 end
+=======
+end
+
+>>>>>>> Mejora de CSS de las Interfaces

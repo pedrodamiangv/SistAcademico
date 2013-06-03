@@ -1,0 +1,19 @@
+#registrousuario {
+border-width: thin;
+color:#333333;
+height:630px;
+padding:0 0 0 50px;
+width:500px;
+}
+
+#registrousuario legend {
+color:#333333;
+font-family:arial;
+font-style: inherit;
+font-size:21px;
+letter-spacing:-1px;
+padding-bottom:20px;
+padding-top:8px;
+text-transform:capitalize;
+}
+

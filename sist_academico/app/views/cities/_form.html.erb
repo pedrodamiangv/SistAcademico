@@ -1,8 +1,19 @@
-<%= form_for(@city) do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
-  <%= f.label :ciudad %>
-  <%= f.text_field :city, :maxlength => 30 %><br/>
-  <%= f.label :pais %>
-  <%= f.collection_select :country_id ,@countries,:id,:pais %><br/>
-  <%= submit_tag "Guardar", class: "btn btn-large btn-inverse" %>
-<% end %>
+<div class="container">
+  	<div class="row">
+  	<div id="registro">
+        <fieldset>
+          <legend>Registrar Nueva Dirección</legend>
+		  <%= form_for(@city) do |f| %>
+		<div class="span3 offset4">
+  			<%= render 'shared/error_messages', object: f.object %>
+  			<%= f.label :ciudad %>
+  			<%= f.text_field :city, :maxlength => 30 %><br/>
+  			<%= f.label :pais %>
+  			<%= f.collection_select :country_id ,@countries,:id,:pais %><br/>
+  			<%= submit_tag "Guardar", class: "btn btn-large btn-inverse" %>
+			<% end %>
+		</div>
+		</fieldset>
+	</div>
+	</div>
+</div>

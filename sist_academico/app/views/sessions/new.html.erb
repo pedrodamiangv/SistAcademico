@@ -1,20 +1,30 @@
 <div class="row" style="margin: 25px;">
-  <div class="span4">
-  	    <p class="error"><%= flash[:error] %></p>
-		<%= form_tag sessions_path do %>
-		  <div class="field">
-		    <%= label_tag :username %>
-		    <%= text_field_tag :username, params[:username] %>
-		  </div>
-		  <div class="field">
-		    <%= label_tag :password %>
-		    <%= password_field_tag :password %>
-		  </div>
-		  <div class="field">
-		    <%= check_box_tag :remember_me, 1, params[:remember_me] %>
-		    <%= label_tag :remember_me %>
-		  </div>
-		  <div class="actions"><%= submit_tag "Log in", class: "btn btn-large btn-primary" %></div>
+
+	<div id="registro">
+    <fieldset>
+      <legend>Iniciar Sesión</legend>
+
+ 		<div class="span4 offset3">
+  	    	<p class="error"><%= flash[:error] %></p>
+				<%= form_tag sessions_path do %>
+		  		<div class="field">
+		   		 <%= label_tag :username, "Usuario" %>
+		    	 <%= text_field_tag :username, params[:username] %>
+		  		</div>
+		  		<div class="field">
+		    	 <%= label_tag :password, "Contraseña" %>
+		    	 <%= password_field_tag :password %>
+		  		</div>
+		  		<div class="field" >
+		   		 <%= check_box_tag :remember_me, 1, params[:remember_me] %>
+		    	 <%= label_tag :remember_me, "Recordarme" %>
+		  		</div>
+				
+		</div>
+
+		<div class="span4 offset3"
+			<div class="actions"><%= submit_tag "Entrar", class: "btn btn-large btn-inverse" %></div>
+		</div>
 		<% end %>
 	</div>
 </div>

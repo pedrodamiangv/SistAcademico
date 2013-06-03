@@ -2,8 +2,10 @@
   <%= render 'shared/error_messages', object: f.object %>
   <div class="container">
     <div class="row">
-      <%= f.label "Datos Personales", class: "label" %>
-      <%= f.fields_for :user do |d| %>
+      <div id="registro">
+        <fieldset>
+          <legend>Registro de Nuevo Administrativo</legend>
+          <%= f.fields_for :user do |d| %>
         <div class="span3">
           <%= d.label :nombre %>
           <%= d.text_field :nombre, :maxlength => 30 %>
@@ -11,52 +13,65 @@
           <%= d.label :apellido %>
           <%= d.text_field :apellido, :maxlength => 30 %>
 
-          <%= d.label :CINro, "Cedula de Identidad Numero" %>
+          <%= d.label :CINro, "Cedula de Identidad Número" %>
           <%= d.text_field :CINro, :maxlength => 12 %>
 
           <%= d.label :sexo %>
-          <%= d.select(:sexo, ['M', 'F' ])%>
+          <%= d.select(:sexo, ['Masculino', 'Femenino' ])%>
         </div>
         <div class="span3 offset1">
-          <%= d.label :telefono %>
+          <%= d.label :telefono, "Teléfono" %>
           <%= d.text_field :telefono, :maxlength => 12 %>
 
-          <%= d.label :fecha_nacimiento %> 
-          <%= d.text_field :fecha_nacimiento, :id=> "fecha" %>
-
-          <%= d.label :email %>
+          <%= d.label :email, "Correo Electrónico" %>
           <%= d.text_field :email, :maxlength => 30 %>
 
-          <%= d.label :lugar_nacimiento %>
+          <%= d.label :fecha_nacimiento, "Fecha de Nacimiento" %> 
+          <%= d.text_field :fecha_nacimiento, :id=> "fecha" %>
+
+          <%= d.label :lugar_nacimiento, "Lugar de Nacimiento" %>
           <%= d.select( :lugar_nacimiento ,@cities_city) %>
         </div>
         <div class="span4 offset1">
-          <%= d.label :username %>
-          <%= d.text_field :username, :maxlength => 30 %>
-
-          <%= d.label :password %>
-          <%= d.password_field :password, :maxlength => 30 %>
-
-          <%= d.label :password_confirmation, "Confirmación" %>
-          <%= d.password_field :password_confirmation, :maxlength => 30 %>
+          <%= f.label :cargo %>
+          <%= f.text_field :cargo, :maxlength => 25 %>
+    
+          <%= f.label :titulo %>
+          <%= f.text_field :titulo, :maxlength => 30 %>
 
           <a data-toggle="modal" href="#example" class="direccion">Ingresar nueva direccion</a>
           <%= d.label :direccion %>
           <%= d.collection_select :address_id ,@addresses,:id,:direccion %>
         </div>
-      <% end %>
+        </fieldset>
+      </div>
     </div>
+    
+
     <div class="row">
-      <%= f.label "Datos del Administrativo", class: "label" %>
-      <div class="span4 offset1">
-        <%= f.label :cargo %>
-        <%= f.text_field :cargo, :maxlength => 25 %>
-      </div>
-      <div class="span4 offset1">
-        <%= f.label :titulo %>
-        <%= f.text_field :titulo, :maxlength => 30 %>
+      <div id="registro">
+        <fieldset>
+          <legend>Datos del Usuario Administrativo</legend>
+          <div class="span3">
+            <%= d.label :username, "Nombre de Usuario" %>
+            <%= d.text_field :username, :maxlength => 30 %>
+          </div>
+
+          <div class="span3 offset1">
+            <%= d.label :password, "Contraseña" %>
+            <%= d.password_field :password, :maxlength => 30 %>
+          </div>
+
+          <div class="span3 offset1">
+            <%= d.label :password_confirmation, "Confirmación" %>
+            <%= d.password_field :password_confirmation, :maxlength => 30 %>
+          </div>
+        </fieldset>
       </div>
     </div>
+    <% end %>
+
+  </br>
     <div class="row" align="center">
         <%= f.submit "Guardar", class: "btn btn-large btn-inverse" %>
     </div>

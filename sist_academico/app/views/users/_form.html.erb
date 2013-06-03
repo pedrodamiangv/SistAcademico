@@ -3,41 +3,11 @@
     <%= form_for(@user) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
       <% if current_user.is_administrativo %>
-
+    <div id="registro">
+    <fieldset>
+      <legend>Datos de Acceso</legend>
       <div class="span3 ">
-        <%= f.label :nombre %>
-        <%= f.text_field :nombre, :maxlength => 30 %>
 
-        <%= f.label :apellido %>
-        <%= f.text_field :apellido, :maxlength => 30 %>
-
-        <%= f.label :CINro, "Cedula de Identidad Numero" %>
-        <%= f.text_field :CINro, :maxlength => 12 %>
-
-        <%= f.label :sexo %>
-        <%= f.select(:sexo, ['Masculino', 'Femenino' ])%>
-        
-      </div>
-
-      <div class="span3 offset1">
-        <%= f.label :telefono %>
-        <%= f.text_field :telefono, :maxlength => 12 %>
-
-        <%= f.label :email, "Correo Electrónico" %>
-        <%= f.text_field :email, :maxlength => 30 %>
-
-        <%= f.label :fecha_nacimiento %> 
-        <%= f.text_field :fecha_nacimiento, :id=> "fecha" %>
-
-        <%= f.label :lugar_nacimiento %>
-        <%= f.select( :lugar_nacimiento ,@cities_city) %>
-      </br></br></br>
-        <div class="offset1">
-          <%= f.submit "Guardar", class: "btn btn-large btn-inverse" %>
-        </div>
-      </div>
-
-      <div class="span3 offset1">
         <%= f.label :username, "Nombre de Usuario" %>
         <%= f.text_field :username, :maxlength => 30 %>
 
@@ -46,19 +16,56 @@
 
         <%= f.label :password_confirmation, "Confirmación de Contraseña" %>
         <%= f.password_field :password_confirmation, :maxlength => 30 %>
+      </div>
+    </div>
+    </fieldset>
+
+    <div id="registro">
+    <fieldset>
+      <legend>Detalles de Usuario</legend>
+      <div class="span3 ">
+        <%= f.label :nombre %>
+        <%= f.text_field :nombre, :maxlength => 30 %>
+
+        <%= f.label :apellido %>
+        <%= f.text_field :apellido, :maxlength => 30 %>
+
+        <%= f.label :sexo %>
+        <%= f.select(:sexo, ['Masculino', 'Femenino' ])%>
+
+        <%= f.submit "Guardar", class: "btn btn-large btn-inverse" %>
+      </div>  
+        
+      <div class="span3 offset1">
+
+        <%= f.label :CINro, "Cedula de Identidad Número" %>
+        <%= f.text_field :CINro, :maxlength => 12 %>
+        
+        <%= f.label :telefono %>
+        <%= f.text_field :telefono, :maxlength => 12 %>
+
+        <%= f.label :lugar_nacimiento, "Lugar de Nacimiento" %>
+        <%= f.select( :lugar_nacimiento ,@cities_city) %>
+      </div>
+
+      <div class="span3 offset1">
+
+        <%= f.label :fecha_nacimiento, "Fecha de Nacimiento" %> 
+        <%= f.text_field :fecha_nacimiento, :id=> "fecha" %>
+
+        <%= f.label :email, "Correo Electrónico" %>
+        <%= f.text_field :email, :maxlength => 30 %>
 
         <%= f.label :direccion %>
         <%= f.collection_select :address_id ,@addresses,:id,:direccion %>
+
         <a data-toggle="modal" href="#example" class="direccion">Ingresar nueva direccion</a>
         <% end %>
       </div>
-
-
-      
-    <% end %>
-  
+        <% end %>
+    </div>
 </div>
- 
+
 <div id="example" class="modal hide fade in" style="display: none; ">  
   <div class="modal-header">  
     <a class="close" data-dismiss="modal">×</a>  
