@@ -17,4 +17,5 @@ ActiveSupport::Inflector.inflections do |inflect|
 	inflect.irregular 'materia', 'materias'
 	inflect.irregular 'error', 'errores'
 	inflect.irregular 'planificacion', 'planificaciones'
+	inflect.irregular 'dia', 'dias'
 end

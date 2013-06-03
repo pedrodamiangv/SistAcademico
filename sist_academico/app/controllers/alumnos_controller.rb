@@ -1,7 +1,7 @@
 class AlumnosController < ApplicationController
   before_filter :require_login
-  before_filter :correct_user,   only: [:edit, :update, :show]
-  before_filter :admin_user
+  before_filter :correct_user || :admin_user,   only: [:edit, :update, :show] 
+  before_filter :admin_user,   only: [:new, :create, :destroy]
   # GET /alumnos
   # GET /alumnos.json
   def index

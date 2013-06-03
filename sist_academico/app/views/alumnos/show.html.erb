@@ -2,7 +2,7 @@
 <p id="notice"><%= notice %></p>
 <div class="container">
 <div class="row">
-  <div class="cabezera">
+  <div class="span3">
     <aside>
       <section>
         <h1>
@@ -19,16 +19,17 @@
         <br/>
         <div>
           <label class="label">Materias</label>
-          <% @alumno.curso.materias.each do |materia| %>
-            <tr>
-              <td><%= link_to materia.materia, materia %></td> 
-            </tr>
-          <% end %>
+          <ul class="nav nav-tabs nav-stacked">
+            <% materias = @alumno.curso.materias %>
+            <% materias.each do |materia| %>
+              <li class="li"><%= link_to materia.materia + " | " + materia.docente.user_nombre + ' ' + materia.docente.user_apellido , materia%> </li>
+            <% end %>
+          </ul>
         </div>
       </section>
     </aside>
   </div>
-  <div class="datos">
+  <div class="span4">
     <p>Apellido: <%= @alumno.user_apellido %></p>
     <p>Sexo: <%= @alumno.user_sexo %></p>
     <p>Telefono: <%= @alumno.user_telefono %></p>
@@ -76,6 +77,20 @@
     <% else %>
        <p class="label label-important"> No trajo ningun documento aun. <p/>
     <% end %>
+  </div>
+  <div class="span4">
+    <label class="label"> Próximas Tareas </label>
+    <ul class="nav nav-tabs nav-stacked">
+      <% materias.each do |materia| %>
+        <% materia.planificaciones.where(:fecha_entrega => Date.today..(Date.today + 7)).each do |tarea| %>
+          <li><b>Tarea:</b> <%= tarea.tarea %>
+            <br/>&nbsp;&nbsp;<b>Materia:</b> <%= materia.materia %>
+            <br/>&nbsp;&nbsp;<b>Fecha de Entrega:</b> <%= time_ago_in_words(tarea.fecha_entrega) %></li> 
+            <br/>&nbsp;&nbsp;<b>Fecha de Entrega:</b> <%= tarea.fecha_entrega %></li>
+          <hr/>
+        <% end %>
+      <% end %>
+    </ul>
   </div>
 </div>
 </div>

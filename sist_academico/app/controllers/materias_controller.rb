@@ -1,6 +1,7 @@
 class MateriasController < ApplicationController
   before_filter :require_login
-  before_filter :admin_user, only: [:destroy, :edit, :update]
+  before_filter :correct_user || :admin_user,   only: [:edit, :update, :show] 
+  before_filter :admin_user,   only: [:new, :create, :destroy]
   # GET /materia
   # GET /materia.json
   def index
@@ -17,7 +18,7 @@ class MateriasController < ApplicationController
   def show
     @materia = Materia.find(params[:id])
     @planificacion = @materia.planificaciones.build(params[:planificacion])
-    
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @materia }
@@ -91,17 +92,12 @@ class MateriasController < ApplicationController
     end
   end
 
-  def create_planificacion
-    @planificacion = Planificacion.new(params[:planificacion])
-
-    respond_to do |format|
-      if @planificacion.save
-        format.html { redirect_to @planificacion, notice: 'Planificacion was successfully created.' }
-        format.json { render json: @planificacion, status: :created, location: @planificacion }
+  private
+    def correct_user
+      if current_user.is_docente?
+        redirect_to(root_path) unless (@materia.docente == current_user.docente)
       else
-        format.html { render action: "new" }
-        format.json { render json: @planificacion.errors, status: :unprocessable_entity }
-      end
+       redirect_to(root_path) unless ( current_user.is_administrativo?)
+     end
     end
-  end
 end
