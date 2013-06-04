@@ -11,6 +11,14 @@
  *= require_self
  *= require_tree .
  */
+
+ .footer{
+   width:800px;
+   position: absolute;
+   bottom: 0 !important;
+   bottom: -1px;
+   text-align: center;
+}
  .field_with_errors {  
   display: inline;  
 }  
