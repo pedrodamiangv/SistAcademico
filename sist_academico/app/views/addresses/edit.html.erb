@@ -1,7 +1,7 @@
 <div class="row">
   <div class="span6 offset3">
 		<h1>Editar direccion</h1>
-		<%= render 'form' %>
+		<%= render 'form', address: @address %>
 		<%= link_to 'Mostrar', @address %> |
 		<%= link_to 'Listar', addresses_path %>
 	</div>

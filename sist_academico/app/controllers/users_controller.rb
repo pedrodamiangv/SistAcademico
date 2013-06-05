@@ -10,21 +10,27 @@ class UsersController < ApplicationController
   def new
   	@user = User.new
     @cities_city = cities
-    @addresses = Address.find(:all)
+    @addresses = Address.order("created_at desc").find(:all)
     addresses_new
 	end
 
 	def create
 	  @user = User.new(params[:user])
-	  if @user.save
-      @user.edad = calcular_edad @user
-	    redirect_to root_url, :notice => "Signed up!"
-	  else
-      @addresses = Address.find(:all)
-      @cities_city = cities
-      addresses_new
-      render :new
-	  end
+    respond_to do |format|
+      if @user.save
+        @user.edad = calcular_edad @user
+        user.update_attribute(:edad, edad )
+        format.html { redirect_to @user, notice: 'El Usuario ha sido registrado.' }
+        format.json { render json: @user, status: :created, location: @user }
+        format.js   {}
+      else
+        @addresses = Address.order("created_at desc").find(:all)
+        @cities_city = cities
+        addresses_new
+        format.html { render action: "new" }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
 	end
 
 	def edit
@@ -65,17 +71,6 @@ class UsersController < ApplicationController
   def addresses_new
       @direccion = Address.new
       @cities = City.find(:all)
-    end
-
-  def self.addresses_create
-      @direccion = Address.new(params[:direccion])
-      if @direccion.save
-        flash[:notice] = "Guardado"
-        return true
-      else
-        flash[:notice] = "Hubo Problemas, no guardo"
-        return false
-      end
   end
 
   private

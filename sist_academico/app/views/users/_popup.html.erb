@@ -1,0 +1,19 @@
+<div class="modal-header">  
+    <a class="close" data-dismiss="modal">×</a>  
+    <h3>Registrar Direccion</h3>  
+  </div>  
+  <div class="modal-body">  
+    <p id="notice" class="error"></p>
+    <%= form_for @direccion, remote: true do |f| %>
+      <%= f.label :direccion %><br />
+      <%= f.text_field :direccion %>
+      <%= f.label :barrio %><br />
+      <%= f.text_field :barrio %>
+      <%= f.label :city %>
+      <%= f.collection_select :city_id ,@cities,:id,:city %>
+  </div>  
+  <div class="modal-footer"> 
+    <%= f.submit "Guardar", :class => 'btn btn-success' %> 
+    <a href="#" class="btn" data-dismiss="modal">Cerrar</a>  
+  </div>  
+      <% end %>

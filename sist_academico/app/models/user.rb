@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password
   validates :nombre, presence: true, length: { maximum: 50 }
   validates :apellido, presence: true, length: { maximum: 50 }
-  validates :sexo, presence: true, length: { maximum: 2 }
+  validates :sexo, presence: true, length: { maximum: 10 }
   validates :telefono, presence: true, length: { maximum: 50 }
   validates :fecha_nacimiento, presence: true, length: { maximum: 50 }
   validates :lugar_nacimiento, presence: true
