@@ -1,0 +1,14 @@
+<%= form_for(puntaje) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="span4 offset3">
+    <%= f.label :tarea_id %>
+    <%= f.collection_select :planificacion_id, @planificaciones,:id,:tarea %>
+    <%= f.label :alumno_id %>
+    <%= f.collection_select :alumno_id, @alumnos,:id,:full_name %>
+    <%= f.label :puntaje %>
+    <%= f.text_field :puntaje, :maxlength => 10 %>
+    <%= f.label :descripcion %>
+    <%= f.text_field :descripcion, :maxlength => 100 %>
+    <%= f.submit "Guardar", class: "btn btn-large btn-inverse" %>
+  </div>
+<% end %>

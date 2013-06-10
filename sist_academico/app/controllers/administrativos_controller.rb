@@ -47,12 +47,13 @@ class AdministrativosController < ApplicationController
     @administrativo = Administrativo.new(params[:administrativo])
     respond_to do |format|
       if @administrativo.save
-          user = @administrativo.user
-          edad = calcular_edad user
-          user.update_attribute(:is_administrativo, true)
-          user.update_attribute(:edad, edad )
+        user = @administrativo.user
+        edad = calcular_edad user
+        user.update_attribute(:is_administrativo, true)
+        user.update_attribute(:edad, edad )
         format.html { redirect_to @administrativo, notice: 'El administrativo ha sido creado.' }
         format.json { render json: @administrativo, status: :created, location: @administrativo }
+        format.js   {}
       else
         atributos
         format.html { render action: "new" }
@@ -92,7 +93,7 @@ class AdministrativosController < ApplicationController
 
   private
     def atributos
-      @addresses = Address.find(:all)
+      @addresses = Address.order("created_at desc").find(:all)
       cities_city = []
       ciudades = City.find(:all)
       ciudades.each do |city|

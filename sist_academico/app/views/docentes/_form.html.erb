@@ -4,7 +4,7 @@
     <div class="row">
       <div id="registro">
         <fieldset>
-          <legend>Registro de Nuevo Docente</legend>
+          <legend>Datos del Docente</legend>
           <%= f.fields_for :user do |d| %>
             <div class="span3">
               <%= d.label :nombre %>
@@ -42,7 +42,9 @@
 
               <a data-toggle="modal" href="#example" class="direccion">Ingresar nueva direccion</a>
               <%= d.label :direccion, "Dirección" %>
-              <%= d.collection_select :address_id ,@addresses,:id,:direccion %>
+              <div id="direccion">
+                <%= render 'direccion' , addresses: @addresses %>
+              </div>
             </div>
             
         </fieldset>
@@ -79,6 +81,3 @@
   </div>
 <% end %>
   
-<div id="example" class="modal hide fade in" style="display: none; ">  
-  <%= render 'shared/popup' %>
-</div> 

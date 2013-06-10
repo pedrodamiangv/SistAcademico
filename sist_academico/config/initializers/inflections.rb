@@ -18,4 +18,5 @@ ActiveSupport::Inflector.inflections do |inflect|
 	inflect.irregular 'error', 'errores'
 	inflect.irregular 'planificacion', 'planificaciones'
 	inflect.irregular 'dia', 'dias'
+	inflect.irregular 'puntaje', 'puntajes'
 end

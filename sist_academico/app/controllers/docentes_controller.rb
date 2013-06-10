@@ -55,6 +55,7 @@ class DocentesController < ApplicationController
         user.update_attribute(:edad, edad )
         format.html { redirect_to @docente, notice: 'El Docente ha sido guardado.' }
         format.json { render json: @docente, status: :created, location: @docente }
+        format.js   {}
       else
         atributos
         format.html { render action: "new" }
@@ -101,7 +102,7 @@ class DocentesController < ApplicationController
     end
 
     def atributos
-      @addresses = Address.find(:all)
+      @addresses = Address.order("created_at desc").find(:all)
       cities_city = []
       ciudades = City.find(:all)
       ciudades.each do |city|

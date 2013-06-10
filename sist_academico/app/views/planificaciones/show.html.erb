@@ -1,36 +1,54 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <b>Materia:</b>
-  <%= link_to @planificacion.materia_materia, @planificacion.materia %>
-</p>
-
-<p>
-  <b>Tarea:</b>
-  <%= @planificacion.tarea %>
-</p>
-
-<p>
-  <b>Descripcion:</b>
-  <%= @planificacion.descripcion %>
-</p>
-
-<p>
-  <b>Etapa:</b>
-  <%= @planificacion.etapa %>
-</p>
-
-<p>
-  <b>Curso:</b>
-  <%= @planificacion.materia.curso_curso %>
-</p>
-
-<p>
-  <b>Fecha entrega:</b>
-  <%= @planificacion.fecha_entrega %>
-</p>
-
-<p>
-  <b>Total puntos:</b>
-  <%= @planificacion.total_puntos %>
-</p>
+<div class="container">
+  <div class="row">
+    <div class="span3">
+      <aside>
+      <section>
+        <h1>
+          <%= @planificacion.tarea.capitalize %>
+        </h1>
+      </section>
+      <section>
+        <p><b>
+          <%= link_to @planificacion.materia_materia, @planificacion.materia %></b><br/>
+          <% if current_user.is_administrativo %>
+            <%= link_to 'Editar', edit_planificacion_path(@planificacion), :style => 'font:normal 9px verdana, arial, helvetica, sans-serif;' %>
+          <% end %>
+        </p>
+        
+        <br/>
+        <p>Curso: <%= link_to @planificacion.materia.curso_curso, @planificacion.materia.curso %></p>
+        <p>Descripcion: <%= @planificacion.descripcion %></p>
+        <p>Etapa: <%= @planificacion.etapa %></p>
+        <p>Fecha de Entrega: <%= @planificacion.fecha_entrega %></p>
+        <p>Total de Puntos: <%= @planificacion.total_puntos %></p>
+        <br/>
+      </section>
+    </aside>
+    </div>
+    <div class="span8">
+      <h1 class="h1">Lista de Alumnos</h1>
+      <div class="row" align="right">
+        Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido"/> 
+      </div>
+      <table id="my-table" class="table table-bordered">
+        <thead class="table-title">
+          <tr>
+            <th>Alumno</th>
+            <th>Puntaje Alcanzado</th>
+            <th>Descripcion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @planificacion.materia.curso.alumnos.each do |alumno| %>
+            <tr>
+              <td><%= alumno.full_name %></td>
+              <td></td>
+              <td></td> 
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

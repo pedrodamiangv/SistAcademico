@@ -41,7 +41,9 @@
 
           <a data-toggle="modal" href="#example" class="direccion">Ingresar nueva direccion</a>
           <%= d.label :direccion %>
-          <%= d.collection_select :address_id ,@addresses,:id,:direccion %>
+          <div id="direccion">
+            <%= render 'direccion' , addresses: @addresses %>
+          </div>
         </div>
         </fieldset>
       </div>
@@ -78,6 +80,3 @@
   </div>
 <% end %>
   
-<div id="example" class="modal hide fade in" style="display: none; ">  
-  <%= render 'shared/popup' %>
-</div> 

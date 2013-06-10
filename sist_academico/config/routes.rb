@@ -1,4 +1,7 @@
 SistAcademico::Application.routes.draw do
+  resources :puntajes
+
+
   resources :planificaciones
 
 

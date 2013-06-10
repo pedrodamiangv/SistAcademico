@@ -58,7 +58,7 @@
 
         <%= f.label :direccion %>
         <div id="direccion">
-          <%= render 'users/direccion' , addresses: @addresses %>
+          <%= render 'users/direccion', addresses: @addresses %>
         </div>
 
         <a data-toggle="modal" href="#example" class="direccion">Ingresar nueva direccion</a>
@@ -69,5 +69,5 @@
 </div>
 
 <div id="example" class="modal hide fade in" style="display: none; ">  
-  <%= render 'users/popup'%>
+  <%= render 'users/popup', direccion: @direccion %>
 </div> 

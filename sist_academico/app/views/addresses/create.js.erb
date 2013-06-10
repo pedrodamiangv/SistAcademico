@@ -1,3 +1,17 @@
-$("#direccion").html("<%= escape_javascript(render 'users/direccion', addresses: @addresses ) %>");
+
+<% current_uri = request.env['PATH_INFO'] %>
+$("#direccion").html('<%= escape_javascript( @address.page) %>' );
+<% if current_uri.split('/')[1] == 'alumnos' %>
+  $("#direccion").html("<%= escape_javascript(render 'alumnos/direccion', addresses: @addresses ) %>");
+<% end %>
+<% if current_uri.split('/')[1] == 'administrativos' %>
+  $("#direccion").html("<%= escape_javascript(render 'administrativos/direccion', addresses: @addresses ) %>");
+<% end %>
+<% if current_uri.split('/')[1] == 'docentes' %>
+  $("#direccion").html("<%= escape_javascript(render 'docentes/direccion', addresses: @addresses ) %>");
+<% end %>
+<% if current_uri.split('/')[1] == 'users' %>
+  $("#direccion").html("<%= escape_javascript(render 'users/direccion', addresses: @addresses ) %>");
+<% end %>
 $("#example").hide();
 $('.modal-backdrop').remove();

@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="row">
+    <h1 class="h1">Lista de Puntajes</h1>
+    <div class="row" align="right">
+      Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido"/> 
+    </div>
+    <div class="row">
+      <table id="my-table" class="table table-bordered">
+        <thead class="table-title">
+          <tr>
+            <th>Curso</th>
+            <th>Materia</th>
+            <th>Tarea</th>
+            <th>Alumno</th>
+            <th>Total de Puntos</th>
+            <th>Puntos Correctos</th>
+            <th>Fecha de Registro</th>
+            <th>Descripcion</th>
+            <% if current_user.is_administrativo %>
+              <th></th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <% @puntajes.each do |puntaje| %>
+            <tr>
+              <td><%= puntaje.planificacion.curso_curso %></td>
+              <td><%= puntaje.planificacion.materia_materia %></td>
+              <td><%= puntaje.planificacion.tarea %></td>
+              <td><%= puntaje.alumno.full_name %></td>
+              <td><%= puntaje.planificacion.total_puntos %></td>
+              <td><%= puntaje.puntaje %></td>
+              <td><%= puntaje.created_at.to_s.slice(0,10); %></td>
+              <td><%= puntaje.descripcion %></td>
+              <% if current_user.is_administrativo %>
+                <td><%= link_to 'Editar', edit_puntaje_path(puntaje) %>
+                <%= link_to 'Eliminar', puntaje, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= will_paginate @puntajes %>
+    </div>
+  </div>
+</div>

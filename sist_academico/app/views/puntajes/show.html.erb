@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Tarea:</b></p>
+  <p><%= @puntaje.planificacion.tarea %><br/>
+  <%= link_to 'Editar', edit_puntaje_path(@puntaje) %></p>
+  <p>Materia: <%= @puntaje.planificacion.materia_materia %><br/>
+  Curso: <%= @puntaje.planificacion.materia.curso_curso %></p>
+</p>
+
+<p>
+  <% if @puntaje.alumno.user_sexo.include? 'F' %>
+    <b>Alumna:</b>
+  <% else %>
+    <b>Alumno:</b>
+  <% end %>
+  <%= @puntaje.alumno.full_name %>
+</p>
+
+<p>
+  <b>Total puntos:</b>
+  <%= @puntaje.planificacion.total_puntos %>
+</p>
+
+<p>
+  <b>Puntaje:</b>
+  <%= @puntaje.puntaje %>
+</p>
+
+<p>
+  <b>Descripcion:</b>
+  <%= @puntaje.descripcion %>
+</p>
+
+<p>
+  <b>Etapa:</b>
+  <%= @puntaje.planificacion.etapa %>
+</p>
+
+<p>
+  <b>Fecha entrega:</b>
+  <%= @puntaje.planificacion.fecha_entrega %>
+</p>
+
+<p>
+  <b>Fecha de registro del puntaje:</b>
+  <%= @puntaje.created_at.to_s.slice(0,10); %>
+</p>
+ 
+<p>
+  <b>Descripcion Inicial:</b>
+  <%= @puntaje.planificacion.descripcion %>
+</p>

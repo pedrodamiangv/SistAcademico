@@ -54,6 +54,7 @@ class AlumnosController < ApplicationController
           user.update_attribute(:edad, edad )
           format.html { redirect_to @alumno, notice: 'El alumno ha sido registrado.' }
           format.json { render json: @alumno, status: :created, location: @alumno }
+          format.js   {}
         else
           atributos
           format.html { render action: "new" }
@@ -93,7 +94,7 @@ class AlumnosController < ApplicationController
 
   private
     def atributos
-      @addresses = Address.find(:all)
+      @addresses = Address.order("created_at desc").find(:all)
       cities_city = []
       ciudades = City.find(:all)
       ciudades.each do |city|

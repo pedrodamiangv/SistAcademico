@@ -26,6 +26,7 @@ class AddressesController < ApplicationController
   # GET /addresses/new
   # GET /addresses/new.json
   def new
+    @page = ''
     @address = Address.new
     @cities = City.find(:all)
     respond_to do |format|
@@ -49,11 +50,12 @@ class AddressesController < ApplicationController
         @addresses = Address.order("created_at desc").find(:all)
         format.html { redirect_to @address, notice: 'La direccion ha sido registrado.' }
         format.json { render json: @address, status: :created, location: @address }
-        format.js   {}
+        format.js   { render 'create' }
       else
         @cities = City.find(:all)
         format.html { render action: "new" }
         format.json { render json: @address.errors, status: :unprocessable_entity }
+        format.js   { render 'create_false' }
       end
     end
   end
