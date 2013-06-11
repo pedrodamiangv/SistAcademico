@@ -34,6 +34,9 @@ GEM
     bootstrap-sass (2.1.0.0)
     builder (3.0.4)
     calendar_date_select (1.16.4)
+    carrierwave (0.8.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
     client_side_validations (3.2.5)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -130,6 +133,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass (= 2.1)
   calendar_date_select
+  carrierwave
   client_side_validations
   coffee-rails (~> 3.2.1)
   jquery-rails
