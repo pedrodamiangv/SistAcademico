@@ -5,7 +5,7 @@
   <div class="modal-body">  
     <p id="error" class="error"></p>
     <%= form_for direccion, :remote => true do |form| %>
-      <% direccion.page = 'alumnos' %>
+      <%= form.text_field :tipo, value: 'alumnos', style: 'display: none;' %>
       <%= form.label :direccion %>
       <%= form.text_field :direccion %>
       <%= form.label :barrio %>

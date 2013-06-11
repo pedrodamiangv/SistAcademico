@@ -25,7 +25,7 @@
         <tbody>
           <% @puntajes.each do |puntaje| %>
             <tr>
-              <td><%= puntaje.planificacion.curso_curso %></td>
+              <td><%= puntaje.planificacion.materia.curso_curso %></td>
               <td><%= puntaje.planificacion.materia_materia %></td>
               <td><%= puntaje.planificacion.tarea %></td>
               <td><%= puntaje.alumno.full_name %></td>

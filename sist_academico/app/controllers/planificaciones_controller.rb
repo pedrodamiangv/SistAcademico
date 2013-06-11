@@ -18,7 +18,11 @@ class PlanificacionesController < ApplicationController
   # GET /planificaciones/1.json
   def show
     @planificacion = Planificacion.find(params[:id])
-
+    if @planificacion.puntajes != nil
+      @puntaje = @planificacion.puntajes
+    else
+      @puntaje = @planificacion.puntajes.build
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @planificacion }

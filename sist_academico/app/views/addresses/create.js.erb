@@ -1,16 +1,14 @@
 
-<% current_uri = request.env['PATH_INFO'] %>
-$("#direccion").html('<%= escape_javascript( @address.page) %>' );
-<% if current_uri.split('/')[1] == 'alumnos' %>
+<% if @address.tipo == 'alumnos' %>
   $("#direccion").html("<%= escape_javascript(render 'alumnos/direccion', addresses: @addresses ) %>");
 <% end %>
-<% if current_uri.split('/')[1] == 'administrativos' %>
+<% if @address.tipo == 'administrativos' %>
   $("#direccion").html("<%= escape_javascript(render 'administrativos/direccion', addresses: @addresses ) %>");
 <% end %>
-<% if current_uri.split('/')[1] == 'docentes' %>
+<% if @address.tipo == 'docentes' %>
   $("#direccion").html("<%= escape_javascript(render 'docentes/direccion', addresses: @addresses ) %>");
 <% end %>
-<% if current_uri.split('/')[1] == 'users' %>
+<% if @address.tipo == 'users' %>
   $("#direccion").html("<%= escape_javascript(render 'users/direccion', addresses: @addresses ) %>");
 <% end %>
 $("#example").hide();

@@ -42,9 +42,14 @@
         <tbody>
           <% @planificacion.materia.curso.alumnos.each do |alumno| %>
             <tr>
-              <td><%= alumno.full_name %></td>
-              <td></td>
-              <td></td> 
+              <%= form_for(@puntaje) do |f| %>
+                <td><%= alumno.full_name %></td>
+                <td><%= f.text_field :alumno_id, value: alumno.id %></td>
+                <td><%= f.text_field :planificacion_id, value: @planificacion.id %></td>
+                <td><%= f.text_field :puntaje, :maxlength => 10, value: f.object.puntaje %></td>
+                <td><%= f.text_field :descripcion, :maxlength => 100 %></td>
+                <td><%= f.submit "Guardar", class: "btn btn-large btn-inverse" %></td>
+              <% end %> 
             </tr>
           <% end %>
         </tbody>

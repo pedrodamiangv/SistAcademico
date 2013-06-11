@@ -25,7 +25,7 @@
           <% @planificaciones.each do |planificacion| %>
             <tr>
               <td><%= planificacion.materia_materia %></td>
-              <td><%= planificacion.tarea %></td>
+              <td><%= link_to planificacion.tarea, planificacion %></td>
               <td><%= planificacion.descripcion %></td>
               <td><%= planificacion.etapa %></td>
               <td><%= planificacion.materia.curso_curso %></td>
