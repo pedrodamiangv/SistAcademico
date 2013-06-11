@@ -36,10 +36,10 @@ ActiveRecord::Schema.define(:version => 20130609210952) do
     t.boolean  "doc_cert_estudios"
     t.boolean  "doc_foto"
     t.boolean  "doc_cert_nacimiento"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
-    t.string   "responsable",          :limit => 30, :null => false
-    t.string   "telefono_responsable", :limit => 15, :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.string   "responsable"
+    t.string   "telefono_responsable"
   end
 
   create_table "cities", :force => true do |t|
@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(:version => 20130609210952) do
     t.string   "telefono"
     t.string   "fecha_nacimiento"
     t.string   "lugar_nacimiento"
+    t.string   "direccion"
     t.integer  "edad"
     t.string   "username",                     :null => false
     t.string   "email"

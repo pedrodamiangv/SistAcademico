@@ -23,3 +23,17 @@ function muestra_oculta(id){
 	el.style.display = (el.style.display == 'none') ? 'block' : 'none'; //damos un atributo display:none que oculta el div
 }
 
+<script type="text/javascript">
+    if(!Modernizr.csstransforms3d) document.getElementById('information').style.display = 'block';
+  </script>
+  <!-- GA -->
+  <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+  <script type="text/javascript">
+    try {
+      var pageTracker = _gat._getTracker("UA-2260508-2");
+      pageTracker._trackPageview();
+    } catch(err) {}</script>
+
