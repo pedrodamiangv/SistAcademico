@@ -1,0 +1,6 @@
+<%= form_for(material, :remote => true) do |f| %>
+  <%= f.text_field :materia_id, value: materia.id, class: "label", :style => 'display:none;' %>
+  <%= f.label :file, 'Subir material', class: 'label' %>
+  <%= f.file_field :file %>
+  <%= f.submit 'Guardar' %>
+<% end %>

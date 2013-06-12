@@ -1,6 +1,10 @@
 SistAcademico::Application.routes.draw do
   resources :puntajes
-
+  resources :materiales do
+    member do
+      get :download_file
+    end
+  end
 
   resources :planificaciones
 

@@ -19,4 +19,5 @@ ActiveSupport::Inflector.inflections do |inflect|
 	inflect.irregular 'planificacion', 'planificaciones'
 	inflect.irregular 'dia', 'dias'
 	inflect.irregular 'puntaje', 'puntajes'
+	inflect.irregular 'material', 'materiales'
 end

@@ -18,7 +18,7 @@ class MateriasController < ApplicationController
   def show
     @materia = Materia.find(params[:id])
     @planificacion = @materia.planificaciones.build(params[:planificacion])
-
+    @material = Material.new
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @materia }

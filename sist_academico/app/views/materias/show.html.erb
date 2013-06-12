@@ -1,6 +1,6 @@
 <% provide(:title, @materia.materia) %>
 <p id="notice"><%= notice %></p>
-<p class="error"><%= flash[:error] %></p>
+<p id="error" class="error"><%= flash[:error] %></p>
 <div class="container">
 <div class="row">
   <div class="span3">
@@ -22,6 +22,9 @@
         <p>Area: <%= @materia.area %></p>
         <p>Curso: <%= link_to @materia.curso_curso, @materia.curso %></p>
         <br/>
+        <div>
+          <%= render 'form_materiales', material: @material, materia: @materia %>
+        </div>
       </section>
     </aside>
     <a href="#" onclick="muestra_oculta('contenido_a_mostrar');">Nueva Tarea</a></br>
@@ -44,7 +47,7 @@
       <% end %>
     </div> 
   </div>
-  <div class="span8">
+  <div class="span7">
     <label class="label">Lista de Tareas de <%= @materia.materia %> del <%= @materia.curso_curso %> </label>
     <div align="right">
       Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido"/> 
@@ -54,8 +57,8 @@
         <tr>
           <th>Tarea</th>
           <th>Etapa</th>
-          <th>Fecha de Entrega</th>
-          <th>Total de Puntos</th>
+          <th>Entrega</th>
+          <th>Puntos</th>
           <th>Descripcion</th>
           <th></th>
         </tr>
@@ -74,6 +77,13 @@
         <% end %>
       </tbody>
     </table>
+  </div class="span1">
+    <label style="margin: 10px;">Materiales</label>
+    <div id="materiales">
+      <%= render 'materiales', materia: @materia %>
+    </div>
+    <%= link_to 'Ver todos los materiales', materiales_path %>
+  <div>
   </div>
 </div>
 </div>

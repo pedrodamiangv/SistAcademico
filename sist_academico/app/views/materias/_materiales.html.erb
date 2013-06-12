@@ -1,0 +1,3 @@
+<% materia.materiales.order("created_at desc").each do |material| %>
+  <%= link_to material.nombre_material, :action => 'download_file', :id => material.id, :controller => 'materiales' %></br>
+<% end %><br/>

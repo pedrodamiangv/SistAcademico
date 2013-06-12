@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <h1 class="h1">Lista de Materias</h1>
+    <h1 class="h1">Lista de Materiales</h1>
     <div class="row" align="right">
       Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido search-query"/> 
     </div>
@@ -8,31 +8,30 @@
       <table id="my-table" class="table table-bordered">
         <thead class="table-title">
           <tr>
+            <th>Material</th>
             <th>Materia</th>
-            <th>Area</th>
             <th>Curso</th>
-            <th>Docente</th>
+            <th>Fecha</th>
             <% if current_user.is_administrativo %>
               <th></th>
             <% end %>
           </tr>
         </thead>
         <tbody>
-          <% @materias.each do |materia| %>
+          <% @materiales.each do |material| %>
             <tr>
-              <td><%= link_to materia.materia, materia %></td>
-              <td><%= materia.area %></td>
-              <td><%= materia.curso_curso %></td>
-              <td><%= materia.docente.user_nombre + ' ' + materia.docente.user_apellido %></td>
+              <td><%= material.nombre_material %></td>
+              <td><%= material.materia_materia %></td>
+              <td><%= material.materia.curso_curso %></td>
+              <td><%= material.created_at.to_s.slice(0,10); %></td>
               <% if current_user.is_administrativo %>
-                <td><%= link_to 'Editar', edit_materia_path(materia) %>
-                <%= link_to 'Eliminar', materia, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
+                <td><%= link_to 'Eliminar', material, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
               <% end %>  
             </tr>
           <% end %>
         </tbody>
       </table>
-      <%= will_paginate @materias %>
+      <%= will_paginate @materiales %>
     </div>
   </div>
 </div>
