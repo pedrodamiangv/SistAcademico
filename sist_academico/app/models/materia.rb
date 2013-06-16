@@ -8,6 +8,6 @@ class Materia < ActiveRecord::Base
   delegate :curso, :turno, :nivel, :enfasis, to: :curso, prefix: true
   validates :curso_id, presence: true
   validates :docente_id, presence: true
-  validates :materia, presence: true, length: {minimum: 5, maximum: 30}
+  validates :materia, presence: true, length: {minimum: 5, maximum: 30}, :format => { :with => /\A[a-zA-Z\s]+\z/ }
   validates :area, length: {minimum: 5, maximum: 30}
 end
