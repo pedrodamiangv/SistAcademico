@@ -3,38 +3,11 @@
 <head>
   <title>Sistema Academico | <%= yield(:title) %></title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag  "application" %>
+  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tag %>
-  <script type="text/javascript">
-    $(document).ready(function() {
-      //Ready for calendar
-  		$("#fecha").datepicker({
-  		changeMonth: true,
-  		changeYear: true,
-  		onSelect: function(dateText, inst) {}
-  		});
-      //ready for search in the table
-      $("#kwd_search").keyup(function(){
-        if( $(this).val() != "")
-        {
-          $("#my-table tbody>tr").hide();
-          $("#my-table td:contains-ci('" + $(this).val() + "')").parent("tr").show();
-        }
-        else
-        {
-          $("#my-table tbody>tr").show();
-        }
-      });
-  	});
-    
-    $.extend($.expr[":"], 
-    {
-      "contains-ci": function(elem, i, match, array) 
-      {
-        return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
-      }
-    });
-  </script>
+  <%= javascript_include_tag "modal-jquery.min", "bootstrap-modal" %>
+  <%= javascript_include_tag "jquery.min", "jquery-ui.min", "calendar"  %>
+  <%= javascript_include_tag  "bootstrap-dropdown" %>
   <%= render 'layouts/shim' %> 
 </head>
 

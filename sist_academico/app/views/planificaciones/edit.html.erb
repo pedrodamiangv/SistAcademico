@@ -1,4 +1,66 @@
-<div class="row">
+<div class="container">
   <h1 class="h1">Editar tarea</h1>
-  <%= render 'form' %>
+  <%= form_for(@planificacion) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <label class="label">Materia: <%= @planificacion.materia_materia %></label>
+  <div id="campos" class="row">
+  	<div class="span4">
+	  	<p>Tarea: <%= @planificacion.tarea.capitalize %><br/>
+	  	Curso: <%= link_to @planificacion.materia.curso_curso, @planificacion.materia.curso %><br/>
+	    Total de Puntos: <%= @planificacion.total_puntos %></p>
+	  </div>
+	  <div class="span4 offset1">
+	    <p>Etapa: <%= @planificacion.etapa %><br/>
+	    Fecha de Entrega: <%= @planificacion.fecha_entrega %><br/>
+	    <a href="#" onclick="edicion_planificacion();">>>Editar estos campos<<</a></p>
+	  </div>
+	  <hr/>
+  </div>
+  <div id="campos_edicion" class="row" style=" display:none;">
+    <div class="span4">
+	  <%= f.label :tarea %>
+	  <%= f.text_field :tarea, class: 'search-query', :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;' %>
+	  <%= f.label :etapa %>
+	  <%= f.text_field :etapa, class: 'search-query', :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;' %>
+	</div>
+	<div class="span4">
+	  <%= f.label :fecha_entrega %>
+	  <%= f.text_field :fecha_entrega, class: 'search-query', :id=> "fecha", :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;' %>
+	  <%= f.label :total_puntos %>
+	  <%= f.text_field :total_puntos, class: 'input-medium', :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;' %>
+	  <a href="#" onclick="edicion_planificacion2();">>>Volver<<</a>
+	</div>
+  </div>
+  <div class="row">
+	  <%= f.label :descripcion %>
+	  <%= f.text_area :descripcion, rows: 3 %>
+	    <table id="my-table" class="table table-bordered">
+	        <thead class="table-title">
+	          <tr>
+	            <th>Alumno</th>
+	            <th>Puntaje Alcanzado</th>
+	            <th>Descripcion</th>
+	          </tr>
+	        </thead>
+	        <tbody>
+	  <%= f.fields_for :puntajes do |p| %>
+
+	    
+	            <tr>
+	              <td><%= p.object.alumno.full_name %></td>
+	              <%= p.text_field :alumno_id, value: p.object.alumno.id, style: 'display: none;' %>
+	              <%= p.text_field :planificacion_id, value: @planificacion.id, style: 'display: none;' %>
+	              <td><%= p.text_field :puntaje, :maxlength => 10 %></td>
+	              <td><%= p.text_field :descripcion, :maxlength => 100 %></td>
+	            </tr>
+
+	  <% end %>
+
+	        </tbody>
+	      </table>
+	  <div align="center">
+	    <%= f.submit "Guardar", class: "btn btn-large btn-inverse" %>
+	  </div>
+	</div>
+<% end %>
 </div>

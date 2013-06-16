@@ -44,6 +44,14 @@ class PlanificacionesController < ApplicationController
   # GET /planificaciones/1/edit
   def edit
     @planificacion = Planificacion.find(params[:id])
+    if @planificacion.puntajes.count == 0
+      @puntajes = []
+      @planificacion.materia.curso.alumnos.each do |alumno|
+        puntaje = @planificacion.puntajes.build
+        puntaje.alumno = alumno
+        @puntajes << puntaje
+      end
+    end
   end
 
   # POST /planificaciones
