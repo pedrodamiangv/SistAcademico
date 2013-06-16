@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   before_save { |user| user.email = email.downcase }
 
   #VALIDACIONES DE LOS CAMPOS
-  validates :username, presence: true, length: { maximum: 50, minimum:2 }
+  validates :username, presence: true, length: { maximum: 30, minimum:2 }
   validates :CINro, presence: true, length: { maximum: 9, minimum:6 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence:   true,
@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   validates :nombre, presence: true, length: { maximum: 50, minimum:3 }
   validates :apellido, presence: true, length: { maximum: 50, minimum:3 }
   validates :sexo, presence: true, length: { maximum: 10 }
-  validates :telefono, presence: true, length: { maximum: 50, minimum:6 }
+  validates :telefono, presence: true, length: { maximum: 12, minimum:6 }
   validates :fecha_nacimiento, presence: true, length: { maximum: 50 }
   validates :lugar_nacimiento, presence: true
   validates :address_id, presence: true, length: { maximum: 50 }
