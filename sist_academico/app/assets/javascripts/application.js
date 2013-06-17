@@ -12,6 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap-modal
+//= require calendar
+//= require bootstrap-dropdown
+//= require jquery-ui.min
 //= require_tree .
 
 $(document).ready(function() {

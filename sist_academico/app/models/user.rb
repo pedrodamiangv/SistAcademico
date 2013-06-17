@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   authenticates_with_sorcery!
   attr_accessible :is_docente, :is_administrativo, :is_alumno, :CINro, :nombre, :apellido, :sexo, :telefono, :fecha_nacimiento, :lugar_nacimiento, :edad, :username, :email, :password, :password_confirmation, :address_id
   belongs_to :address
-  has_one :alumno, :dependent => :destroy
+  has_one :alumno
   accepts_nested_attributes_for :alumno
   has_one :administrativo
   has_one :docente

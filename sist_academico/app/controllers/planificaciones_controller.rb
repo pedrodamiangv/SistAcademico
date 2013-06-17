@@ -52,6 +52,10 @@ class PlanificacionesController < ApplicationController
         @puntajes << puntaje
       end
     end
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # POST /planificaciones
