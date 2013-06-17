@@ -21,7 +21,7 @@
           </div>
           <div class="span3 offset1">
             <%= d.label :telefono, "Teléfono" %>
-            <%= d.text_field :telefono, :maxlength => 12 %>
+            <%= d.text_field :telefono, :maxlength => 13, :placeholder => "(xxxx) xxxxxx" %>
 
             <%= d.label :fecha_nacimiento, "Fecha de Nacimiento" %> 
             <%= d.text_field :fecha_nacimiento, :id=> "fecha" %>
@@ -37,7 +37,7 @@
             <%= f.text_field :responsable, :maxlength => 50 %>
 
             <%= f.label :telefono_responsable, "Teléfono del Responsable" %>
-            <%= f.text_field :telefono_responsable, :maxlength => 12 %>
+            <%= f.text_field :telefono_responsable, :maxlength => 13, :placeholder => "(xxxx) xxxxxx" %>
 
             <%= f.label :curso_id %>
             <%= f.collection_select :curso_id ,@cursos,:id, :curso  %>

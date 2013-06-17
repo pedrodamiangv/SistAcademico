@@ -42,7 +42,7 @@
         <%= f.text_field :CINro, :maxlength => 9 %>
         
         <%= f.label :telefono %>
-        <%= f.text_field :telefono, :maxlength => 12 %>
+        <%= f.text_field :telefono, :maxlength => 13, :placeholder => "(xxxx) xxxxxx" %>
 
         <%= f.label :lugar_nacimiento, "Lugar de Nacimiento" %>
         <%= f.select( :lugar_nacimiento ,@cities_city) %>

@@ -79,37 +79,18 @@
     <% end %>
   </div>
   <div class="span4">
-      <label class="label"> Próximas Actividades </label>
-      <ul class="nav nav-tabs nav-stacked">
-        <% materias.each do |materia| %>
-          <% materia.planificaciones.where(:fecha_entrega => Date.today..(Date.today + 7)).each do |tarea| %>
-            <li><b>Tarea:</b> <%= tarea.tarea %>
-              <br/>&nbsp;&nbsp;<b>Materia:</b> <%= materia.materia %>
-              <br/>&nbsp;&nbsp;<b>Fecha de Entrega:</b> <%= time_ago_in_words(tarea.fecha_entrega) %></li> 
-              <br/>&nbsp;&nbsp;<b>Fecha de Entrega:</b> <%= tarea.fecha_entrega %></li>
-            <hr/>
-          <% end %>
+    <label class="label"> Próximas Tareas </label>
+    <ul class="nav nav-tabs nav-stacked">
+      <% materias.each do |materia| %>
+        <% materia.planificaciones.where(:fecha_entrega => Date.today..(Date.today + 7)).each do |tarea| %>
+          <li><b>Tarea:</b> <%= tarea.tarea %>
+            <br/>&nbsp;&nbsp;<b>Materia:</b> <%= materia.materia %>
+            <br/>&nbsp;&nbsp;<b>Fecha de Entrega:</b> <%= time_ago_in_words(tarea.fecha_entrega) %></li> 
+            <br/>&nbsp;&nbsp;<b>Fecha de Entrega:</b> <%= tarea.fecha_entrega %></li>
+          <hr/>
         <% end %>
-      </ul>
-      <label class="label"> Mis notas </label>
-      <table id="my-table" class="table table-bordered">
-        <thead class="table-title">
-          <tr>
-            <th>Tarea</th>
-            <th>Total</th>
-            <th>Puntaje</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @alumno.puntajes.by_month(Date.today.month).each do |puntaje| %>
-            <tr>
-              <td><%= puntaje.planificacion.tarea %></td>
-              <td><%= puntaje.planificacion.total_puntos %></td>
-              <td><%= puntaje.puntaje %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <% end %>
+    </ul>
   </div>
 </div>
 </div>

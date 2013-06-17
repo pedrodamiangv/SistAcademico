@@ -10,7 +10,7 @@
     <%= f.text_field :direccion %>
     <%= f.label :barrio %><br />
     <%= f.text_field :barrio %>
-    <%= f.label :city %>
+    <%= f.label :city, "Ciudad" %>
     <%= f.collection_select :city_id ,@cities,:id,:city %>
   </div>  
   <div class="modal-footer"> 

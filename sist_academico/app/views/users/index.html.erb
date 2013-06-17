@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <h1 class="h1">Lista de Usuarios</h1>
+    <legend>Lista de Usuarios</legend>
     <div class="row" align="right">
       Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido search-query"/> 
     </div>
@@ -10,7 +10,6 @@
         <tr>
           <th>Nombre</th>
           <th>Apellido</th>
-          <th>Sexo</th>
           <th>Telefono</th>
           <th class="span5">Fecha y lugar de Nacimiento</th>
           <th class="span3">Direccion</th>
@@ -26,7 +25,6 @@
         <tr>
           <td><%= link_to user.nombre, user %></td>
           <td><%= user.apellido %></td>
-          <td><%= user.sexo %></td>
           <td><%= user.telefono %></td>
           <td><%= user.fecha_nacimiento %>|<%= user.lugar_nacimiento %></td>
           <td><%= user.address.direccion %></td>
@@ -41,9 +39,11 @@
       </tbody>
       </table>
       <%= will_paginate @users %>
-      <% if current_user.is_administrativo %>
-        <%= link_to 'Registrar nuevo', new_user_path %>
-      <% end %>
+      <div class="link">
+        <% if current_user.is_administrativo %>
+          <%= link_to 'Registrar nuevo ->', new_user_path %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

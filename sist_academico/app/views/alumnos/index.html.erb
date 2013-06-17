@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <h1 class="h1">Listando alumnos</h1>
+    <legend>Lista de Alumnos</legend>
     <div class="row" align="right">
       Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido search-query"/> 
     </div>
@@ -8,16 +8,12 @@
       <table id="my-table" class="table table-bordered">
         <thead class="table-title">
           <tr>
-            <th>Nombre</th>
-            <th>Apellido</th>
+            <th class="span2">Nombre</th>
+            <th class="span2">Apellido</th>
             <th>CINro</th>
             <th>Curso</th>
             <th>Nivel</th>
-            <th class="span5">Responsable | Telefono </th>
-            <th>Cedula</th>
-            <th class="span3">Cert. estudios</th>
-            <th>Foto</th>
-            <th class="span3">Cert. nacimiento</th>
+            <th class="span4">Responsable | Telefono </th>
             <% if current_user.is_administrativo %>
               <th></th>
             <% end %>
@@ -32,10 +28,6 @@
               <td><%= alumno.curso_curso.split(' ')[0] %></td>
               <td><%= alumno.curso_nivel %></td>
               <td><%= alumno.responsable %> | <%= alumno.telefono_responsable %></td>
-              <td><%= alumno.doc_cedula %></td>
-              <td><%= alumno.doc_cert_estudios %></td>
-              <td><%= alumno.doc_foto %></td>
-              <td><%= alumno.doc_cert_nacimiento %></td>
               <% if current_user.is_administrativo %>
                 <td><%= link_to 'Editar', edit_alumno_path(alumno) %><%= link_to 'Eliminar', alumno, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
               <% end %>
@@ -44,9 +36,11 @@
         </tbody>
       </table>
       <%= will_paginate @alumnos %>
-      <% if current_user.is_administrativo %>
-        <%= link_to 'Nuevo Alumno', new_alumno_path %>
-      <% end %>
+      <div class="link">
+        <% if current_user.is_administrativo %>
+          <%= link_to 'Nuevo Alumno', new_alumno_path %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
