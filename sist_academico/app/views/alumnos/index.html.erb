@@ -38,7 +38,7 @@
       <%= will_paginate @alumnos %>
       <div class="link">
         <% if current_user.is_administrativo %>
-          <%= link_to 'Nuevo Alumno', new_alumno_path %>
+          <%= link_to 'Nuevo Alumno ->', new_alumno_path %>
         <% end %>
       </div>
     </div>

@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <h1 class="h1">Lista de Administrativos</h1>
+    <legend>Lista de Administrativos</legend>
     <div class="row" align="right">
       Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido search-query"/> 
     </div>
@@ -37,9 +37,11 @@
         </tbody>
       </table>
       <%= will_paginate @administrativos %>
-      <% if current_user.is_administrativo %>
-        <%= link_to 'Registrar nuevo Administrativo', new_administrativo_path %>
-      <% end %>
+      <div class="link">
+        <% if current_user.is_administrativo %>
+          <%= link_to 'Registrar Nuevo Administrativo ->', new_administrativo_path %>
+        <% end %
+      </div>
     </div>
   </div>
 </div>

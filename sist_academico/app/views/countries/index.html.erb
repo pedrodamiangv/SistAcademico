@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <h1 class="h1">Lista de Paises</h1>
+    <legend>Lista de Paises</legend>
     <div class="row" align="right">
       Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido search-query"/> 
     </div>
@@ -8,9 +8,9 @@
       <table id="my-table" class="table table-bordered">
         <thead class="table-title">
           <tr>
-            <th class="span9">Pais</th>
+            <th class="span5">Pais</th>
+            <th class="span3"></th>
             <% if current_user.is_administrativo %>
-              <th></th>
             <% end %>
           </tr>
         </thead>
@@ -27,9 +27,11 @@
         </tbody>
       </table>
       <%= will_paginate @countries %>
-      <% if current_user.is_administrativo %>
-        <%= link_to 'Registrar Nuevo', new_country_path %>
-      <% end %>
+      <div class="link">
+        <% if current_user.is_administrativo %>
+          <%= link_to 'Registrar Nuevo ->', new_country_path %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

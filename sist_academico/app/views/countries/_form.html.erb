@@ -2,9 +2,8 @@
   <div class="row">
     <div id="registro">
         <fieldset>
-          <legend>Registrar Nuevo País</legend>
 			<%= form_for(@country) do |f| %>
-			<div class="span3">
+			<div class="span3 offset4">
   				<%= render 'shared/error_messages', object: f.object %>
   				<%= f.label :pais %>
  				<%= f.text_field :pais, :maxlength => 30 %>

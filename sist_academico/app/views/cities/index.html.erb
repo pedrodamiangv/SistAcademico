@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <h1 class="h1">Lista de Ciudades</h1>
+    <legend>Lista de Ciudades</legend>
     <div class="row" align="right">
       Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido search-query"/> 
     </div>
@@ -29,9 +29,11 @@
         </tbody>
       </table>
       <%= will_paginate @cities %>
-      <% if current_user.is_administrativo %>
-        <%= link_to 'Registrar nuevo', new_city_path %>
-      <% end %>
+      <div class="link">
+        <% if current_user.is_administrativo %>
+          <%= link_to 'Registrar nuevo ->', new_city_path %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
