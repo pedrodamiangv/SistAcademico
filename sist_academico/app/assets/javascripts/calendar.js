@@ -20,10 +20,3 @@ yearSuffix: ''};
 $.datepicker.setDefaults($.datepicker.regional['es']);
 });
 
-$(document).ready(function() {
-$("#fecha").datepicker({
-changeMonth: true,
-changeYear: true,
-onSelect: function(dateText, inst) {}
-});
-});

@@ -14,7 +14,36 @@
 //= require jquery_ujs
 //= require_tree .
 
+$(document).ready(function() {
+  //Ready for calendar
+  $("#fecha").datepicker({
+  	changeMonth: true,
+  	changeYear: true,
+  	onSelect: function(dateText, inst) {}
+  });
+  //ready for search in the table
+  $("#kwd_search").keyup(function(){
+    if( $(this).val() != "")
+    {
+      $("#my-table tbody>tr").hide();
+      $("#my-table td:contains-ci('" + $(this).val() + "')").parent("tr").show();
+    }
+    else
+    {
+      $("#my-table tbody>tr").show();
+    }
+  });
 
+  $.extend($.expr[":"], 
+  {
+      "contains-ci": function(elem, i, match, array) 
+    {
+      return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+    }
+  });
+  
+});
+    
 
 
 function muestra_oculta(id){
@@ -31,34 +60,3 @@ function edicion_planificacion2(){
   $('#campos_edicion').hide();
   $('#campos').show();
 }
-
-$(document).ready(function() {
-      //Ready for calendar
-  		$("#fecha").datepicker({
-  		changeMonth: true,
-  		changeYear: true,
-  		onSelect: function(dateText, inst) {}
-  		});
-      //ready for search in the table
-      $("#kwd_search").keyup(function(){
-        if( $(this).val() != "")
-        {
-          $("#my-table tbody>tr").hide();
-          $("#my-table td:contains-ci('" + $(this).val() + "')").parent("tr").show();
-        }
-        else
-        {
-          $("#my-table tbody>tr").show();
-        }
-      });
-  	});
-    
-    $.extend($.expr[":"], 
-    {
-      "contains-ci": function(elem, i, match, array) 
-      {
-        return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
-      }
-    });
-
-
