@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <h1 class="h1">Lista de Materias</h1>
+    <legend>Lista de Materias</legend>
     <div class="row" align="right">
       Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido search-query"/> 
     </div>
@@ -33,6 +33,11 @@
         </tbody>
       </table>
       <%= will_paginate @materias %>
+      <div class="link">
+        <% if current_user.is_administrativo %>
+          <%= link_to 'Registrar Materia ->', new_materia_path %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

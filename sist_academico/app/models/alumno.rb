@@ -9,7 +9,7 @@ class Alumno < ActiveRecord::Base
   delegate :curso, :turno, :nivel, :enfasis, to: :curso, prefix: true
   validates :curso_id, presence: true
   validates :responsable, presence: true, length: {minimum: 5, maximum: 50}, :format => { :with => /\A[a-zA-Z\s]+\z/ }
-  validates :telefono_responsable, presence: true, length: {minimum: 5, maximum: 13}, :format => { :with => /^\(\d{4}\)\s\d{6}$/ }
+  validates :telefono_responsable, presence: true, length: {minimum: 5, maximum: 13}, :format => { :with => /^\(\d{3,4}\)\s\d{6}$/ }
   before_save { build_user unless user }
 
   def full_name

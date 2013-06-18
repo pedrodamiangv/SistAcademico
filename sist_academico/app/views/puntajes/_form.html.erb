@@ -6,7 +6,7 @@
     <%= f.label :alumno_id %>
     <%= f.collection_select :alumno_id, @alumnos,:id,:full_name %>
     <%= f.label :puntaje %>
-    <%= f.text_field :puntaje, :maxlength => 10 %>
+    <%= f.text_field :puntaje, :maxlength => 3, onblur: "validar(this)" %>
     <%= f.label :descripcion %>
     <%= f.text_field :descripcion, :maxlength => 100 %>
     <%= f.submit "Guardar", class: "btn btn-large btn-inverse" %>

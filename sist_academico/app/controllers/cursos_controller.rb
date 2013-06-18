@@ -1,10 +1,23 @@
 class CursosController < ApplicationController
   before_filter :require_login
   before_filter :admin_user, only: [:destroy, :edit, :update, :new, :create]
+
+
+
+  def index_total
+    @cursos = Curso.paginate(:page => params[:page], :per_page => 10)
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @cursos }
+    end
+
+  end
+
   # GET /cursos
   # GET /cursos.json
   def index
-    @cursos = Curso.paginate(:page => params[:page], :per_page => 10)
+    @cursos = Curso.by_year(Date.today.year).paginate(:page => params[:page], :per_page => 10)
 
     respond_to do |format|
       format.html # index.html.erb

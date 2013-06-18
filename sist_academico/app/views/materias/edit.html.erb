@@ -1,19 +1,18 @@
 <div class="container">
-  <h1 class="h1">Cargar Calificaciones</h1>
+  <legend>Cargar Calificaciones de <%= @materia.materia %> </legend>
   <%= form_for(@materia) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-  <label class="label">Materia: <%= @materia.materia %></label>
   <div id="campos" class="row">
   	<div class="span4">
-	  	<p>Curso: <%= link_to @materia.curso_curso, @materia.curso %><br/>
+	  	<b>Curso: <%= link_to @materia.curso_curso, @materia.curso %><br/>
 	  	Area: <%= @materia.area %><br/>
-	  	Docente: <%= link_to @materia.docente.full_name, @materia.docente %></p>
+	  	Docente: <%= link_to @materia.docente.full_name, @materia.docente %></b>
 	  </div>
 	  <div class="span4 offset1">
-	    <p>Etapa: <%= select_tag 'select_etapa',  "<option>Primera</option><option>Segunda</option><option>Tercera</option>".html_safe, {class: 'input-medium'} %><br/>
+	    <b>Etapa: <%= select_tag 'select_etapa',  "<option>Primera</option><option>Segunda</option><option>Tercera</option>".html_safe, {class: 'input-medium'} %><br/>
 	    Puntos Acumulados: <small id="total"><%= @puntaje_total %></small><br/>
-	    <a href="#" onclick="edicion_planificacion();">>>Editar estos campos<<</a></p>
 	  </div>
+	  <a href="#" class="offset8" onclick="edicion_planificacion();">>>Editar estos campos<<</a></b>
   </div>
   <div id="campos_edicion" class="row" style=" display:none;">
     <div class="span4">

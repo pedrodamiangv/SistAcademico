@@ -39,7 +39,7 @@
       <div class="span3 offset1">
 
         <%= f.label :CINro, "Cedula de Identidad Número" %>
-        <%= f.text_field :CINro, :maxlength => 9 %>
+        <%= f.text_field :CINro, :maxlength => 9, onblur: "validar(this)" %>
         
         <%= f.label :telefono %>
         <%= f.text_field :telefono, :maxlength => 13, :placeholder => "(xxxx) xxxxxx" %>
@@ -71,3 +71,4 @@
 <div id="example" class="modal hide fade in" style="display: none; ">  
   <%= render 'users/popup', direccion: @direccion %>
 </div> 
+

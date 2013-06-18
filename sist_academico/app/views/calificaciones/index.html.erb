@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <h1 class="h1">Listando Calificaciones</h1>
+    <legend>Lista de Calificaciones</legend>
     <div class="row" align="right">
       Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido search-query"/> 
     </div>
@@ -22,8 +22,8 @@
 
           <% @calificaciones.each do |calificacion| %>
             <tr>
-              <td><%= calificacion.alumno_id %></td>
-              <td><%= calificacion.materia_id %></td>
+              <td><%= calificacion.alumno.full_name %></td>
+              <td><%= calificacion.materia.materia %></td>
               <td><%= calificacion.calificacion %></td>
               <td><%= calificacion.total_puntos %></td>
               <td><%= calificacion.puntos_correctos %></td>

@@ -64,3 +64,11 @@ function edicion_planificacion2(){
   $('#campos_edicion').hide();
   $('#campos').show();
 }
+
+function validar(obj) {
+  txt = obj.value;
+  if(parseInt(txt) != parseFloat(txt)) {
+    alert('Solo debe ser número entero');
+  }
+}
+

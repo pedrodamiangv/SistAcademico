@@ -14,7 +14,7 @@
           <%= d.text_field :apellido, :maxlength => 50 %>
 
           <%= d.label :CINro, "Cedula de Identidad Número" %>
-          <%= d.text_field :CINro, :maxlength => 9 %>
+          <%= d.text_field :CINro, :maxlength => 9, onblur: "validar(this)" %>
 
           <%= d.label :sexo %>
           <%= d.select(:sexo, ['Masculino', 'Femenino' ])%>

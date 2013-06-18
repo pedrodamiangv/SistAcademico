@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <legend>Lista de Cursos del <%= Date.today.year %></legend>
+    <legend>Lista de Cursos</legend>
     <div class="row" align="right">
       Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido search-query"/> 
     </div>
@@ -12,6 +12,7 @@
             <th>Turno</th>
             <th>Nivel</th>
             <th>Enfasis</th>
+            <th>Año</th>
             <% if current_user.is_administrativo %>
               <th></th>
             <% end %>
@@ -24,6 +25,7 @@
               <td><%= curso.turno %></td>
               <td><%= curso.nivel %></td>
               <td><%= curso.enfasis %></td>
+              <td><%= curso. created_at.to_s.slice(0,4); %></td>
               <% if current_user.is_administrativo %>
                 <td><%= link_to 'Editar', edit_curso_path(curso) %>
                 <%= link_to 'Eliminar', curso, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
@@ -36,7 +38,6 @@
       <div class="link">
         <% if current_user.is_administrativo %>
           <%= link_to 'Registrar Curso ->', new_curso_path %>
-          <%= link_to 'Ver Cursos de años anteriores ->', index_total_cursos_path %>
         <% end %>
       </div>
     </div>
