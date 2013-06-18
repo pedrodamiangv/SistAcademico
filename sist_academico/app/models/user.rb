@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   validates :nombre, presence: true, length: { maximum: 50, minimum:3 }, :format => { :with => /\A[a-zA-Z\s]+\z/ }
   validates :apellido, presence: true, length: { maximum: 50, minimum:3 }, :format => { :with => /\A[a-zA-Z\s]+\z/ }
   validates :sexo, presence: true, length: { maximum: 10 }
-  validates :telefono, presence: true, length: { maximum: 12, minimum:6 }, :format => { :with => /^\(\d{4}\)\s\d{6}$/ }
+  validates :telefono, presence: true, length: { maximum: 12, minimum:6 }, :format => { :with => /^\(\d{3,4}\)\s\d{6}$/ }
   validates :fecha_nacimiento, presence: true, length: { maximum: 50 }
   validates :lugar_nacimiento, presence: true
   validates :address_id, presence: true, length: { maximum: 50 }
