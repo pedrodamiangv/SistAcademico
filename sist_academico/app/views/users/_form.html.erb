@@ -1,71 +1,73 @@
-<div class="row">
+<div class="container">
   
     <%= form_for(@user) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
-      <% if current_user.is_administrativo %>
-    <div id="registro">
-    <fieldset>
-      <legend>Datos de Acceso</legend>
-      <div class="span3 ">
+      <div class="row">
+        <div id="registro">
+          <fieldset>
+            <legend>Datos de Acceso</legend>
+            <div class="span3 ">
+              <%= f.label :username, "Nombre de Usuario" %>
+              <%= f.text_field :username, :maxlength => 30 %>
 
-        <%= f.label :username, "Nombre de Usuario" %>
-        <%= f.text_field :username, :maxlength => 30 %>
+              <%= f.label :password, "Contraseña" %>
+              <%= f.password_field :password, :maxlength => 20 %>
 
-        <%= f.label :password, "Contraseña" %>
-        <%= f.password_field :password, :maxlength => 20 %>
-
-        <%= f.label :password_confirmation, "Confirmación de Contraseña" %>
-        <%= f.password_field :password_confirmation, :maxlength => 20 %>
-      </div>
-    </div>
-    </fieldset>
-
-    <div id="registro">
-    <fieldset>
-      <legend>Detalles de Usuario</legend>
-      <div class="span3 ">
-        <%= f.label :nombre %>
-        <%= f.text_field :nombre, :maxlength => 50 %>
-
-        <%= f.label :apellido %>
-        <%= f.text_field :apellido, :maxlength => 50 %>
-
-        <%= f.label :sexo %>
-        <%= f.select(:sexo, ['Masculino', 'Femenino' ])%>
-
-        <%= f.submit "Guardar", class: "btn btn-large btn-inverse" %>
-      </div>  
-        
-      <div class="span3 offset1">
-
-        <%= f.label :CINro, "Cedula de Identidad Número" %>
-        <%= f.text_field :CINro, :maxlength => 9, onblur: "validar(this)" %>
-        
-        <%= f.label :telefono %>
-        <%= f.text_field :telefono, :maxlength => 13, :placeholder => "(xxxx) xxxxxx" %>
-
-        <%= f.label :lugar_nacimiento, "Lugar de Nacimiento" %>
-        <%= f.select( :lugar_nacimiento ,@cities_city) %>
-      </div>
-
-      <div class="span3 offset1">
-
-        <%= f.label :fecha_nacimiento, "Fecha de Nacimiento" %> 
-        <%= f.text_field :fecha_nacimiento, :id=> "fecha" %>
-
-        <%= f.label :email, "Correo Electrónico" %>
-        <%= f.text_field :email, :maxlength => 30 %>
-
-        <%= f.label :direccion %>
-        <div id="direccion">
-          <%= render 'users/direccion', addresses: @addresses %>
+              <%= f.label :password_confirmation, "Confirmación de Contraseña" %>
+              <%= f.password_field :password_confirmation, :maxlength => 20 %>
+            </div>
+          </fieldset>
         </div>
 
-        <a data-toggle="modal" href="#example" class="direccion">Ingresar nueva direccion</a>
+        <% if current_user.is_administrativo %>
+        <div id="registro">
+        <fieldset>
+          <legend>Detalles de Usuario</legend>
+          <div class="span3 ">
+            <%= f.label :nombre %>
+            <%= f.text_field :nombre, :maxlength => 50 %>
+
+            <%= f.label :apellido %>
+            <%= f.text_field :apellido, :maxlength => 50 %>
+
+            <%= f.label :sexo %>
+            <%= f.select(:sexo, ['Masculino', 'Femenino' ])%>
+          </div>  
+          
+          <div class="span3 offset1">
+
+            <%= f.label :CINro, "Cedula de Identidad Número" %>
+            <%= f.text_field :CINro, :maxlength => 9, onblur: "validar(this)" %>
+            
+            <%= f.label :telefono %>
+            <%= f.text_field :telefono, :maxlength => 13, :placeholder => "(xxxx) xxxxxx" %>
+
+            <%= f.label :lugar_nacimiento, "Lugar de Nacimiento" %>
+            <%= f.select( :lugar_nacimiento ,@cities_city) %>
+          </div>
+
+          <div class="span3 offset1">
+
+            <%= f.label :fecha_nacimiento, "Fecha de Nacimiento" %> 
+            <%= f.text_field :fecha_nacimiento, :id=> "fecha" %>
+
+            <%= f.label :email, "Correo Electrónico" %>
+            <%= f.text_field :email, :maxlength => 30 %>
+
+            <%= f.label :direccion %>
+            <div id="direccion">
+              <%= render 'users/direccion', addresses: @addresses %>
+            </div>
+
+            <a data-toggle="modal" href="#example" class="direccion">Ingresar nueva direccion</a>
+          </div>
         <% end %>
       </div>
-        <% end %>
-    </div>
+      <div class="row" align="center">
+        <%= f.submit "Guardar", class: "btn btn-large btn-inverse" %>
+      </div>
+    <% end %>
+  </div>
 </div>
 
 <div id="example" class="modal hide fade in" style="display: none; ">  

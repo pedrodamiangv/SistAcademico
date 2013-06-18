@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_filter :require_login
-  before_filter :admin_user
   before_filter :correct_user,   only: [:edit, :update, :show]
+  before_filter :admin_user,   only: [:new, :create, :destroy]
 
   def index
     @users = User.paginate(:page => params[:page], :per_page => 10)
@@ -42,15 +42,16 @@ class UsersController < ApplicationController
 
   def update
     @user = User.new (params[:user])
-    if @user.update_attributes(params[:user])
-      flash[:success] = "Profile updated"
-      sign_in @user
-      redirect_to @user
-    else
-      @cities_city = cities
-      @addresses = Address.find(:all)
-      addresses_new
-      render 'edit'
+    respond_to do |format|
+      if @user.update_attributes(params[:user])
+        format.html { redirect_to @user, notice: 'Los campos han sido actualizados.' }   
+      else
+        @addresses = Address.order("created_at desc").find(:all)
+        @cities_city = cities
+        addresses_new
+        format.html { render action: "edit" }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
     end
   end
 

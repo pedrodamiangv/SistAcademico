@@ -1,6 +1,7 @@
 class MateriasController < ApplicationController
   before_filter :require_login
-  before_filter :correct_user || :admin_user,   only: [:edit, :update, :show] 
+  before_filter :correct_user_for_show || :admin_user,   only: [:show] 
+  before_filter :correct_user || :admin_user,   only: [:edit, :update] 
   before_filter :admin_user,   only: [:new, :create, :destroy]
   # GET /materia
   # GET /materia.json
@@ -150,12 +151,23 @@ class MateriasController < ApplicationController
   end
 
   private
-    def correct_user
+    def correct_user_for_show
       @materia = Materia.find(params[:id])
       if current_user.is_docente?
         redirect_to(root_path) unless ( @materia.docente == current_user.docente)
       elsif current_user.is_alumno?
         redirect_to(root_path) unless ( @materia.curso == current_user.alumno.curso )
+      else
+       redirect_to(root_path) unless ( current_user.is_administrativo?)
+     end
+    end
+
+    def correct_user
+      @materia = Materia.find(params[:id])
+      if current_user.is_docente?
+        redirect_to(root_path) unless ( @materia.docente == current_user.docente)
+      elsif current_user.is_alumno?
+        redirect_to(root_path) 
       else
        redirect_to(root_path) unless ( current_user.is_administrativo?)
      end
