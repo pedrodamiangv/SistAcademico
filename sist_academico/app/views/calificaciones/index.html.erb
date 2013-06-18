@@ -22,8 +22,8 @@
 
           <% @calificaciones.each do |calificacion| %>
             <tr>
-              <td><%= calificacion.alumno_id %></td>
-              <td><%= calificacion.materia_id %></td>
+              <td><%= calificacion.alumno.full_name %></td>
+              <td><%= calificacion.materia.materia %></td>
               <td><%= calificacion.calificacion %></td>
               <td><%= calificacion.total_puntos %></td>
               <td><%= calificacion.puntos_correctos %></td>

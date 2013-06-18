@@ -20,7 +20,12 @@ SistAcademico::Application.routes.draw do
   resources :administrativos
   resources :docentes
   resources :alumnos
-  resources :cursos
+  
+  resources :cursos do
+    collection do
+      get :index_total
+    end
+  end
 
 
   get "logout" => "sessions#destroy", :as => "logout"
