@@ -13,9 +13,9 @@
 			<%= text_field 'materia[calificaciones]', :alumno_id, value: p.alumno.id, style: 'display: none;' %>
 			<%= text_field 'materia[calificaciones]', :materia_id, value: materia.id, style: 'display: none;' %>
 			<%= text_field 'materia[calificaciones]', :etapa, value: etapa, style: 'display: none;', class: 'etapa_change' %>
-			<%= text_field 'materia[calificaciones]', :total_puntos, value: puntaje_total, style: 'display: none;' %>
+			<%= text_field 'materia[calificaciones]', :total_puntos, value: puntaje_total, style: 'display: none;', onblur: "validar(this)" %>
 			<td><%= p.puntos_correctos %></td>
-			<td><%= text_field 'materia[calificaciones]', :calificacion, :maxlength => 10, class: 'input-small' %></td>
+			<td><%= text_field 'materia[calificaciones]', :calificacion, :maxlength => 10, class: 'input-small', onblur: "validar(this)" %></td>
 		</tr>
 	<% end %>
 	</tbody>

@@ -4,9 +4,6 @@
     <div class="span3">
       <aside>
       <section>
-        <h1>
-          <%= @planificacion.tarea.capitalize %>
-        </h1>
       </section>
       <section>
         <p><b>
@@ -28,9 +25,9 @@
     </div>
     <div class="span8">
       <% if @planificacion.puntajes.count != 0 %>
-        <h1 class="h1">Lista de Alumnos</h1>
+        <legend>Lista de Alumnos - Tarea: <%= @planificacion.tarea.capitalize %></legend>
         <div class="row" align="right">
-          Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido"/> 
+          Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido search-query"/> 
         </div>
         <table id="my-table" class="table table-bordered">
           <thead class="table-title">
@@ -51,7 +48,7 @@
           </tbody>
         </table>
       <% else %>
-        <label class="label-info"> No ha cargado los puntajes aun! </label>
+        <label class="label-info"> No ha cargado los puntajes aun! </label> </br>
         <%= link_to "Cargar Puntajes", edit_planificacion_path(@planificacion), class: "btn btn-large btn-inverse" %>
       <% end %>
     </div>

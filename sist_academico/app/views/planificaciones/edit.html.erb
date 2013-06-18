@@ -1,19 +1,18 @@
 <div class="container">
-  <h1 class="h1">Editar tarea</h1>
+  <legend>Editar tarea de <%= @planificacion.materia_materia %></legend>
   <%= form_for(@planificacion) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-  <label class="label">Materia: <%= @planificacion.materia_materia %></label>
   <div id="campos" class="row">
   	<div class="span4">
-	  	<p>Tarea: <%= @planificacion.tarea.capitalize %><br/>
+	  	<b>Tarea: <%= @planificacion.tarea.capitalize %><br/>
 	  	Curso: <%= link_to @planificacion.materia.curso_curso, @planificacion.materia.curso %><br/>
-	    Total de Puntos: <%= @planificacion.total_puntos %></p>
+	    Total de Puntos: <%= @planificacion.total_puntos %></b>
 	  </div>
 	  <div class="span4 offset1">
-	    <p>Etapa: <%= @planificacion.etapa %><br/>
+	    <b>Etapa: <%= @planificacion.etapa %><br/>
 	    Fecha de Entrega: <%= @planificacion.fecha_entrega %><br/>
-	    <a href="#" onclick="edicion_planificacion();">>>Editar estos campos<<</a></p>
 	  </div>
+	  <a href="#" class="offset5" onclick="edicion_planificacion();">>>Editar estos campos<<</a></b>
   </div>
   <hr/>
   <div id="campos_edicion" class="row" style=" display:none;">
@@ -27,7 +26,7 @@
 	  <%= f.label :fecha_entrega %>
 	  <%= f.text_field :fecha_entrega, class: 'search-query', :id=> "fecha", :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;' %>
 	  <%= f.label :total_puntos %>
-	  <%= f.text_field :total_puntos, class: 'input-medium', :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;' %>
+	  <%= f.text_field :total_puntos, class: 'input-medium', :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;', onblur: "validar(this)" %>
 	  <a href="#" onclick="edicion_planificacion2();">>>Volver<<</a>
 	</div>
   </div>
@@ -50,7 +49,7 @@
 	              <td><%= p.object.alumno.full_name %></td>
 	              <%= p.text_field :alumno_id, value: p.object.alumno.id, style: 'display: none;' %>
 	              <%= p.text_field :planificacion_id, value: @planificacion.id, style: 'display: none;' %>
-	              <td><%= p.text_field :puntaje, :maxlength => 10 %></td>
+	              <td><%= p.text_field :puntaje, :maxlength => 3, onblur: "validar(this)" %></td>
 	              <td><%= p.text_field :descripcion, :maxlength => 100 %></td>
 	            </tr>
 

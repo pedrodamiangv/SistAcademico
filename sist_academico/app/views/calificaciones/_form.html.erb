@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :calificacion %><br />
-    <%= f.number_field :calificacion %>
+    <%= f.number_field :calificacion, onblur: "validar(this)" %>
   </div>
   <div class="field">
     <%= f.label :total_puntos %><br />
