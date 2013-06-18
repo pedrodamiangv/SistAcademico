@@ -16,10 +16,17 @@ SistAcademico::Application.routes.draw do
     member do
       get :change_data
     end
+    member do
+      get :materias_calificaciones
+    end
   end
   resources :administrativos
   resources :docentes
-  resources :alumnos
+  resources :alumnos do
+    member do
+      get :alumno_calificaciones
+    end
+  end
   resources :cursos
 
 

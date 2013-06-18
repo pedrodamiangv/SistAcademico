@@ -13,11 +13,14 @@
         <h1>
           <%= @alumno.user_nombre %>
         </h1>
+        <hr/>
         <% if current_user.is_administrativo %>
-          <%= link_to 'Editar', edit_alumno_path(@alumno) %>
+          <%= link_to 'Editar Datos->', edit_alumno_path(@alumno) %>
         <% end %>
         <br/>
         <div>
+          <%= link_to 'Ver mis notas->', alumno_calificaciones_alumno_path %>
+          <hr/>
           <label class="label">Materias</label>
           <ul class="nav nav-tabs nav-stacked">
             <% materias = @alumno.curso.materias %>

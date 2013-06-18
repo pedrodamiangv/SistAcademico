@@ -4,7 +4,7 @@
   </div>  
   <div class="modal-body">  
     <p id="error_material" class="error"></p>
-    <%= form_for(:material, remote: true) do |form| %>
+    <%= form_for @material, remote: true do |form| %>
       <%= form.text_field :materia_id, value: materia.id, class: "label", :style => 'display:none;' %>
       <%= form.label :file, 'Subir material', class: 'label' %>
       <%= form.file_field :file %><br/>

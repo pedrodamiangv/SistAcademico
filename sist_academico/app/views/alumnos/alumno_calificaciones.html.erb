@@ -1,0 +1,84 @@
+<% provide(:title, "Mis Notas") %>
+<div class="row">
+	<div class="row" align="right">
+    Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido"/> 
+  </div>
+	
+		<label class="label">Primera Etapa<small class="direccion"> <%= @alumno.full_name %></small></label>
+    <% if @calificaciones_primera_etapa.count !=0 %>
+    	<table id="my-table" class="table table-bordered">
+				<thead class="table-title">
+				  <tr>
+				    <th>Materia</th>
+				    <th>Total de Puntos</th>
+				    <th>Puntaje Alcanzado</th>
+				    <th>Calificacion</th>
+				   </tr>
+				</thead>
+				<tbody>
+				  <% @calificaciones_primera_etapa.each do |p| %>
+					 <tr>
+						<td><%= p.materia_materia %></td>
+						<td><%= p.total_puntos %></td>
+						<td><%= p.puntos_correctos %></td>
+						<td><%= p.calificacion %></td>
+					</tr>
+					<% end %>
+				</tbody>
+	    </table>
+		<% else %>
+			<label class="label-info"> No se ha cargado estas calificaciones aun! </label>
+		<% end %>
+		<hr/>
+		<label class="label">Segunda Etapa</label>
+		<% if @calificaciones_segunda_etapa.count !=0 %>
+		  <table id="my-table" class="table table-bordered">
+				<thead class="table-title">
+				  <tr>
+				    <th>Alumno</th>
+				    <th>Puntaje Alcanzado</th>
+				    <th>Calificacion</th>
+				    <th>Fecha de Actualizacion</th>
+				   </tr>
+				</thead>
+				<tbody>
+				  <% @calificaciones_segunda_etapa.each do |p| %>
+					 <tr>
+						<td><%= p.materia_materia %></td>
+						<td><%= p.total_puntos %></td>
+						<td><%= p.puntos_correctos %></td>
+						<td><%= p.calificacion %></td>
+					</tr>
+					<% end %>
+				</tbody>
+	    </table>
+	  <% else %>
+			<label class="label-info"> No se ha cargado estas calificaciones aun! </label>
+		<% end %>
+		<hr/>
+		<label class="label">Tercera Etapa</label>
+		<% if @calificaciones_tercera_etapa.count !=0 %>
+		  <table id="my-table" class="table table-bordered">
+				<thead class="table-title">
+				  <tr>
+				    <th>Alumno</th>
+				    <th>Puntaje Alcanzado</th>
+				    <th>Calificacion</th>
+				    <th>Fecha de Actualizacion</th>
+				   </tr>
+				</thead>
+				<tbody>
+				  <% @calificaciones_tercera_etapa.each do |p| %>
+					 <tr>
+						<td><%= p.materia_materia %></td>
+						<td><%= p.total_puntos %></td>
+						<td><%= p.puntos_correctos %></td>
+						<td><%= p.calificacion %></td>
+					 </tr>
+					<% end %>
+				</tbody>
+	    </table>
+		<% else %>
+			<label class="label-info"> No se ha cargado estas calificaciones aun! </label>
+		<% end %>
+</div>

@@ -1,5 +1,6 @@
 class Materia < ActiveRecord::Base
-  attr_accessible :area, :curso_id, :docente_id, :materia, :calificaciones_attributes
+  attr_accessible :area, :curso_id, :docente_id, :materia
+  attr_accessible :calificaciones_attributes
   belongs_to :curso
   belongs_to :docente
   has_many :materiales

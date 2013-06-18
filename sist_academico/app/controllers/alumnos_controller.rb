@@ -13,6 +13,30 @@ class AlumnosController < ApplicationController
     end
   end
 
+  def alumno_calificaciones
+    @alumno = Alumno.find(params[:id])
+    @materias = @alumno.curso.materias
+    @calificaciones_primera_etapa = []
+    @calificaciones_segunda_etapa = []
+    @calificaciones_tercera_etapa = []
+    @materias.each do |materia|
+      calificacion_etapa_uno = materia.calificaciones.where(:etapa => 'Primera', :alumno_id => @alumno.id)
+      unless calificacion_etapa_uno.count == 0
+        @calificaciones_primera_etapa << calificacion_etapa_uno.first 
+      end 
+      
+      calificacion_etapa_dos = materia.calificaciones.where(:etapa => 'Segunda', :alumno_id => @alumno.id)
+      unless calificacion_etapa_dos.count == 0
+        @calificaciones_segunda_etapa << calificacion_etapa_dos.first 
+      end 
+      
+      calificacion_etapa_tres = materia.calificaciones.where(:etapa => 'Tercera', :alumno_id => @alumno.id)
+      unless calificacion_etapa_tres.count == 0
+        @calificaciones_tercera_etapa << calificacion_etapa_tres.first 
+      end 
+    end
+  end
+
   # GET /alumnos/1
   # GET /alumnos/1.json
   def show

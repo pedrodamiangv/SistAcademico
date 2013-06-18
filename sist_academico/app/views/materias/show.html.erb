@@ -1,10 +1,7 @@
 <% provide(:title, @materia.materia) %>
-<div id="example" class="modal hide fade in" style="display: none; ">  
-  <%= render 'materiales/form', materia: @materia %>
-</div> 
-<p id="notice"><%= notice %></p>
-<p id="error" class="error"><%= flash[:error] %></p>
-<div class="container">
+<div class="row">
+  <p id="notice"><%= notice %></p>
+  <p id="error" class="error"><%= flash[:error] %></p>
   <div class="span2">
     <aside>
       <section>
@@ -25,6 +22,7 @@
           <ul class="nav nav-tabs nav-stacked">
             <li class='li'><a data-toggle="modal" href="#example">Subir Material de estudio</a></li>
             <li class='li'><%= link_to "Cargar Calificaciones", edit_materia_path(@materia) %></li>
+            <li class='li'><%= link_to "Ver Calificaciones", materias_calificaciones_materia_path %></li>
             <li class='li'><a href="#" onclick="muestra_oculta('contenido_a_mostrar');">Nueva Tarea</a></li>
           </ul>
         <% end %>
@@ -99,3 +97,6 @@
   <div>
 </div>
 
+<div id="example" class="modal hide fade in" style="display: none; ">  
+  <%= render 'materiales/form', materia: @materia %>
+</div> 

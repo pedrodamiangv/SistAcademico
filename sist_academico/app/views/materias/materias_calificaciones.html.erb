@@ -1,0 +1,87 @@
+<% provide(:title, @materia.materia) %>
+<div class="row">
+	<div class="row" align="right">
+    Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido"/> 
+  </div>
+	
+		<label class="label">Primera Etapa<small class="direccion">Puntaje total: <%= @puntaje_total_uno %></small></label>
+    <% if @calificaciones_etapa_uno.count !=0 %>
+    	<table id="my-table" class="table table-bordered">
+				<thead class="table-title">
+				  <tr>
+				    <th>Alumno</th>
+				    <th>Puntaje Alcanzado</th>
+				    <th>Calificacion</th>
+				    <th>Fecha de Actualizacion</th>
+				   </tr>
+				</thead>
+				<tbody>
+				  <% @calificaciones_etapa_uno.each do |p| %>
+					 <tr>
+						  <td><%= p.alumno.full_name %></td>
+							<td><%= p.puntos_correctos %></td>
+							<td><%= p.calificacion %></td>
+							<td><%= p.updated_at.to_s.slice(0,10); %></td>
+						</tr>
+					<% end %>
+				</tbody>
+	    </table>
+		<% else %>
+			<label class="label-info"> No ha cargado estas calificaciones aun! </label>
+        <%= link_to "Cargar Calificaciones", edit_materia_path(@materia), class: "btn btn-large btn-inverse" %>
+		<% end %>
+		<hr/>
+		<label class="label">Segunda Etapa<small class="direccion">Puntaje total: <%= @puntaje_total_dos %></small></label>
+		<% if @calificaciones_etapa_dos.count !=0 %>
+		  <table id="my-table" class="table table-bordered">
+				<thead class="table-title">
+				  <tr>
+				    <th>Alumno</th>
+				    <th>Puntaje Alcanzado</th>
+				    <th>Calificacion</th>
+				    <th>Fecha de Actualizacion</th>
+				   </tr>
+				</thead>
+				<tbody>
+				  <% @calificaciones_etapa_dos.each do |p| %>
+					 <tr>
+						  <td><%= p.alumno.full_name %></td>
+							<td><%= p.puntos_correctos %></td>
+							<td><%= p.calificacion %></td>
+							<td><%= p.updated_at.to_s.slice(0,10); %></td>
+						</tr>
+					<% end %>
+				</tbody>
+	    </table>
+	  <% else %>
+			<label class="label-info"> No ha cargado estas calificaciones aun! </label>
+        <%= link_to "Cargar Calificaciones", edit_materia_path(@materia), class: "btn btn-large btn-inverse" %>
+		<% end %>
+		<hr/>
+		<label class="label">Tercera Etapa<small class="direccion">Puntaje total: <%= @puntaje_total_tres %></small></label>
+		<% if @calificaciones_etapa_tres.count !=0 %>
+		  <table id="my-table" class="table table-bordered">
+				<thead class="table-title">
+				  <tr>
+				    <th>Alumno</th>
+				    <th>Puntaje Alcanzado</th>
+				    <th>Calificacion</th>
+				    <th>Fecha de Actualizacion</th>
+				   </tr>
+				</thead>
+				<tbody>
+				  <% @calificaciones_etapa_tres.each do |p| %>
+					 <tr>
+						  <td><%= p.alumno.full_name %></td>
+							<td><%= p.puntos_correctos %></td>
+							<td><%= p.calificacion %></td>
+							<td><%= p.updated_at.to_s.slice(0,10); %></td>
+						</tr>
+					<% end %>
+				</tbody>
+	    </table>
+		<% else %>
+			<label class="label-info"> No ha cargado estas calificaciones aun! </label>
+        <%= link_to "Cargar Calificaciones", edit_materia_path(@materia), class: "btn btn-large btn-inverse" %>
+		<% end %>
+</div>

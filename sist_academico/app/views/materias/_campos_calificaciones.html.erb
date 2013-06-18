@@ -7,15 +7,17 @@
 	   </tr>
 	</thead>
 	<tbody>
-  <% calificaciones.each do |p| %>
+  <% calificaciones.each_with_index do |p, i| %>
+  	 <% name = 'materia[calificaciones_attributes]['.concat(i.to_s).concat(']') %>
 	 <tr>
 		  <td><%= p.alumno.full_name %></td>
-			<%= text_field 'materia[calificaciones]', :alumno_id, value: p.alumno.id, style: 'display: none;' %>
-			<%= text_field 'materia[calificaciones]', :materia_id, value: materia.id, style: 'display: none;' %>
-			<%= text_field 'materia[calificaciones]', :etapa, value: etapa, style: 'display: none;', class: 'etapa_change' %>
-			<%= text_field 'materia[calificaciones]', :total_puntos, value: puntaje_total, style: 'display: none;' %>
+			<%= text_field name, :alumno_id, value: p.alumno.id, style: 'display: none;' %>
+			<%= text_field name, :materia_id, value: materia.id, style: 'display: none;' %>
+			<%= text_field name, :etapa, value: etapa, style: 'display: none;', class: 'etapa_change' %>
+			<%= text_field name, :total_puntos, value: puntaje_total, style: 'display: none;' %>
+			<%= text_field name, :puntos_correctos, value: p.puntos_correctos, style: 'display: none;' %>
 			<td><%= p.puntos_correctos %></td>
-			<td><%= text_field 'materia[calificaciones]', :calificacion, :maxlength => 10, class: 'input-small' %></td>
+			<td><%= text_field name, :calificacion, :maxlength => 10, class: 'input-small' %></td>
 		</tr>
 	<% end %>
 	</tbody>

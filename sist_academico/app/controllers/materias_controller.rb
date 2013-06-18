@@ -13,6 +13,16 @@ class MateriasController < ApplicationController
     end
   end
 
+  def materias_calificaciones
+    @materia = Materia.find(params[:id])
+    @puntaje_total_uno = @materia.planificaciones.where(:etapa => 'Primera').sum(:total_puntos)
+    @calificaciones_etapa_uno = @materia.calificaciones.where(:etapa => 'Primera')
+    @puntaje_total_dos = @materia.planificaciones.where(:etapa => 'Segunda').sum(:total_puntos)
+    @calificaciones_etapa_dos = @materia.calificaciones.where(:etapa => 'Segunda')
+    @puntaje_total_tres = @materia.planificaciones.where(:etapa => 'Tercera').sum(:total_puntos)
+    @calificaciones_etapa_tres = @materia.calificaciones.where(:etapa => 'Tercera')
+  end
+
   # GET /materia/1
   # GET /materia/1.json
   def show
@@ -48,19 +58,19 @@ class MateriasController < ApplicationController
   end
 
   def edit_auxiliar materia, etapa
-    @puntaje_total = materia.planificaciones.where(:etapa => etapa).sum(:total_puntos)
-    if @materia.calificaciones.count == 0
-      @calificaciones = []
-      @materia.curso.alumnos.each do |alumno|
-        calificacion = @materia.calificaciones.build
-        puntos_acumulados =  obtener_puntaje alumno, @materia, etapa
+    if materia.calificaciones.count == 0
+      calificaciones = []
+      materia.curso.alumnos.each do |alumno|
+        calificacion = materia.calificaciones.build
+        puntos_acumulados =  obtener_puntaje alumno, materia, etapa
         calificacion.puntos_correctos = puntos_acumulados
         calificacion.alumno = alumno
-        @calificaciones << calificacion
+        calificaciones << calificacion
       end
     else
-      @calificaciones = @materia.calificaciones
+      calificaciones = materia.calificaciones
     end
+    calificaciones
   end
 
   def change_data
@@ -68,7 +78,8 @@ class MateriasController < ApplicationController
     @materia = Materia.find(params[:id])
     @docentes = Docente.find(:all)
     @cursos = Curso.find(:all)
-    edit_auxiliar @materia, @etapa
+    @puntaje_total = @materia.planificaciones.where(:etapa => etapa).sum(:total_puntos)
+    @calificaciones = edit_auxiliar @materia, @etapa
     respond_to do |format|
       format.js
     end
@@ -80,7 +91,8 @@ class MateriasController < ApplicationController
     @docentes = Docente.find(:all)
     @cursos = Curso.find(:all)
     @etapa = 'Primera'
-    edit_auxiliar @materia, @etapa
+    @puntaje_total = @materia.planificaciones.where(:etapa => etapa).sum(:total_puntos)
+    @calificaciones = edit_auxiliar @materia, @etapa
     respond_to do |format|
       format.html
       format.js
@@ -91,7 +103,7 @@ class MateriasController < ApplicationController
   # POST /materia.json
   def create
     @materia = Materia.new(params[:materia])
-
+    
     respond_to do |format|
       if @materia.save
         format.html { redirect_to @materia, notice: 'La materia ha sido registrada.' }
@@ -109,7 +121,7 @@ class MateriasController < ApplicationController
   # PUT /materia/1.json
   def update
     @materia = Materia.find(params[:id])
-
+    @etapa = params[:select_etapa]
     respond_to do |format|
       if @materia.update_attributes(params[:materia])
         format.html { redirect_to @materia, notice: 'La materia ha sido actualizada.' }
@@ -117,7 +129,8 @@ class MateriasController < ApplicationController
       else
         @docentes = Docente.find(:all)
         @cursos = Curso.find(:all)
-        edit_auxiliar @materia
+        @puntaje_total = @materia.planificaciones.where(:etapa => etapa).sum(:total_puntos)
+        @calificaciones = edit_auxiliar @materia, @etapa
         format.html { render action: "edit" }
         format.json { render json: @materia.errors, status: :unprocessable_entity }
       end

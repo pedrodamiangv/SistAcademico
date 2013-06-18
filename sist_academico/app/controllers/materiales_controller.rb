@@ -18,9 +18,11 @@ class MaterialesController < ApplicationController
 
   def create
     @material = Material.new(params[:material])
+    @materia = @material.materia
     respond_to do |format|
       if @material.save
         @materia = @material.materia
+        format.html { redirect_to @materia }
         format.js { render 'material_guardado' }
       else
         format.js { render 'material_no_guardado' }
