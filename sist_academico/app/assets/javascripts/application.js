@@ -69,7 +69,6 @@ function validar(obj) {
   txt = obj.value;
   if(parseInt(txt) != parseFloat(txt)) {
     alert('Solo debe ser número entero');
-    obj.focus();
   }
 }
 

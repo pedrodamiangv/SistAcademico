@@ -14,12 +14,3 @@
   <%= f.submit "Guardar", class: "btn btn-large btn-inverse" %>
 <% end %>
 
-<script type="text/javascript">
-function validar(obj) {
-  txt = obj.value;
-  if(parseInt(txt) != parseFloat(txt)) {
-    alert('Sólo números enteros');
-    obj.focus();
-  }
-}
-</script>

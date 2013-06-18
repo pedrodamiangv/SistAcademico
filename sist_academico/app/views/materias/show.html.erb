@@ -5,20 +5,18 @@
 <p id="notice"><%= notice %></p>
 <p id="error" class="error"><%= flash[:error] %></p>
 <div class="container">
+  <legend>
+          <%= @materia.materia.capitalize %>
+        </legend>
   <div class="span2">
     <aside>
       <section>
-        <h1>
-          <%= @materia.materia.capitalize %>
-        </h1>
       </section>
       <section>
         <p><b>
           <%= link_to @materia.docente.full_name, @materia.docente %></b><br/>
         </p>
-        
         <br/>
-        <p>Area: <%= @materia.area %></p>
         <% if current_user.is_administrativo || current_user.is_docente %>
           <p>Curso: <%= link_to @materia.curso_curso, @materia.curso %></p>
           <br/>
@@ -34,7 +32,7 @@
       </br><div id="contenido_a_mostrar" style="display: none; ">  
     	  <%= form_for @planificacion do |f| %>
           <%= render 'shared/error_messages', object: f.object %>
-          <label class="label">Materia: <%= @materia.materia %></label>
+          <label class="label"><%= @materia.materia %></label>
           <%= f.text_field :materia_id, value: @materia.id, class: "label", :name => 'materia_id', :style => 'display:none;' %>
           <%= f.label :tarea %>
           <%= f.text_field :tarea, class: 'search-query', :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;' %>

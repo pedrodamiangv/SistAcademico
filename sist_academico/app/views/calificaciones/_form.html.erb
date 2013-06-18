@@ -25,11 +25,11 @@
   </div>
   <div class="field">
     <%= f.label :total_puntos %><br />
-    <%= f.number_field :total_puntos %>
+    <%= f.number_field :total_puntos, onblur: "validar(this)" %>
   </div>
   <div class="field">
     <%= f.label :puntos_correctos %><br />
-    <%= f.text_field :puntos_correctos %>
+    <%= f.text_field :puntos_correctos, onblur: "validar(this)" %>
   </div>
   <div class="actions">
     <%= f.submit %>
