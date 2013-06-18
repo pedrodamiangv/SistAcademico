@@ -43,7 +43,7 @@
           <%= f.label :fecha_entrega %>
           <%= f.text_field :fecha_entrega, class: 'search-query', :id=> "fecha", :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;' %>
           <%= f.label :total_puntos %>
-          <%= f.text_field :total_puntos, class: 'input-medium', :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;' %>
+          <%= f.text_field :total_puntos, class: 'input-medium', :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;', onblur: "validar(this)", :maxlength =>  2 %>
           <%= f.label :descripcion %>
           <%= f.text_area :descripcion, rows: 3, :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;' %>
           <%= f.submit "Guardar", class: "btn btn-large btn-inverse", :name => 'test_button' %>
@@ -98,4 +98,3 @@
     <%= link_to 'Ver todos los materiales', materiales_path %>
   <div>
 </div>
-
