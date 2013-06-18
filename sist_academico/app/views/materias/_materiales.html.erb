@@ -1,3 +1,5 @@
+<ul id="ul" class="nav nav-tabs nav-stacked ul">
 <% materia.materiales.order("created_at desc").each do |material| %>
-  <%= link_to material.nombre_material, :action => 'download_file', :id => material.id, :controller => 'materiales' %></br>
-<% end %><br/>
+  <li class="li"><%= link_to material.nombre_material, :action => 'download_file', :id => material.id, :controller => 'materiales' %></li>
+<% end %>
+</ul>

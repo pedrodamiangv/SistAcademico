@@ -5,8 +5,7 @@
 <p id="notice"><%= notice %></p>
 <p id="error" class="error"><%= flash[:error] %></p>
 <div class="container">
-<div class="row">
-  <div class="span3">
+  <div class="span2">
     <aside>
       <section>
         <h1>
@@ -15,10 +14,7 @@
       </section>
       <section>
         <p><b>
-          <%= link_to @materia.docente.user_nombre.capitalize + ' ' + @materia.docente.user_apellido.capitalize, @materia.docente %></b><br/>
-          <% if current_user.is_administrativo %>
-            <%= link_to 'Editar', edit_materia_path(@materia), :style => 'font:normal 9px verdana, arial, helvetica, sans-serif;' %>
-          <% end %>
+          <%= link_to @materia.docente.full_name, @materia.docente %></b><br/>
         </p>
         
         <br/>
@@ -26,13 +22,15 @@
         <% if current_user.is_administrativo || current_user.is_docente %>
           <p>Curso: <%= link_to @materia.curso_curso, @materia.curso %></p>
           <br/>
-          <a data-toggle="modal" href="#example">Subir Material de estudio</a><br/>
-          <%= link_to "Cargar Calificaciones", edit_materia_path(@materia) %>
+          <ul class="nav nav-tabs nav-stacked">
+            <li class='li'><a data-toggle="modal" href="#example">Subir Material de estudio</a></li>
+            <li class='li'><%= link_to "Cargar Calificaciones", edit_materia_path(@materia) %></li>
+            <li class='li'><a href="#" onclick="muestra_oculta('contenido_a_mostrar');">Nueva Tarea</a></li>
+          </ul>
         <% end %>
       </section>
     </aside>
     <% if current_user.is_administrativo || current_user.is_docente %>
-      <a href="#" onclick="muestra_oculta('contenido_a_mostrar');">Nueva Tarea</a></br>
       </br><div id="contenido_a_mostrar" style="display: none; ">  
     	  <%= form_for @planificacion do |f| %>
           <%= render 'shared/error_messages', object: f.object %>
@@ -53,7 +51,7 @@
       <% end %>
     </div> 
   </div>
-  <div class="span7">
+  <div class="span6">
     <label class="label">Lista de Tareas de <%= @materia.materia %> del <%= @materia.curso_curso %> </label>
     <div align="right">
       Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido search-query"/> 
@@ -80,7 +78,7 @@
               <td><%= tarea.tarea %></td>
             <% end %>
             <td><%= tarea.etapa %> </td>
-            <td><%= tarea.fecha_entrega %></td>
+            <td><%= tarea.fecha_entrega.to_s[5..10] %></td>
             <td><%= tarea.total_puntos %></td>
             <td><%= tarea.descripcion %></td>
             <% if current_user.is_administrativo || current_user.is_docente %>
@@ -91,14 +89,13 @@
         <% end %>
       </tbody>
     </table>
-  </div class="span1">
-    <label style="margin: 10px;">Materiales</label>
+  </div>
+  <div class="span3">
+    <label class="label">Materiales</label>
     <div id="materiales">
       <%= render 'materiales', materia: @materia %>
     </div>
     <%= link_to 'Ver todos los materiales', materiales_path %>
   <div>
-  </div>
-</div>
 </div>
 
