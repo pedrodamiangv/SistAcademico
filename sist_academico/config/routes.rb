@@ -1,4 +1,7 @@
 SistAcademico::Application.routes.draw do
+  resources :calificaciones
+
+
   resources :puntajes
   resources :materiales do
     member do
@@ -9,7 +12,11 @@ SistAcademico::Application.routes.draw do
   resources :planificaciones
 
 
-  resources :materias
+  resources :materias do
+    member do
+      get :change_data
+    end
+  end
   resources :administrativos
   resources :docentes
   resources :alumnos

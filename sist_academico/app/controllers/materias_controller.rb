@@ -37,11 +37,54 @@ class MateriasController < ApplicationController
     end
   end
 
+  def obtener_puntaje a, m, etapa
+    planificaciones = m.planificaciones.where(:etapa => etapa)
+    puntajes = 0
+    planificaciones.each  do |p|
+      ptjs = p.puntajes.where(:alumno_id => a.id)
+      puntajes += ptjs.sum(:puntaje)
+    end
+    puntajes
+  end
+
+  def edit_auxiliar materia, etapa
+    @puntaje_total = materia.planificaciones.where(:etapa => etapa).sum(:total_puntos)
+    if @materia.calificaciones.count == 0
+      @calificaciones = []
+      @materia.curso.alumnos.each do |alumno|
+        calificacion = @materia.calificaciones.build
+        puntos_acumulados =  obtener_puntaje alumno, @materia, etapa
+        calificacion.puntos_correctos = puntos_acumulados
+        calificacion.alumno = alumno
+        @calificaciones << calificacion
+      end
+    else
+      @calificaciones = @materia.calificaciones
+    end
+  end
+
+  def change_data
+    @etapa = params[:select_etapa]
+    @materia = Materia.find(params[:id])
+    @docentes = Docente.find(:all)
+    @cursos = Curso.find(:all)
+    edit_auxiliar @materia, @etapa
+    respond_to do |format|
+      format.js
+    end
+  end
+
   # GET /materia/1/edit
   def edit
     @materia = Materia.find(params[:id])
     @docentes = Docente.find(:all)
     @cursos = Curso.find(:all)
+    @etapa = 'Primera'
+    edit_auxiliar @materia, @etapa
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # POST /materia
@@ -74,6 +117,7 @@ class MateriasController < ApplicationController
       else
         @docentes = Docente.find(:all)
         @cursos = Curso.find(:all)
+        edit_auxiliar @materia
         format.html { render action: "edit" }
         format.json { render json: @materia.errors, status: :unprocessable_entity }
       end

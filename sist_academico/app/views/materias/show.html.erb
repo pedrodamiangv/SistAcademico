@@ -1,4 +1,7 @@
 <% provide(:title, @materia.materia) %>
+<div id="example" class="modal hide fade in" style="display: none; ">  
+  <%= render 'materiales/form', materia: @materia %>
+</div> 
 <p id="notice"><%= notice %></p>
 <p id="error" class="error"><%= flash[:error] %></p>
 <div class="container">
@@ -23,9 +26,8 @@
         <% if current_user.is_administrativo || current_user.is_docente %>
           <p>Curso: <%= link_to @materia.curso_curso, @materia.curso %></p>
           <br/>
-          <div>
-            <%= render 'form_materiales', material: @material, materia: @materia %>
-          </div>
+          <a data-toggle="modal" href="#example">Subir Material de estudio</a><br/>
+          <%= link_to "Cargar Calificaciones", edit_materia_path(@materia) %>
         <% end %>
       </section>
     </aside>
@@ -99,3 +101,4 @@
   </div>
 </div>
 </div>
+

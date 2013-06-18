@@ -11,5 +11,7 @@
 <% if @address.tipo == 'users' %>
   $("#direccion").html("<%= escape_javascript(render 'users/direccion', addresses: @addresses ) %>");
 <% end %>
-$("#example").hide();
-$('.modal-backdrop').remove();
+$("#address_direccion").val('');
+$("#address_barrio").val('');
+$("#error").html('');
+$('#example').modal('hide');

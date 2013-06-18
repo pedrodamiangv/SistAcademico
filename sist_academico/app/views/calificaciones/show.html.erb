@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Alumno:</b>
+  <%= @calificacion.alumno_id %>
+</p>
+
+<p>
+  <b>Materia:</b>
+  <%= @calificacion.materia_id %>
+</p>
+
+<p>
+  <b>Calificacion:</b>
+  <%= @calificacion.calificacion %>
+</p>
+
+<p>
+  <b>Total puntos:</b>
+  <%= @calificacion.total_puntos %>
+</p>
+
+<p>
+  <b>Puntos correctos:</b>
+  <%= @calificacion.puntos_correctos %>
+</p>
+
+
+<%= link_to 'Edit', edit_calificacion_path(@calificacion) %> |
+<%= link_to 'Back', calificaciones_path %>

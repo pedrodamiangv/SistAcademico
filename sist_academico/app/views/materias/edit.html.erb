@@ -1,8 +1,61 @@
-<div class="row">
-  <div class="span6 offset3">
-	<h1>Editar Materia</h1>
-	<%= render 'form' %>
-	<%= link_to 'Mostrar', @materia %> |
-	<%= link_to 'Listar', materias_path %>
+<div class="container">
+  <h1 class="h1">Cargar Calificaciones</h1>
+  <%= form_for(@materia) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <label class="label">Materia: <%= @materia.materia %></label>
+  <div id="campos" class="row">
+  	<div class="span4">
+	  	<p>Curso: <%= link_to @materia.curso_curso, @materia.curso %><br/>
+	  	Area: <%= @materia.area %><br/>
+	  	Docente: <%= link_to @materia.docente.full_name, @materia.docente %></p>
+	  </div>
+	  <div class="span4 offset1">
+	    <p>Etapa: <%= select_tag 'select_etapa',  "<option>Primera</option><option>Segunda</option><option>Tercera</option>".html_safe, {class: 'input-medium'} %><br/>
+	    Puntos Acumulados: <small id="total"><%= @puntaje_total %></small><br/>
+	    <a href="#" onclick="edicion_planificacion();">>>Editar estos campos<<</a></p>
+	  </div>
   </div>
+  <div id="campos_edicion" class="row" style=" display:none;">
+    <div class="span4">
+	  <%= f.label :materia %>
+      <%= f.text_field :materia, :maxlength => 30 %>
+      <%= f.label :area %>
+      <%= f.select( :area, ['Lenguas y sus Tecnolog.', 'Matemática y sus Tecnolog.', 'Ciencias Naturales', 'Ciencias Sociales', 'Artes y sus Tecnolog.', 'Plan Especifico', 'Plan Optativo'])%>
+              
+	</div>
+	<div class="span4">
+	  <%= f.label :curso_id %>
+      <%= f.collection_select :curso_id ,@cursos,:id,:curso %>
+      <%= f.label :docente_id %>
+      <%= f.select :docente_id,  @docentes.map {|d| [d.full_name  ,d.id] }  %>
+	  <a href="#" onclick="edicion_planificacion2();">>>Volver<<</a>
+	</div>
+  </div>
+  <hr/>
+  <div class="row">
+  	<label class="Cargar Calificaciones"></label>
+	    <div id="campos_calif">
+	  	  <%= render 'campos_calificaciones', calificaciones: @calificaciones, materia: @materia, puntaje_total: @puntaje_total, etapa: @etapa %>
+	    </div>    
+	  <div align="center">
+	    <%= f.submit "Guardar", class: "btn btn-large btn-inverse" %>
+	  </div>
+	</div>
+<% end %>
 </div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+	  $('#select_etapa').on('change', function(){
+	    var _etapa = $("#select_etapa").val();
+	    $.ajax({
+	    url: '<%= change_data_materia_path %>',
+	    data: { "select_etapa": _etapa },
+	    async: true,
+	    dataType: 'script'
+	    });
+	    return false;
+	  });
+	});
+
+</script>

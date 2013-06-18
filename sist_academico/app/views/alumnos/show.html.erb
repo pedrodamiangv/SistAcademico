@@ -91,6 +91,24 @@
         <% end %>
       <% end %>
     </ul>
+    <label class="label"> Mis notas </label>
+      <table id="my-table" class="table table-bordered">
+        <thead class="table-title">
+          <tr>
+            <th>Tarea</th>
+            <th>Total</th>
+            <th>Puntaje</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @alumno.puntajes.by_month(Date.today.month).each do |puntaje| %>
+            <tr>
+              <td><%= puntaje.planificacion.tarea %></td>
+              <td><%= puntaje.planificacion.total_puntos %></td>
+              <td><%= puntaje.puntaje %></td>
+            </tr>
+          <% end %>
+        </tbody>
   </div>
 </div>
 </div>

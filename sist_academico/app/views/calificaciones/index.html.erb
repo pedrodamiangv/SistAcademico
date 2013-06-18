@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    <h1 class="h1">Listando Calificaciones</h1>
+    <div class="row" align="right">
+      Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido search-query"/> 
+    </div>
+    <div class="row">
+      <table id="my-table" class="table table-bordered">
+        <thead class="table-title">
+          <tr>    
+            <th>Alumno</th>
+            <th>Materia</th>
+            <th>Calificacion</th>
+            <th>Total puntos</th>
+            <th>Puntos correctos</th>
+            <% if current_user.is_administrativo %>
+              <th></th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+
+          <% @calificaciones.each do |calificacion| %>
+            <tr>
+              <td><%= calificacion.alumno_id %></td>
+              <td><%= calificacion.materia_id %></td>
+              <td><%= calificacion.calificacion %></td>
+              <td><%= calificacion.total_puntos %></td>
+              <td><%= calificacion.puntos_correctos %></td>
+              <% if current_user.is_administrativo %>
+                <td><%= link_to 'Editar', edit_calificacion_path(calificacion) %><%= link_to 'Eliminar', calificacion, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </table>
+      <%= will_paginate @calificaciones %>
+    </div>
+  </div>
+</div>
+
+
+

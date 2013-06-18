@@ -23,7 +23,7 @@ class MaterialesController < ApplicationController
         @materia = @material.materia
         format.js { render 'material_guardado' }
       else
-        format.js { render 'material__no_guardado' }
+        format.js { render 'material_no_guardado' }
       end
     end
   end

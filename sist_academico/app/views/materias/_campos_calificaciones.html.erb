@@ -1,0 +1,22 @@
+<table id="my-table" class="table table-bordered">
+	<thead class="table-title">
+	  <tr>
+	    <th>Alumno</th>
+	    <th>Puntaje Alcanzado</th>
+	    <th>Calificacion</th>
+	   </tr>
+	</thead>
+	<tbody>
+  <% calificaciones.each do |p| %>
+	 <tr>
+		  <td><%= p.alumno.full_name %></td>
+			<%= text_field 'materia[calificaciones]', :alumno_id, value: p.alumno.id, style: 'display: none;' %>
+			<%= text_field 'materia[calificaciones]', :materia_id, value: materia.id, style: 'display: none;' %>
+			<%= text_field 'materia[calificaciones]', :etapa, value: etapa, style: 'display: none;', class: 'etapa_change' %>
+			<%= text_field 'materia[calificaciones]', :total_puntos, value: puntaje_total, style: 'display: none;' %>
+			<td><%= p.puntos_correctos %></td>
+			<td><%= text_field 'materia[calificaciones]', :calificacion, :maxlength => 10, class: 'input-small' %></td>
+		</tr>
+	<% end %>
+	</tbody>
+</table>

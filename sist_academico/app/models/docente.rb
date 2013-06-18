@@ -8,4 +8,7 @@ class Docente < ActiveRecord::Base
   validates :matricula, presence: true, length: {minimum: 5, maximum: 20}, uniqueness: true, :format => { :with => /\d/}
   validates :titulo, presence: true, length: {minimum: 5, maximum: 50}, :format => { :with => /\A[a-zA-Z\s]+\z/ }
   before_save { build_user unless user }
+  def full_name
+    user_nombre.capitalize + ' ' + user_apellido.capitalize
+  end
 end

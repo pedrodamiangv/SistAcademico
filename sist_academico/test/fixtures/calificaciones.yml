@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  alumno_id: 1
+  materia_id: 1
+  calificacion: 1
+  total_puntos: 1
+  puntos_correctos: 9.99
+
+two:
+  alumno_id: 1
+  materia_id: 1
+  calificacion: 1
+  total_puntos: 1
+  puntos_correctos: 9.99

@@ -3,6 +3,7 @@ class Alumno < ActiveRecord::Base
   belongs_to :user, :autosave => true
   belongs_to :curso
   has_many :puntajes
+  has_many :calificaciones
   accepts_nested_attributes_for :user
   delegate :created_at, :CINro, :nombre, :apellido, :sexo, :telefono, :fecha_nacimiento, :lugar_nacimiento, :edad, :username, :email, :password, :password_confirmation, :address_id, to: :user, prefix: true
   delegate :curso, :turno, :nivel, :enfasis, to: :curso, prefix: true
