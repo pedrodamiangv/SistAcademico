@@ -3,8 +3,8 @@
   	<div id="registro">
         <fieldset>
 		  <%= form_for(@city) do |f| %>
-		<div class="span3 offset4">
   			<%= render 'shared/error_messages', object: f.object %>
+    <div class="span3 offset4">
   			<%= f.label :ciudad %>
   			<%= f.text_field :city, :maxlength => 50 %><br/>
   			<%= f.label :pais %>

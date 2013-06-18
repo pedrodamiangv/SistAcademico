@@ -1,10 +1,9 @@
 <% provide(:title, "Mis Notas") %>
 <div class="row">
-	<div class="row" align="right">
-    Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido"/> 
+  <div class="row" align="right">
+    Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido search-query"/> 
   </div>
-	
-		<label class="label">Primera Etapa<small class="direccion"> <%= @alumno.full_name %></small></label>
+	<label class="label">Primera Etapa<small class="direccion"> <%= @alumno.full_name %></small></label>
     <% if @calificaciones_primera_etapa.count !=0 %>
     	<table id="my-table" class="table table-bordered">
 				<thead class="table-title">

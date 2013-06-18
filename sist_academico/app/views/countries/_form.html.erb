@@ -3,10 +3,10 @@
     <div id="registro">
         <fieldset>
 			<%= form_for(@country) do |f| %>
-			<div class="span3 offset4">
   				<%= render 'shared/error_messages', object: f.object %>
+      <div class="span3 offset4">
   				<%= f.label :pais %>
- 				<%= f.text_field :pais, :maxlength => 30 %>
+ 				  <%= f.text_field :pais, :maxlength => 30 %>
   				<%= f.submit "Guardar", class: "btn btn-large btn-inverse" %>
 				<% end %>
 			</div>

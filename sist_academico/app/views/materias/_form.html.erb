@@ -3,19 +3,19 @@
   <div id="registro">
         <fieldset>
             <%= form_for(@materia) do |f| %>
-            <div class="span3 offset4">
               <%= render 'shared/error_messages', object: f.object %>
-              <%= f.label :materia %>
-              <%= f.text_field :materia, :maxlength => 30 %>
-              <%= f.label :area %>
-              <%= f.select( :area, ['Lenguas y sus Tecnolog.', 'Matemática y sus Tecnolog.', 'Ciencias Naturales', 'Ciencias Sociales', 'Artes y sus Tecnolog.', 'Plan Especifico', 'Plan Optativo'])%>
-              <%= f.label :curso_id %>
-              <%= f.collection_select :curso_id ,@cursos,:id,:curso %>
-              <%= f.label :docente_id %>
-              <%= f.select :docente_id,  @docentes.map {|d| [d.user.nombre + ' ' + d.user.apellido  ,d.id] }  %>
-              <%= f.submit "Guardar", class: "btn btn-large btn-inverse" %>
-               
-            </div>
+              <div class="span3 offset4">
+                <%= f.label :materia %>
+                <%= f.text_field :materia, :maxlength => 30 %>
+                <%= f.label :area %>
+                <%= f.select( :area, ['Lenguas y sus Tecnolog.', 'Matemática y sus Tecnolog.', 'Ciencias Naturales', 'Ciencias Sociales', 'Artes y sus Tecnolog.', 'Plan Especifico', 'Plan Optativo'])%>
+                <%= f.label :curso_id %>
+                <%= f.collection_select :curso_id ,@cursos,:id,:curso %>
+                <%= f.label :docente_id %>
+                <%= f.select :docente_id,  @docentes.map {|d| [d.user.nombre + ' ' + d.user.apellido  ,d.id] }  %>
+                <%= f.submit "Guardar", class: "btn btn-large btn-inverse" %>
+                 
+              </div>
             <% end %>
         </fieldset>
   </div>

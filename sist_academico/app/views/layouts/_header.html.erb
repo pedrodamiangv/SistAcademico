@@ -34,7 +34,15 @@
                         <li><%= link_to "Administrativo", new_administrativo_path %></li>
                       </ul>
                     </li>
-                    <li><%= link_to "Listar", users_path %></li>
+                    <li class="dropdown-submenu">
+                      <a tabindex="-1" href="#">Listar</a>
+                      <ul class="dropdown-menu">
+                        <li><%= link_to "Alumnos", alumnos_path %></li>
+                        <li><%= link_to "Docentes", docentes_path %></li>
+                        <li><%= link_to "Administrativos", administrativos_path %></li>
+                        <li><%= link_to "Todos", users_path %></li>
+                      </ul>
+                    </li>
                     <li class="divider"></li>
                     <li class="dropdown-submenu">
                       <a tabindex="-1" href="#">Direccion</a>
@@ -52,14 +60,16 @@
                 <ul class="dropdown-menu">
                   <% if current_user.is_alumno %>
                     <li><%= link_to "Perfil", current_user.alumno %></li>
+                    <li><%= link_to "Settings", edit_alumno_path(current_user.alumno) %></li>
                   <% end %>
                   <% if current_user.is_administrativo %>
                     <li><%= link_to "Perfil", current_user.administrativo %></li>
+                    <li><%= link_to "Settings", edit_administrativo_path(current_user.administrativo) %></li>
                   <% end %>
                   <% if current_user.is_docente %>
                     <li><%= link_to "Perfil", current_user.docente %></li>
+                    <li><%= link_to "Settings", edit_docente_path(current_user.docente) %></li>
                   <% end %>
-                  <li><%= link_to "Settings", edit_user_path(current_user) %></li>
                   <li class="divider"></li>
                   <li>
                     <%= link_to "Cerrar Sesion", logout_path %>

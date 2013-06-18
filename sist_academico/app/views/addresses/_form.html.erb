@@ -1,22 +1,23 @@
 <div class="container">
-  	<div class="row">
+  <div class="row">
   	<div id="registro">
-        <fieldset>
+      <fieldset>
 		  <%= form_for(address) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
 		  	<div class="span3 offset4">
- 			 <p id="notice"><%= notice %></p>
-   			 <p class="error"><%= flash[:error] %></p>
-  			 <%= f.label :direccion, "Dirección" %>
-  			 <%= f.text_field :direccion, :maxlength => 50 %>
-  			 <%= f.label :barrio %>
- 			 <%= f.text_field :barrio, :maxlength => 30 %>
-  			 <%= f.label :ciudad %>
-  			 <%= f.collection_select :city_id ,@cities,:id,:city %>
-             <%= f.submit "Guardar", class: "btn btn-large btn-inverse" %>
-			 <% end %>
-			</div>
-		</fieldset>
-	</div>
+   			   <p id="notice"><%= notice %></p>
+     			 <p class="error"><%= flash[:error] %></p>
+    			 <%= f.label :direccion, "Dirección" %>
+    			 <%= f.text_field :direccion, :maxlength => 50 %>
+    			 <%= f.label :barrio %>
+   			   <%= f.text_field :barrio, :maxlength => 30 %>
+    			 <%= f.label :ciudad %>
+    			 <%= f.collection_select :city_id ,@cities,:id,:city %>
+           <%= f.submit "Guardar", class: "btn btn-large btn-inverse" %>
+        </div>
+			<% end %>
+		  </fieldset>
+	  </div>
 	</div>
 </div>
 

@@ -29,7 +29,7 @@
             <li class='li'><a data-toggle="modal" href="#example">Subir Material de estudio</a></li>
             <li class='li'><%= link_to "Cargar Calificaciones", edit_materia_path(@materia) %></li>
             <li class='li'><%= link_to "Ver Calificaciones", materias_calificaciones_materia_path %></li>
-            <li class='li'><a href="#" onclick="muestra_oculta('contenido_a_mostrar');">Nueva Tarea</a></li>
+            <li class='li'><a href="#tarea" onclick="muestra_oculta('contenido_a_mostrar');">Nueva Tarea</a></li>
           </ul>
         <% end %>
       </section>
@@ -52,6 +52,7 @@
           <%= f.text_area :descripcion, rows: 3, :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;' %>
           <%= f.submit "Guardar", class: "btn btn-large btn-inverse", :name => 'test_button' %>
         <% end %>
+        <a name="tarea"> </a>
       </div>
     <% end %> 
   </div>
