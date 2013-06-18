@@ -1,6 +1,6 @@
 class CalificacionesController < ApplicationController
-  before_filter :correct_user || :admin_user,   only: [:edit, :update, :show] 
-  before_filter :admin_user,   only: [:new, :create, :destroy]
+  before_filter :require_login
+  before_filter :admin_user
   # GET /calificaciones
   # GET /calificaciones.json
   def index

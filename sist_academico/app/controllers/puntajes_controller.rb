@@ -1,6 +1,6 @@
 class PuntajesController < ApplicationController
   before_filter :require_login
-  before_filter :admin_user, only: [:destroy, :edit, :update, :new, :create]
+  before_filter :admin_user
   # GET /puntajes
   # GET /puntajes.json
   def index

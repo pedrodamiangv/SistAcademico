@@ -14,7 +14,12 @@
       </section>
       <section>
         <p><b>
-          <%= link_to @materia.docente.full_name, @materia.docente %></b><br/>
+          <% if current_user.is_administrativo || current_user.is_docente %>
+            <%= link_to @materia.docente.full_name, @materia.docente %>
+          <% else %>
+            <%= @materia.docente.full_name %>
+          <% end %>
+        </b><br/>
         </p>
         <br/>
         <% if current_user.is_administrativo || current_user.is_docente %>
@@ -47,8 +52,8 @@
           <%= f.text_area :descripcion, rows: 3, :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;' %>
           <%= f.submit "Guardar", class: "btn btn-large btn-inverse", :name => 'test_button' %>
         <% end %>
-      <% end %>
-    </div> 
+      </div>
+    <% end %> 
   </div>
   <div class="span6">
     <label class="label">Lista de Tareas de <%= @materia.materia %> del <%= @materia.curso_curso %> </label>

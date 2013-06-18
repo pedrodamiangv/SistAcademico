@@ -58,19 +58,19 @@ class MateriasController < ApplicationController
   end
 
   def edit_auxiliar materia, etapa
-    if materia.calificaciones.count == 0
-      calificaciones = []
+    @puntaje_total = materia.planificaciones.where(:etapa => etapa).sum(:total_puntos)
+    if materia.calificaciones.where(:etapa => etapa).count == 0
+      @calificaciones = []
       materia.curso.alumnos.each do |alumno|
         calificacion = materia.calificaciones.build
         puntos_acumulados =  obtener_puntaje alumno, materia, etapa
         calificacion.puntos_correctos = puntos_acumulados
         calificacion.alumno = alumno
-        calificaciones << calificacion
+        @calificaciones << calificacion
       end
     else
-      calificaciones = materia.calificaciones
+      @calificaciones = materia.calificaciones
     end
-    calificaciones
   end
 
   def change_data
@@ -78,8 +78,8 @@ class MateriasController < ApplicationController
     @materia = Materia.find(params[:id])
     @docentes = Docente.find(:all)
     @cursos = Curso.find(:all)
-    @puntaje_total = @materia.planificaciones.where(:etapa => etapa).sum(:total_puntos)
-    @calificaciones = edit_auxiliar @materia, @etapa
+    
+    edit_auxiliar @materia, @etapa
     respond_to do |format|
       format.js
     end
@@ -91,8 +91,8 @@ class MateriasController < ApplicationController
     @docentes = Docente.find(:all)
     @cursos = Curso.find(:all)
     @etapa = 'Primera'
-    @puntaje_total = @materia.planificaciones.where(:etapa => etapa).sum(:total_puntos)
-    @calificaciones = edit_auxiliar @materia, @etapa
+    
+    edit_auxiliar @materia, @etapa
     respond_to do |format|
       format.html
       format.js
@@ -129,8 +129,8 @@ class MateriasController < ApplicationController
       else
         @docentes = Docente.find(:all)
         @cursos = Curso.find(:all)
-        @puntaje_total = @materia.planificaciones.where(:etapa => etapa).sum(:total_puntos)
-        @calificaciones = edit_auxiliar @materia, @etapa
+        
+        edit_auxiliar @materia, @etapa
         format.html { render action: "edit" }
         format.json { render json: @materia.errors, status: :unprocessable_entity }
       end
