@@ -1,3 +1,5 @@
+require 'custom_logger'
+
 class CitiesController < ApplicationController
   before_filter :require_login
   before_filter :admin_user, only: [:destroy, :edit, :update, :new, :create]
@@ -48,10 +50,12 @@ class CitiesController < ApplicationController
     respond_to do |format|
       if @city.save
         format.html { redirect_to @city, notice: 'City was successfully created.' }
+        CustomLogger.info("Nueva ciudad: #{@city.city.inspect} creada por #{current_user.full_name.inspect}, #{Time.now}")
         format.json { render json: @city, status: :created, location: @city }
       else
         @countries = Country.find(:all)
         format.html { render action: "new" }
+        CustomLogger.error("Error al crear una ciudad. Usuario: #{current_user.inspect}, #{Time.now}")
         format.json { render json: @city.errors, status: :unprocessable_entity }
       end
     end
@@ -78,6 +82,7 @@ class CitiesController < ApplicationController
   def destroy
     @city = City.find(params[:id])
     @city.destroy
+    CustomLogger.info("Ciudad #{@city.city.inspect} eliminada por #{current_user.inspect}, #{Time.now}")
 
     respond_to do |format|
       format.html { redirect_to cities_url }
