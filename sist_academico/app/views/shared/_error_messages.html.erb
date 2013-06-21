@@ -4,5 +4,7 @@
     <!--El formulario contiene <%#= pluralize(object.errors.count, "error")%>. -->
     No están correctos los datos del formulario
   </div>
-  
+  <% object.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
 <% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130617213522) do
+ActiveRecord::Schema.define(:version => 20130621203858) do
 
   create_table "addresses", :force => true do |t|
     t.string   "direccion"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(:version => 20130617213522) do
     t.string   "tipo"
   end
 
+  add_index "addresses", ["city_id"], :name => "addresses_city_id_fk"
+
   create_table "administrativos", :force => true do |t|
     t.integer  "user_id"
     t.string   "cargo",      :limit => 30
@@ -30,6 +32,8 @@ ActiveRecord::Schema.define(:version => 20130617213522) do
     t.string   "titulo",     :limit => 30
   end
 
+  add_index "administrativos", ["user_id"], :name => "administrativos_user_id_fk"
+
   create_table "alumnos", :force => true do |t|
     t.integer  "user_id"
     t.integer  "curso_id"
@@ -37,11 +41,14 @@ ActiveRecord::Schema.define(:version => 20130617213522) do
     t.boolean  "doc_cert_estudios"
     t.boolean  "doc_foto"
     t.boolean  "doc_cert_nacimiento"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
-    t.string   "responsable"
-    t.string   "telefono_responsable"
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.string   "responsable",          :limit => 30, :null => false
+    t.string   "telefono_responsable", :limit => 15, :null => false
   end
+
+  add_index "alumnos", ["curso_id"], :name => "alumnos_curso_id_fk"
+  add_index "alumnos", ["user_id"], :name => "alumnos_user_id_fk"
 
   create_table "calificaciones", :force => true do |t|
     t.integer  "alumno_id",                                      :null => false
@@ -54,12 +61,17 @@ ActiveRecord::Schema.define(:version => 20130617213522) do
     t.string   "etapa",                                          :null => false
   end
 
+  add_index "calificaciones", ["alumno_id"], :name => "calificaciones_alumno_id_fk"
+  add_index "calificaciones", ["materia_id"], :name => "calificaciones_materia_id_fk"
+
   create_table "cities", :force => true do |t|
     t.string   "city"
     t.integer  "country_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "cities", ["country_id"], :name => "cities_country_id_fk"
 
   create_table "countries", :force => true do |t|
     t.string   "pais"
@@ -84,12 +96,16 @@ ActiveRecord::Schema.define(:version => 20130617213522) do
     t.datetime "updated_at",               :null => false
   end
 
+  add_index "docentes", ["user_id"], :name => "docentes_user_id_fk"
+
   create_table "materiales", :force => true do |t|
     t.string   "file",       :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "materia_id", :null => false
   end
+
+  add_index "materiales", ["materia_id"], :name => "materiales_materia_id_fk"
 
   create_table "materias", :force => true do |t|
     t.string   "materia",    :limit => 30, :null => false
@@ -99,6 +115,9 @@ ActiveRecord::Schema.define(:version => 20130617213522) do
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
   end
+
+  add_index "materias", ["curso_id"], :name => "materias_curso_id_fk"
+  add_index "materias", ["docente_id"], :name => "materias_docente_id_fk"
 
   create_table "planificaciones", :force => true do |t|
     t.integer  "materia_id",                   :null => false
@@ -111,6 +130,8 @@ ActiveRecord::Schema.define(:version => 20130617213522) do
     t.datetime "updated_at",                   :null => false
   end
 
+  add_index "planificaciones", ["materia_id"], :name => "planificaciones_materia_id_fk"
+
   create_table "puntajes", :force => true do |t|
     t.integer  "planificacion_id",                                              :null => false
     t.integer  "alumno_id",                                                     :null => false
@@ -120,6 +141,9 @@ ActiveRecord::Schema.define(:version => 20130617213522) do
     t.datetime "updated_at",                                                    :null => false
   end
 
+  add_index "puntajes", ["alumno_id"], :name => "puntajes_alumno_id_fk"
+  add_index "puntajes", ["planificacion_id"], :name => "puntajes_planificacion_id_fk"
+
   create_table "users", :force => true do |t|
     t.string   "nombre"
     t.string   "apellido"
@@ -127,7 +151,6 @@ ActiveRecord::Schema.define(:version => 20130617213522) do
     t.string   "telefono"
     t.string   "fecha_nacimiento"
     t.string   "lugar_nacimiento"
-    t.string   "direccion"
     t.integer  "edad"
     t.string   "username",                     :null => false
     t.string   "email"
@@ -144,6 +167,33 @@ ActiveRecord::Schema.define(:version => 20130617213522) do
     t.boolean  "is_administrativo"
   end
 
+  add_index "users", ["address_id"], :name => "users_address_id_fk"
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"
+
+  add_foreign_key "addresses", "cities", :name => "addresses_city_id_fk"
+
+  add_foreign_key "administrativos", "users", :name => "administrativos_user_id_fk"
+
+  add_foreign_key "alumnos", "cursos", :name => "alumnos_curso_id_fk"
+  add_foreign_key "alumnos", "users", :name => "alumnos_user_id_fk"
+
+  add_foreign_key "calificaciones", "alumnos", :name => "calificaciones_alumno_id_fk"
+  add_foreign_key "calificaciones", "materias", :name => "calificaciones_materia_id_fk"
+
+  add_foreign_key "cities", "countries", :name => "cities_country_id_fk"
+
+  add_foreign_key "docentes", "users", :name => "docentes_user_id_fk"
+
+  add_foreign_key "materiales", "materias", :name => "materiales_materia_id_fk"
+
+  add_foreign_key "materias", "cursos", :name => "materias_curso_id_fk"
+  add_foreign_key "materias", "docentes", :name => "materias_docente_id_fk"
+
+  add_foreign_key "planificaciones", "materias", :name => "planificaciones_materia_id_fk"
+
+  add_foreign_key "puntajes", "alumnos", :name => "puntajes_alumno_id_fk"
+  add_foreign_key "puntajes", "planificaciones", :name => "puntajes_planificacion_id_fk"
+
+  add_foreign_key "users", "addresses", :name => "users_address_id_fk"
 
 end
