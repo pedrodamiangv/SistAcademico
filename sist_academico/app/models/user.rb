@@ -26,6 +26,11 @@ class User < ActiveRecord::Base
   validates :address_id, presence: true, length: { maximum: 50 }
   validates_format_of :fecha_nacimiento, :with => /\A\d{2}(\/|-)\d{2}(\/|-)\d{4}\Z/i, :message => "*tiene formato incorrecto"
   
+  def full_name
+   self.nombre.capitalize + ' ' + self.apellido.capitalize
+  end
+end
+
   def guardar_address direccion
     if direccion.save
       return true
@@ -33,4 +38,5 @@ class User < ActiveRecord::Base
     return false
   end
 
-end
+
+

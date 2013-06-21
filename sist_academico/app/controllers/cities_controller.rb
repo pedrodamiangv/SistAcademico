@@ -1,3 +1,5 @@
+require 'custom_logger'
+
 class CitiesController < ApplicationController
   before_filter :require_login
   before_filter :admin_user, only: [:destroy, :edit, :update, :new, :create]
@@ -47,11 +49,13 @@ class CitiesController < ApplicationController
 
     respond_to do |format|
       if @city.save
-        format.html { redirect_to @city, notice: 'City was successfully created.' }
+        format.html { redirect_to @city, notice: 'Ciudad creada con exito.' }
+        CustomLogger.info("Nueva ciudad: #{@city.city.inspect} del pais #{@city.country_pais.inspect} creada por #{current_user.full_name.inspect}, #{Time.now}")
         format.json { render json: @city, status: :created, location: @city }
       else
         @countries = Country.find(:all)
         format.html { render action: "new" }
+        CustomLogger.error("Error al crear una ciudad: #{@city.city.inspect} del pais #{@city.country_pais.inspect} .Usuario: #{current_user.full_name.inspect}, #{Time.now}")
         format.json { render json: @city.errors, status: :unprocessable_entity }
       end
     end
@@ -61,9 +65,14 @@ class CitiesController < ApplicationController
   # PUT /cities/1.json
   def update
     @city = City.find(params[:id])
+    ciudad_antigua = @city.city
+    pais_antiguo =  @city.country_pais
     respond_to do |format|
       if @city.update_attributes(params[:city])
-        format.html { redirect_to @city, notice: 'City was successfully updated.' }
+        ciudad_nueva = @city.city
+        pais_nuevo =  @city.country_pais
+        CustomLogger.info("Los datos antes de actualizar son: Ciudad #{ciudad_antigua.inspect} del pais #{pais_antiguo.inspect} .Los datos actualizados por el usuario: #{current_user.full_name.inspect} son: Ciudad #{ciudad_nueva.inspect} del pais #{pais_nuevo.inspect}, #{Time.now}")
+        format.html { redirect_to @city, notice: 'La ciudad fue actualizada con exito' }
         format.json { head :no_content }
       else
         @countries = Country.find(:all)
@@ -77,11 +86,18 @@ class CitiesController < ApplicationController
   # DELETE /cities/1.json
   def destroy
     @city = City.find(params[:id])
-    @city.destroy
-
     respond_to do |format|
-      format.html { redirect_to cities_url }
-      format.json { head :no_content }
+      begin
+        @city.destroy
+        notice= "La ciudad ha sido eliminada"
+        CustomLogger.info("Ciudad #{@city.city.inspect} del pais #{@city.country_pais.inspect} eliminada por #{current_user.full_name.inspect}, #{Time.now}")
+      rescue
+        notice= "Esta ciudad no puede ser eliminada"
+        CustomLogger.error("Error al eliminar la ciudad: #{@city.city.inspect} del pais #{@city.country_pais.inspect} .Usuario: #{current_user.full_name.inspect}, #{Time.now}")
+      ensure
+        format.html { redirect_to cities_url, notice: notice }
+        format.json { head :no_content }
+      end
     end
   end
 end

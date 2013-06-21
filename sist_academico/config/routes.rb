@@ -1,4 +1,12 @@
 SistAcademico::Application.routes.draw do
+
+
+  resources :auditorias do
+    member do
+      post :index
+    end
+  end
+
   resources :calificaciones
 
 
@@ -20,6 +28,7 @@ SistAcademico::Application.routes.draw do
       get :materias_calificaciones
     end
   end
+ 
   resources :administrativos
   resources :docentes
 
