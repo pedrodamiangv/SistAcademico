@@ -1,6 +1,15 @@
 SistAcademico::Application.routes.draw do
 
 
+  resources :reports do
+    collection do
+      get :consult_between
+    end
+    collection do
+      get :change_data
+    end
+  end
+
   resources :auditorias do
     member do
       post :index

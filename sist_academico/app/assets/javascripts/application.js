@@ -16,6 +16,8 @@
 //= require calendar
 //= require bootstrap-dropdown
 //= require jquery-ui.min
+//= require jsapi
+//= require bootstrap-button
 //= require_tree .
 
 $(document).ready(function() {
@@ -72,3 +74,61 @@ function validar(obj) {
   }
 }
 
+function change_data_by_select(path){
+  $('#select_type').on('change', function(){
+    var _type = $("#select_type").val();
+    var range = $("#6").val();
+    $.ajax({
+      url: path,
+      data: { "select_type": _type, "select_range": range },
+      async: true,
+      dataType: 'script'
+     });
+     return false;
+  });
+}
+
+function change_data_by_note(path){
+  $('.btn').on('click', function(){
+    $("#6").val($(this).val());
+    $(this).button('toggle');
+    var _type = $("#select_type").val();
+    var range = $("#6").val();
+    $.ajax({
+      url: path,
+      data: { "select_type": _type, "select_range": range },
+      async: true,
+      dataType: 'script'
+     });
+     return false;
+  });
+}
+
+function change_data_by_filters(){
+  $('#consult_between_link').on("click", function() {
+    var _from = $("#from").val();
+    var _to = $("#to").val();
+     var _type = $("#select_type").val();
+    var range = $("input[name='radio']:checked").attr('id');
+    $.ajax({
+    url: $(this).attr('ajax_path'),
+    data: { "from": _from, "to": _to, "select_type": _type, "select_range": range },
+    async: true,
+    dataType: 'script'
+    });
+    return false;
+  });
+}
+
+function rangeDate() {
+    $("#from").datepicker({
+      changeMonth: true,
+      changeYear: true,
+      onSelect: function(dateText, inst) {}
+    });
+    $("#to").datepicker({
+      changeMonth: true,
+      changeYear: true,
+      onSelect: function(dateText, inst) {}
+    });
+  }

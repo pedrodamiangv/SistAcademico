@@ -83,6 +83,12 @@ input.input2 {
     text-transform:uppercase;
 }
 
+.small{
+    font-family: 'Chela One', cursive;
+    /*font-family: 'Jockey One', sans-serif;*/
+    font-size: 20px;
+}
+
 /* 
     Blue Dream
     Written by Teylor Feliz  http://www.admixweb.com
