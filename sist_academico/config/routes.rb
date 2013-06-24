@@ -8,6 +8,9 @@ SistAcademico::Application.routes.draw do
     collection do
       get :change_data
     end
+    collection do
+      get :alumnos
+    end
   end
 
   resources :auditorias do

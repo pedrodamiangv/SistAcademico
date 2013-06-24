@@ -1,0 +1,28 @@
+<div id="reports">
+  <div class="container">
+  	<div class="row">
+	  <div class="page-header">
+		<h1><small class="h1">Reporte de Alumnos</small>
+			<small class="direccion">Ver: <%= select_tag 'select_type', options_from_collection_for_select(@cursos, "curso", "curso"), {class: 'input-medium'} %>
+				<div id="filters" class="row">
+				  <%= render 'filters' if @table and @chart %>
+				</div>
+			</small>
+		</h1>
+	   </div>
+	</div>
+	<div id="graphic" class="row">
+		<%= render 'graphic' if @table and @chart %>
+	</div>
+  </div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		var path = '<%= change_data_reports_path %>';
+		rangeDate();
+		change_data_by_select(path);
+		change_data_by_note(path);
+		change_data_by_filters();
+	});
+</script>
