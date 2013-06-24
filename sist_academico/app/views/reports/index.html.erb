@@ -3,7 +3,7 @@
   	<div class="row">
 	  <div class="page-header">
 		<h1><small class="h1">Reporte de Calificaciones</small>
-			<small class="direccion">Curso: <%= select_tag 'select_type', options_from_collection_for_select(@cursos, "curso", "curso"), {class: 'input-medium'} %>
+			<small class="direccion">Ver: <%= select_tag 'select_type', options_from_collection_for_select(@cursos, "curso", "curso"), {class: 'input-medium'} %>
 				<div id="filters" class="row">
 				  <%= render 'notes' if @table and @chart %>
 				</div>

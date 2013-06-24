@@ -3,6 +3,8 @@ class ReportsController < ApplicationController
   before_filter :require_login
   def index
   	@cursos = Curso.by_year(Date.today.year)
+    @cursos << Curso.new(curso: "Colegio")
+    @cant_alumnos = @cursos.first.alumnos.count
     data_table = generate_data_table "5", "Primer Curso"
     @chart = generate_graphic data_table, "Primer Curso", "Materia"
     @table = generate_table data_table
@@ -24,6 +26,12 @@ class ReportsController < ApplicationController
   def change_data
     @type = params[:select_type]
     @range = params[:select_range]
+    unless @type == "Colegio"
+      @cursos = Curso.by_year(Date.today.year)
+      @cant_alumnos = @cursos.detect{|w| w.curso == @type }.alumnos.count
+    else
+      @cant_alumnos = Alumno.by_year(Date.today.year).count
+    end
     data_table = generate_data_table @range, @type
     @chart = generate_graphic data_table, @type , "Materia"
     @table = generate_table data_table
@@ -56,14 +64,25 @@ class ReportsController < ApplicationController
       calificaciones = Calificacion.where("calificacion = ?", range).order("created_at ASC").all
       calificaciones.each do |calificacion|
         materia = calificacion.materia
-        if calificacion.created_at.between?(lower_limit,upper_limit) && materia.curso.curso == type
-          key = materia.materia
-          if hash.has_key?(key)
-            hash[key]= hash[key]+1
-          else
-            hash[key]= 1
+        unless type == "Colegio"
+          if calificacion.created_at.between?(lower_limit,upper_limit) && materia.curso.curso == type
+            key = materia.materia
+            if hash.has_key?(key)
+              hash[key]= hash[key]+1
+            else
+              hash[key]= 1
+            end 
           end 
-        end 
+        else
+          if calificacion.created_at.between?(lower_limit,upper_limit)
+            key = materia.materia
+            if hash.has_key?(key)
+              hash[key]= hash[key]+1
+            else
+              hash[key]= 1
+            end 
+          end
+        end
       end
       hash
     end

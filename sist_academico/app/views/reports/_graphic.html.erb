@@ -1,5 +1,6 @@
 <div id="graphics_and_tables" class="row">
-	<div id="chart" class="span8">
+	<label class="label label-info">Cantidad de alumnos = <%= @cant_alumnos %></label>
+	<div id="chart" class="span7">
 	  	<%= render_chart(@chart, 'chart') if @chart.data_table %>
 	</div>
 	<div id="table" class="span4">
