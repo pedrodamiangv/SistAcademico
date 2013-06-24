@@ -1,3 +1,4 @@
+require 'custom_logger'
 class CursosController < ApplicationController
   before_filter :require_login
   before_filter :admin_user, only: [:destroy, :edit, :update, :new, :create]
@@ -59,10 +60,12 @@ class CursosController < ApplicationController
 
     respond_to do |format|
       if @curso.save
-        format.html { redirect_to @curso, notice: 'Curso was successfully created.' }
+        format.html { redirect_to @curso, notice: 'El curso fue creado con exito.' }
+        CustomLogger.info("Nuevo curso: #{@curso.curso.inspect} ,Nivel: #{@curso.nivel.inspect} ,Enfasis: #{@curso.enfasis.inspect} ,Turno:#{@curso.turno.inspect} creado por el usuario: #{current_user.full_name.inspect}, #{Time.now}")
         format.json { render json: @curso, status: :created, location: @curso }
       else
         format.html { render action: "new" }
+        CustomLogger.error("Error al crear un nuevo curso: #{@curso.curso.inspect} ,Nivel: #{@curso.nivel.inspect} ,Enfasis: #{@curso.enfasis.inspect} ,Turno:#{@curso.turno.inspect} por el usuario: #{current_user.full_name.inspect}, #{Time.now} ")
         format.json { render json: @curso.errors, status: :unprocessable_entity }
       end
     end
@@ -72,10 +75,18 @@ class CursosController < ApplicationController
   # PUT /cursos/1.json
   def update
     @curso = Curso.find(params[:id])
-
+    curso_antiguo = @curso.curso
+    nivel_antiguo = @curso.nivel
+    enfasis_antiguo = @curso.enfasis
+    turno_antiguo = @curso.turno
     respond_to do |format|
       if @curso.update_attributes(params[:curso])
-        format.html { redirect_to @curso, notice: 'Curso was successfully updated.' }
+        curso_nuevo = @curso.curso
+        nivel_nuevo = @curso.nivel
+        enfasis_nuevo = @curso.enfasis
+        turno_nuevo = @curso.turno
+        CustomLogger.info("Los datos antes de actualizar son: #{curso_antiguo.inspect}, Nivel: #{nivel_antiguo.inspect} ,Enfasis: #{enfasis_antiguo.inspect} ,Turno: #{turno_antiguo.inspect} .Los datos actualizados por el usuario: #{current_user.full_name.inspect} son: Curso: #{curso_nuevo.inspect} ,Nivel: #{nivel_nuevo.inspect} ,Enfasis:#{enfasis_nuevo.inspect} ,Turno:#{turno_nuevo.inspect}, #{Time.now}")
+        format.html { redirect_to @curso, notice: 'El curso fue actualizado con exito' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -88,11 +99,18 @@ class CursosController < ApplicationController
   # DELETE /cursos/1.json
   def destroy
     @curso = Curso.find(params[:id])
-    @curso.destroy
-
     respond_to do |format|
-      format.html { redirect_to cursos_url }
-      format.json { head :no_content }
+      begin
+        @curso.destroy
+        notice = "El curso y sus demas campos fueron eliminado correctamente."
+        CustomLogger.info("Curso: #{@curso.curso.inspect} ,Nivel: #{@curso.nivel.inspect} ,Enfasis: #{@curso.enfasis.inspect} ,Turno:#{@curso.turno.inspect} eliminados por el usuario: #{current_user.full_name.inspect}, #{Time.now}")
+      rescue
+        notice = "Este curso no puede ser eliminado"
+        CustomLogger.error("Curso: #{@curso.curso.inspect} y sus demas campos no pueden ser eliminados por el usuario: #{current_user.full_name.inspect}, #{Time.now} ")
+      ensure
+        format.html { redirect_to cursos_url }
+        format.json { head :no_content }
+      end
     end
   end
 end
