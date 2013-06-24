@@ -26,11 +26,15 @@ class ReportsController < ApplicationController
   def change_data
     @type = params[:select_type]
     @range = params[:select_range]
+    @cursos = Curso.by_year(Date.today.year)
     unless @type == "Colegio"
-      @cursos = Curso.by_year(Date.today.year)
       @cant_alumnos = @cursos.detect{|w| w.curso == @type }.alumnos.count
     else
-      @cant_alumnos = Alumno.by_year(Date.today.year).count
+      i = 0
+      @cursos.each do |curso|
+        i += curso.alumnos.count
+      end
+      @cant_alumnos = i
     end
     data_table = generate_data_table @range, @type
     @chart = generate_graphic data_table, @type , "Materia"
