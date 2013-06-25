@@ -1,3 +1,5 @@
+require 'custom_logger'
+
 class CountriesController < ApplicationController
   before_filter :require_login
   before_filter :admin_user, only: [:destroy, :edit, :update, :new, :create]
@@ -46,10 +48,12 @@ class CountriesController < ApplicationController
 
     respond_to do |format|
       if @country.save
-        format.html { redirect_to @country, notice: 'EL Pais ha sido creado. ' }
+        format.html { redirect_to @country, notice: 'EL Pais ha sido creado con exito. ' }
+        CustomLogger.info("Nuevo pais: #{@country.pais.inspect} creado por el usuario: #{current_user.full_name.inspect}, #{Time.now}" )
         format.json { render json: @country, status: :created, location: @country }
       else
         format.html { render action: "new" }
+        CustomLogger.error("Error al crear el pais #{@country.pais.inspect} por el usuario: #{current_user.full_name.inspect}, #{Time.now}")
         format.json { render json: @country.errors, status: :unprocessable_entity }
       end
     end
@@ -59,9 +63,11 @@ class CountriesController < ApplicationController
   # PUT /countries/1.json
   def update
     @country = Country.find(params[:id])
-
+    pais_antiguo = @country.pais
     respond_to do |format|
       if @country.update_attributes(params[:country])
+        pais_nuevo = @country.pais
+        CustomLogger.info("Los datos antes de actualizar son #{pais_antiguo.inspect} .Los datos actualizados por el usuario: #{current_user.full_name.inspect} son: #{pais_nuevo.inspect}, #{Time.now}")
         format.html { redirect_to @country, notice: 'El pais ha sido actualizado. ' }
         format.json { head :no_content }
       else
@@ -75,15 +81,18 @@ class CountriesController < ApplicationController
   # DELETE /countries/1.json
   def destroy
     @country = Country.find(params[:id])
-
     respond_to do |format|
-    if @country.destroy
-      format.html { redirect_to countries_url }
+      begin
+        @country.destroy
+        notice = "El pais ha sido eliminado"
+        CustomLogger.info("Pais: #{@country.pais.inspect} ha sido eliminado por el usuario: #{current_user.full_name.inspect}, #{Time.now}")
+      rescue
+        notice = "Este pais no puede ser eliminado"
+        CustomLogger.error("Error al querer eliminar el pais #{@country.pais.inspect} por el usuario: #{current_user.full_name.inspect}, #{Time.now}")
+      ensure
+      format.html { redirect_to countries_url, notice: notice }
       format.json { head :no_content }
-    else
-      format.html { redirect_to country }
-      format.json { head :no_content }
+      end
     end
-  end
   end
 end

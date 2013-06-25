@@ -1,3 +1,4 @@
+require 'custom_logger'
 class MateriasController < ApplicationController
   before_filter :require_login
   before_filter :correct_user_for_show || :admin_user,   only: [:show] 
@@ -107,12 +108,14 @@ class MateriasController < ApplicationController
     
     respond_to do |format|
       if @materia.save
-        format.html { redirect_to @materia, notice: 'La materia ha sido registrada.' }
+        format.html { redirect_to @materia, notice: 'La materia ha sido creada con exito.' }
+        CustomLogger.info("Nueva materia: #{@materia.materia.inspect} ,Area: #{@materia.area.inspect} ,Curso: #{@materia.curso_curso.inspect} ,Docente: #{@materia.docente.full_name.inspect} creado por el usuario: #{current_user.full_name.inspect}, #{Time.now}")
         format.json { render json: @materia, status: :created, location: @materia }
       else
         @docentes = Docente.find(:all)
         @cursos = Curso.find(:all)
         format.html { render action: "new" }
+        CustomLogger.error("Error al crear materia: #{@materia.materia.inspect} ,Area: #{@materia.area.inspect} ,Curso: #{@materia.curso_curso.inspect} ,Docente: #{@materia.docente.full_name.inspect} por el usuario: #{current_user.full_name.inspect}, #{Time.now}")
         format.json { render json: @materia.errors, status: :unprocessable_entity }
       end
     end
@@ -122,10 +125,19 @@ class MateriasController < ApplicationController
   # PUT /materia/1.json
   def update
     @materia = Materia.find(params[:id])
+    materia_antigua = @materia.materia
+    area_antiguo = @materia.area
+    curso_antiguo = @materia.curso_curso
+    docente_antiguo = @materia.docente.full_name
     @etapa = params[:select_etapa]
     respond_to do |format|
       if @materia.update_attributes(params[:materia])
-        format.html { redirect_to @materia, notice: 'La materia ha sido actualizada.' }
+        materia_nueva = @materia.materia
+        area_nueva = @materia.area
+        curso_nuevo = @materia.curso_curso
+        docente_nuevo = @materia.docente.full_name
+        CustomLogger.info("Los datos antes de actualizar son: Materia: #{materia_antigua.inspect} ,Area:#{area_antiguo.inspect} ,Curso:#{curso_antiguo.inspect} ,Docente:#{docente_antiguo.inspect} .Los datos actualizados por el usuario: #{current_user.full_name.inspect} son: #{materia_nueva.inspect} ,Area:#{area_nueva.inspect} ,Curso:#{curso_nuevo.inspect} ,Docente:#{docente_nuevo.inspect}, #{Time.now}")
+        format.html { redirect_to @materia, notice: 'La materia ha sido actualizada correctamente.' }
         format.json { head :no_content }
       else
         @docentes = Docente.find(:all)
@@ -142,11 +154,18 @@ class MateriasController < ApplicationController
   # DELETE /materia/1.json
   def destroy
     @materia = Materia.find(params[:id])
-    @materia.destroy
-
     respond_to do |format|
-      format.html { redirect_to materia_url }
-      format.json { head :no_content }
+      begin
+        @materia.destroy
+        notice = "La materia ha sido eliminado correctamente"
+        CustomLogger.info("Materia: #{@materia.materia.inspect} ,Area: #{@materia.area.inspect} ,Curso: #{@materia.curso_curso.inspect} ,Docente: #{@materia.docente.full_name.inspect} han sido eliminados por el usuario: #{current_user.full_name.inspect}, #{Time.now}")
+      rescue
+        notice = "Esta materia y sus demas campos no pueden ser eliminados"
+        CustomLogger.error("Error al eliminar la materia: #{@materia.materia.inspect} y sus demas campos, por el usuario: #{current_user.full_name.inspect}, #{Time.now}" )
+      ensure
+        format.html { redirect_to materia_url, notice: notice }
+        format.json { head :no_content }
+      end
     end
   end
 
