@@ -1,7 +1,7 @@
 class Alumno < ActiveRecord::Base
   attr_accessible :user_attributes, :responsable, :telefono_responsable, :curso_id, :doc_cedula, :doc_cert_estudios, :doc_cert_nacimiento, :doc_foto, :user_id
   belongs_to :user, :autosave => true
-  belongs_to :curso
+  has_and_belongs_to_many :cursos, join_table: :alumnos_cursos
   has_many :puntajes
   has_many :calificaciones
   accepts_nested_attributes_for :user

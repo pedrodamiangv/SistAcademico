@@ -6,6 +6,8 @@ gem 'calendar_date_select'
 gem "carrierwave"
 gem "google_visualr", ">= 2.1"
 gem 'foreigner'
+gem 'prawn'
+gem "prawnto_2", :require => "prawnto"
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
