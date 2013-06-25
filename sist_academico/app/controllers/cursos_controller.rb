@@ -6,10 +6,11 @@ class CursosController < ApplicationController
 
   def index_total
     @cursos = Curso.paginate(:page => params[:page], :per_page => 10)
-
+    @total = true
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @cursos }
+      format.pdf { render 'index', :layout => false }
     end
 
   end
@@ -18,7 +19,7 @@ class CursosController < ApplicationController
   # GET /cursos.json
   def index
     @cursos = Curso.by_year(Date.today.year).paginate(:page => params[:page], :per_page => 10)
-
+    @total = false
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @cursos }
@@ -34,6 +35,7 @@ class CursosController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @curso }
+      format.pdf { render :layout => false }
     end
   end
 

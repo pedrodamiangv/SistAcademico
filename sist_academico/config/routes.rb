@@ -39,6 +39,9 @@ SistAcademico::Application.routes.draw do
     member do
       get :materias_calificaciones
     end
+    collection do
+      get :index_total
+    end
   end
  
   resources :administrativos

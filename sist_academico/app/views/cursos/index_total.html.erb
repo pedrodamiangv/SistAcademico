@@ -37,7 +37,8 @@
       <%= will_paginate @cursos %>
       <div class="link">
         <% if current_user.is_administrativo %>
-          <%= link_to 'Registrar Curso ->', new_curso_path %>
+          <%= link_to 'Volver ->', cursos_path %>
+          <%= link_to 'Ver Lista como pdf ->', index_total_cursos_path(:format => 'pdf') %>
         <% end %>
       </div>
     </div>

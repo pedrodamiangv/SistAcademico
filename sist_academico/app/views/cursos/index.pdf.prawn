@@ -2,7 +2,11 @@ pdf.text "Colegio Monseñor Wiesen", :size => 20, :style => :bold, :align => :ce
 pdf.text "Misiones e/ Cristophersen. Ciudad de Fram-Itapúa-Paraguay.", :size => 11, :style => :italic, :align => :center
 pdf.text "Teléfono/Fax: 0761265221. Email: cmjw.fram@gmail.com", :size => 11, :style => :italic, :align => :center
 pdf.move_down(10) 
-pdf.text "Listado de Cursos #{Date.today.year}", :size => 15, :style => :bold 
+if @total
+  pdf.text "Listado de Cursos", :size => 15, :style => :bold 
+else
+  pdf.text "Listado de Cursos #{Date.today.year}", :size => 15, :style => :bold 
+end
 pdf.text "Cantidad de Cursos: #{@cursos.count}", :size => 11, :style => :italic
 pdf.move_down(20)  
 items = [ ["<b>Curso</b>", "<b>Turno</b>", "<b>Nivel</b>", "<b>Enfasis</b>", "<b>Cantidad de Alumnos</b>"]  ]

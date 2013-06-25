@@ -6,12 +6,27 @@ class MateriasController < ApplicationController
   before_filter :admin_user,   only: [:new, :create, :destroy]
   # GET /materia
   # GET /materia.json
-  def index
-    @materias = Materia.paginate(:page => params[:page], :per_page => 10)
 
+  def index_total
+    @materias = Materia.paginate(:page => params[:page], :per_page => 10)
+    @total = true
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @materias }
+      format.pdf { render 'index', :layout => false }
+    end
+
+  end
+
+  # GET /cursos
+  # GET /cursos.json
+  def index
+    @materias = Materia.by_year(Date.today.year).paginate(:page => params[:page], :per_page => 10)
+    @total = false
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @materias }
+      format.pdf { render :layout => false }
     end
   end
 
@@ -34,6 +49,7 @@ class MateriasController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @materia }
+      format.pdf { render :layout => false }
     end
   end
 

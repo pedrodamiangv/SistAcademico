@@ -59,14 +59,16 @@
       <tbody>
         <% @curso.alumnos.order("created_at desc").each do |alumno| %>
           <tr>
-            <td><%= link_to alumno.user_nombre + " " + alumno.user_apellido, alumno %></td>
+            <td><%= link_to alumno.full_name, alumno %></td>
             <td><%= alumno.user_edad %> </td>
             <td><%= alumno.user_created_at.strftime("%d/%m/%Y") %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
-
+    <div align="right">
+      <%= link_to 'Ver Lista como pdf ->', curso_path(@curso, format: 'pdf') %>
+    </div>
   </div>
 </div>
 </div>
