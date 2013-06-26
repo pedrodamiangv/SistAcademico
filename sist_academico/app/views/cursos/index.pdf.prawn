@@ -7,7 +7,7 @@ if @total
 else
   pdf.text "Listado de Cursos #{Date.today.year}", :size => 15, :style => :bold 
 end
-pdf.text "Cantidad de Cursos: #{@cursos.count}", :size => 11, :style => :italic
+pdf.text "Cantidad de Cursos: #{@cursos.size}", :size => 11, :style => :italic
 pdf.move_down(20)  
 items = [ ["<b>Curso</b>", "<b>Turno</b>", "<b>Nivel</b>", "<b>Enfasis</b>", "<b>Cantidad de Alumnos</b>"]  ]
 items += @cursos.map do |item|  

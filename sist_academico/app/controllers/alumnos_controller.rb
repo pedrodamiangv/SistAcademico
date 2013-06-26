@@ -4,36 +4,72 @@ class AlumnosController < ApplicationController
   before_filter :admin_user,   only: [:new, :create, :destroy]
   # GET /alumnos
   # GET /alumnos.json
-  def index
+  def index_total
     @alumnos = Alumno.paginate(:page => params[:page], :per_page => 10)
-
+    @total = true
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @alumnos }
+      format.pdf { render 'index', :layout => false }
+    end
+  end
+
+  def index
+    @alumnos = []
+    @cursos = Curso.by_year(Date.today.year)
+    @cursos.each do |curso|
+      curso.alumnos.each do |alumno|
+        @alumnos << alumno
+      end
+    end
+    #@alumnos.paginate(:page => params[:page], :per_page => 10)
+    @total = false
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @alumnos }
+      format.pdf { render :layout => false }
     end
   end
 
   def alumno_calificaciones
     @alumno = Alumno.find(params[:id])
     @materias = @alumno.curso.materias
+    @calificaciones_general = []
     @calificaciones_primera_etapa = []
     @calificaciones_segunda_etapa = []
     @calificaciones_tercera_etapa = []
     @materias.each do |materia|
+      calificacion = []
+      calificacion << materia.materia
       calificacion_etapa_uno = materia.calificaciones.where(:etapa => 'Primera', :alumno_id => @alumno.id)
       unless calificacion_etapa_uno.count == 0
         @calificaciones_primera_etapa << calificacion_etapa_uno.first 
+        calificacion << calificacion_etapa_uno.first.calificacion
+      else
+        calificacion << "--"
       end 
       
       calificacion_etapa_dos = materia.calificaciones.where(:etapa => 'Segunda', :alumno_id => @alumno.id)
       unless calificacion_etapa_dos.count == 0
         @calificaciones_segunda_etapa << calificacion_etapa_dos.first 
+        calificacion << calificacion_etapa_dos.first.calificacion
+      else
+        calificacion << "--"
       end 
       
       calificacion_etapa_tres = materia.calificaciones.where(:etapa => 'Tercera', :alumno_id => @alumno.id)
       unless calificacion_etapa_tres.count == 0
         @calificaciones_tercera_etapa << calificacion_etapa_tres.first 
+        calificacion << calificacion_etapa_tres.first.calificacion
+      else
+        calificacion << "--"
       end 
+      @calificaciones_general << calificacion
+    end
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @alumnos }
+      format.pdf { render :layout => false }
     end
   end
 
@@ -45,6 +81,7 @@ class AlumnosController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @alumno }
+      format.pdf { render :layout => false }
     end
   end
 

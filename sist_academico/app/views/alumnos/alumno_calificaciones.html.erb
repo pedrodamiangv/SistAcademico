@@ -3,6 +3,9 @@
   <div class="row" align="right">
     Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido search-query"/> 
   </div>
+  <div align="right">
+	  <%= link_to 'Boletin de calificaciones en pdf ->', alumno_calificaciones_alumno_path( format: 'pdf') %>
+	</div>
 	<label class="label">Primera Etapa<small class="direccion"> <%= @alumno.full_name %></small></label>
     <% if @calificaciones_primera_etapa.count !=0 %>
     	<table id="my-table" class="table table-bordered">

@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <legend>Lista de Alumnos del <%= Date.today.year %></legend>
+    <legend>Lista de Alumnos registrados</legend>
     <div class="row" align="right">
       Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido search-query"/> 
     </div>
@@ -13,7 +13,8 @@
             <th>CINro</th>
             <th>Curso</th>
             <th>Nivel</th>
-            <th class="span4">Responsable | Telefono </th>
+            <th>Fecha Registro</th>
+            <th class="span3">Responsable | Telefono </th>
             <% if current_user.is_administrativo %>
               <th></th>
             <% end %>
@@ -27,6 +28,7 @@
               <td><%= alumno.user_CINro %></td>
               <td><%= alumno.curso_curso.split(' ')[0] %></td>
               <td><%= alumno.curso_nivel %></td>
+              <td><%= alumno.created_at.to_s.slice(0,10); %></td>
               <td><%= alumno.responsable_full %></td>
               <% if current_user.is_administrativo %>
                 <td><%= link_to 'Editar', edit_alumno_path(alumno) %><%= link_to 'Eliminar', alumno, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
@@ -35,12 +37,11 @@
           <% end %>
         </tbody>
       </table>
-      <%#= will_paginate @alumnos %>
+      <%= will_paginate @alumnos %>
       <div class="link">
         <% if current_user.is_administrativo %>
-          <%= link_to 'Ver Lista como pdf ->', alumnos_path(:format => 'pdf') %>
-          <%= link_to 'Nuevo Alumno ->', new_alumno_path %>
-          <%= link_to 'Ver todos los alumnos registrados ->', index_total_alumnos_path %>
+          <%= link_to 'Volver ->', alumnos_path %>
+          <%= link_to 'Ver Lista como pdf ->', index_total_alumnos_path(:format => 'pdf') %>
         <% end %>
       </div>
     </div>

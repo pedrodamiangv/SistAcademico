@@ -51,6 +51,9 @@ SistAcademico::Application.routes.draw do
     member do
       get :alumno_calificaciones
     end
+    collection do
+      get :index_total
+    end
   end
 
   resources :cursos do
