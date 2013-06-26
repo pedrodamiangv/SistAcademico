@@ -39,6 +39,7 @@
       <%= will_paginate @administrativos %>
       <div class="link">
         <% if current_user.is_administrativo %>
+          <%= link_to 'Ver Lista como pdf ->', administrativos_path(:format => 'pdf') %>
           <%= link_to 'Registrar Nuevo Administrativo ->', new_administrativo_path %>
         <% end %>
       </div>

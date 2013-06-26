@@ -6,10 +6,11 @@ class AdministrativosController < ApplicationController
   # GET /administrativos.json
   def index
     @administrativos = Administrativo.paginate(:page => params[:page], :per_page => 10)
-
+    @total = false
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @administrativos }
+      format.pdf { render :layout => false }
     end
   end
 

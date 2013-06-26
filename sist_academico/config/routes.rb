@@ -45,7 +45,11 @@ SistAcademico::Application.routes.draw do
   end
  
   resources :administrativos
-  resources :docentes
+  resources :docentes do
+    collection do
+      get :index_total
+    end
+  end
 
   resources :alumnos do
     member do

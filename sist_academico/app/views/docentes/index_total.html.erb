@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <h1 class="h1">Lista de Docentes <%= Date.today.year %></h1>
+    <h1 class="h1">Lista de Docentes</h1>
     <div class="row" align="right">
       Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido search-query"/> 
     </div>
@@ -13,6 +13,7 @@
             <th>Telefono</th>
             <th>Matricula numero</th>
             <th>Titulo</th>
+            <th>Año de Registro</th>
             <% if current_user.is_administrativo %>
               <th></th>
             <% end %>
@@ -26,6 +27,7 @@
               <td><%= docente.user_telefono %></td>
               <td><%= docente.matricula %></td>
               <td><%= docente.titulo %></td>
+              <td><%= docente.created_at.to_s.slice(0,10); %></td>
               <% if current_user.is_administrativo %>
                 <td><%= link_to 'Editar', edit_docente_path(docente) %>
                 <%= link_to 'Eliminar', docente, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
@@ -34,11 +36,10 @@
           <% end %>
         </tbody>
       </table>
-      <%#= will_paginate @docentes %>
+      <%= will_paginate @docentes %>
       <% if current_user.is_administrativo %>
-        <%= link_to 'Ver Lista como pdf ->', docentes_path(:format => 'pdf') %>
-        <%= link_to 'Registrar nuevo Docente ->', new_docente_path %>
-        <%= link_to 'Ver todos los docentes registrados ->', index_total_docentes_path %>
+        <%= link_to 'Volver ->', docentes_path %>
+        <%= link_to 'Ver Lista como pdf ->', index_total_docentes_path(:format => 'pdf') %>
       <% end %>
     </div>
   </div>

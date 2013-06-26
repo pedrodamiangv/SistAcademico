@@ -3,6 +3,7 @@ pdf.text "Misiones e/ Cristophersen. Ciudad de Fram-Itapúa-Paraguay.", :size =>
 pdf.text "Teléfono/Fax: 0761265221. Email: cmjw.fram@gmail.com", :size => 11, :style => :italic, :align => :center
 pdf.move_down(10) 
 if @total
+  @materias = Materia.all
   pdf.text "Listado de Materias", :size => 15, :style => :bold 
 else
   pdf.text "Listado de Materias #{Date.today.year}", :size => 15, :style => :bold 

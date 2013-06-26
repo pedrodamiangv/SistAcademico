@@ -5,12 +5,27 @@ class DocentesController < ApplicationController
   before_filter :correct_user,   only: [:edit, :update, :show]
   # GET /docentes
   # GET /docentes.json
-  def index
+  def index_total
     @docentes = Docente.paginate(:page => params[:page], :per_page => 10)
-
+    @total = true
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @docentes }
+      format.pdf { render 'index', :layout => false }
+    end
+  end
+
+  def index
+    @docentes = []
+    materias = Materia.by_year(Date.today.year)
+    @total = false
+    materias.each do |materia|
+      @docentes << materia.docente
+    end
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @docentes }
+      format.pdf { render :layout => false }
     end
   end
 
