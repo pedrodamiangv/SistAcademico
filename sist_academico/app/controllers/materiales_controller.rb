@@ -1,3 +1,4 @@
+require 'custom_logger'
 class MaterialesController < ApplicationController
 
   def index
@@ -23,6 +24,7 @@ class MaterialesController < ApplicationController
       if @material.save
         @materia = @material.materia
         format.html { redirect_to @materia }
+        CustomLogger.info("Un nuevo material #{@material.file.inspect} se ha subido en la materia: #{@material.materia_materia.inspect} por el usuario: #{current_user.full_name.inspect}, #{Time.now}")
         format.js { render 'material_guardado' }
       else
         format.js { render 'material_no_guardado' }
@@ -37,6 +39,7 @@ class MaterialesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to materiales_url }
       format.js { render 'material_eliminado' }
+      CustomLogger.info("Material #{@material.file.inspect} almacenado en la materia: #{@material.materia_materia.inspect} ha sido eliminado por el usuario: #{current_user.full_name.inspect}, #{Time.now}")
     end
   end
 

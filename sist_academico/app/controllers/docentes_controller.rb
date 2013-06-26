@@ -125,7 +125,7 @@ class DocentesController < ApplicationController
         notice = "Este docente y sus demas atributos no pueden ser eliminados. "
         CustomLogger.error("El docente #{@docente.user_nombre.inspect} y sus demas atributos no pueden ser eliminados por el usuario: #{current_user.full_name.inspect}, #{Time.now}")
       ensure
-        format.html { redirect_to docentes_url }
+        format.html { redirect_to docentes_url, notice: notice }
         format.json { head :no_content }
       end
     end
