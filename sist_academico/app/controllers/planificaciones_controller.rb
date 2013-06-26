@@ -1,3 +1,4 @@
+require 'custom_logger'
 class PlanificacionesController < ApplicationController
   before_filter :require_login
   #before_filter :correct_user_is_docente,  only: [:new, :create] || :admin_user
@@ -65,9 +66,11 @@ class PlanificacionesController < ApplicationController
       @materia = Materia.find(params[:materia_id])
       @planificacion = @materia.planificaciones.build(params[:planificacion])
       if @planificacion.save
-        redirect_to @materia, notice: 'La planificacion se ha guardado. '
+        redirect_to @materia, notice: 'La planificacion se ha guardado con exito '
+        CustomLogger.info("Una nueva tarea: #{@planificacion.tarea.inspect}, Etapa: #{@planificacion.etapa.inspect}, Fecha de Entrega: #{@planificacion.fecha_entrega.inspect} ,Total de Puntos: #{@planificacion.total_puntos.inspect} ,Descripcion: #{@planificacion.descripcion.inspect} correspondiente a la materia: #{@planificacion.materia_materia.inspect} ha sido creada por el usuario: #{current_user.full_name.inspect}, #{Time.now}")
       else
         flash[:error] = 'No pudo guardarse la tarea. ' 
+        CustomLogger.error("No pudo registrarse la tarea: #{@planificacion.tarea.inspect} y sus demas atributos por el usuario: #{current_user.full_name.inspect} ,#{Time.now}")
         redirect_to @materia
       end
     end
@@ -77,10 +80,22 @@ class PlanificacionesController < ApplicationController
   # PUT /planificaciones/1.json
   def update
     @planificacion = Planificacion.find(params[:id])
+    tarea_antigua = @planificacion.tarea
+    etapa_antigua = @planificacion.etapa
+    fecha_entrega_antigua = @planificacion.fecha_entrega
+    total_puntos_antiguo = @planificacion.total_puntos
+    descripcion_antigua = @planificacion.descripcion
 
     respond_to do |format|
       if @planificacion.update_attributes(params[:planificacion])
-        format.html { redirect_to @planificacion, notice: 'La planificacion ha sido actualizada.' }
+        tarea_nueva = @planificacion.tarea
+        etapa_nueva = @planificacion.etapa
+        fecha_entrega_nueva = @planificacion.fecha_entrega
+        total_puntos_nuevo = @planificacion.total_puntos
+        descripcion_nueva = @planificacion.descripcion
+
+        format.html { redirect_to @planificacion, notice: 'La planificacion ha sido actualizada con exito.' }
+        CustomLogger.info("Los datos antes de ser actualizados son: tarea: #{tarea_antigua.inspect}, Etapa: #{etapa_antigua.inspect}, Fecha de Entrega: #{fecha_entrega_antigua.inspect} ,Total de Puntos: #{total_puntos_antiguo.inspect} ,Descripcion: #{descripcion_antigua.inspect} .Los datos actualizados por el usuario: #{current_user.full_name.inspect} son los siguientes: Tarea: #{tarea_nueva.inspect}, Etapa: #{etapa_nueva.inspect}, Fecha de Entrega: #{fecha_entrega_nueva.inspect} ,Total de Puntos: #{total_puntos_nuevo.inspect} ,Descripcion: #{descripcion_nueva.inspect}, #{Time.now}")
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -95,7 +110,8 @@ class PlanificacionesController < ApplicationController
     @planificacion = Planificacion.find(params[:id])
     @materia = @planificacion.materia
     @planificacion.destroy
-    redirect_to @materia, notice: 'Tarea eliminada.'
+    redirect_to @materia, notice: 'Tarea eliminada correctamente. '
+    CustomLogger.info("Tarea: #{@planificacion.tarea.inspect}, Etapa: #{@planificacion.etapa.inspect}, Fecha de Entrega: #{@planificacion.fecha_entrega.inspect} ,Total de Puntos: #{@planificacion.total_puntos.inspect} ,Descripcion: #{@planificacion.descripcion.inspect} correspondiente a la materia: #{@planificacion.materia_materia.inspect} han sido eliminados por el usuario: #{current_user.full_name.inspect}, #{Time.now}")
   end
 
   private

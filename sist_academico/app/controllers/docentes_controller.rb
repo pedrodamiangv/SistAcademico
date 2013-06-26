@@ -1,3 +1,4 @@
+require 'custom_logger'
 class DocentesController < ApplicationController
   before_filter :require_login
   before_filter :admin_user, only: [:destroy, :index, :new, :create]
@@ -53,12 +54,14 @@ class DocentesController < ApplicationController
         edad = calcular_edad user
         user.update_attribute(:is_docente, true)
         user.update_attribute(:edad, edad )
-        format.html { redirect_to @docente, notice: 'El Docente ha sido guardado.' }
+        format.html { redirect_to @docente, notice: 'El Docente ha sido registrado con exito. ' }
+        CustomLogger.info("Nuevo docente: #{@docente.user_nombre.inspect} ,Apellido: #{@docente.user_apellido.inspect} ,Cedula de Identidad: #{@docente.user_CINro.inspect} ,Sexo: #{@docente.user_sexo.inspect} ,Telefono:#{@docente.user_telefono.inspect} ,Correo Electronico: #{@docente.user_email.inspect} ,Fecha de Nacimiento:#{@docente.user_fecha_nacimiento.inspect} ,Lugar de Nacimiento: #{@docente.user_lugar_nacimiento.inspect} ,Matricula Numero: #{@docente.matricula.inspect} ,Titulo: #{@docente.titulo.inspect} ,Direccion: #{@docente.user.address.direccion.inspect} ,Nombre de Usuario: #{@docente.user_username.inspect} creado por el usuario: #{current_user.full_name.inspect} ,#{Time.now}")
         format.json { render json: @docente, status: :created, location: @docente }
         format.js   {}
       else
         atributos
         format.html { render action: "new" }
+        CustomLogger.error("Error al querer crear un nuevo docente: #{@docente.user_nombre.inspect} y sus demas atributos, por el usuario: #{current_user.full_name.inspect}, #{Time.now}")
         format.json { render json: @docente.errors, status: :unprocessable_entity }
       end
     end
@@ -68,12 +71,38 @@ class DocentesController < ApplicationController
   # PUT /docentes/1.json
   def update
     @docente = Docente.find(params[:id])
+    nombre_antiguo = @docente.user_nombre
+    apellido_antiguo = @docente.user_apellido
+    cedula_antiguo = @docente.user_CINro
+    sexo_antiguo = @docente.user_sexo
+    telefono_antiguo = @docente.user_telefono
+    correo_antiguo = @docente.user_email
+    fechaNac_antiguo = @docente.user_fecha_nacimiento
+    lugarNac_antiguo = @docente.user_lugar_nacimiento
+    direccion_antiguo = @docente.user.address.direccion
+    matricula_antiguo = @docente.matricula
+    titulo_antiguo = @docente.titulo
+    nombreUsuario_antiguo = @docente.user_username
+
     user = @docente.user
     edad = calcular_edad user
     user.update_attribute(:edad, edad )
     respond_to do |format|
       if @docente.update_attributes(params[:docente])
-        format.html { redirect_to @docente, notice: 'El docente ha sido actualizado.' }
+        nombre_nuevo = @docente.user_nombre
+        apellido_nuevo = @docente.user_apellido
+        cedula_nuevo = @docente.user_CINro
+        sexo_nuevo = @docente.user_sexo
+        telefono_nuevo = @docente.user_telefono
+        correo_nuevo = @docente.user_email
+        fechaNac_nuevo = @docente.user_fecha_nacimiento
+        lugarNac_nuevo = @docente.user_lugar_nacimiento
+        direccion_nuevo = @docente.user.address.direccion
+        matricula_nuevo = @docente.matricula
+        titulo_nuevo = @docente.titulo
+        nombreUsuario_nuevo = @docente.user_username
+        CustomLogger.info("Los datos antes de ser actualizados son: Nombre del docente: #{nombre_antiguo.inspect} ,Apellido: #{apellido_antiguo.inspect} ,Cedula de Identidad: #{cedula_antiguo.inspect} ,Sexo: #{sexo_antiguo.inspect} ,Telefono:#{telefono_antiguo.inspect} ,Correo Electronico: #{correo_antiguo.inspect} ,Fecha de Nacimiento:#{fechaNac_antiguo.inspect} ,Lugar de Nacimiento: #{lugarNac_antiguo.inspect} ,Matricula Numero: #{matricula_antiguo.inspect} ,Titulo: #{titulo_antiguo.inspect} ,Direccion: #{direccion_antiguo.inspect} ,Nombre de Usuario: #{nombreUsuario_antiguo.inspect} .Los datos actualizados por el usuario: #{current_user.full_name.inspect} son los siguientes: Nombre del docente: #{nombre_nuevo.inspect} ,Apellido: #{apellido_nuevo.inspect} ,Cedula de Identidad: #{cedula_nuevo.inspect} ,Sexo: #{sexo_nuevo.inspect} ,Telefono:#{telefono_nuevo.inspect} ,Correo Electronico: #{correo_nuevo.inspect} ,Fecha de Nacimiento:#{fechaNac_nuevo.inspect} ,Lugar de Nacimiento: #{lugarNac_nuevo.inspect} ,Matricula Numero: #{matricula_nuevo.inspect} ,Titulo: #{titulo_nuevo.inspect} ,Direccion: #{direccion_nuevo.inspect} ,Nombre de Usuario: #{nombreUsuario_nuevo.inspect}, #{Time.now} ")
+        format.html { redirect_to @docente, notice: 'El docente ha sido actualizado con exito.' }
         format.json { head :no_content }
       else
         atributos
@@ -87,11 +116,18 @@ class DocentesController < ApplicationController
   # DELETE /docentes/1.json
   def destroy
     @docente = Docente.find(params[:id])
-    @docente.destroy
-
     respond_to do |format|
-      format.html { redirect_to docentes_url }
-      format.json { head :no_content }
+      begin
+        @docente.destroy
+        notice = "El docente y sus demas atributos han sido eliminados correctamente. "
+        CustomLogger.info("Nombre del docente: #{@docente.user_nombre.inspect} ,Apellido: #{@docente.user_apellido.inspect} ,Cedula de Identidad: #{@docente.user_CINro.inspect} ,Sexo: #{@docente.user_sexo.inspect} ,Telefono:#{@docente.user_telefono.inspect} ,Correo Electronico: #{@docente.user_email.inspect} ,Fecha de Nacimiento:#{@docente.user_fecha_nacimiento.inspect} ,Lugar de Nacimiento: #{@docente.user_lugar_nacimiento.inspect} ,Matricula Numero: #{@docente.matricula.inspect} ,Titulo: #{@docente.titulo.inspect} ,Direccion: #{@docente.user.address.direccion.inspect} ,Nombre de Usuario: #{@docente.user_username.inspect} han sido eliminados por el usuario: #{current_user.full_name.inspect}, #{Time.now}")
+      rescue
+        notice = "Este docente y sus demas atributos no pueden ser eliminados. "
+        CustomLogger.error("El docente #{@docente.user_nombre.inspect} y sus demas atributos no pueden ser eliminados por el usuario: #{current_user.full_name.inspect}, #{Time.now}")
+      ensure
+        format.html { redirect_to docentes_url, notice: notice }
+        format.json { head :no_content }
+      end
     end
   end
 

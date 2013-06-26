@@ -1,3 +1,4 @@
+require 'custom_logger'
 class CalificacionesController < ApplicationController
   before_filter :require_login
   before_filter :admin_user
@@ -46,10 +47,12 @@ class CalificacionesController < ApplicationController
 
     respond_to do |format|
       if @calificacion.save
-        format.html { redirect_to @calificacion, notice: 'Calificacion was successfully created.' }
+        format.html { redirect_to @calificacion, notice: 'La calificacion ha sido registrado con exito.' }
+        CustomLogger.info("Se ha registrado una nueva calificacion: #{@calificacion.calificacion.inspect} ,Materia: #{@calificacion.materia_materia.inspect} ,Puntos Correctos: #{@calificacion.puntos_correctos.inspect} ,Total de Puntos: #{@calificacion.total_puntos.inspect} ,Etapa: #{@calificacion.etapa.inspect} creados por el usuario: #{current_user.full_name.inspect}, #{Time.now}")
         format.json { render json: @calificacion, status: :created, location: @calificacion }
       else
         format.html { render action: "new" }
+        CustomLogger.error("Error al querer registrar una nueva calificacion: #{@calificacion.calificacion.inspect} y sus demas atributos, por el usuario: #{current_user.full_name.inspect}, #{Time.now} ")
         format.json { render json: @calificacion.errors, status: :unprocessable_entity }
       end
     end
@@ -59,10 +62,21 @@ class CalificacionesController < ApplicationController
   # PUT /calificaciones/1.json
   def update
     @calificacion = Calificacion.find(params[:id])
+    calificacion_antigua = @calificacion.calificacion
+    materia_antigua = @calificacion.materia_materia
+    puntos_correctos_antiguo = @calificacion.puntos_correctos
+    total_puntos_antiguo = @calificacion.total_puntos
+    etapa_antigua = @calificacion.etapa
 
     respond_to do |format|
       if @calificacion.update_attributes(params[:calificacion])
-        format.html { redirect_to @calificacion, notice: 'Calificacion was successfully updated.' }
+        calificacion_nueva = @calificacion.calificacion
+        materia_nueva = @calificacion.materia_materia
+        puntos_correctos_nueva = @calificacion.puntos_correctos
+        total_puntos_nueva = @calificacion.total_puntos
+        etapa_nueva = @calificacion.etapa
+        CustomLogger.info("Los datos antes de ser actualizados son: calificacion: #{calificacion_antigua.inspect} ,Materia: #{materia_antigua.inspect} ,Puntos Correctos: #{puntos_correctos_antiguo.inspect} ,Total de Puntos: #{total_puntos_antiguo.inspect} ,Etapa: #{etapa_antigua.inspect} .Los datos actualizados por el usuario: #{current_user.full_name.inspect} son los siguientes: calificacion: #{calificacion_nueva.inspect} ,Materia: #{materia_nueva.inspect} ,Puntos Correctos: #{puntos_correctos_nueva.inspect} ,Total de Puntos: #{total_puntos_nueva.inspect} ,Etapa: #{etapa_nueva.inspect}, #{Time.now} ")
+        format.html { redirect_to @calificacion, notice: 'La calificacion ha sido actualizado con exito. ' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -75,11 +89,18 @@ class CalificacionesController < ApplicationController
   # DELETE /calificaciones/1.json
   def destroy
     @calificacion = Calificacion.find(params[:id])
-    @calificacion.destroy
-
     respond_to do |format|
-      format.html { redirect_to calificaciones_url }
-      format.json { head :no_content }
+      begin
+        @calificacion.destroy
+        notice = "La calificacion y sus demas atributos son eliminados correctamente. "
+        CustomLogger.info("Calificacion: #{@calificacion.calificacion.inspect} ,Materia: #{@calificacion.materia_materia.inspect} ,Puntos Correctos: #{@calificacion.puntos_correctos.inspect} ,Total de Puntos: #{@calificacion.total_puntos.inspect} ,Etapa: #{@calificacion.etapa.inspect} han sido eliminados por el usuario: #{current_user.full_name.inspect}, #{Time.now}")
+      rescue
+        notice = "Esta calificacion y sus demas atributos no pueden ser eliminados"
+        CustomLogger.error("La calificacion: #{@calificacion.calificacion.inspect} y sus demas atributos no pueden ser eliminados por el usuario: #{current_user.full_name.inspect}, #{Time.now}")
+      ensure
+        format.html { redirect_to calificaciones_url, notice: notice }
+        format.json { head :no_content }
+      end
     end
   end
 

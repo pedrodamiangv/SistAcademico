@@ -179,7 +179,7 @@ class MateriasController < ApplicationController
         notice = "Esta materia y sus demas campos no pueden ser eliminados"
         CustomLogger.error("Error al eliminar la materia: #{@materia.materia.inspect} y sus demas campos, por el usuario: #{current_user.full_name.inspect}, #{Time.now}" )
       ensure
-        format.html { redirect_to materia_url, notice: notice }
+        format.html { redirect_to materias_url, notice: notice }
         format.json { head :no_content }
       end
     end
@@ -199,12 +199,12 @@ class MateriasController < ApplicationController
 
     def correct_user
       @materia = Materia.find(params[:id])
-      if current_user.is_docente?
+      if current_user.is_administrativo?
+
+      elsif current_user.is_docente?
         redirect_to(root_path) unless ( @materia.docente == current_user.docente)
       elsif current_user.is_alumno?
         redirect_to(root_path) 
-      else
-       redirect_to(root_path) unless ( current_user.is_administrativo?)
      end
     end
 end
