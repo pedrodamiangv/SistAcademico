@@ -1,0 +1,22 @@
+<legend>Manual de Usuario </legend>
+<div class="span8">
+  <div class="span7 last">
+    <section class="ac-container">
+      <%i=0%>
+      <% @link.each do |help| %>
+      <div>
+        <input id="<%= "ac-#{i}" %>" name="accordion-1" type="radio" checked />
+        <label for="<%= "ac-#{i}" %>" ><%=help  %></label>
+        <article class="ac-large">
+           <%= image_tag "../images/help/help#{i+1}.png", :width => '670x600' %>
+          <p><%= @link_helps[i] %></p>
+        </article>
+      </div>
+      <%i+=1%>
+      <% end %>
+
+    </section>
+
+  </div>
+
+</div>

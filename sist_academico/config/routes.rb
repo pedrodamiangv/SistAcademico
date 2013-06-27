@@ -1,5 +1,6 @@
 SistAcademico::Application.routes.draw do
 
+  resources :helps
 
   resources :reports do
     collection do
@@ -75,6 +76,8 @@ SistAcademico::Application.routes.draw do
   resources :addresses
   resources :cities
   resources :countries
+ 
+
 
   match '/help',    to: 'static_pages#help'
   match '/about',   to: 'static_pages#about'
