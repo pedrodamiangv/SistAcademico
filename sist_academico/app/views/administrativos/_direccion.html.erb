@@ -1,1 +1,5 @@
-<%= collection_select 'administrativo[user_attributes]', :address_id, addresses,:id,:direccion %>
+<% if @administrativo.titulo %>
+  <%= collection_select "administrativo[user_attributes]", :address_id, addresses,:id,:direccion,  {:prompt => @administrativo.user.address.direccion} %>
+<% else %>
+  <%= collection_select "administrativo[user_attributes]", :address_id, addresses,:id,:direccion %>
+<% end %>

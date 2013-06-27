@@ -30,7 +30,7 @@
           <% end %>
         </tbody>
       </table>
-      <%= will_paginate @addresses %>
+      <%= will_paginate %>
       <div class="link">
         <% if current_user.is_administrativo %>
           <%= link_to 'Ver Lista como pdf ->', addresses_path(:format => 'pdf') %>
