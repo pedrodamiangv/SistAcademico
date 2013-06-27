@@ -5,7 +5,7 @@ pdf.move_down(10)
 pdf.text "Boletin de Calificaciones", :size => 15, :style => :bold 
 pdf.text "Fecha: #{Date.today.to_s.slice(0,10)}", :size => 11, :style => :italic
 pdf.text "Alumno: #{@alumno.full_name}", :size => 11, :style => :italic
-pdf.text "Curso: #{@alumno.curso_curso}", :size => 11, :style => :italic
+pdf.text "Curso: #{@alumno.curso_curso_grado}", :size => 11, :style => :italic
 pdf.move_down(20)  
 
 items = [ ["<b>Materia</b>", "<b>Primera Etapa</b>", "<b>Segunda Etapa</b>", "<b>Tercera Etapa</b>"]  ]

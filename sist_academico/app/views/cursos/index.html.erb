@@ -20,7 +20,7 @@
         <tbody>
           <% @cursos.each do |curso| %>
             <tr>
-              <td><%= link_to curso.curso, curso %></td>
+              <td><%= link_to curso.curso_grado, curso %></td>
               <td><%= curso.turno %></td>
               <td><%= curso.nivel %></td>
               <td><%= curso.enfasis %></td>

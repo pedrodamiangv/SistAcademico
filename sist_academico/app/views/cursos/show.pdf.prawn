@@ -3,7 +3,7 @@ pdf.text "Misiones e/ Cristophersen. Ciudad de Fram-Itapúa-Paraguay.", :size =>
 pdf.text "Teléfono/Fax: 0761265221. Email: cmjw.fram@gmail.com", :size => 11, :style => :italic, :align => :center
 pdf.move_down(10) 
 pdf.text "Listado de Alumno", :size => 15, :style => :bold 
-pdf.text "Curso: #{@curso.curso}", :size => 11, :style => :italic
+pdf.text "Curso: #{@curso.curso_grado}", :size => 11, :style => :italic
 pdf.move_down(20)  
 items = [ ["<b>Alumno</b>", "<b>Edad</b>", "<b>Telefono</b>", "<b>Responsable</b>", "<b>Fecha de Inscripcion</b>"]  ]
 items += @curso.alumnos.map do |item|  

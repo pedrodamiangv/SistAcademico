@@ -13,7 +13,7 @@ pdf.move_down(20)
 items = [ ["<b>Curso</b>", "<b>Turno</b>", "<b>Nivel</b>", "<b>Enfasis</b>", "<b>Cantidad de Alumnos</b>"]  ]
 items += @cursos.map do |item|  
   [  
-        item.curso,  
+        item.curso_grado,  
         item.turno,
         item.nivel,
         item.enfasis,

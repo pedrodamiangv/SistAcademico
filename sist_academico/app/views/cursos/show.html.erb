@@ -6,7 +6,7 @@
     <aside>
       <section>
         <h1>
-          <%= @curso.curso %>
+          <%= @curso.curso_grado %>
         </h1>
         <% if current_user.is_administrativo %>
           <span><%= link_to '(Editar)', edit_curso_path(@curso) %> </span>
@@ -44,7 +44,7 @@
     </aside>
   </div>
   <div class="datos span8">
-    <label class="label">Lista de Alumnos del <%= @curso.curso %> </label>
+    <label class="label">Lista de Alumnos del <%= @curso.curso_grado %> </label>
     <div align="right">
       Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido search-query"/> 
     </div>

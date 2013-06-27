@@ -1,5 +1,5 @@
 class Curso < ActiveRecord::Base
-  attr_accessible :curso, :enfasis, :nivel, :turno
+  attr_accessible :curso, :enfasis, :nivel, :turno, :tipo
   has_many :alumnos
   has_many :materias
   delegate :area, :materia, to: :materia, prefix: true
@@ -7,4 +7,8 @@ class Curso < ActiveRecord::Base
   validates :enfasis, presence: true, length: {minimum: 5, maximum: 50}
   validates :nivel, presence: true, length: {minimum: 5, maximum: 30}
   validates :turno, presence: true, length: { maximum: 10 }
+  validates :tipo, presence: true, length: { maximum: 10 }
+  def curso_grado
+  	self.curso + ' ' + self.tipo
+  end
 end

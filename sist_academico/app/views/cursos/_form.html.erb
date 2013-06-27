@@ -4,9 +4,12 @@
         <fieldset>
             <%= form_for(@curso) do |f| %>
               <%= render 'shared/error_messages', object: f.object %>
-              <div class="span3 offset4">
+              <div class="span4 offset4">
                 <%= f.label :curso %>
-                <%= f.text_field :curso, :size => 40, :maxlength => 20 %>
+                <%= f.select :curso, @cursos, {},{class: 'input-medium seguido'} %>
+                <%= f.select :tipo, ['Grado', 'Curso' ], {},{class: 'input-small seguido'} %>
+              </div>
+              <div class="span3 offset4">
                 <%= f.label :turno %>
                 <%= f.select(:turno, ['Mañana', 'Tarde', 'Noche' ])%>
                 <%= f.label :nivel %>

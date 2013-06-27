@@ -25,7 +25,7 @@
               <td><%= link_to alumno.user_nombre, alumno %></td>
               <td><%= alumno.user_apellido %></td>
               <td><%= alumno.user_CINro %></td>
-              <td><%= alumno.curso_curso.split(' ')[0] %></td>
+              <td><%= alumno.curso_curso_grado %></td>
               <td><%= alumno.curso_nivel %></td>
               <td><%= alumno.responsable_full %></td>
               <% if current_user.is_administrativo %>
