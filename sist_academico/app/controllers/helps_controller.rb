@@ -4,7 +4,7 @@ class HelpsController < ApplicationController
   
   def index
     @link = [
-      "Como ingresar al Sistema?"
+      "Como ingresar al Sistema?",
       "Como registrar un Alumno?",
       "Como registrar un Docente?",
       "Como registrar un Administrativo?",
