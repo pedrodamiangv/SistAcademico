@@ -1,5 +1,5 @@
 <% unless @new %>
-  <%= collection_select "administrativo[user_attributes]", :address_id, addresses,:id,:direccion,  {:prompt => @administrativo.user.address.direccion} %>
+  <%= collection_select "administrativo[user_attributes]", :address_id, addresses,:id,:direccion,  {prompt: @administrativo.user.address.direccion, selected: @administrativo.user.address.id} %>
 <% else %>
   <%= collection_select "administrativo[user_attributes]", :address_id, addresses,:id,:direccion %>
 <% end %>
