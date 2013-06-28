@@ -17,7 +17,11 @@ class Alumno < ActiveRecord::Base
   end
 
   def responsable_full
-    self.responsable + ' | ' + self.telefono_responsable
+    if self.responsable && self.telefono_responsable
+      self.responsable + ' | ' + self.telefono_responsable
+    else
+      ""
+    end
   end
 
   def curso_actual

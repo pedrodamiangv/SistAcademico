@@ -15,3 +15,10 @@
   </div>
 
 </html>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    <% actual_page = request.original_url %>
+    <% ApplicationController.save_preference("last_page", current_user, actual_page) %>
+  });
+</script>

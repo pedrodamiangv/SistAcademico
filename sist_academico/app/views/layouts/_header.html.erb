@@ -68,15 +68,15 @@
                 <ul class="dropdown-menu">
                   <% if current_user.is_alumno %>
                     <li><%= link_to "Perfil", current_user.alumno %></li>
-                    <li><%= link_to "Settings", edit_alumno_path(current_user.alumno) %></li>
+                    <li><%= link_to "Editar Perfil", edit_alumno_path(current_user.alumno) %></li>
                   <% end %>
                   <% if current_user.is_administrativo %>
                     <li><%= link_to "Perfil", current_user.administrativo %></li>
-                    <li><%= link_to "Settings", edit_administrativo_path(current_user.administrativo) %></li>
+                    <li><%= link_to "Editar Perfil", edit_administrativo_path(current_user.administrativo) %></li>
                   <% end %>
                   <% if current_user.is_docente %>
                     <li><%= link_to "Perfil", current_user.docente %></li>
-                    <li><%= link_to "Settings", edit_docente_path(current_user.docente) %></li>
+                    <li><%= link_to "Editar Perfil", edit_docente_path(current_user.docente) %></li>
                   <% end %>
                   <li class="divider"></li>
                   <li>

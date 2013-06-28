@@ -11,6 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+
 ActiveRecord::Schema.define(:version => 20130627202307) do
 
   create_table "addresses", :force => true do |t|
@@ -41,10 +42,10 @@ ActiveRecord::Schema.define(:version => 20130627202307) do
     t.boolean  "doc_cert_estudios"
     t.boolean  "doc_foto"
     t.boolean  "doc_cert_nacimiento"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
-    t.string   "responsable",          :limit => 30, :null => false
-    t.string   "telefono_responsable", :limit => 15, :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.string   "responsable"
+    t.string   "telefono_responsable"
   end
 
   add_index "alumnos", ["curso_id"], :name => "alumnos_curso_id_fk"
@@ -141,6 +142,16 @@ ActiveRecord::Schema.define(:version => 20130627202307) do
 
   add_index "planificaciones", ["materia_id"], :name => "planificaciones_materia_id_fk"
 
+  create_table "preferencias", :force => true do |t|
+    t.string   "codigo"
+    t.integer  "user_id"
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "preferencias", ["user_id"], :name => "preferencias_user_id_fk"
+
   create_table "puntajes", :force => true do |t|
     t.integer  "planificacion_id",                                              :null => false
     t.integer  "alumno_id",                                                     :null => false
@@ -160,6 +171,7 @@ ActiveRecord::Schema.define(:version => 20130627202307) do
     t.string   "telefono"
     t.string   "fecha_nacimiento"
     t.string   "lugar_nacimiento"
+    t.string   "direccion"
     t.integer  "edad"
     t.string   "username",                     :null => false
     t.string   "email"
@@ -202,6 +214,8 @@ ActiveRecord::Schema.define(:version => 20130627202307) do
   add_foreign_key "materias", "docentes", :name => "materias_docente_id_fk"
 
   add_foreign_key "planificaciones", "materias", :name => "planificaciones_materia_id_fk"
+
+  add_foreign_key "preferencias", "users", :name => "preferencias_user_id_fk"
 
   add_foreign_key "puntajes", "alumnos", :name => "puntajes_alumno_id_fk"
   add_foreign_key "puntajes", "planificaciones", :name => "puntajes_planificacion_id_fk"

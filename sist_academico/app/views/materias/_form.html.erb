@@ -10,7 +10,7 @@
                 <%= f.label :area %>
                 <%= f.select( :area, ['Lenguas y sus Tecnolog.', 'Matemática y sus Tecnolog.', 'Ciencias Naturales', 'Ciencias Sociales', 'Artes y sus Tecnolog.', 'Plan Especifico', 'Plan Optativo'])%>
                 <%= f.label :curso_id %>
-                <%= f.collection_select :curso_id ,@cursos,:id,:curso %>
+                <%= f.collection_select :curso_id ,@cursos,:id,:curso_grado %>
                 <%= f.label :docente_id %>
                 <%= f.select :docente_id,  @docentes.map {|d| [d.user.nombre + ' ' + d.user.apellido  ,d.id] }  %>
                 <%= f.submit "Guardar", class: "btn btn-large btn-inverse" %>
