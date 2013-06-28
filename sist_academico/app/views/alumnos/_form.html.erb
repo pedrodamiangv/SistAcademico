@@ -7,48 +7,51 @@
           <%= f.fields_for :user do |d| %>
             <% if current_user.is_administrativo %>
             <legend>Datos del Alumno</legend>
+          <div class="container cuadro">
             <div class="span3">
               <%= d.label :nombre %>
-              <%= d.text_field :nombre, :maxlength => 50 %>
+              <%= d.text_field :nombre, :maxlength => 50, class: "span4" %>
 
               <%= d.label :apellido %>
-              <%= d.text_field :apellido, :maxlength => 50 %>
-
-              <%= d.label :CINro, "Cedula de Identidad Número" %>
-              <%= d.text_field :CINro, :maxlength => 9, onblur: "validar(this)" %>
-
-              <%= d.label :sexo %>
-              <%= d.select(:sexo, ['Masculino', 'Femenino' ])%>
-            </div>
-            <div class="span3 offset1">
-              <%= d.label :telefono, "Teléfono" %>
-              <%= d.text_field :telefono, :maxlength => 13, :placeholder => "(xxxx) xxxxxx" %>
+              <%= d.text_field :apellido, :maxlength => 50, class: "span4" %>
 
               <%= d.label :fecha_nacimiento, "Fecha de Nacimiento" %> 
               <%= d.text_field :fecha_nacimiento, :id=> "fecha" %>
 
-              <%= d.label :email, "Correo Electrónico" %>
+              <%= d.label :lugar_nacimiento, "Lugar de Nacimiento" %>
+              <%= d.select( :lugar_nacimiento ,@cities_city) %> 
+            </div>
+            <div class="span3 offset1">
+                <%= d.label :email, "Correo Electrónico" %>
               <%= d.text_field :email, :maxlength => 30 %>
 
-              <%= d.label :lugar_nacimiento, "Lugar de Nacimiento" %>
-              <%= d.select( :lugar_nacimiento ,@cities_city) %>
+              <%= d.label :CINro, "C.I.Número" %>
+              <%= d.text_field :CINro, :maxlength => 9, onblur: "validar(this)", class:  "span2" %>
+
+              <%= d.label :telefono, "Teléfono" %>
+              <%= d.text_field :telefono, :maxlength => 13, :placeholder => "(xxxx) xxxxxx",  class:  "span2"%>
+
+              <%= d.label :sexo %>
+              <%= d.select(:sexo, ['Masculino', 'Femenino' ],{},{class: "span2"})%>
             </div>
-            <div class="span4 offset1">
+            <div class="span3">
               <%= f.label :responsable, "Nombre del Responsable" %>
-              <%= f.text_field :responsable, :maxlength => 50 %>
+              <%= f.text_field :responsable, :maxlength => 50, class: "span4" %>
 
               <%= f.label :telefono_responsable, "Teléfono del Responsable" %>
-              <%= f.text_field :telefono_responsable, :maxlength => 13, :placeholder => "(xxxx) xxxxxx" %>
+              <%= f.text_field :telefono_responsable, :maxlength => 13, :placeholder => "(xxxx) xxxxxx", class:  "span2" %>
 
               <%= f.label :curso_id %>
-              <%= f.collection_select :curso_id ,@cursos,:id, :curso  %>
+              <%= f.collection_select :curso_id ,@cursos,:id, :curso,{},{class: "span2"}  %>
 
-              <a data-toggle="modal" href="#example" class="direccion">Ingresar nueva direccion</a>
               <%= d.label :direccion, "Dirección" %>
               <div id="direccion">
                 <%= render 'direccion', addresses: @addresses %>
+                <a data-toggle="modal" href="#example" class="direccion">Ingresar nueva direccion</a>
               </div>
             </div>
+          </div>
+
           <% end %>
         </legend>
       </div>
@@ -56,6 +59,7 @@
       <div id="registro">
         <fieldset>
           <legend>Datos del Usuario Alumno</legend>
+          <div class="container cuadro">
             <div class="span3">
               <%= d.label :username, "Nombre de Usuario" %>
               <%= d.text_field :username, :maxlength => 30 %>
@@ -89,13 +93,17 @@
                   <%= f.label "Certificado de Nacimiento", class: "seguido-espaciado" %>
                 </div>
               </div>
+
+              <div class="abajo" align="center">
+                <%= f.submit "Guardar", class: "btn btn-large btn-primary" %>
+                <%= link_to "Cancelar", alumnos_path, class: "btn btn-large btn-primary", id: "colorBoton"%>
+              </div>
+          </div>
             <% end %>
         </fieldset>
-      </div>
-      
-    <div class="abajo" align="center">
-      <%= f.submit "Guardar", class: "btn btn-large btn-inverse" %>
     </div>
-  
+      
+    
+  </div>
   
 <% end %>

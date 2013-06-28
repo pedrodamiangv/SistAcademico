@@ -38,9 +38,9 @@
         </tbody>
       </table>
       <%= will_paginate @alumnos %>
-      <div class="link">
+      <div class="link" align="center">
         <% if current_user.is_administrativo %>
-          <%= link_to 'Volver ->', alumnos_path %>
+          <%= link_to '<- Volver ', alumnos_path %>
           <%= link_to 'Ver Lista como pdf ->', index_total_alumnos_path(:format => 'pdf') %>
         <% end %>
       </div>
