@@ -18,6 +18,7 @@
 //= require jquery-ui.min
 //= require jsapi
 //= require bootstrap-button
+//= require jquery.corner
 //= require_tree .
 
 $(document).ready(function() {

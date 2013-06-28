@@ -1,78 +1,99 @@
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#principal').removeClass('container');
+    $('#fondo').corner("round 18px");
+  });
+</script>
 <% provide(:title, 'Inicio') %>
-</br>
-<div id="container2">
-    
-    <h1>BIENVENIDOS</h1>
-    <h3 align="center">Colegio Parroquial Privado Subvencionado "Monseñor Juan Wiesen"</h3></br>
+<div id="fondo" class="fondo">
+    <h3 align="center">Colegio Parroquial Privado Subvencionado "Monseñor Juan Wiesen"</h3>
     <h5 align="center"> Fram - Itapúa - Paraguay </h5>
-    </br></br></br>  
-    <div class="wrapper">
-      <div class="item">
-        <img src="images/historial.jpg" />
-        <span class="information">
-          <strong><%= link_to 'Sobre Nosotros', about_path %></strong>
-          Conozca el historial de la institución desde su fundación hasta nuestros días.
-        </span>
+</div>
+<br/>
+<div class="container">
+  <div class="row">
+
+    <div class="span6">
+      <label class="label label-success">Noticias</label>
+          <ul class="nav nav-tabs nav-stacked">
+            <% @noticias.each do |noticia| %>
+              <li class="li"><%= noticia.noticia %> </li>
+              <li class="li">Posteado por: <%= noticia.user_full_name %> </li>
+              <li class="li">Fecha: <%= noticia.created_at %> </li>
+              <hr/>
+            <% end %>
+          </ul>
+    </div>
+
+    <div class="span4 offset1">
+      <div class="wrapper">
+        <div class="item">
+          <img src="images/historial.jpg" />
+          <span class="information">
+            <strong><%= link_to 'Sobre Nosotros', about_path %></strong>
+            Conozca el historial de la institución desde su fundación hasta nuestros días.
+          </span>
+        </div>
+      </div>
+
+      <div class="wrapper">
+        <div class="item">
+          <img src="images/ayuda.jpg" />
+          <span class="information">
+            <strong><%= link_to 'Ayuda', helps_path %></strong> 
+            Le brindamos la ayuda necesaria para que pueda tener un manejo del sistema.
+          </span>
+        </div>
+      </div>
+      
+      <div class="wrapper">
+        <div class="item">
+          <img src="images/mec.jpg" />
+          <span class="information">
+            <strong><%= link_to 'MEC', "http://www.mec.gov.py/cms"  %></strong> 
+            Para que pueda estar al tanto de la eduacación de nuestro país, resoluciones, informaciones
+            y demás noticias de suma importancia.
+          </span>
+        </div>
+      </div>
+      
+      <div class="wrapper">
+        <div class="item">
+          <img src="images/facebook.jpg" />
+          <span class="information">
+            <strong><%= link_to 'Facebook', "https://www.facebook.com/colmonsj.wiesen?fref=ts"  %></strong> 
+            Hazte nuestro amigo en una de las redes sociales más utilizadas, para compartir información e
+            imágenes.
+          </span>
+        </div>
+      </div>
+      
+    
+
+      <div class="wrapper">
+        <div class="item">
+          <img src="images/twitter.jpg" />
+          <span class="information">
+            <strong><%= link_to 'Twitter', "https://twitter.com/"  %></strong> 
+            O seguinos en twitter, para estar al tanto de nuestras actividades, compartir opiniones y otros
+            puntos de importancia
+          </span>
+        </div>
+      </div>
+
+      <div class="wrapper">
+        <div class="item">
+          <img src="images/contactos.jpg" />
+          <span class="information">
+            <strong>Contactanos</strong> 
+            Misiones e/ Cristophersen. Ciudad de Fram-Itapúa-Paraguay.
+            Teléfono/Fax: 0761265221
+            </br> Email: cmjw.fram@gmail.com
+
+          </span>
+        </div>
       </div>
     </div>
 
-    <div class="wrapper">
-      <div class="item">
-        <img src="images/ayuda.jpg" />
-        <span class="information">
-          <strong><%= link_to 'Ayuda', helps_path %></strong> 
-          Le brindamos la ayuda necesaria para que pueda tener un manejo del sistema.
-        </span>
-      </div>
     </div>
-    
-    <div class="wrapper">
-      <div class="item">
-        <img src="images/mec.jpg" />
-        <span class="information">
-          <strong><%= link_to 'MEC', "http://www.mec.gov.py/cms"  %></strong> 
-          Para que pueda estar al tanto de la eduacación de nuestro país, resoluciones, informaciones
-          y demás noticias de suma importancia.
-        </span>
-      </div>
-    </div>
-    
-    </br></br>
-    <div class="wrapper">
-      <div class="item">
-        <img src="images/facebook.jpg" />
-        <span class="information">
-          <strong><%= link_to 'Facebook', "https://www.facebook.com/colmonsj.wiesen?fref=ts"  %></strong> 
-          Hazte nuestro amigo en una de las redes sociales más utilizadas, para compartir información e
-          imágenes.
-        </span>
-      </div>
-    </div>
-    
-  
-
-    <div class="wrapper">
-      <div class="item">
-        <img src="images/twitter.jpg" />
-        <span class="information">
-          <strong><%= link_to 'Twitter', "https://twitter.com/"  %></strong> 
-          O seguinos en twitter, para estar al tanto de nuestras actividades, compartir opiniones y otros
-          puntos de importancia
-        </span>
-      </div>
-    </div>
-
-    <div class="wrapper">
-      <div class="item">
-        <img src="images/contactos.jpg" />
-        <span class="information">
-          <strong>Contactanos</strong> 
-          Misiones e/ Cristophersen. Ciudad de Fram-Itapúa-Paraguay.
-          Teléfono/Fax: 0761265221
-          </br> Email: cmjw.fram@gmail.com
-
-        </span>
-      </div>
-    </div>
-    
   </div>  

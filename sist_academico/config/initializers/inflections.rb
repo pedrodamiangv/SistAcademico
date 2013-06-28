@@ -23,4 +23,5 @@ ActiveSupport::Inflector.inflections do |inflect|
 	inflect.irregular 'calificacion', 'calificaciones'
 	inflect.irregular 'alumno_curso', 'alumnos_cursos'
 	inflect.irregular 'preferencia', 'preferencias'
+	inflect.irregular 'noticia', 'noticias'
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130627222200) do
+ActiveRecord::Schema.define(:version => 20130628215117) do
 
   create_table "addresses", :force => true do |t|
     t.string   "direccion"
@@ -128,6 +128,15 @@ ActiveRecord::Schema.define(:version => 20130627222200) do
   add_index "materias", ["curso_id"], :name => "materias_curso_id_fk"
   add_index "materias", ["docente_id"], :name => "materias_docente_id_fk"
 
+  create_table "noticias", :force => true do |t|
+    t.integer  "user_id",    :null => false
+    t.text     "noticia",    :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "noticias", ["user_id"], :name => "noticias_user_id_fk"
+
   create_table "planificaciones", :force => true do |t|
     t.integer  "materia_id",                   :null => false
     t.string   "tarea",         :limit => 30,  :null => false
@@ -210,6 +219,8 @@ ActiveRecord::Schema.define(:version => 20130627222200) do
 
   add_foreign_key "materias", "cursos", :name => "materias_curso_id_fk"
   add_foreign_key "materias", "docentes", :name => "materias_docente_id_fk"
+
+  add_foreign_key "noticias", "users", :name => "noticias_user_id_fk"
 
   add_foreign_key "planificaciones", "materias", :name => "planificaciones_materia_id_fk"
 

@@ -33,4 +33,8 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+
+  def self.obtener_noticias
+    noticias = Noticia.all
+  end
 end
