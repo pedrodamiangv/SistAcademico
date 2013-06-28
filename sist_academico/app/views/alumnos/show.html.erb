@@ -21,11 +21,18 @@
         <div>
           <%= link_to 'Ver mis notas->', alumno_calificaciones_alumno_path %>
           <hr/>
+          <label class="label">Cursos</label>
+          <ul class="nav nav-tabs nav-stacked">
+            <% @alumno.cursos.each do |curso| %>
+              <li class="li"><%= link_to curso.curso_grado, change_curso_alumno_path(@alumno, curso_id: curso) %> </li>
+            <% end %>
+          </ul>
+          <hr/>
           <label class="label">Materias</label>
           <ul class="nav nav-tabs nav-stacked">
             <% materias = @alumno.curso.materias %>
             <% materias.each do |materia| %>
-              <li class="li"><%= link_to materia.materia + " | " + materia.docente.user_nombre + ' ' + materia.docente.user_apellido , materia%> </li>
+              <li class="li"><%= link_to materia.materia + " | " + materia.docente.full_name , materia%> </li>
             <% end %>
           </ul>
         </div>
@@ -41,12 +48,16 @@
     <p>Direccion: <%= @alumno.user.address.direccion %></p>
     <p>Edad: <%= @alumno.user_edad %></p>
     <hr>
-    <p>Curso: <%= @alumno.curso_curso_grado %></p>
-    <p>Nivel: <%= @alumno.curso_nivel %></p>
-    <p>Enfasis: <%= @alumno.curso_enfasis %></p>
-    <p>Turno: <%= @alumno.curso_turno %></p>
     <p>Nombre del Responsable: <%= @alumno.responsable %> </p>
     <p>Telefono del Responsable: <%= @alumno.telefono_responsable %> </p>
+    <p>Curso Actual: <%= @alumno.curso_actual.curso_grado %></p>
+    <p>--------Nivel: <%= @alumno.curso_actual.nivel %></p>
+    <p>--------Enfasis: <%= @alumno.curso_actual.enfasis %></p>
+    <p>--------Turno: <%= @alumno.curso_actual.turno %></p>
+    <p>Curso Seleccionado: <%= @alumno.curso_curso_grado %></p>
+    <p>--------Nivel: <%= @alumno.curso_nivel %></p>
+    <p>--------Enfasis: <%= @alumno.curso_enfasis %></p>
+    <p>--------Turno: <%= @alumno.curso_turno %></p>
     <hr>
     <% if @alumno.doc_cedula || @alumno.doc_foto || @alumno.doc_cert_nacimiento || @alumno.doc_cert_estudios %>
       <p> Documentos Traidos: <p/>

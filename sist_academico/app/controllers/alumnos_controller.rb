@@ -78,7 +78,7 @@ class AlumnosController < ApplicationController
   # GET /alumnos/1.json
   def show
     @alumno = Alumno.find(params[:id])
-
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @alumno }
@@ -89,6 +89,7 @@ class AlumnosController < ApplicationController
   # GET /alumnos/new
   # GET /alumnos/new.json
   def new
+    @new = true
     @alumno = Alumno.new
     @alumno.build_user
     atributos
@@ -100,8 +101,19 @@ class AlumnosController < ApplicationController
 
   # GET /alumnos/1/edit
   def edit
+    @new = false
     @alumno = Alumno.find(params[:id])
     atributos
+    @endereco = @alumno.user.address
+  end
+
+  def change_curso 
+    @alumno = Alumno.find(params[:id])
+    curso = Curso.find(params[:curso_id])
+    @alumno.update_attribute(:curso_id, curso.id )
+    respond_to do |f|
+      f.html { redirect_to @alumno, notice: curso.curso_grado}
+    end
   end
 
   # POST /alumnos
@@ -114,11 +126,13 @@ class AlumnosController < ApplicationController
           edad = calcular_edad user
           user.update_attribute(:is_alumno, true)
           user.update_attribute(:edad, edad )
+          @alumno.cursos << @alumno.curso
           format.html { redirect_to @alumno, notice: 'El alumno ha sido registrado con exito.' }
           CustomLogger.info("Nuevo alumno: #{@alumno.user_nombre.inspect} ,Apellido: #{@alumno.user_apellido.inspect} ,Cedula de Identidad: #{@alumno.user_CINro.inspect} ,Sexo: #{@alumno.user_sexo.inspect} ,Telefono:#{@alumno.user_telefono.inspect} ,Correo Electronico: #{@alumno.user_email.inspect} ,Fecha de Nacimiento:#{@alumno.user_fecha_nacimiento.inspect} ,Lugar de Nacimiento: #{@alumno.user_lugar_nacimiento.inspect} ,Nombre del Responsable: #{@alumno.responsable.inspect} ,Telefono del Responsable: #{@alumno.telefono_responsable.inspect} ,Direccion: #{@alumno.user.address.direccion.inspect} ,Documentos Personales: Certificado de Estudio: #{@alumno.doc_cert_estudios.inspect} ,Cedula: #{@alumno.doc_cedula.inspect} ,Certificado de Nacimiento: #{@alumno.doc_cert_nacimiento.inspect} ,Foto Tipo Carnet: #{@alumno.doc_foto.inspect} ,Nombre de Usuario: #{@alumno.user_username.inspect} creado por el usuario: #{current_user.full_name.inspect} ,#{Time.now}")
           format.json { render json: @alumno, status: :created, location: @alumno }
           format.js   {}
         else
+          @new = true
           atributos
           format.html { render action: "new" }
           CustomLogger.error("Error al querer crear el nuevo alumno: #{@alumno.user_nombre.inspect} y sus demas atributos, por el usuario: #{current_user.full_name.inspect} ,#{Time.now}")
@@ -147,7 +161,8 @@ class AlumnosController < ApplicationController
     doc_cert_nacimiento_antiguo = @alumno.doc_cert_nacimiento
     doc_foto_antiguo = @alumno.doc_foto
     nombreUsuario_antiguo = @alumno.user_username
-
+    curso_anterior = @alumno.curso
+ 
     respond_to do |format|
       if @alumno.update_attributes(params[:alumno])
         nombre_nuevo = @alumno.user_nombre
@@ -166,11 +181,17 @@ class AlumnosController < ApplicationController
         doc_cert_nacimiento_nuevo = @alumno.doc_cert_nacimiento
         doc_foto_nuevo = @alumno.doc_foto
         nombreUsuario_nuevo = @alumno.user_username
+        curso_nuevo = @alumno.curso
+        unless @alumno.cursos.exists? curso_nuevo
+          @alumno.cursos << curso_nuevo
+        end
         CustomLogger.info("Los datos antes de ser actualizados son: Nombre del alumno: #{nombre_antiguo.inspect} ,Apellido: #{apellido_antiguo.inspect} ,Cedula de Identidad: #{cedula_antiguo.inspect} ,Sexo: #{sexo_antiguo.inspect} ,Telefono:#{telefono_antiguo.inspect} ,Correo Electronico: #{correo_antiguo.inspect} ,Fecha de Nacimiento:#{fechaNac_antiguo.inspect} ,Lugar de Nacimiento: #{lugarNac_antiguo.inspect} ,Nombre del Responsable: #{responsable_antiguo.inspect} ,Telefono del Responsable: #{telefonoRespon_antiguo.inspect} ,Direccion: #{direccion_antiguo.inspect} ,Documentos Personales: Foto Tipo Carnet: #{doc_foto_antiguo.inspect} ,Cedula: #{doc_cedula_antiguo.inspect} ,Certificado de Nacimiento: #{doc_cert_nacimiento_antiguo.inspect} ,Certificado de Estudio: #{doc_cert_estudios_antiguo.inspect} ,Nombre de Usuario: #{nombreUsuario_antiguo.inspect} .Los datos actualizados por el usuario: #{current_user.full_name.inspect} son los siguientes: Nombre del alumno: #{nombre_nuevo.inspect} ,Apellido: #{apellido_nuevo.inspect} ,Cedula de Identidad: #{cedula_nuevo.inspect} ,Sexo: #{sexo_nuevo.inspect} ,Telefono:#{telefono_nuevo.inspect} ,Correo Electronico: #{correo_nuevo.inspect} ,Fecha de Nacimiento:#{fechaNac_nuevo.inspect} ,Lugar de Nacimiento: #{lugarNac_nuevo.inspect} ,Nombre del Responsable: #{responsable_nuevo.inspect} ,Telefono del Responsable: #{telefonoRespon_nuevo.inspect} ,Direccion: #{direccion_nuevo.inspect} ,Documentos Personales: Foto Tipo Carnet: #{doc_foto_nuevo.inspect} ,Cedula: #{doc_cedula_nuevo.inspect} ,Certificado de Nacimiento: #{doc_cert_nacimiento_nuevo.inspect} ,Certificado de Estudio: #{doc_cert_estudios_nuevo.inspect} ,Nombre de Usuario: #{nombreUsuario_nuevo.inspect} ,#{Time.now} ")
         format.html { redirect_to @alumno, notice: 'El alumno ha sido actualizado.' }
         format.json { head :no_content }
       else
+        @new = false
         atributos
+        @endereco = @alumno.user.address
         format.html { render action: "edit" }
         format.json { render json: @alumno.errors, status: :unprocessable_entity }
       end

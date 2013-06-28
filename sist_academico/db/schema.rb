@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130627032016) do
+ActiveRecord::Schema.define(:version => 20130627202307) do
 
   create_table "addresses", :force => true do |t|
     t.string   "direccion"
@@ -49,6 +49,14 @@ ActiveRecord::Schema.define(:version => 20130627032016) do
 
   add_index "alumnos", ["curso_id"], :name => "alumnos_curso_id_fk"
   add_index "alumnos", ["user_id"], :name => "alumnos_user_id_fk"
+
+  create_table "alumnos_cursos", :id => false, :force => true do |t|
+    t.integer "alumno_id", :null => false
+    t.integer "curso_id",  :null => false
+  end
+
+  add_index "alumnos_cursos", ["alumno_id"], :name => "alumnos_cursos_alumno_id_fk"
+  add_index "alumnos_cursos", ["curso_id"], :name => "alumnos_cursos_curso_id_fk"
 
   create_table "calificaciones", :force => true do |t|
     t.integer  "alumno_id",                                      :null => false
@@ -177,6 +185,9 @@ ActiveRecord::Schema.define(:version => 20130627032016) do
 
   add_foreign_key "alumnos", "cursos", :name => "alumnos_curso_id_fk"
   add_foreign_key "alumnos", "users", :name => "alumnos_user_id_fk"
+
+  add_foreign_key "alumnos_cursos", "alumnos", :name => "alumnos_cursos_alumno_id_fk"
+  add_foreign_key "alumnos_cursos", "cursos", :name => "alumnos_cursos_curso_id_fk"
 
   add_foreign_key "calificaciones", "alumnos", :name => "calificaciones_alumno_id_fk"
   add_foreign_key "calificaciones", "materias", :name => "calificaciones_materia_id_fk"

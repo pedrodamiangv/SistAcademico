@@ -21,4 +21,5 @@ ActiveSupport::Inflector.inflections do |inflect|
 	inflect.irregular 'puntaje', 'puntajes'
 	inflect.irregular 'material', 'materiales'
 	inflect.irregular 'calificacion', 'calificaciones'
+	inflect.irregular 'alumno_curso', 'alumnos_cursos'
 end
