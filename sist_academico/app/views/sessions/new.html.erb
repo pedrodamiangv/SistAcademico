@@ -9,7 +9,7 @@
 				<%= form_tag sessions_path do %>
 		  		<div class="field">
 		   		 <%= label_tag :username, "Usuario" %>
-		    	 <%= text_field_tag :username, params[:username] %>
+		    	 <%= text_field_tag :username, params[:username] , :maxlength => 30 %>
 		  		</div>
 		  		<div class="field">
 		    	 <%= label_tag :password, "Contraseña" %>

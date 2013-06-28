@@ -28,6 +28,7 @@ class AdministrativosController < ApplicationController
   # GET /administrativos/new
   # GET /administrativos/new.json
   def new
+    @new = true
     @administrativo = Administrativo.new
     @administrativo.build_user
     atributos
@@ -39,6 +40,7 @@ class AdministrativosController < ApplicationController
 
   # GET /administrativos/1/edit
   def edit
+    @new = false
     @administrativo = Administrativo.find(params[:id])
     atributos
   end
@@ -58,6 +60,7 @@ class AdministrativosController < ApplicationController
         format.json { render json: @administrativo, status: :created, location: @administrativo }
         format.js   {}
       else
+        @new = true
         atributos
         format.html { render action: "new" }
         CustomLogger.error("Error al querer crear el nuevo administrativo: #{@administrativo.user_nombre.inspect} y sus demas atributos, por el usuario: #{current_user.full_name.inspect} ,#{Time.now}")
@@ -102,6 +105,7 @@ class AdministrativosController < ApplicationController
         format.html { redirect_to @administrativo, notice: 'El administrativo ha sido actualizado con exito.' }
         format.json { head :no_content }
       else
+        @new = false
         atributos
         format.html { render action: "edit" }
         format.json { render json: @administrativo.errors, status: :unprocessable_entity }

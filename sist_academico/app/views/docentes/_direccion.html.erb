@@ -1,5 +1,5 @@
-<% if @docente.titulo %>
-  <%= collection_select "docente[user_attributes]", :address_id, addresses,:id,:direccion,  {:prompt => @docente.user.address.direccion} %>
+<% unless @new %>
+  <%= collection_select "docente[user_attributes]", :address_id, addresses,:id,:direccion,  {:prompt => @endereco.id} %>
 <% else %>
   <%= collection_select "docente[user_attributes]", :address_id, addresses,:id,:direccion %>
 <% end %>

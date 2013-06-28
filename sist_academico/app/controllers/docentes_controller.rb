@@ -43,6 +43,7 @@ class DocentesController < ApplicationController
   # GET /docentes/new
   # GET /docentes/new.json
   def new
+    @new = true
     @docente = Docente.new
     @docente.build_user
     atributos
@@ -54,8 +55,10 @@ class DocentesController < ApplicationController
 
   # GET /docentes/1/edit
   def edit
+    @new = false
     @docente = Docente.find(params[:id])
     atributos
+    @endereco = @docente.user.address
   end
 
   # POST /docentes
@@ -74,6 +77,7 @@ class DocentesController < ApplicationController
         format.json { render json: @docente, status: :created, location: @docente }
         format.js   {}
       else
+        @new = true
         atributos
         format.html { render action: "new" }
         CustomLogger.error("Error al querer crear un nuevo docente: #{@docente.user_nombre.inspect} y sus demas atributos, por el usuario: #{current_user.full_name.inspect}, #{Time.now}")
@@ -120,7 +124,9 @@ class DocentesController < ApplicationController
         format.html { redirect_to @docente, notice: 'El docente ha sido actualizado con exito.' }
         format.json { head :no_content }
       else
+        @new = false
         atributos
+        @endereco = @docente.user.address
         format.html { render action: "edit" }
         format.json { render json: @docente.errors, status: :unprocessable_entity }
       end
