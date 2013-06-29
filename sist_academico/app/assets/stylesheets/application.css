@@ -12,6 +12,89 @@
  *= require_tree .
  */
 
+#vinculos a:link { 
+color:#1E90FF;
+font-size:12px;
+font-weight:bold;
+}
+#vinculos a:visited {
+color:#1E90FF;
+font-size:12px;
+font-weight:bold;
+}
+
+.texto{
+  text-align: justify;
+  font-size: 14px;
+  font-family: Arial;
+  color: black; 
+}
+
+.subTitulo{
+  text-align: justify;
+  font-family: Arial;
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.colorBorde{
+  background-color: #00BFFF;
+  padding: 20px;
+  border-style: solid;
+  border-width: 2px;
+}
+
+.colorBorde2{
+  background-color: #87CEFA;
+  padding: 20px;
+  border-style: solid;
+  border-width: 2px;
+}
+.textWrap{
+  float: right;
+  margin: 10px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #551010;
+}
+
+.textWrapLeft{
+  clear: right;
+  float: left;
+  margin: 10px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #551010;
+}
+
+.textWrapRight{
+  clear: left;
+  float: right;
+  margin: 10px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #551010;
+}
+
+#registrousuario {
+border-width: thin;
+color:#333333;
+height:630px;
+padding:0 0 0 50px;
+width:500px;
+}
+
+#registrousuario legend {
+color:#333333;
+font-family:arial;
+font-style: inherit;
+font-size:21px;
+letter-spacing:-1px;
+padding-bottom:20px;
+padding-top:8px;
+text-transform:capitalize;
+}
 
  #colorBoton{
   color:white;

@@ -36,11 +36,11 @@
         </tbody>
       </table>
       <%#= will_paginate @alumnos %>
-      <div class="link" align="center">
+      <div align="center" id="vinculos">
         <% if current_user.is_administrativo %>
-          <%= link_to 'Ver Lista como pdf ->', alumnos_path(:format => 'pdf') %>
-          <%= link_to 'Nuevo Alumno ->', new_alumno_path %>
-          <%= link_to 'Ver todos los alumnos registrados ->', index_total_alumnos_path %>
+          <i class="icon-file"></i><%= link_to 'Ver Lista como pdf', alumnos_path(:format => 'pdf') %>
+          <i class="icon-plus-sign"></i><%= link_to 'Nuevo Alumno', new_alumno_path %>
+          <i class="icon-list"></i><%= link_to 'Ver todos los alumnos registrados', index_total_alumnos_path %>
         <% end %>
       </div>
     </div>
