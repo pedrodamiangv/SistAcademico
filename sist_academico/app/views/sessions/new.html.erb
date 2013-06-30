@@ -3,7 +3,7 @@
 	<div id="registro">
     <fieldset>
       <legend>Iniciar Sesión</legend>
-
+    <div class="container cuadro">
  		<div class="span4 offset3">
   	    	<p class="error"><%= flash[:error] %></p>
 				<%= form_tag sessions_path do %>
@@ -19,12 +19,15 @@
 		   		 <%= check_box_tag :remember_me, 1, params[:remember_me] %>
 		    	 <%= label_tag :remember_me, "Recordarme" %>
 		  		</div>
-				
 		</div>
 
-		<div class="span4 offset3"
-			<div class="actions"><%= submit_tag "Entrar", class: "btn btn-large btn-inverse" %></div>
+		<div class="span4 offset3">
+			<div class="actions" align="center">
+				<%= submit_tag "Entrar", class: "btn btn-large btn-primary" %>
+				<%= link_to "Cancelar", root_path, class: "btn btn-large btn-primary", id: "colorBoton"%>
+			</div>	
 		</div>
+	</div>
 		<% end %>
 	</div>
 </div>

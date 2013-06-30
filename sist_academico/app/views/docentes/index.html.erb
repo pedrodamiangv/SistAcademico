@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <h1 class="h1">Lista de Docentes <%= Date.today.year %></h1>
+    <legend>Lista de Docentes <%= Date.today.year %></legend>
     <div class="row" align="right">
       Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido search-query"/> 
     </div>
@@ -35,11 +35,13 @@
         </tbody>
       </table>
       <%#= will_paginate @docentes %>
-      <% if current_user.is_administrativo %>
-        <%= link_to 'Ver Lista como pdf ->', docentes_path(:format => 'pdf') %>
-        <%= link_to 'Registrar nuevo Docente ->', new_docente_path %>
-        <%= link_to 'Ver todos los docentes registrados ->', index_total_docentes_path %>
-      <% end %>
+      <div align="center" id="vinculos">
+        <% if current_user.is_administrativo %>
+          <i class="icon-file"></i><%= link_to 'Ver Lista como pdf', docentes_path(:format => 'pdf') %>
+          <i class="icon-plus-sign"></i><%= link_to 'Nuevo Docente', new_docente_path %>
+          <i class="icon-list"></i><%= link_to 'Ver todos los docentes registrados', index_total_docentes_path %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

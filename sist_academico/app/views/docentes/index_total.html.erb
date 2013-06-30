@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <h1 class="h1">Lista de Docentes</h1>
+    <legend>Lista de Docentes</legend>
     <div class="row" align="right">
       Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido search-query"/> 
     </div>
@@ -36,11 +36,12 @@
           <% end %>
         </tbody>
       </table>
-      <%= will_paginate @docentes %>
-      <% if current_user.is_administrativo %>
-        <%= link_to 'Volver ->', docentes_path %>
-        <%= link_to 'Ver Lista como pdf ->', index_total_docentes_path(:format => 'pdf') %>
-      <% end %>
+      <div align="center" id="vinculos">
+        <% if current_user.is_administrativo %>
+          <i class="icon-arrow-left"></i><%= link_to 'Volver', docentes_path %>
+          <i class="icon-file"></i><%= link_to 'Ver Lista como pdf', index_total_docentes_path(:format => 'pdf') %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
