@@ -1,21 +1,25 @@
 <p id="notice"><%= notice %></p>
+<div class="datos">
+	<p>
+  		<b>Direccion:</b>
+  		<%= @address.direccion %>
+	</p>
 
-<p>
-  <b>Direccion:</b>
-  <%= @address.direccion %>
-</p>
+	<p>
+  		<b>Barrio:</b>
+  		<%= @address.barrio %>
+	</p>
 
-<p>
-  <b>Barrio:</b>
-  <%= @address.barrio %>
-</p>
+	<p>
+  		<b>Ciudad:</b>
+  		<%= link_to @address.city_city, @address.city %>
+	</p>
 
-<p>
-  <b>City:</b>
-  <%= link_to @address.city_city, @address.city %>
-</p>
+<div id="vinculos">
+	<% if current_user.is_administrativo %>
+		<i class="icon-edit"></i><%= link_to 'Editar', edit_address_path(@address) %> |
+	<% end %>
+		<i class="icon-list"></i><%= link_to 'Listar', addresses_path %>
+</div>
 
-<% if current_user.is_administrativo %>
-<%= link_to 'Editar', edit_address_path(@address) %> |
-<% end %>
-<%= link_to 'Listar', addresses_path %>
+</div>

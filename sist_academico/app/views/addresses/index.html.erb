@@ -30,11 +30,10 @@
           <% end %>
         </tbody>
       </table>
-      <%= will_paginate %>
-      <div class="link">
+      <div align="center" id="vinculos">
         <% if current_user.is_administrativo %>
-          <%= link_to 'Ver Lista como pdf ->', addresses_path(:format => 'pdf') %>
-          <%= link_to 'Registrar nuevo ->', new_address_path %>
+          <i class="icon-file"></i><%= link_to 'Ver Lista como pdf', addresses_path(:format => 'pdf') %>
+          <i class="icon-plus-sign"></i><%= link_to 'Registrar nuevo', new_address_path %>
         <% end %>
       </div>
     </div>
