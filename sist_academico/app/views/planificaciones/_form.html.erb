@@ -6,7 +6,7 @@
   <%= f.label :etapa %>
   <%= f.text_field :etapa, class: 'search-query', :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;' %>
   <%= f.label :fecha_entrega %>
-  <%= f.text_field :fecha_entrega, class: 'search-query', :id=> "fecha", :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;' %>
+  <%= f.text_field :fecha_entrega, class: 'search-query', :id=> "fecha", :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;', id:"fechaTarea" %>
   <%= f.label :total_puntos %>
   <%= f.text_field :total_puntos, class: 'input-medium', :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;', onblur: "validar(this)", :maxlength =>  2 %>
   <%= f.label :descripcion %>

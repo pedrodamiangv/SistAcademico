@@ -28,7 +28,7 @@
               <%= d.text_field :email, :maxlength => 30 %>
 
               <%= d.label :fecha_nacimiento, "Fecha de Nacimiento" %> 
-              <%= d.text_field :fecha_nacimiento, :id=> "fecha" %>
+              <%= d.text_field :fecha_nacimiento, :id=> "fecha" , id:"fechaNacDocen" %>
 
               <%= d.label :lugar_nacimiento, "Lugar de Nacimiento" %>
               <%= d.select( :lugar_nacimiento ,@cities_city) %>
