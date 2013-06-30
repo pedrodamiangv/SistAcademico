@@ -1,16 +1,21 @@
-<div id="reports">
+<% provide(:title, 'Inicio') %>
+<div id="fondo" class="fondo">
+    <h3 align="center">Colegio Parroquial Privado Subvencionado "Monseñor Juan Wiesen"</h3>
+    <h5 align="center"> Pagina de Reportes </h5>
+</div>
+<br/>
   <div class="container">
   	<div class="row">
-	  <div class="page-header">
-		<h1><small class="h1">Reporte de Calificaciones</small>
-			<small class="direccion">Ver: <%= select_tag 'select_type', options_from_collection_for_select(@cursos, "curso", "curso"), {class: 'input-medium'} %>
-				<div id="filters" class="row">
-				  <%= render 'notes' if @table and @chart %>
-				</div>
+		<h1>
+			<small class="direccion" style="margin-top: 39px;">
+				<%= select_tag 'select_type', options_from_collection_for_select(@cursos, "curso_grado", "curso_grado"), {class: 'input-medium'} %>
 			</small>
+			<div id="filters" class="direccion">
+				<%= render 'notes' if @table and @chart %>
+			</div>
 		</h1>
-	   </div>
 	</div>
+	<br/>
 	<div id="graphic" class="row">
 		<%= render 'graphic' if @table and @chart %>
 	</div>
@@ -19,6 +24,8 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
+		$('#principal').removeClass('container');
+    $('#fondo').corner("round 18px");
 		var path = '<%= change_data_reports_path %>';
 		rangeDate();
 		change_data_by_select(path);

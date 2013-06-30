@@ -9,6 +9,14 @@ class Curso < ActiveRecord::Base
   validates :turno, presence: true, length: { maximum: 10 }
   validates :tipo, presence: true, length: { maximum: 10 }
   def curso_grado
-  	self.curso + ' ' + self.tipo
+    if self.curso && self.tipo
+  	  self.curso + ' ' + self.tipo
+    elsif self.curso && !self.tipo
+      self.curso
+    elsif !self.curso && self.tipo  
+      self.tipo
+    else
+      ""
+    end 
   end
 end

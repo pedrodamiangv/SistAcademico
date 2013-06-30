@@ -50,7 +50,7 @@ class ReportsController < ApplicationController
     @range = params[:select_range]
     @cursos = Curso.by_year(Date.today.year)
     unless @type == "Colegio"
-      @cant_alumnos = @cursos.detect{|w| w.curso == @type }.alumnos.count
+      @cant_alumnos = @cursos.detect{|w| w.curso_grado == @type }.alumnos.count
     else
       i = 0
       @cursos.each do |curso|
@@ -91,7 +91,7 @@ class ReportsController < ApplicationController
       calificaciones.each do |calificacion|
         materia = calificacion.materia
         unless type == "Colegio"
-          if calificacion.created_at.between?(lower_limit,upper_limit) && materia.curso.curso == type
+          if calificacion.created_at.between?(lower_limit,upper_limit) && materia.curso.curso_grado == type
             key = materia.materia
             if hash.has_key?(key)
               hash[key]= hash[key]+1
@@ -117,7 +117,7 @@ class ReportsController < ApplicationController
       hash = Hash.new
       unless type == "Colegio"
         cursos = Curso.by_year(Date.today.year)
-        curso = cursos.detect{|w| w.curso == type }
+        curso = cursos.detect{|w| w.curso_grado == type }
         if range == "Sexo"
           cant_mas = 0
           cant_fem = 0

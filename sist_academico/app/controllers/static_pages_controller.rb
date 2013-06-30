@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-  before_filter :require_login, :only => :secret
+  before_filter :require_login
   def home
   	@noticias = ApplicationController.obtener_noticias
   end
