@@ -17,19 +17,23 @@
           </tr>
         </thead>
         <tbody>
-          <% @addresses.each do |address| %>
+          <% @addresses.each_with_index do |address, i| %>
+          <% id = "page-" + i.to_s %>
             <tr>
-              <td><%= link_to address.direccion, address %></td>
-              <td><%= address.barrio %></td>
-              <td><%= address.city_city %></td>
+              <td class="selection <%= id %>"><%= link_to address.direccion, address %></td>
+              <td class="selection <%= id %>"><%= address.barrio %></td>
+              <td class="selection <%= id %>"><%= address.city_city %></td>
               <% if current_user.is_administrativo %>
-                <td><%= link_to 'Editar', edit_address_path(address) %>
+                <td class="selection <%= id %>"><%= link_to 'Editar', edit_address_path(address) %>
                 <%= link_to 'Eliminar', address, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
               <% end %>
             </tr>
           <% end %>
         </tbody>
       </table>
+      <% if @addresses.size > 9 %>
+        <div id="selector"></div>
+      <% end %>
       <div align="center" id="vinculos">
         <% if current_user.is_administrativo %>
           <i class="icon-file"></i><%= link_to 'Ver Lista como pdf', addresses_path(:format => 'pdf') %>
@@ -39,4 +43,14 @@
     </div>
   </div>
 </div>
-
+<script type="text/javascript">
+    $(document).ready(function(){
+      test(0);
+    });
+    $('#selector').pagination({
+        items: <%= @addresses.size %>,
+        itemsOnPage: 10,
+        cssStyle: 'light-theme',
+        onPageClick: function(pageNumber){test(((pageNumber-1)*10))}
+    });
+</script>

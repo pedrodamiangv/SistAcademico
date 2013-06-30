@@ -17,7 +17,7 @@
                 <%= f.label :enfasis %>
                 <%= f.select(:enfasis, ['Ciencias Sociales', 'Ciencias Básicas', 'Técnico en Informática', 'Técnico en Contabilidad', 'Técnico en Administración', 'Otros' ])%>
                 <%= f.submit "Guardar",class: "btn btn-large btn-primary"%>
-                <%= link_to "Cancelar", cursos_path, class: "btn btn-large btn-primary", id: "colorBoton"%>
+                <%= link_to "Cancelar", :back, class: "btn btn-large btn-inverse" %>
               </div>
             <% end %>
         </fieldset>

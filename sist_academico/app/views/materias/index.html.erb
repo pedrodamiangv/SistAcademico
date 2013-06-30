@@ -18,27 +18,43 @@
           </tr>
         </thead>
         <tbody>
-          <% @materias.each do |materia| %>
+          <% @materias.each_with_index do |materia, i| %>
+          <% id = "page-" + i.to_s %>
             <tr>
-              <td><%= link_to materia.materia, materia %></td>
-              <td><%= materia.area %></td>
-              <td><%= materia.curso_curso %></td>
-              <td><%= materia.docente.user_nombre + ' ' + materia.docente.user_apellido %></td>
+              <td class="selection <%= id %>"><%= link_to materia.materia, materia %></td>
+              <td class="selection <%= id %>"><%= materia.area %></td>
+              <td class="selection <%= id %>"><%= materia.curso_curso %></td>
+              <td class="selection <%= id %>"><%= materia.docente.full_name %></td>
               <% if current_user.is_administrativo %>
-                <td><%= link_to 'Editar', edit_materia_path(materia) %>
+                <td class="selection <%= id %>"><%= link_to 'Editar', edit_materia_path(materia) %>
                 <%= link_to 'Eliminar', materia, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
               <% end %>  
             </tr>
           <% end %>
         </tbody>
       </table>
+      <% if @materias.size > 9 %>
+        <div id="selector"></div>
+      <% end %>
       <div align="center" id="vinculos">
         <% if current_user.is_administrativo %>
           <i class="icon-file"></i><%= link_to 'Ver Lista como pdf', materias_path(format: 'pdf') %>
           <i class="icon-plus-sign"></i><%= link_to 'Registrar Materia', new_materia_path %>
-          <i class="icon-list"></i><%= link_to 'Ver Materias de años anteriores', index_total_materias_path %>
+          <i class="icon-list"></i><%= link_to 'Ver Todas las Materias', index_total_materias_path %>
         <% end %>
       </div>
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+      test(0);
+    });
+    $('#selector').pagination({
+        items: <%= @materias.size %>,
+        itemsOnPage: 10,
+        cssStyle: 'light-theme',
+        onPageClick: function(pageNumber){test(((pageNumber-1)*10))}
+    });
+</script>

@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_filter :admin_user,   only: [:new, :create, :destroy]
 
   def index
-    @users = User.paginate(:page => params[:page], :per_page => 10)
+    @users = User.order('created_at DESC').all
   end
 
   def new

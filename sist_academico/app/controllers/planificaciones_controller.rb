@@ -7,7 +7,7 @@ class PlanificacionesController < ApplicationController
   # GET /planificaciones
   # GET /planificaciones.json
   def index
-    @planificaciones = Planificacion.paginate(:page => params[:page], :per_page => 10)
+    @planificaciones = Planificacion.order('created_at DESC').all
 
     respond_to do |format|
       format.html # index.html.erb

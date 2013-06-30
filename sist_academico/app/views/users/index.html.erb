@@ -21,25 +21,28 @@
         </tr>
       </thead>
       <tbody>
-      <% @users.each do |user| %>
+      <% @users.each_with_index do |user, i| %>
+      <% id = "page-" + i.to_s %>
         <tr>
-          <td><%= link_to user.nombre, user %></td>
-          <td><%= user.apellido %></td>
-          <td><%= user.telefono %></td>
-          <td><%= user.fecha_nacimiento %>|<%= user.lugar_nacimiento %></td>
-          <td><%= user.address.direccion %></td>
-          <td><%= user.username %></td>
-          <td><%= user.email %></td>
+          <td class="selection <%= id %>"><%= link_to user.nombre, user %></td>
+          <td class="selection <%= id %>"><%= user.apellido %></td>
+          <td class="selection <%= id %>"><%= user.telefono %></td>
+          <td class="selection <%= id %>"><%= user.fecha_nacimiento %>|<%= user.lugar_nacimiento %></td>
+          <td class="selection <%= id %>"><%= user.address.direccion %></td>
+          <td class="selection <%= id %>"><%= user.username %></td>
+          <td class="selection <%= id %>"><%= user.email %></td>
           <% if current_user.is_administrativo %>
-            <td><%= link_to 'Editar', edit_user_path(user) %>
+            <td class="selection <%= id %>"><%= link_to 'Editar', edit_user_path(user) %>
             <%= link_to 'Eliminar', user, method: :delete, data: { confirm: 'Estas seguro?'} %></td>
           <% end %>
         </tr>
       <% end %>
       </tbody>
       </table>
-      <%= will_paginate @users %>
-      <div class="link">
+      <% if @users.size > 9 %>
+        <div id="selector"></div>
+      <% end %>
+      <div align="center" id="vinculos">
         <% if current_user.is_administrativo %>
           <%= link_to 'Registrar nuevo ->', new_user_path %>
         <% end %>
@@ -47,3 +50,15 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+      test(0);
+    });
+    $('#selector').pagination({
+        items: <%= @users.size %>,
+        itemsOnPage: 10,
+        cssStyle: 'light-theme',
+        onPageClick: function(pageNumber){test(((pageNumber-1)*10))}
+    });
+</script>

@@ -18,19 +18,23 @@
           </tr>
         </thead>
         <tbody>
-          <% @materiales.each do |material| %>
+          <% @materiales.each_with_index do |material, i| %>
+          <% id = "page-" + i.to_s %>
             <tr>
-              <td><%= link_to material.nombre_material, :action => 'download_file', :id => material.id, :controller => 'materiales'  %></td>
-              <td><%= material.materia_materia %></td>
-              <td><%= material.materia.curso_curso %></td>
-              <td><%= material.created_at.to_s.slice(0,10); %></td>
+              <td class="selection <%= id %>"><%= link_to material.nombre_material, :action => 'download_file', :id => material.id, :controller => 'materiales'  %></td>
+              <td class="selection <%= id %>"><%= material.materia_materia %></td>
+              <td class="selection <%= id %>"><%= material.materia.curso_curso %></td>
+              <td class="selection <%= id %>"><%= material.created_at.to_s.slice(0,10); %></td>
               <% if current_user.is_administrativo %>
-                <td><%= link_to 'Eliminar', material, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
+                <td class="selection <%= id %>"><%= link_to 'Eliminar', material, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
               <% end %>  
             </tr>
           <% end %>
         </tbody>
       </table>
+      <% if @materiales.size > 9 %>
+        <div id="selector"></div>
+      <% end %>
       <div align="center" id="vinculos">
         <% if current_user.is_administrativo %>
           <i class="icon-arrow-left"></i><%= link_to 'Volver a lista de Materias', materias_path%>
@@ -39,3 +43,15 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+      test(0);
+    });
+    $('#selector').pagination({
+        items: <%= @materiales.size %>,
+        itemsOnPage: 10,
+        cssStyle: 'light-theme',
+        onPageClick: function(pageNumber){test(((pageNumber-1)*10))}
+    });
+</script>

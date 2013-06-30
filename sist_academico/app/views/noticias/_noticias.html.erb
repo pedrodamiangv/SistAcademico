@@ -1,11 +1,28 @@
 <ul class="nav nav-tabs nav-stacked">
-  <% noticias.each do |noticia| %>
-    <li> <%= noticia.noticia %> </li>
-    <li class="li">Posteado por: <%= noticia.user_full_name %> </li>
-    <li class="li"> <%= time_ago_in_words(noticia.created_at) %> </li>
+  <% noticias.each_with_index do |noticia, i| %>
+  <% id = "page-" + i.to_s %>
+    <li class="selection <%= id %>"> <%= noticia.noticia %> </li>
+    <li class="li selection <%= id %>">Posteado por: <%= noticia.user_full_name %> </li>
+    <li class="li selection <%= id %>"> <%= time_ago_in_words(noticia.created_at) %> </li>
     <% if noticia.user == current_user || current_user.is_administrativo? %>
-      <%= link_to "Editar", edit_noticia_path(noticia), remote: true %>|<%= link_to 'Eliminar', noticia, method: :delete, data: { confirm: 'Estas seguro?' }, remote: true %>
+      <p class="selection <%= id %>"> <%= link_to "Editar", edit_noticia_path(noticia), remote: true %>|<%= link_to 'Eliminar', noticia, method: :delete, data: { confirm: 'Estas seguro?' }, remote: true %></p>
     <% end %>
-    <hr/>
+    <hr class="selection <%= id %>"/>
   <% end %>
 </ul>
+
+<% if noticias.size > 9 %>
+    <div id="selector"></div>
+<% end %>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+      test(0);
+    });
+    $('#selector').pagination({
+        items: <%= noticias.size %>,
+        itemsOnPage: 10,
+        cssStyle: 'light-theme',
+        onPageClick: function(pageNumber){test(((pageNumber-1)*10))}
+    });
+</script>

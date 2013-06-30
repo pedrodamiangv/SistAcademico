@@ -5,7 +5,7 @@ class CursosController < ApplicationController
  
 
   def index_total
-    @cursos = Curso.paginate(:page => params[:page], :per_page => 10)
+    @cursos = Curso.order('created_at DESC').all
     @total = true
     respond_to do |format|
       format.html # index.html.erb
@@ -18,7 +18,7 @@ class CursosController < ApplicationController
   # GET /cursos
   # GET /cursos.json
   def index
-    @cursos = Curso.by_year(Date.today.year).paginate(:page => params[:page], :per_page => 10)
+    @cursos = Curso.by_year(Date.today.year).all
     @total = false
     respond_to do |format|
       format.html # index.html.erb

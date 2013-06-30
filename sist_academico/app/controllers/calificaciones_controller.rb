@@ -5,7 +5,7 @@ class CalificacionesController < ApplicationController
   # GET /calificaciones
   # GET /calificaciones.json
   def index
-    @calificaciones = Calificacion.paginate(:page => params[:page], :per_page => 10)
+    @calificaciones = Calificacion.order('created_at DESC').all
 
     respond_to do |format|
       format.html # index.html.erb

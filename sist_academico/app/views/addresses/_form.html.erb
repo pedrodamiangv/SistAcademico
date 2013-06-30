@@ -15,7 +15,7 @@
     			 <%= f.collection_select :city_id ,@cities,:id,:city %>
            <div class="row" align="center">
               <%= f.submit "Guardar", class: "btn btn-large btn-primary" %>
-              <%= link_to "Cancelar", addresses_path, class: "btn btn-large btn-primary", id: "colorBoton"%>
+              <%= link_to "Cancelar", :back, class: "btn btn-large btn-inverse" %>
            </div>
         </div>
 	<% end %>

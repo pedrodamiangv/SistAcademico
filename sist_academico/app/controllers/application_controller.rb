@@ -38,7 +38,4 @@ class ApplicationController < ActionController::Base
     noticias = Noticia.order('created_at DESC').all
   end
 
-  def save_noticia
-  end
-
 end

@@ -6,7 +6,7 @@ class AlumnosController < ApplicationController
   # GET /alumnos
   # GET /alumnos.json
   def index_total
-    @alumnos = Alumno.paginate(:page => params[:page], :per_page => 10)
+    @alumnos = Alumno.order('created_at DESC').all
     @total = true
     respond_to do |format|
       format.html # index.html.erb

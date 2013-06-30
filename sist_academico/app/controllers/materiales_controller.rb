@@ -2,7 +2,7 @@ require 'custom_logger'
 class MaterialesController < ApplicationController
 
   def index
-    @materiales = Material.paginate(:page => params[:page], :per_page => 10)
+    @materiales = Material.order('created_at DESC').all
   end
 
   def show

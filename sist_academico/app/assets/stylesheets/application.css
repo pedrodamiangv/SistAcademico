@@ -12,6 +12,10 @@
  *= require_tree .
  */
 
+.selection {
+  display: none;
+}
+
 #vinculos a:link { 
 color:#1E90FF;
 font-size:12px;

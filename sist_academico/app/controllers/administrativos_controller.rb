@@ -5,7 +5,7 @@ class AdministrativosController < ApplicationController
   # GET /administrativos
   # GET /administrativos.json
   def index
-    @administrativos = Administrativo.paginate(:page => params[:page], :per_page => 10)
+    @administrativos = Administrativo.order('created_at DESC').all
     @total = false
     respond_to do |format|
       format.html # index.html.erb

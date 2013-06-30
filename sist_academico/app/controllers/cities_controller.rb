@@ -6,7 +6,7 @@ class CitiesController < ApplicationController
   # GET /cities
   # GET /cities.json
   def index
-    @cities = City.paginate(:page => params[:page], :per_page => 10)
+    @cities = City.order('created_at DESC').all
 
     respond_to do |format|
       format.html # index.html.erb

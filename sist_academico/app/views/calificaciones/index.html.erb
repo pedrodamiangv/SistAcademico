@@ -20,23 +20,36 @@
         </thead>
         <tbody>
 
-          <% @calificaciones.each do |calificacion| %>
+          <% @calificaciones.each_with_index do |calificacion, i| %>
+          <% id = "page-" + i.to_s %>
             <tr>
-              <td><%= calificacion.alumno.full_name %></td>
-              <td><%= calificacion.materia.materia %></td>
-              <td><%= calificacion.calificacion %></td>
-              <td><%= calificacion.total_puntos %></td>
-              <td><%= calificacion.puntos_correctos %></td>
+              <td class="selection <%= id %>"><%= calificacion.alumno.full_name %></td>
+              <td class="selection <%= id %>"><%= calificacion.materia.materia %></td>
+              <td class="selection <%= id %>"><%= calificacion.calificacion %></td>
+              <td class="selection <%= id %>"><%= calificacion.total_puntos %></td>
+              <td class="selection <%= id %>"><%= calificacion.puntos_correctos %></td>
               <% if current_user.is_administrativo %>
-                <td><%= link_to 'Editar', edit_calificacion_path(calificacion) %><%= link_to 'Eliminar', calificacion, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
+                <td class="selection <%= id %>"><%= link_to 'Editar', edit_calificacion_path(calificacion) %><%= link_to 'Eliminar', calificacion, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
               <% end %>
             </tr>
           <% end %>
         </table>
-      <%= will_paginate @calificaciones %>
+        <% if @calificaciones.size > 9 %>
+          <div id="selector"></div>
+        <% end %>
     </div>
   </div>
 </div>
 
-
+<script type="text/javascript">
+    $(document).ready(function(){
+      test(0);
+    });
+    $('#selector').pagination({
+        items: <%= @calificaciones.size %>,
+        itemsOnPage: 10,
+        cssStyle: 'light-theme',
+        onPageClick: function(pageNumber){test(((pageNumber-1)*10))}
+    });
+</script>
 

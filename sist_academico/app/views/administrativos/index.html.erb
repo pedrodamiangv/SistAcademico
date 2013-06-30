@@ -20,22 +20,26 @@
           </tr>
         </thead>
         <tbody>
-          <% @administrativos.each do |administrativo| %>
+          <% @administrativos.each_with_index do |administrativo, i| %>
+          <% id = "page-" + i.to_s %>
             <tr>
-              <td><%= link_to administrativo.user_nombre, administrativo %></td>
-              <td><%= administrativo.user_apellido %></td>
-              <td><%= administrativo.cargo %></td>
-              <td><%= administrativo.user_telefono %></td>
-              <td><%= administrativo.titulo %></td>
-              <td><%= administrativo.created_at.to_s.slice(0,10); %></td>
+              <td class="selection <%= id %>"><%= link_to administrativo.user_nombre, administrativo %></td>
+              <td class="selection <%= id %>"><%= administrativo.user_apellido %></td>
+              <td class="selection <%= id %>"><%= administrativo.cargo %></td>
+              <td class="selection <%= id %>"><%= administrativo.user_telefono %></td>
+              <td class="selection <%= id %>"><%= administrativo.titulo %></td>
+              <td class="selection <%= id %>"><%= administrativo.created_at.to_s.slice(0,10); %></td>
               <% if current_user.is_administrativo %>
-                <td><%= link_to 'Editar', edit_administrativo_path(administrativo) %>
+                <td class="selection <%= id %>"><%= link_to 'Editar', edit_administrativo_path(administrativo) %>
                 <%= link_to 'Eliminar', administrativo, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
               <% end %>
             </tr>
           <% end %>
         </tbody>
       </table>
+      <% if @administrativos.size > 9 %>
+        <div id="selector"></div>
+      <% end %>
       <div align="center" id="vinculos">
         <% if current_user.is_administrativo %>
           <i class="icon-file"></i><%= link_to 'Ver Lista como pdf', administrativos_path(:format => 'pdf') %>
@@ -45,3 +49,14 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function(){
+      test(0);
+    });
+    $('#selector').pagination({
+        items: <%= @administrativos.size %>,
+        itemsOnPage: 10,
+        cssStyle: 'light-theme',
+        onPageClick: function(pageNumber){test(((pageNumber-1)*10))}
+    });
+</script>

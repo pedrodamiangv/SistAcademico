@@ -5,7 +5,7 @@ class AddressesController < ApplicationController
   # GET /addresses
   # GET /addresses.json
   def index
-    @addresses = Address.paginate(:page => params[:page], :per_page => 10)
+    @addresses = Address.order('created_at DESC').all
     @total = false
     respond_to do |format|
       format.html # index.html.erb

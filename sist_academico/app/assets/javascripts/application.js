@@ -19,7 +19,17 @@
 //= require jsapi
 //= require bootstrap-button
 //= require jquery.corner
+//= require simple_pagination
 //= require_tree .
+
+function test(pageNumber)
+{
+  $('.selection').hide();
+  for(var i=0; i<10; i++){
+    var page=".page-"+(pageNumber+i);
+    $(page).show();
+  }
+}
 
 $(document).ready(function() {
   //Ready for calendar
@@ -32,6 +42,7 @@ $(document).ready(function() {
   $("#kwd_search").keyup(function(){
     if( $(this).val() != "")
     {
+      $(".selection").show();
       $("#my-table tbody>tr").hide();
       $("#my-table td:contains-ci('" + $(this).val() + "')").parent("tr").show();
     }

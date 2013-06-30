@@ -19,22 +19,25 @@
           </tr>
         </thead>
         <tbody>
-          <% @cursos.each do |curso| %>
+          <% @cursos.each_with_index do |curso, i| %>
+          <% id = "page-" + i.to_s %>
             <tr>
-              <td><%= link_to curso.curso_grado, curso %></td>
-              <td><%= curso.turno %></td>
-              <td><%= curso.nivel %></td>
-              <td><%= curso.enfasis %></td>
-              <td><%= curso. created_at.to_s.slice(0,4); %></td>
+              <td class="selection <%= id %>"><%= link_to curso.curso_grado, curso %></td>
+              <td class="selection <%= id %>"><%= curso.turno %></td>
+              <td class="selection <%= id %>"><%= curso.nivel %></td>
+              <td class="selection <%= id %>"><%= curso.enfasis %></td>
+              <td class="selection <%= id %>"><%= curso. created_at.to_s.slice(0,4); %></td>
               <% if current_user.is_administrativo %>
-                <td><%= link_to 'Editar', edit_curso_path(curso) %>
+                <td class="selection <%= id %>"><%= link_to 'Editar', edit_curso_path(curso) %>
                 <%= link_to 'Eliminar', curso, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
               <% end %>
             </tr>
           <% end %>
         </tbody>
       </table>
-      
+      <% if @cursos.size > 9 %>
+        <div id="selector"></div>
+      <% end %>
       <div align="center" id="vinculos">
         <% if current_user.is_administrativo %>
           <i class="icon-arrow-left"></i><%= link_to 'Volver', cursos_path %>
@@ -45,3 +48,14 @@
   </div>
 </div>
 
+<script type="text/javascript">
+    $(document).ready(function(){
+      test(0);
+    });
+    $('#selector').pagination({
+        items: <%= @cursos.size %>,
+        itemsOnPage: 10,
+        cssStyle: 'light-theme',
+        onPageClick: function(pageNumber){test(((pageNumber-1)*10))}
+    });
+</script>

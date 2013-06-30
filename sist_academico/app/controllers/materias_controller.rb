@@ -8,7 +8,7 @@ class MateriasController < ApplicationController
   # GET /materia.json
 
   def index_total
-    @materias = Materia.paginate(:page => params[:page], :per_page => 10)
+    @materias = Materia.order('created_at DESC').all
     @total = true
     respond_to do |format|
       format.html # index.html.erb
@@ -21,7 +21,7 @@ class MateriasController < ApplicationController
   # GET /cursos
   # GET /cursos.json
   def index
-    @materias = Materia.by_year(Date.today.year).paginate(:page => params[:page], :per_page => 10)
+    @materias = Materia.by_year(Date.today.year).all
     @total = false
     respond_to do |format|
       format.html # index.html.erb

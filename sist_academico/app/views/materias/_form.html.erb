@@ -14,7 +14,7 @@
                 <%= f.label :docente_id %>
                 <%= f.select :docente_id,  @docentes.map {|d| [d.user.nombre + ' ' + d.user.apellido  ,d.id] }  %>
                 <%= f.submit "Guardar", class: "btn btn-large btn-primary" %>
-                <%= link_to "Cancelar", materias_path, class: "btn btn-large btn-primary", id: "colorBoton"%>
+                <%= link_to "Cancelar", :back, class: "btn btn-large btn-inverse" %>
               </div>
             <% end %>
         </fieldset>

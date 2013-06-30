@@ -20,22 +20,26 @@
           </tr>
         </thead>
         <tbody>
-          <% @docentes.each do |docente| %>
+          <% @docentes.each_with_index do |docente, i| %>
+          <% id = "page-" + i.to_s %>
             <tr>
-              <td><%= link_to docente.user_nombre, docente %></td>
-              <td><%= docente.user_apellido %></td>
-              <td><%= docente.user_telefono %></td>
-              <td><%= docente.matricula %></td>
-              <td><%= docente.titulo %></td>
-              <td><%= docente.created_at.to_s.slice(0,10); %></td>
+              <td class="selection <%= id %>"><%= link_to docente.user_nombre, docente %></td>
+              <td class="selection <%= id %>"><%= docente.user_apellido %></td>
+              <td class="selection <%= id %>"><%= docente.user_telefono %></td>
+              <td class="selection <%= id %>"><%= docente.matricula %></td>
+              <td class="selection <%= id %>"><%= docente.titulo %></td>
+              <td class="selection <%= id %>"><%= docente.created_at.to_s.slice(0,10); %></td>
               <% if current_user.is_administrativo %>
-                <td><%= link_to 'Editar', edit_docente_path(docente) %>
+                <td class="selection <%= id %>"><%= link_to 'Editar', edit_docente_path(docente) %>
                 <%= link_to 'Eliminar', docente, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
               <% end %>
             </tr>
           <% end %>
         </tbody>
       </table>
+      <% if @docentes.size > 9 %>
+        <div id="selector"></div>
+      <% end %>
       <div align="center" id="vinculos">
         <% if current_user.is_administrativo %>
           <i class="icon-arrow-left"></i><%= link_to 'Volver', docentes_path %>
@@ -46,3 +50,14 @@
   </div>
 </div>
 
+<script type="text/javascript">
+    $(document).ready(function(){
+      test(0);
+    });
+    $('#selector').pagination({
+        items: <%= @docentes.size %>,
+        itemsOnPage: 10,
+        cssStyle: 'light-theme',
+        onPageClick: function(pageNumber){test(((pageNumber-1)*10))}
+    });
+</script>

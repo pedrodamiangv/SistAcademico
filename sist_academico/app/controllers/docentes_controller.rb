@@ -6,7 +6,7 @@ class DocentesController < ApplicationController
   # GET /docentes
   # GET /docentes.json
   def index_total
-    @docentes = Docente.paginate(:page => params[:page], :per_page => 10)
+    @docentes = Docente.order('created_at DESC').all
     @total = true
     respond_to do |format|
       format.html # index.html.erb

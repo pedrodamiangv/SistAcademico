@@ -10,7 +10,7 @@
   			<%= f.label :pais %>
   			<%= f.collection_select :country_id ,@countries,:id,:pais %><br/>
   			<%= submit_tag "Guardar", class: "btn btn-large btn-primary" %>
-        <%= link_to "Cancelar", cities_path, class: "btn btn-large btn-primary", id: "colorBoton"%>
+        <%= link_to "Cancelar", :back, class: "btn btn-large btn-inverse" %>
 			<% end %>
 		</div>
 		</fieldset>
