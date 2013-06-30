@@ -2,6 +2,9 @@
   $(document).ready(function(){
     $('#principal').removeClass('container');
     $('#fondo').corner("round 18px");
+    $('#txt-noticia').on("click", function(){
+      $('#btn-noticia').slideToggle();
+    });
   });
 </script>
 <% provide(:title, 'Inicio') %>
@@ -14,15 +17,24 @@
   <div class="row">
 
     <div class="span6">
-      <label class="label label-success">Noticias</label>
-          <ul class="nav nav-tabs nav-stacked">
-            <% @noticias.each do |noticia| %>
-              <li class="li"><%= noticia.noticia %> </li>
-              <li class="li">Posteado por: <%= noticia.user_full_name %> </li>
-              <li class="li">Fecha: <%= noticia.created_at %> </li>
-              <hr/>
-            <% end %>
-          </ul>
+      <div>
+        <label id="bien" class="alert alert-success" style="display: none;"></label>
+        <label id="mal" class="alert alert-error" style="display: none;"></label>
+        <%= form_for :noticia, remote: true, :url => url_for(:controller => 'noticias', :action => 'create') do |form| %>
+          <%= form.label :noticia, 'Publicar Noticia' %>
+          <%= form.text_field :noticia, id: "txt-noticia" %>
+          <div id="btn-noticia" style="display: none;">
+            <%= form.submit "Publicar", :class => 'direccion btn btn-info btn-small' %>  
+          </div>  
+        <% end %>
+      </div>
+      <br/>
+      <div>
+        <label class="label label-success">Noticias</label>
+        <div id="noticias">
+          <%= render 'noticias/noticias', noticias: @noticias %>
+        </div>
+      </div>
     </div>
 
     <div class="span4 offset1">

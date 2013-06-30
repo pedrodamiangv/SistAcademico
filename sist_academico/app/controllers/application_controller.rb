@@ -35,6 +35,10 @@ class ApplicationController < ActionController::Base
   end
 
   def self.obtener_noticias
-    noticias = Noticia.all
+    noticias = Noticia.order('created_at DESC').all
   end
+
+  def save_noticia
+  end
+
 end

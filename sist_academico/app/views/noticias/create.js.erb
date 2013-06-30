@@ -1,0 +1,6 @@
+$('#noticias').html("<%= escape_javascript( render 'noticias/noticias', noticias: @noticias) %>");
+$('#bien').html("Noticia publicada");
+$('#mal').hide();
+$('#bien').show();
+$('#txt-noticia').val("");
+$('#btn-noticia').hide();

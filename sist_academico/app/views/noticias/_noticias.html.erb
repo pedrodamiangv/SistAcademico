@@ -1,0 +1,8 @@
+<ul class="nav nav-tabs nav-stacked">
+  <% noticias.each do |noticia| %>
+    <li class="li"><%= noticia.noticia %> </li>
+    <li class="li">Posteado por: <%= noticia.user_full_name %> </li>
+    <li class="li">Fecha: <%= noticia.created_at %> </li>
+    <hr/>
+  <% end %>
+</ul>

@@ -1,6 +1,7 @@
 SistAcademico::Application.routes.draw do
 
   resources :helps
+  resources :noticias 
 
   resources :reports do
     collection do
