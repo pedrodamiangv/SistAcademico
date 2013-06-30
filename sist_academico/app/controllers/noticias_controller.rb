@@ -12,6 +12,9 @@ class NoticiasController < ApplicationController
   # GET /cities/1/edit
   def edit
     @noticia = Noticia.find(params[:id])
+    respond_to do |format|
+      format.js
+    end
   end
 
   # POST /cities
@@ -41,7 +44,7 @@ class NoticiasController < ApplicationController
       	@noticias = Noticia.order("created_at DESC").all
         noticia_nueva = @noticia.noticia
         CustomLogger.info("Los datos antes de actualizar son: Noticia #{noticia_antigua.inspect}. Los datos actualizados por el usuario: #{current_user.full_name.inspect} son: Noticia #{noticia_nueva.inspect}, #{Time.now}")
-        format.js { 'create' }
+        format.js
       else
         format.js { render 'create_error' }
       end
@@ -61,6 +64,7 @@ class NoticiasController < ApplicationController
         notice= "Esta noticia no puede ser eliminada"
         Custom+Logger.error("Error al eliminar la noticia: #{@noticia.noticia.inspect}. Usuario: #{current_user.full_name.inspect}, #{Time.now}")
       ensure
+      	@noticias = Noticia.order("created_at DESC").all
         format.js
       end
     end

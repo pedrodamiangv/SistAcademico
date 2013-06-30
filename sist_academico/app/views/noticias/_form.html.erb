@@ -1,0 +1,10 @@
+<label id="bien" class="alert alert-success" style="display: none;"></label>
+<label id="mal" class="alert alert-error" style="display: none;"></label>
+<%= form_for noticia, remote: true do |form| %>
+  <%= form.label :noticia, 'Publicar Noticia' %>
+  <%= form.text_field :noticia, id: "txt-noticia" %>
+  <div id="btn-noticia" style="display: none;">
+    <%= form.submit "Publicar", :class => 'direccion btn btn-info btn-small' %> 
+    <a href="#" onclick="limpiar();" class="direccion btn btn-small">Cancelar</a>
+  </div>  
+<% end %>

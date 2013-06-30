@@ -1,0 +1,7 @@
+$('#noticias').html("<%= escape_javascript( render 'noticias/noticias', noticias: @noticias) %>");
+$('#new_edit').html("<%= escape_javascript( render 'noticias/form', noticia: Noticia.new ) %>");
+$('#bien').html("Noticia actualizada");
+$('#mal').hide();
+$('#bien').show();
+$('#txt-noticia').val("");
+$('#btn-noticia').hide();
