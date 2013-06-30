@@ -18,5 +18,10 @@ showMonthAfterYear: false,
 yearRange:'-40:+0',
 yearSuffix: ''};
 $.datepicker.setDefaults($.datepicker.regional['es']);
+
+$( "#fechaNacAlumn" ).datepicker({ maxDate: '-4y' });
+$("#fechaNacDocen").datepicker({ maxDate:'-20y'});
+$("#fechaNacAdminis").datepicker({ maxDate:'-20y'});
+      
 });
 

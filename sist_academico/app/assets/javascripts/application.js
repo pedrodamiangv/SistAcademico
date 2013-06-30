@@ -75,6 +75,20 @@ function validar(obj) {
   }
 }
 
+function validarFechaMenorActual (obj)
+  {
+        date2= obj.value
+        var today = Date.today;
+        if (date2>today)
+        {
+            alert('Debe ser menor a la fecha actual');
+        }
+          else
+          {
+              return true;
+          }
+  }
+
 function change_data_by_select(path){
   $('#select_type').on('change', function(){
     var _type = $("#select_type").val();
