@@ -42,7 +42,7 @@
               <%= f.text_field :telefono_responsable, :maxlength => 13, :placeholder => "(xxxx) xxxxxx", class:  "span2" %>
 
               <%= f.label :curso_id %>
-              <%= f.collection_select :curso_id ,@cursos,:id, :curso,{},{class: "span2"}  %>
+              <%= f.collection_select :curso_id ,@cursos,:id, :curso_grado,{},{class: "span2"}  %>
 
               <%= d.label :direccion, "Dirección" %>
               <div id="direccion">
