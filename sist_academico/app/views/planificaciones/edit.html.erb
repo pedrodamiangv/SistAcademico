@@ -12,7 +12,9 @@
 	    <b>Etapa: <%= @planificacion.etapa %><br/>
 	    Fecha de Entrega: <%= @planificacion.fecha_entrega %><br/>
 	  </div>
-	  <a href="#" class="offset5" onclick="edicion_planificacion();">>>Editar estos campos<<</a></b>
+	  <div id="vinculos">
+	  	<a href="#" class="offset5" onclick="edicion_planificacion();"><i class="icon-edit"></i>Editar estos campos</a></b>
+	  </div>
   </div>
   <hr/>
   <div id="campos_edicion" class="row" style=" display:none;">
@@ -27,7 +29,9 @@
 	  <%= f.text_field :fecha_entrega, class: 'search-query', :id=> "fecha", :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;' %>
 	  <%= f.label :total_puntos %>
 	  <%= f.text_field :total_puntos, class: 'input-medium', :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;', onblur: "validar(this)" %>
-	  <a href="#" onclick="edicion_planificacion2();">>>Volver<<</a>
+	  <div id="vinculos">
+	  	<a href="#" onclick="edicion_planificacion2();"><i class="icon-arrow-left"></i>Volver</a>
+	  </div>
 	</div>
   </div>
   <div class="row">
@@ -58,7 +62,8 @@
 	        </tbody>
 	      </table>
 	  <div align="center">
-	    <%= f.submit "Guardar", class: "btn btn-large btn-inverse" %>
+	    <%= f.submit "Guardar", class: "btn btn-large btn-primary" %>
+	    <%= link_to "Cancelar", planificaciones_path, class: "btn btn-large btn-primary", id: "colorBoton"%>
 	  </div>
 	</div>
 <% end %>

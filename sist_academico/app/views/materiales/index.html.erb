@@ -31,7 +31,11 @@
           <% end %>
         </tbody>
       </table>
-      <%= will_paginate @materiales %>
+      <div align="center" id="vinculos">
+        <% if current_user.is_administrativo %>
+          <i class="icon-arrow-left"></i><%= link_to 'Volver a lista de Materias', materias_path%>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

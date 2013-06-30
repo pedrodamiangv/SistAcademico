@@ -34,11 +34,11 @@
           <% end %>
         </tbody>
       </table>
-      <%= will_paginate @cursos %>
-      <div class="link">
+      
+      <div align="center" id="vinculos">
         <% if current_user.is_administrativo %>
-          <%= link_to 'Volver ->', cursos_path %>
-          <%= link_to 'Ver Lista como pdf ->', index_total_cursos_path(:format => 'pdf') %>
+          <i class="icon-arrow-left"></i><%= link_to 'Volver', cursos_path %>
+          <i class="icon-file"></i><%= link_to 'Ver Lista como pdf', index_total_cursos_path(:format => 'pdf') %>
         <% end %>
       </div>
     </div>

@@ -18,9 +18,9 @@
 			<%= text_field name, :puntos_correctos, value: p.puntos_correctos, style: 'display: none;' %>
 			<td><%= p.puntos_correctos %></td>
 			<% if p.calificacion != nil %>
-			  <td><%= text_field name, :calificacion, value: p.calificacion, :maxlength => 10, class: 'input-small' %></td>
+			  <td><%= text_field name, :calificacion, value: p.calificacion, :maxlength => 1, class: 'input-small' %></td>
 			<% else %>
-			  <td><%= text_field name, :calificacion, :maxlength => 10, class: 'input-small' %></td>
+			  <td><%= text_field name, :calificacion, :maxlength => 1, class: 'input-small' %></td>
 			<% end %>
 		</tr>
 	<% end %>

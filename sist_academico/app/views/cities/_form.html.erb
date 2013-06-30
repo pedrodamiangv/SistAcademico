@@ -1,15 +1,16 @@
+<%= form_for(@city) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
 <div class="container">
   	<div class="row">
   	<div id="registro">
         <fieldset>
-		  <%= form_for(@city) do |f| %>
-  			<%= render 'shared/error_messages', object: f.object %>
     <div class="span3 offset4">
   			<%= f.label :ciudad %>
-  			<%= f.text_field :city, :maxlength => 50 %><br/>
+  			<%= f.text_field :city, :maxlength => 50, class: "span4" %><br/>
   			<%= f.label :pais %>
   			<%= f.collection_select :country_id ,@countries,:id,:pais %><br/>
-  			<%= submit_tag "Guardar", class: "btn btn-large btn-inverse" %>
+  			<%= submit_tag "Guardar", class: "btn btn-large btn-primary" %>
+        <%= link_to "Cancelar", cities_path, class: "btn btn-large btn-primary", id: "colorBoton"%>
 			<% end %>
 		</div>
 		</fieldset>

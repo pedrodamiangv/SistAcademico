@@ -1,5 +1,6 @@
 <% provide(:title, @materia.materia) %>
 <div class="row">
+	<legend>Calificaciones</legend>
 	<div class="row" align="right">
     Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido search-query"/> 
   </div>
@@ -28,7 +29,7 @@
 	    </table>
 		<% else %>
 			<label class="label-info"> No ha cargado estas calificaciones aun! </label>
-        <%= link_to "Cargar Calificaciones", edit_materia_path(@materia), class: "btn btn-large btn-inverse" %>
+        <%= link_to "Cargar Calificaciones", edit_materia_path(@materia), class: "btn btn-large btn-primary", id:"colorBoton" %>
 		<% end %>
 		<hr/>
 		<label class="label">Segunda Etapa<small class="direccion">Puntaje total: <%= @puntaje_total_dos %></small></label>
@@ -55,7 +56,7 @@
 	    </table>
 	  <% else %>
 			<label class="label-info"> No ha cargado estas calificaciones aun! </label>
-        <%= link_to "Cargar Calificaciones", edit_materia_path(@materia), class: "btn btn-large btn-inverse" %>
+        <%= link_to "Cargar Calificaciones", edit_materia_path(@materia), class: "btn btn-large btn-primary", id:"colorBoton" %>
 		<% end %>
 		<hr/>
 		<label class="label">Tercera Etapa<small class="direccion">Puntaje total: <%= @puntaje_total_tres %></small></label>
@@ -82,6 +83,6 @@
 	    </table>
 		<% else %>
 			<label class="label-info"> No ha cargado estas calificaciones aun! </label>
-        <%= link_to "Cargar Calificaciones", edit_materia_path(@materia), class: "btn btn-large btn-inverse" %>
+        <%= link_to "Cargar Calificaciones", edit_materia_path(@materia), class: "btn btn-large btn-primary", id:"colorBoton" %>
 		<% end %>
 </div>

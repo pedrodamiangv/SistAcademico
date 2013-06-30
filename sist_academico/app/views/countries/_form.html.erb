@@ -1,13 +1,14 @@
+<%= form_for(@country) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
 <div class="container">
   <div class="row">
     <div id="registro">
         <fieldset>
-			<%= form_for(@country) do |f| %>
-  				<%= render 'shared/error_messages', object: f.object %>
       <div class="span3 offset4">
   				<%= f.label :pais %>
  				  <%= f.text_field :pais, :maxlength => 30 %>
-  				<%= f.submit "Guardar", class: "btn btn-large btn-inverse" %>
+  				<%= f.submit "Guardar", class: "btn btn-large btn-primary" %>
+          <%= link_to "Cancelar", countries_path, class: "btn btn-large btn-primary", id: "colorBoton"%>
 				<% end %>
 			</div>
 		</fieldset>

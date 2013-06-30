@@ -8,9 +8,11 @@
         <h1>
           <%= @curso.curso_grado %>
         </h1>
+        <div id="vinculos">
         <% if current_user.is_administrativo %>
-          <span><%= link_to '(Editar)', edit_curso_path(@curso) %> </span>
+          <span><i class="icon-edit"></i><%= link_to 'Editar', edit_curso_path(@curso) %> </span>
         <% end %>
+      </div>
       </section>
       <section>
         <p>
@@ -29,11 +31,15 @@
           <b>Cantidad de Alumnos:</b>
           <%= @curso.alumnos.count %>
         </p>
+        <hr/>
+      <div id="vinculos">
         <% if current_user.is_administrativo %>
           <p>
-            <b><%= link_to 'Registrar nueva Materia', new_materia_path %></b>
+            <i class="icon-plus-sign"></i><%= link_to 'Registrar nueva Materia', new_materia_path %>
           </p>
         <% end %>
+      </div>
+      <hr/>
         <label class="label">Materias</label>
           <ul class="nav nav-tabs nav-stacked">
             <% @curso.materias.each do |materia| %>
@@ -66,8 +72,8 @@
         <% end %>
       </tbody>
     </table>
-    <div align="right">
-      <%= link_to 'Ver Lista como pdf ->', curso_path(@curso, format: 'pdf') %>
+    <div align="right" id="vinculos">
+      <i class="icon-file"></i><%= link_to 'Ver Lista como pdf', curso_path(@curso, format: 'pdf') %>
     </div>
   </div>
 </div>

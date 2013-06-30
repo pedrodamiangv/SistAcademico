@@ -28,10 +28,10 @@
           <% end %>
         </tbody>
       </table>
-      <%= will_paginate @cities %>
-      <div class="link">
+      
+      <div align="center" id="vinculos">
         <% if current_user.is_administrativo %>
-          <%= link_to 'Registrar nuevo ->', new_city_path %>
+          <i class="icon-plus-sign"></i><%= link_to 'Registrar nuevo', new_city_path %>
         <% end %>
       </div>
     </div>

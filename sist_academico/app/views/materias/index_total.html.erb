@@ -34,11 +34,10 @@
           <% end %>
         </tbody>
       </table>
-      <%= will_paginate @materias %>
-      <div class="link">
+      <div align="center" id="vinculos">
         <% if current_user.is_administrativo %>
-          <%= link_to 'Volver ->', materias_path %>
-          <%= link_to 'Ver Lista como pdf ->', index_total_materias_path(format: 'pdf') %>
+          <i class="icon-arrow-left"></i><%= link_to 'Volver', materias_path %>
+          <i class="icon-file"></i><%= link_to 'Ver Lista como pdf', index_total_materias_path(format: 'pdf') %>
         <% end %>
       </div>
     </div>

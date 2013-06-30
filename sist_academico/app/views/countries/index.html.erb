@@ -26,10 +26,9 @@
           <% end %>
         </tbody>
       </table>
-      <%= will_paginate @countries %>
-      <div class="link">
+      <div align="center" id="vinculos">
         <% if current_user.is_administrativo %>
-          <%= link_to 'Registrar Nuevo ->', new_country_path %>
+          <i class="icon-plus-sign"></i><%= link_to 'Registrar Nuevo', new_country_path %>
         <% end %>
       </div>
     </div>

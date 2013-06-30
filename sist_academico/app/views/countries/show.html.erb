@@ -1,11 +1,14 @@
 <p id="notice"><%= notice %></p>
-
+<div class="datos">
 <p>
   <b>Pais:</b>
   <%= @country.pais %>
 </p>
 
-<% if current_user.is_administrativo %>
-  <%= link_to 'Editar', edit_country_path(@country) %> |
-<% end %>
-<%= link_to 'Listar', countries_path %>
+<div id="vinculos">
+	<% if current_user.is_administrativo %>
+  		<i class="icon-edit"></i><%= link_to 'Editar', edit_country_path(@country) %> |
+	<% end %>
+		<i class="icon-list"></i><%= link_to 'Listar', countries_path %>
+</div>
+</div>

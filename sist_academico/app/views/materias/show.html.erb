@@ -50,7 +50,7 @@
           <%= f.text_field :total_puntos, class: 'input-medium', :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;', onblur: "validar(this)", :maxlength =>  2 %>
           <%= f.label :descripcion %>
           <%= f.text_area :descripcion, rows: 3, :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;' %>
-          <%= f.submit "Guardar", class: "btn btn-large btn-inverse", :name => 'test_button' %>
+          <%= f.submit "Guardar", class: "btn btn-large btn-primary", :name => 'test_button' %>
         <% end %>
         <a name="tarea"> </a>
       </div>
@@ -94,8 +94,8 @@
         <% end %>
       </tbody>
     </table>
-    <div align="right">
-      <%= link_to 'Ver Lista como pdf ->', materia_path(@materia, format: 'pdf') %>
+    <div align="right" id="vinculos">
+      <i class="icon-file"></i><%= link_to 'Ver Lista como pdf', materia_path(@materia, format: 'pdf') %>
     </div>
   </div>
   <div class="span3">
@@ -103,6 +103,8 @@
     <div id="materiales">
       <%= render 'materiales', materia: @materia %>
     </div>
-    <%= link_to 'Ver todos los materiales', materiales_path %>
+  <div id="vinculos">
+    <i class="icon-list"></i><%= link_to 'Ver todos los materiales', materiales_path %>
+  </div>
   <div>
 </div>

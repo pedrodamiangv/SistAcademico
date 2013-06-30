@@ -32,12 +32,11 @@
           <% end %>
         </tbody>
       </table>
-      <%= will_paginate @materias %>
-      <div class="link">
+      <div align="center" id="vinculos">
         <% if current_user.is_administrativo %>
-          <%= link_to 'Ver Lista como pdf ->', materias_path(format: 'pdf') %>
-          <%= link_to 'Registrar Materia ->', new_materia_path %>
-          <%= link_to 'Ver Materias de años anteriores ->', index_total_materias_path %>
+          <i class="icon-file"></i><%= link_to 'Ver Lista como pdf', materias_path(format: 'pdf') %>
+          <i class="icon-plus-sign"></i><%= link_to 'Registrar Materia', new_materia_path %>
+          <i class="icon-list"></i><%= link_to 'Ver Materias de años anteriores', index_total_materias_path %>
         <% end %>
       </div>
     </div>

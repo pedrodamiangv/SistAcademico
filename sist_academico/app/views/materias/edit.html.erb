@@ -4,15 +4,17 @@
   <%= render 'shared/error_messages', object: f.object %>
   <div id="campos" class="row">
   	<div class="span4">
-	  	<b>Curso: <%= link_to @materia.curso_curso, @materia.curso %><br/>
-	  	Area: <%= @materia.area %><br/>
-	  	Docente: <%= link_to @materia.docente.full_name, @materia.docente %></b>
+	  	<p><b>Curso:</b> <%= link_to @materia.curso_curso, @materia.curso %><br/>
+	  	<b>Area:<b> <%= @materia.area %><br/>
+	  	<b>Docente:</b> <%= link_to @materia.docente.full_name, @materia.docente %></p>
 	  </div>
 	  <div class="span4 offset1">
 	    <b>Etapa: <%= select_tag 'select_etapa',  "<option>Primera</option><option>Segunda</option><option>Tercera</option>".html_safe, {class: 'input-medium'} %><br/>
 	    Puntos Acumulados: <small id="total"><%= @puntaje_total %></small><br/>
 	  </div>
-	  <a href="#" class="offset8" onclick="edicion_planificacion();">>>Editar estos campos<<</a></b>
+	  <div id="vinculos">
+	  <a href="#" class="offset8" onclick="edicion_planificacion();"><i class="icon-edit"></i>Editar estos campos</a></b>
+	</div>
   </div>
   <div id="campos_edicion" class="row" style=" display:none;">
     <div class="span4">
@@ -27,7 +29,9 @@
       <%= f.collection_select :curso_id ,@cursos,:id,:curso %>
       <%= f.label :docente_id %>
       <%= f.select :docente_id,  @docentes.map {|d| [d.full_name  ,d.id] }  %>
-	  <a href="#" onclick="edicion_planificacion2();">>>Volver<<</a>
+      <div id="vinculos">
+	  	<a href="#" onclick="edicion_planificacion2();"><i class="icon-arrow-left"></i>Volver</a>
+	  </div>
 	</div>
   </div>
   <hr/>
@@ -37,7 +41,8 @@
 	  	  <%= render 'campos_calificaciones', calificaciones: @calificaciones, materia: @materia, puntaje_total: @puntaje_total, etapa: @etapa %>
 	    </div>    
 	  <div align="center">
-	    <%= f.submit "Guardar", class: "btn btn-large btn-inverse" %>
+	    <%= f.submit "Guardar", class: "btn btn-large btn-primary" %>
+	    <%= link_to "Cancelar", calificaciones_path, class: "btn btn-large btn-primary", id: "colorBoton"%>
 	  </div>
 	</div>
 <% end %>

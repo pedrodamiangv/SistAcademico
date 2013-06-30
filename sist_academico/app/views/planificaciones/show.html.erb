@@ -7,18 +7,20 @@
       </section>
       <section>
         <p><b>
-          <%= link_to @planificacion.materia_materia, @planificacion.materia %></b><br/>
+          <h1><%= link_to @planificacion.materia_materia, @planificacion.materia %></h1></b><br/>
+          <div id="vinculos">
           <% if current_user.is_administrativo %>
-            <%= link_to 'Editar', edit_planificacion_path(@planificacion), :style => 'font:normal 9px verdana, arial, helvetica, sans-serif;' %>
+            <i class="icon-edit"></i><%= link_to 'Editar', edit_planificacion_path(@planificacion), :style => 'font:normal 9px verdana, arial, helvetica, sans-serif;' %>
           <% end %>
+        </div>
         </p>
         
         <br/>
-        <p>Curso: <%= link_to @planificacion.materia.curso_curso, @planificacion.materia.curso %></p>
-        <p>Descripcion: <%= @planificacion.descripcion %></p>
-        <p>Etapa: <%= @planificacion.etapa %></p>
-        <p>Fecha de Entrega: <%= @planificacion.fecha_entrega %></p>
-        <p>Total de Puntos: <%= @planificacion.total_puntos %></p>
+        <p><b>Curso: </b><%= link_to @planificacion.materia.curso_curso, @planificacion.materia.curso %></p>
+        <p><b>Descripcion:</b> <%= @planificacion.descripcion %></p>
+        <p><b>Etapa:</b> <%= @planificacion.etapa %></p>
+        <p><b>Fecha de Entrega:</b> <%= @planificacion.fecha_entrega %></p>
+        <p><b>Total de Puntos:</b> <%= @planificacion.total_puntos %></p>
         <br/>
       </section>
     </aside>
@@ -49,7 +51,7 @@
         </table>
       <% else %>
         <label class="label-info"> No ha cargado los puntajes aun! </label> </br>
-        <%= link_to "Cargar Puntajes", edit_planificacion_path(@planificacion), class: "btn btn-large btn-inverse" %>
+        <%= link_to "Cargar Puntajes", edit_planificacion_path(@planificacion), class: "btn btn-large btn-primary", id:"colorBoton" %>
       <% end %>
     </div>
   </div>

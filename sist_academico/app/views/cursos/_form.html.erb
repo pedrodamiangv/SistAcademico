@@ -1,9 +1,9 @@
+<%= form_for(@curso) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
 <div class="container">
   <div class="row">
     <div id="registro">
-        <fieldset>
-            <%= form_for(@curso) do |f| %>
-              <%= render 'shared/error_messages', object: f.object %>
+        <fieldset>       
               <div class="span4 offset4">
                 <%= f.label :curso %>
                 <%= f.select :curso, @cursos, {},{class: 'input-medium seguido'} %>
@@ -16,7 +16,8 @@
                 <%= f.select(:nivel, ['Educación Escolar Básica', 'Educación Media' ])%>
                 <%= f.label :enfasis %>
                 <%= f.select(:enfasis, ['Ciencias Sociales', 'Ciencias Básicas', 'Técnico en Informática', 'Técnico en Contabilidad', 'Técnico en Administración', 'Otros' ])%>
-                <%= f.submit "Guardar",class: "btn btn-large btn-inverse middle"%>
+                <%= f.submit "Guardar",class: "btn btn-large btn-primary"%>
+                <%= link_to "Cancelar", cursos_path, class: "btn btn-large btn-primary", id: "colorBoton"%>
               </div>
             <% end %>
         </fieldset>

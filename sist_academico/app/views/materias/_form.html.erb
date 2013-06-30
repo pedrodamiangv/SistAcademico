@@ -1,9 +1,9 @@
+<%= form_for(@materia) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
 <div class="container">
   <div class="row">
   <div id="registro">
         <fieldset>
-            <%= form_for(@materia) do |f| %>
-              <%= render 'shared/error_messages', object: f.object %>
               <div class="span3 offset4">
                 <%= f.label :materia %>
                 <%= f.text_field :materia, :maxlength => 30 %>
@@ -13,8 +13,8 @@
                 <%= f.collection_select :curso_id ,@cursos,:id,:curso_grado %>
                 <%= f.label :docente_id %>
                 <%= f.select :docente_id,  @docentes.map {|d| [d.user.nombre + ' ' + d.user.apellido  ,d.id] }  %>
-                <%= f.submit "Guardar", class: "btn btn-large btn-inverse" %>
-                 
+                <%= f.submit "Guardar", class: "btn btn-large btn-primary" %>
+                <%= link_to "Cancelar", materias_path, class: "btn btn-large btn-primary", id: "colorBoton"%>
               </div>
             <% end %>
         </fieldset>
