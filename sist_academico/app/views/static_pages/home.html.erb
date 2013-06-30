@@ -2,16 +2,21 @@
   $(document).ready(function(){
     $('#principal').removeClass('container');
     $('#fondo').corner("round 18px");
+    $('#btn-noticia').hide();
     $('#txt-noticia').on("click", function(){
       $('#btn-noticia').slideToggle();
     });
   });
 
   function limpiar(){
+    $('#new_edit').html("<%= escape_javascript( render 'noticias/form', noticia: Noticia.new ) %>");
     $('#bien').hide();
     $('#mal').hide();
     $('#txt-noticia').val("");
     $('#btn-noticia').hide();
+    $('#txt-noticia').on("click", function(){
+      $('#btn-noticia').slideToggle();
+    });
   }
 </script>
 <% provide(:title, 'Inicio') %>
@@ -24,9 +29,11 @@
   <div class="row">
 
     <div class="span6">
-      <div id="new_edit">
-        <%= render 'noticias/form', noticia: :noticia %>
-      </div>
+      <% unless current_user.is_alumno? %>
+        <div id="new_edit">
+          <%= render 'noticias/form', noticia: :noticia %>
+        </div>
+      <% end %>
       <br/>
       <div>
         <label class="label label-success">Noticias</label>

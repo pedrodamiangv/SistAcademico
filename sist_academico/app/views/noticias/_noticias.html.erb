@@ -1,9 +1,11 @@
 <ul class="nav nav-tabs nav-stacked">
   <% noticias.each do |noticia| %>
-    <li class="li"><%= noticia.noticia %> </li>
+    <li> <%= noticia.noticia %> </li>
     <li class="li">Posteado por: <%= noticia.user_full_name %> </li>
-    <li class="li">Fecha: <%= noticia.created_at %> </li>
-    <%= link_to "Editar", edit_noticia_path(noticia), remote: true %>|<%= link_to 'Eliminar', noticia, method: :delete, data: { confirm: 'Estas seguro?' }, remote: true %>
+    <li class="li"> <%= time_ago_in_words(noticia.created_at) %> </li>
+    <% if noticia.user == current_user || current_user.is_administrativo? %>
+      <%= link_to "Editar", edit_noticia_path(noticia), remote: true %>|<%= link_to 'Eliminar', noticia, method: :delete, data: { confirm: 'Estas seguro?' }, remote: true %>
+    <% end %>
     <hr/>
   <% end %>
 </ul>
