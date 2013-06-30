@@ -47,6 +47,7 @@ class AddressesController < ApplicationController
   # POST /addresses.json
   def create
     @address = Address.new(params[:address])
+    @new = true
     respond_to do |format|
       if @address.save
         @addresses = Address.order("created_at desc").find(:all)
