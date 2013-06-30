@@ -39,6 +39,9 @@ SistAcademico::Application.routes.draw do
       get :change_data
     end
     member do
+      get :edit_campos
+    end
+    member do
       get :materias_calificaciones
     end
     collection do

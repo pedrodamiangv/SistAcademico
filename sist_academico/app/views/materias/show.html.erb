@@ -10,6 +10,7 @@
       <section>
         <legend>
           <h5><%= @materia.materia.capitalize %></h5>
+          <p class="li"><%= link_to "(Editar)", edit_campos_materia_path(@materia) %></p>
         </legend>
       </section>
       <section>
@@ -19,7 +20,7 @@
           <% else %>
             <%= @materia.docente.full_name %>
           <% end %>
-        </b><br/>
+        </b>
         </p>
         <br/>
         <% if current_user.is_administrativo || current_user.is_docente %>

@@ -57,8 +57,8 @@ class MateriasController < ApplicationController
   # GET /materia/new.json
   def new
     @materia = Materia.new
-    @docentes = Docente.find(:all)
-    @cursos = Curso.find(:all)
+    @docentes = Docente.order('created_at desc').all
+    @cursos = Curso.by_year(Date.today.year).all
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @materia }
@@ -94,8 +94,8 @@ class MateriasController < ApplicationController
   def change_data
     @etapa = params[:select_etapa]
     @materia = Materia.find(params[:id])
-    @docentes = Docente.find(:all)
-    @cursos = Curso.find(:all)
+    @docentes = Docente.order('created_at desc').all
+    @cursos = Curso.by_year(Date.today.year).all
     
     edit_auxiliar @materia, @etapa
     respond_to do |format|
@@ -106,14 +106,25 @@ class MateriasController < ApplicationController
   # GET /materia/1/edit
   def edit
     @materia = Materia.find(params[:id])
-    @docentes = Docente.find(:all)
-    @cursos = Curso.find(:all)
+    @docentes = Docente.order('created_at desc').all
+    @cursos = Curso.by_year(Date.today.year).all
     @etapa = 'Primera'
     
     edit_auxiliar @materia, @etapa
     respond_to do |format|
       format.html
       format.js
+    end
+  end
+
+  def edit_campos
+    @materia = Materia.find(params[:id])
+
+    @docentes = Docente.order('created_at desc').all
+    @cursos = Curso.by_year(Date.today.year).all
+    respond_to do |format|
+      format.html 
+      format.json { render json: @materia }
     end
   end
 
@@ -128,8 +139,8 @@ class MateriasController < ApplicationController
         CustomLogger.info("Nueva materia: #{@materia.materia.inspect} ,Area: #{@materia.area.inspect} ,Curso: #{@materia.curso_curso.inspect} ,Docente: #{@materia.docente.full_name.inspect} creado por el usuario: #{current_user.full_name.inspect}, #{Time.now}")
         format.json { render json: @materia, status: :created, location: @materia }
       else
-        @docentes = Docente.find(:all)
-        @cursos = Curso.find(:all)
+        @docentes = Docente.order('created_at desc').all
+        @cursos = Curso.by_year(Date.today.year).all
         format.html { render action: "new" }
         CustomLogger.error("Error al crear materia: #{@materia.materia.inspect} ,Area: #{@materia.area.inspect} ,Curso: #{@materia.curso_curso.inspect} ,Docente: #{@materia.docente.full_name.inspect} por el usuario: #{current_user.full_name.inspect}, #{Time.now}")
         format.json { render json: @materia.errors, status: :unprocessable_entity }
@@ -146,6 +157,7 @@ class MateriasController < ApplicationController
     curso_antiguo = @materia.curso_curso
     docente_antiguo = @materia.docente.full_name
     @etapa = params[:select_etapa]
+    set_direccion
     respond_to do |format|
       if @materia.update_attributes(params[:materia])
         materia_nueva = @materia.materia
@@ -156,13 +168,20 @@ class MateriasController < ApplicationController
         format.html { redirect_to @materia, notice: 'La materia ha sido actualizada correctamente.' }
         format.json { head :no_content }
       else
-        @docentes = Docente.find(:all)
-        @cursos = Curso.find(:all)
+        @docentes = Docente.order('created_at desc').all
+        @cursos = Curso.by_year(Date.today.year).all
         
         edit_auxiliar @materia, @etapa
-        format.html { render action: "edit" }
+        format.html { render action: "#{@@dir}" }
         format.json { render json: @materia.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  @@dir
+  def set_direccion
+    if current_user.preferencias.first.value.split('/').last == "edit" || current_user.preferencias.first.value.split('/').last == "edit_campos"
+      @@dir = current_user.preferencias.first.value.split('/').last
     end
   end
 
