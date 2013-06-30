@@ -3,24 +3,11 @@
       Log de Auditoria
     </legend>
     <%= form_tag :action => 'index', :controller => 'auditorias', :method => :post do%>
-      <div class="span5">
-          <div>
-            <li>
-              <%= label_tag :from, 'From' %>
-              <%= text_field_tag :from, '', id: :from, :size => '20'%>
-            </li>			
-          </div>
-      </div>
-      <div class="span5">
-          <div>
-            <li>
-              <%= label_tag :to, "To" %>
-              <%= text_field_tag :to, '', id: :to, :size => '20'%>
-            </li>	
-          </div>
-      </div>
     <% end %>
   </fieldset>
+  <div class="row" align="right">
+      Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido search-query"/> 
+  </div>
 
 <div class="row">
   <table id="my-table" class="table table-bordered">

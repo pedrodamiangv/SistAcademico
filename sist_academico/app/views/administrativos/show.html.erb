@@ -13,22 +13,27 @@
         <h1>
           <%= @administrativo.user_nombre %>
         </h1>
+        <hr/>
         <% if current_user.is_administrativo %>
-          <%= link_to 'Editar', edit_administrativo_path(@administrativo) %>
+        <div id="vinculos">
+          <i class="icon-edit"></i><%= link_to 'Editar', edit_administrativo_path(@administrativo) %>
+        </br>
+          <i class="icon-arrow-left"></i><%= link_to 'Volver ', administrativos_path %>
+        </div>
         <% end %>
       </section>
     </aside>
   </div>
   <div class="datos">
-    <p>Apellido: <%= @administrativo.user_apellido %></p>
-    <p>Sexo: <%= @administrativo.user_sexo %></p>
-    <p>Telefono: <%= @administrativo.user_telefono %></p>
-    <p>Fecha de Nacimiento: <%= @administrativo.user_fecha_nacimiento %></p>
-    <p>Lugar de Nacimiento: <%= @administrativo.user_lugar_nacimiento %></p>
-    <p>Direccion: <%= link_to @administrativo.user.address.direccion, @administrativo.user.address %></p>
-    <p>Edad: <%= @administrativo.user_edad %></p>
-    <p>Cargo: <%= @administrativo.cargo %></p>
-    <p>Titulo del Administrativo: <%= @administrativo.titulo %></p>
+    <p><b>Apellido: </b><%= @administrativo.user_apellido %></p>
+    <p><b>Sexo:</b> <%= @administrativo.user_sexo %></p>
+    <p><b>Telefono:</b> <%= @administrativo.user_telefono %></p>
+    <p><b>Fecha de Nacimiento:</b> <%= @administrativo.user_fecha_nacimiento %></p>
+    <p><b>Lugar de Nacimiento:</b> <%= @administrativo.user_lugar_nacimiento %></p>
+    <p><b>Direccion:</b> <%= link_to @administrativo.user.address.direccion, @administrativo.user.address %></p>
+    <p><b>Edad:</b> <%= @administrativo.user_edad %></p>
+    <p><b>Cargo:</b> <%= @administrativo.cargo %></p>
+    <p><b>Titulo del Administrativo:</b> <%= @administrativo.titulo %></p>
   </div>
 </div>
 </div>
