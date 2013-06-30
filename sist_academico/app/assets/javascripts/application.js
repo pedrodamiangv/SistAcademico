@@ -81,8 +81,24 @@ function edicion_planificacion2(){
 
 function validar(obj) {
   txt = obj.value;
-  if(parseInt(txt) != parseFloat(txt)) {
-    alert('Solo debe ser número entero');
+  if ( txt != "" ) {
+    if(parseInt(txt) != parseFloat(txt) || parseInt(txt) > 6) {
+      alert('Solo debe ser número entero menor a 6');
+      $(obj).val("");
+      $('#guardar').attr("disabled", "disabled");
+    } else {
+      var total = 0;
+      var correctos = 0;
+      $('.calificacion').each(function(){
+        total += 1;
+        if ($(this).val() != "" ){
+          correctos += 1;
+        }
+      });
+      if( total == correctos ){
+        $('#guardar').removeAttr("disabled");
+      }
+    }
   }
 }
 

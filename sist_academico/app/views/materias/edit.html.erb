@@ -32,7 +32,6 @@
       <div id="vinculos">
 	  	<a href="#" onclick="edicion_planificacion2();"><i class="icon-arrow-left"></i>Volver</a>
 	  </div>
-	  <%= f.submit "Guardar", class: "btn btn-large btn-primary" %>
 	</div>
   </div>
   <hr/>
@@ -42,8 +41,8 @@
 	  	  <%= render 'campos_calificaciones', calificaciones: @calificaciones, materia: @materia, puntaje_total: @puntaje_total, etapa: @etapa %>
 	    </div>    
 	  <div align="center">
-	    <%= f.submit "Guardar", class: "btn btn-large btn-primary" %>
-	    <%= link_to "Cancelar", calificaciones_path, class: "btn btn-large btn-primary", id: "colorBoton"%>
+	    <%= f.submit "Guardar", id: "guardar", disabled: 'disabled', class: "btn btn-large btn-primary" %>
+	    <%= link_to "Cancelar", :back, class: "btn btn-large btn-inverse" %>
 	  </div>
 	</div>
 <% end %>

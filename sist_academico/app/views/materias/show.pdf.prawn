@@ -3,7 +3,7 @@ pdf.text "Misiones e/ Cristophersen. Ciudad de Fram-Itapúa-Paraguay.", :size =>
 pdf.text "Teléfono/Fax: 0761265221. Email: cmjw.fram@gmail.com", :size => 11, :style => :italic, :align => :center
 pdf.move_down(10) 
 pdf.text "Listado de Tareas", :size => 15, :style => :bold 
-pdf.text "Curso: #{@materia.curso_curso}", :size => 11, :style => :italic
+pdf.text "Curso: #{@materia.curso.curso_grado}", :size => 11, :style => :italic
 pdf.move_down(20)
 tareas = @materia.planificaciones.order("created_at desc")
 items = [ ["<b>Tarea</b>", "<b>Etapa</b>", "<b>Fecha de Entrega</b>", "<b>Total de Puntos</b>", "<b>Descripcion</b>"]  ]

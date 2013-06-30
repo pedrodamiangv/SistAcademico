@@ -20,7 +20,7 @@
 			<% if p.calificacion != nil %>
 			  <td><%= text_field name, :calificacion, value: p.calificacion, :maxlength => 1, onblur: "validar(this)", class: 'input-small' %></td>
 			<% else %>
-			  <td><%= text_field name, :calificacion, :maxlength => 1, onblur: "validar(this)",class: 'input-small' %></td>
+			  <td><%= text_field name, :calificacion, :maxlength => 1, onchange: "validar(this)",class: 'input-small calificacion' %></td>
 			<% end %>
 		</tr>
 	<% end %>
