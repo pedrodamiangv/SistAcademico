@@ -13,11 +13,16 @@
         <h1>
           <%= @docente.user_nombre %>
         </h1>
-        <% if current_user.is_administrativo %>
-          <%= link_to 'Editar', edit_docente_path(@docente) %>
-        <% end %>
-        <br/>
-        <br/>
+      </section>
+      <hr/>
+        <div id="vinculos">
+          <% if current_user.is_administrativo %>
+            <i class="icon-edit"></i><%= link_to 'Editar', edit_docente_path(@docente) %>
+          </br>
+            <i class="icon-arrow-left"></i><%= link_to 'Volver ', docentes_path %>
+          <% end %>
+        </div>
+        <hr/>
         <% materias = @docente.materias %>
         <label class="label">Materias</label>
         <ul id="ul" class="nav nav-tabs nav-stacked ul">
@@ -25,19 +30,18 @@
             <li class="li"><%= link_to materia.materia, materia%> </li>
           <% end %>
         </ul>
-      </section>
     </aside>
   </div>
   <div class="span4">
-    <p>Apellido: <%= @docente.user_apellido %></p>
-    <p>Sexo: <%= @docente.user_sexo %></p>
-    <p>Telefono: <%= @docente.user_telefono %></p>
-    <p>Fecha de Nacimiento: <%= @docente.user_fecha_nacimiento %></p>
-    <p>Lugar de Nacimiento: <%= @docente.user_lugar_nacimiento %></p>
-    <p>Direccion: <%= link_to @docente.user.address.direccion, @docente.user.address %></p>
-    <p>Edad: <%= @docente.user_edad %></p>
-    <p>Matricula: <%= @docente.matricula %></p>
-    <p>Titulo: <%= @docente.titulo %></p>
+    <p><b>Apellido:</b> <%= @docente.user_apellido %></p>
+    <p><b>Sexo:</b> <%= @docente.user_sexo %></p>
+    <p><b>Telefono:</b> <%= @docente.user_telefono %></p>
+    <p><b>Fecha de Nacimiento:</b> <%= @docente.user_fecha_nacimiento %></p>
+    <p><b>Lugar de Nacimiento:</b> <%= @docente.user_lugar_nacimiento %></p>
+    <p><b>Direccion:</b> <%= link_to @docente.user.address.direccion, @docente.user.address %></p>
+    <p><b>Edad:</b> <%= @docente.user_edad %></p>
+    <p><b>Matricula:</b> <%= @docente.matricula %></p>
+    <p><b>Titulo:</b> <%= @docente.titulo %></p>
   </div>
   <div class="span4">
       <label class="label"> Próximas Actividades </label>

@@ -5,23 +5,24 @@
       <div id="registro">
         <fieldset>
           <legend>Datos del Docente</legend>
+        <div class="container cuadro">
           <%= f.fields_for :user do |d| %>
             <div class="span3">
               <%= d.label :nombre %>
-              <%= d.text_field :nombre, :maxlength => 50 %>
+              <%= d.text_field :nombre, :maxlength => 50, class: "span4" %>
 
               <%= d.label :apellido %>
-              <%= d.text_field :apellido, :maxlength => 50 %>
+              <%= d.text_field :apellido, :maxlength => 50, class: "span4" %>
 
-              <%= d.label :CINro, "Cedula de Identidad Número" %>
-              <%= d.text_field :CINro, :maxlength => 9, onblur: "validar(this)" %>
+              <%= d.label :CINro, "C.I.Número" %>
+              <%= d.text_field :CINro, :maxlength => 9, onblur: "validar(this)", class: "span2" %>
 
               <%= d.label :sexo %>
-              <%= d.select(:sexo, ['Masculino', 'Femenino' ])%>
+              <%= d.select(:sexo, ['Masculino', 'Femenino' ],{},{class: "span2"})%>
             </div>
             <div class="span3 offset1">
               <%= d.label :telefono, "Teléfono" %>
-              <%= d.text_field :telefono, :maxlength => 13, :placeholder => "(xxxx) xxxxxx" %>
+              <%= d.text_field :telefono, :maxlength => 13, :placeholder => "(xxxx) xxxxxx", class:  "span2" %>
 
               <%= d.label :email, "Correo Electrónico" %>
               <%= d.text_field :email, :maxlength => 30 %>
@@ -32,13 +33,13 @@
               <%= d.label :lugar_nacimiento, "Lugar de Nacimiento" %>
               <%= d.select( :lugar_nacimiento ,@cities_city) %>
             </div>
-            <div class="span4 offset1">
+            <div class="span4">
 
               <%= f.label :matricula, "Matricula Número" %>
-              <%= f.number_field :matricula, :maxlength => 20, onblur: "validar(this)" %>
+              <%= f.text_field :matricula, :maxlength => 15, onblur: "validar(this)", class: "span2" %>
 
               <%= f.label :titulo, "Título Obtenido" %>
-              <%= f.text_field :titulo, :maxlength => 50 %>
+              <%= f.text_field :titulo, :maxlength => 50, class:"span4" %>
 
               <a data-toggle="modal" href="#example" class="direccion">Ingresar nueva direccion</a>
               <%= d.label :direccion, "Dirección" %>
@@ -49,12 +50,14 @@
             
         </fieldset>
       </div>
+      </div>
     </div>
 
     <div class="row">
       <div id="registro">
         <fieldset>
           <legend>Datos del Usuario Docente</legend>
+          <div class="container cuadro">
             <div class="span3">
               <%= d.label :username, "Nombre de Usuario" %>
               <%= d.text_field :username, :maxlength => 30 %>
@@ -68,16 +71,18 @@
             <div class="span3 offset1">
               <%= d.label :password_confirmation, "Confirmación" %>
               <%= d.password_field :password_confirmation, :maxlength => 20 %>
+            </br></br></br>
             </div>
+            
+            <div class="row" align="center">
+                <%= f.submit "Guardar", class: "btn btn-large btn-primary" %>
+                <%= link_to "Cancelar", docentes_path, class: "btn btn-large btn-primary", id: "colorBoton"%>
+            </div>
+          </div>
         </fieldset>
       </div>
     </div>
     <% end %>
-    
-    </br>
-    <div class="row" align="center">
-        <%= f.submit "Guardar", class: "btn btn-large btn-inverse" %>
-    </div>
   </div>
 <% end %>
   

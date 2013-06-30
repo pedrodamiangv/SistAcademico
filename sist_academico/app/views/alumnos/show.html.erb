@@ -14,12 +14,16 @@
           <%= @alumno.user_nombre %>
         </h1>
         <hr/>
-        <% if current_user.is_administrativo %>
-          <%= link_to 'Editar Datos->', edit_alumno_path(@alumno) %>
-        <% end %>
-        <br/>
-        <div>
-          <%= link_to 'Ver mis notas->', alumno_calificaciones_alumno_path %>
+        <div id="vinculos">
+          <% if current_user.is_administrativo %>
+            <i class="icon-edit"></i><%= link_to 'Editar Datos', edit_alumno_path(@alumno) %>
+          <% end %>
+          <br/>
+            <i class="icon-eye-open"></i><%= link_to 'Ver mis notas', alumno_calificaciones_alumno_path %>
+          <br/>
+            <i class="icon-arrow-left"></i><%= link_to 'Volver ', alumnos_path %>
+        </div>
+          <div>
           <hr/>
           <label class="label">Cursos</label>
           <ul class="nav nav-tabs nav-stacked">
@@ -40,27 +44,27 @@
     </aside>
   </div>
   <div class="span4">
-    <p>Apellido: <%= @alumno.user_apellido %></p>
-    <p>Sexo: <%= @alumno.user_sexo %></p>
-    <p>Telefono: <%= @alumno.user_telefono %></p>
-    <p>Fecha de Nacimiento: <%= @alumno.user_fecha_nacimiento %></p>
-    <p>Lugar de Nacimiento: <%= @alumno.user_lugar_nacimiento %></p>
-    <p>Direccion: <%= @alumno.user.address.direccion %></p>
-    <p>Edad: <%= @alumno.user_edad %></p>
+    <p><b>Apellido:</b> <%= @alumno.user_apellido %></p>
+    <p><b>Sexo:</b> <%= @alumno.user_sexo %></p>
+    <p><b>Telefono:</b> <%= @alumno.user_telefono %></p>
+    <p><b>Fecha de Nacimiento:</b> <%= @alumno.user_fecha_nacimiento %></p>
+    <p><b>Lugar de Nacimiento:</b> <%= @alumno.user_lugar_nacimiento %></p>
+    <p><b>Direccion:</b> <%= @alumno.user.address.direccion %></p>
+    <p><b>Edad:</b> <%= @alumno.user_edad %></p>
     <hr>
-    <p>Nombre del Responsable: <%= @alumno.responsable %> </p>
-    <p>Telefono del Responsable: <%= @alumno.telefono_responsable %> </p>
-    <p>Curso Actual: <%= @alumno.curso_actual.curso_grado %></p>
-    <p>--------Nivel: <%= @alumno.curso_actual.nivel %></p>
-    <p>--------Enfasis: <%= @alumno.curso_actual.enfasis %></p>
-    <p>--------Turno: <%= @alumno.curso_actual.turno %></p>
-    <p>Curso Seleccionado: <%= @alumno.curso_curso_grado %></p>
-    <p>--------Nivel: <%= @alumno.curso_nivel %></p>
-    <p>--------Enfasis: <%= @alumno.curso_enfasis %></p>
-    <p>--------Turno: <%= @alumno.curso_turno %></p>
+    <p><b>Nombre del Responsable:</b> <%= @alumno.responsable %> </p>
+    <p><b>Telefono del Responsable:</b> <%= @alumno.telefono_responsable %> </p>
+    <p><b>Curso Actual:</b> <%= @alumno.curso_actual.curso_grado %></p>
+    <p><b>--------Nivel:</b> <%= @alumno.curso_actual.nivel %></p>
+    <p><b>--------Enfasis:</b> <%= @alumno.curso_actual.enfasis %></p>
+    <p><b>--------Turno:</b> <%= @alumno.curso_actual.turno %></p>
+    <p><b>Curso Seleccionado:</b> <%= @alumno.curso_curso_grado %></p>
+    <p><b>--------Nivel:</b> <%= @alumno.curso_nivel %></p>
+    <p><b>--------Enfasis:</b> <%= @alumno.curso_enfasis %></p>
+    <p><b>--------Turno:</b> <%= @alumno.curso_turno %></p>
     <hr>
     <% if @alumno.doc_cedula || @alumno.doc_foto || @alumno.doc_cert_nacimiento || @alumno.doc_cert_estudios %>
-      <p> Documentos Traidos: <p/>
+      <p><b> Documentos Presentados:</b> <p/>
       <% if @alumno.doc_cedula %> 
         <p>  &nbsp;&nbsp;-Fotocopia de cedula <p/>
       <% end %>
@@ -74,7 +78,7 @@
         <p>  &nbsp;&nbsp;-Certificados de estudios </p>
       <% end %>
        <% if !@alumno.doc_cedula || !@alumno.doc_foto || !@alumno.doc_cert_nacimiento || !@alumno.doc_cert_estudios %>
-        <p> Documentos Faltantes: <p/>
+        <p><b> Documentos Faltantes:</b> <p/>
         <% if !@alumno.doc_cedula %> 
           <p>  &nbsp;&nbsp;-Fotocopia de cedula <p/>
         <% end %>
