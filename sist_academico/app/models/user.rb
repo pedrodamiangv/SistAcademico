@@ -10,10 +10,10 @@ class User < ActiveRecord::Base
   before_save { |user| user.email = email.downcase }
 
   #VALIDACIONES DE LOS CAMPOS
-  validates :username, presence: true, length: { maximum: 30, minimum:2 }, :format => { :with => /\A[a-zA-Z\d]+\z/ }
-  validates :CINro, presence: true, length: { maximum: 9, minimum:6 }, :format => { :with => /\d/}
+  validates :username, presence: true, length: { maximum: 30, minimum:2 }, :format => { :with => /\A[a-zA-Z\d]+\z/ }, :uniqueness => { :message => "Este nombre de usuario ya existe. "}
+  validates :CINro, presence: true, length: { maximum: 9, minimum:6 }, :format => { :with => /\d/}, :uniqueness => { :message => "Ya existe un usuario con ese numero de documento"}
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence:   true,
+ validates :email, presence:   true,
                     format:     { with: VALID_EMAIL_REGEX }
   validates :email, uniqueness: { case_sensitive: false }, on: :edit
   validates :password, presence: true, length: { maximum: 20, minimum: 6 }
