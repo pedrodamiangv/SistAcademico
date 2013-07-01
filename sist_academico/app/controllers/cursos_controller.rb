@@ -44,6 +44,7 @@ class CursosController < ApplicationController
   def new
     @curso = Curso.new
     @cursos = obtain_cursos "Grado"
+    @secciones = obtain_seccion "Primer", "Grado"
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @curso }
@@ -54,13 +55,13 @@ class CursosController < ApplicationController
   def edit
     @curso = Curso.find(params[:id])
     @cursos = obtain_cursos @curso.tipo
+    @secciones = obtain_seccion @curso.curso, @curso.tipo
   end
 
   # POST /cursos
   # POST /cursos.json
   def create
     @curso = Curso.new(params[:curso])
-
     respond_to do |format|
       if @curso.save
         format.html { redirect_to @curso, notice: 'El curso fue creado con exito.' }
@@ -68,6 +69,7 @@ class CursosController < ApplicationController
         format.json { render json: @curso, status: :created, location: @curso }
       else
         @cursos = obtain_cursos @curso.tipo
+        @secciones = obtain_seccion @curso.curso, @curso.tipo
         format.html { render action: "new" }
         CustomLogger.error("Error al crear un nuevo curso: #{@curso.curso.inspect} ,Nivel: #{@curso.nivel.inspect} ,Enfasis: #{@curso.enfasis.inspect} ,Turno:#{@curso.turno.inspect} por el usuario: #{current_user.full_name.inspect}, #{Time.now} ")
         format.json { render json: @curso.errors, status: :unprocessable_entity }
@@ -94,6 +96,7 @@ class CursosController < ApplicationController
         format.json { head :no_content }
       else
         @cursos = obtain_cursos @curso.tipo
+        @secciones = obtain_seccion @curso.curso, @curso.tipo
         format.html { render action: "edit" }
         format.json { render json: @curso.errors, status: :unprocessable_entity }
       end
@@ -125,7 +128,14 @@ class CursosController < ApplicationController
 
   def change_select
     tipo = params[:tipo]
+    curso_s = params[:curso]
+    unless params[:id].empty?
+      @curso = Curso.find(params[:id])
+    else
+      @curso = Curso.new
+    end
     @cursos = obtain_cursos tipo
+    @secciones = obtain_seccion curso_s, tipo
     respond_to do |format|
       format.js
     end
@@ -139,5 +149,26 @@ class CursosController < ApplicationController
         todos_cursos = ['Primer', 'Segundo', 'Tercer']
       end
       todos_cursos
+    end
+
+    def obtain_seccion curso_s, tipo
+      curso_nombre = curso_s + " " + tipo
+      todas_secciones = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L' ]
+      cursos = Curso.by_year(Date.today.year).all
+      secciones = []
+      todas_secciones.each do |seccion|
+        existe = false
+        cursos.each do |curso|
+          if curso.curso_grado_sin_seccion == curso_nombre
+            if curso.seccion == seccion
+              existe = true
+            end
+          end
+        end
+        unless existe
+          secciones << seccion
+        end
+      end
+      secciones
     end
 end

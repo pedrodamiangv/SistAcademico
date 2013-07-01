@@ -122,11 +122,13 @@ function change_data_by_select(path){
 }
 
 function change_data_by_tipo(path){
-  $('#curso_tipo').on('change', function(){
+  $('#curso_tipo, #curso_curso').on('change', function(){
     var _type = $("#curso_tipo").val();
+    var _curso = $("#curso_curso").val();
+    var _id = $("#curso_id").val();
     $.ajax({
       url: path,
-      data: { "tipo": _type },
+      data: { "tipo": _type, "curso": _curso, "id": _id },
       async: true,
       dataType: 'script'
      });

@@ -1,0 +1,5 @@
+<% add_secciones = secciones %>
+<% if @curso.seccion %>
+  <% add_secciones << @curso.seccion %>
+<% end %>
+<%= select "curso", :seccion, add_secciones, {},{class: 'input-mini seguido'} %>
