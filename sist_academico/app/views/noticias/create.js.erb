@@ -1,6 +1,6 @@
 $('#noticias').html("<%= escape_javascript( render 'noticias/noticias', noticias: @noticias) %>");
 $('#new_edit').html("<%= escape_javascript( render 'noticias/form', noticia: Noticia.new ) %>");
-$('#bien').html("Noticia publicada");
+$('#bien').html('Noticia publicada <button type="button" class="close" data-dismiss="alert" onClick="cerrar();">&times;</button>');
 $('#mal').hide();
 $('#bien').show();
 $('#txt-noticia').val("");

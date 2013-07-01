@@ -1,6 +1,6 @@
 <legend>Manual de Usuario </legend>
 <div class="span8">
-  <div class="span7 last">
+  <div class="span7 offset2">
     <section class="ac-container">
       <%i=0%>
       <% @link.each do |help| %>
@@ -8,7 +8,7 @@
         <input id="<%= "ac-#{i}" %>" name="accordion-1" type="radio" checked />
         <label for="<%= "ac-#{i}" %>" ><%=help  %></label>
         <article class="ac-large">
-           <%= image_tag "../images/help/help#{i+1}.png", :width => '670x600' %>
+           <%= image_tag "help/help#{i+1}.png", :width => '670x600' %>
           <p><%= @link_helps[i] %></p>
         </article>
       </div>

@@ -24,7 +24,7 @@ class HelpsController < ApplicationController
       "Como encontrar a la institucion en las redes sociales?"
     ]
     @link_helps=[
-      "Vaya al menu, luego click en la opcion de Sesion del lado derecho superior; completa los campos USUARIO y CONTRASENA y click en el boton entrar.",
+      "Para ingresar al sistema, no es necesario dirigirse a ningun menu en especial; porque la pagina inicial por defecto es del loguin. Complete los campos y haga click en entrar.",
       "Vaya al menu, Usuarios, Nuevo y click en Alumno. Aqui debes completar todos los campos del alumno, una vez completo haz click en el boton guardar, esto te redirecciona a la lista de alumnos donde puedes ver todos los alumnos con sus diferentes atributos. Para realizar dicha accion de registrar debes ser un administrativo.",
       "Vaya al menu, Usuarios, Nuevo y click en Docente. Aqui debes completar todos los campos del docente, una vez completo haz click en el boton guardar, esto te redirecciona a la lista de docentes donde puedes ver todos los docentes con sus diferentes atributos. Para realizar dicha accion de registrar debes ser un administrativo.",
       "Vaya al menu, Usuarios, Nuevo y click en Administrativo. Aqui debes completar todos los campos del usuario administrativo, una vez completo haz click en el boton guardar, esto te redirecciona a la lista de los administrativos donde puedes ver todos los administrativos con sus diferentes atributos. Para realizar dicha accion de registrar debes ser un administrativo.",
