@@ -121,6 +121,19 @@ function change_data_by_select(path){
   });
 }
 
+function change_data_by_tipo(path){
+  $('#curso_tipo').on('change', function(){
+    var _type = $("#curso_tipo").val();
+    $.ajax({
+      url: path,
+      data: { "tipo": _type },
+      async: true,
+      dataType: 'script'
+     });
+     return false;
+  });
+}
+
 function change_data_by_note(path){
   $('.btn').on('click', function(){
     $("#6").val($(this).val());

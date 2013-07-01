@@ -72,6 +72,9 @@ SistAcademico::Application.routes.draw do
     collection do
       get :index_total
     end
+    collection do
+      get :change_select
+    end
   end
 
 

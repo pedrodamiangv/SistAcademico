@@ -4,8 +4,8 @@
       <%= link_to "Colegio Mons. Juan Wiesen", root_path, id: "logo" %>
       <nav>
         <ul class="nav pull-right">
-          <li><%= link_to "Inicio",  root_path %></li>
           <% if current_user %>
+             <li><%= link_to "Inicio",  root_path %></li>
              <% if current_user.is_administrativo %>
 
              <li class="dropdown" data-dropdown="dropdown" >

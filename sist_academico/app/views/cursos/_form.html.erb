@@ -6,8 +6,10 @@
         <fieldset>       
               <div class="span4 offset4">
                 <%= f.label :curso %>
-                <%= f.select :curso, @cursos, {},{class: 'input-medium seguido'} %>
-                <%= f.select :tipo, ['Grado', 'Curso' ], {},{class: 'input-small seguido'} %>
+                <div id="cursos">
+                  <%= render 'select_cursos', cursos: @cursos %>
+                </div>
+                <%= f.select :tipo, ['Grado', 'Curso'], {},{class: 'input-small seguido'} %>
               </div>
               <div class="span3 offset4">
                 <%= f.label :turno %>
@@ -24,3 +26,10 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    var path = '<%= change_select_cursos_path %>';
+    change_data_by_tipo(path);
+  });
+</script>

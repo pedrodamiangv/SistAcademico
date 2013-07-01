@@ -43,7 +43,7 @@ class CursosController < ApplicationController
   # GET /cursos/new.json
   def new
     @curso = Curso.new
-    @cursos = obtain_cursos
+    @cursos = obtain_cursos "Grado"
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @curso }
@@ -53,7 +53,7 @@ class CursosController < ApplicationController
   # GET /cursos/1/edit
   def edit
     @curso = Curso.find(params[:id])
-    @cursos = obtain_cursos
+    @cursos = obtain_cursos @curso.tipo
   end
 
   # POST /cursos
@@ -67,7 +67,7 @@ class CursosController < ApplicationController
         CustomLogger.info("Nuevo curso: #{@curso.curso.inspect} ,Nivel: #{@curso.nivel.inspect} ,Enfasis: #{@curso.enfasis.inspect} ,Turno:#{@curso.turno.inspect} creado por el usuario: #{current_user.full_name.inspect}, #{Time.now}")
         format.json { render json: @curso, status: :created, location: @curso }
       else
-        @cursos = obtain_cursos
+        @cursos = obtain_cursos @curso.tipo
         format.html { render action: "new" }
         CustomLogger.error("Error al crear un nuevo curso: #{@curso.curso.inspect} ,Nivel: #{@curso.nivel.inspect} ,Enfasis: #{@curso.enfasis.inspect} ,Turno:#{@curso.turno.inspect} por el usuario: #{current_user.full_name.inspect}, #{Time.now} ")
         format.json { render json: @curso.errors, status: :unprocessable_entity }
@@ -93,7 +93,7 @@ class CursosController < ApplicationController
         format.html { redirect_to @curso, notice: 'El curso fue actualizado con exito' }
         format.json { head :no_content }
       else
-        @cursos = obtain_cursos
+        @cursos = obtain_cursos @curso.tipo
         format.html { render action: "edit" }
         format.json { render json: @curso.errors, status: :unprocessable_entity }
       end
@@ -123,26 +123,21 @@ class CursosController < ApplicationController
     end
   end
 
+  def change_select
+    tipo = params[:tipo]
+    @cursos = obtain_cursos tipo
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
-    def obtain_cursos
-      todos_cursos = ['Primer', 'Segundo', 'Tercer', 'Cuarto', 'Quinto', 'Sexto', 'Septimo', 'Octavo', 'Noveno' ]
-      unless @curso.curso
-        cursos_guardados = Curso.by_year(Date.today.year)
-        cursos = []
-        todos_cursos.each do |todo_curso|
-          existe = false 
-          cursos_guardados.each do |curso_guardado|
-            if curso_guardado.curso.split(" ")[0] == todo_curso
-              existe = true
-            end
-          end
-          unless existe
-            cursos << todo_curso
-          end
-        end
-      else
-        cursos = todos_cursos
+    def obtain_cursos tipo
+      if tipo == "Grado"
+        todos_cursos = ['Primer', 'Segundo', 'Tercer', 'Cuarto', 'Quinto', 'Sexto', 'Septimo', 'Octavo', 'Noveno' ]
+      else 
+        todos_cursos = ['Primer', 'Segundo', 'Tercer']
       end
-      cursos
+      todos_cursos
     end
 end
