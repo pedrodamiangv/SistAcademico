@@ -115,11 +115,14 @@ class PlanificacionesController < ApplicationController
         if @planificacion.destroy
            @destruyo = true
         end
-          redirect_to @materia, notice: 'Tarea eliminada correctamente. '
+          notice = "La tarea y sus demas atributos han sido eliminados correctamente. "
           CustomLogger.info("Tarea: #{@planificacion.tarea.inspect}, Etapa: #{@planificacion.etapa.inspect}, Fecha de Entrega: #{@planificacion.fecha_entrega.inspect} ,Total de Puntos: #{@planificacion.total_puntos.inspect} ,Descripcion: #{@planificacion.descripcion.inspect} correspondiente a la materia: #{@planificacion.materia_materia.inspect} han sido eliminados por el usuario: #{current_user.full_name.inspect}, #{Time.now}")
       rescue
           notice = "Esta tarea no puede ser eliminada correctamente. "
+          CustomLogger.error("Error al eliminar la tarea: #{@planificacion.tarea.inspect} y sus demas atributos por el usuario: #{current_user.full_name.inspect}, #{Time.now}")
       ensure
+          format.html{ redirect_to @materia, notice: notice}
+          format.json{ head :no_content}
           format.js
       end
     end

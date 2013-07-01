@@ -12,7 +12,9 @@
       <section>
         <legend>
           <h5><%= @materia.materia.capitalize %></h5>
+          <% if current_user.is_administrativo || current_user.is_docente %>
           <p class="li" id="vinculos"><i class="icon-edit"></i><%= link_to "Editar", edit_campos_materia_path(@materia) %></p>
+          <% end %>
         </legend>
       </section>
       <section>
