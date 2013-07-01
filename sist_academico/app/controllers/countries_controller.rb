@@ -81,9 +81,12 @@ class CountriesController < ApplicationController
   # DELETE /countries/1.json
   def destroy
     @country = Country.find(params[:id])
+    @destruyo = false
     respond_to do |format|
       begin
-        @country.destroy
+        if @country.destroy
+           @destruyo = true
+        end
         notice = "El pais ha sido eliminado"
         CustomLogger.info("Pais: #{@country.pais.inspect} ha sido eliminado por el usuario: #{current_user.full_name.inspect}, #{Time.now}")
       rescue
@@ -92,6 +95,7 @@ class CountriesController < ApplicationController
       ensure
       format.html { redirect_to countries_url, notice: notice }
       format.json { head :no_content }
+      format.js
       end
     end
   end

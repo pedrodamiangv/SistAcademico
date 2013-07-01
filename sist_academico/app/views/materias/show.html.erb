@@ -1,3 +1,5 @@
+<label class="alert alert-error" style="display: none;" id="error"></label>
+<label class="Sample ui-state-highlight style." style="display: none;" id="correcto"></label>
 <% provide(:title, @materia.materia) %>
 <p id="notice"><%= notice %></p>
 <p id="error" class="error"><%= flash[:error] %></p>
@@ -10,7 +12,7 @@
       <section>
         <legend>
           <h5><%= @materia.materia.capitalize %></h5>
-          <p class="li"><%= link_to "(Editar)", edit_campos_materia_path(@materia) %></p>
+          <p class="li" id="vinculos"><i class="icon-edit"></i><%= link_to "Editar", edit_campos_materia_path(@materia) %></p>
         </legend>
       </section>
       <section>
@@ -48,7 +50,7 @@
           <%= f.label :fecha_entrega %>
           <%= f.text_field :fecha_entrega, class: 'search-query', :id=> "fecha", :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;', id:"fechaTarea" %>
           <%= f.label :total_puntos %>
-          <%= f.text_field :total_puntos, class: 'input-medium', :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;', onblur: "validar(this)", :maxlength =>  2 %>
+          <%= f.text_field :total_puntos, class: 'input-medium', :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;', onblur: "validarCIN(this)", :maxlength =>  2 %>
           <%= f.label :descripcion %>
           <%= f.text_area :descripcion, rows: 3, :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;' %>
           <%= f.submit "Guardar", class: "btn btn-large btn-primary", :name => 'test_button' %>
@@ -89,7 +91,7 @@
             <td><%= tarea.descripcion %></td>
             <% if current_user.is_administrativo || current_user.is_docente %>
               <td><%= link_to 'Editar', edit_planificacion_path(tarea), remote: true %>
-                <%= link_to 'Eliminar', tarea, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
+                <%= link_to 'Eliminar', tarea, method: :delete, data: { confirm: 'Estas seguro?' }, remote: true %></td>
             <% end %>
           </tr>
         <% end %>
@@ -109,3 +111,14 @@
   </div>
   <div>
 </div>
+<script type="text/javascript">
+    function cerrar(){
+               $("#error").hide();
+
+       }
+
+       function refresh()
+        {
+                location.reload(true);
+        }
+</script>

@@ -104,9 +104,12 @@ class CursosController < ApplicationController
   # DELETE /cursos/1.json
   def destroy
     @curso = Curso.find(params[:id])
+    @destruyo = false
     respond_to do |format|
       begin
-        @curso.destroy
+        if @curso.destroy
+           @destruyo = true
+        end
         notice = "El curso y sus demas campos fueron eliminado correctamente."
         CustomLogger.info("Curso: #{@curso.curso.inspect} ,Nivel: #{@curso.nivel.inspect} ,Enfasis: #{@curso.enfasis.inspect} ,Turno:#{@curso.turno.inspect} eliminados por el usuario: #{current_user.full_name.inspect}, #{Time.now}")
       rescue
@@ -115,6 +118,7 @@ class CursosController < ApplicationController
       ensure
         format.html { redirect_to cursos_url }
         format.json { head :no_content }
+        format.js
       end
     end
   end

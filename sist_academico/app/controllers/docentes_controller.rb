@@ -137,9 +137,12 @@ class DocentesController < ApplicationController
   # DELETE /docentes/1.json
   def destroy
     @docente = Docente.find(params[:id])
+    @destruyo = false
     respond_to do |format|
       begin
-        @docente.destroy
+        if @docente.destroy
+          @destruyo = true
+        end
         notice = "El docente y sus demas atributos han sido eliminados correctamente. "
         CustomLogger.info("Nombre del docente: #{@docente.user_nombre.inspect} ,Apellido: #{@docente.user_apellido.inspect} ,Cedula de Identidad: #{@docente.user_CINro.inspect} ,Sexo: #{@docente.user_sexo.inspect} ,Telefono:#{@docente.user_telefono.inspect} ,Correo Electronico: #{@docente.user_email.inspect} ,Fecha de Nacimiento:#{@docente.user_fecha_nacimiento.inspect} ,Lugar de Nacimiento: #{@docente.user_lugar_nacimiento.inspect} ,Matricula Numero: #{@docente.matricula.inspect} ,Titulo: #{@docente.titulo.inspect} ,Direccion: #{@docente.user.address.direccion.inspect} ,Nombre de Usuario: #{@docente.user_username.inspect} han sido eliminados por el usuario: #{current_user.full_name.inspect}, #{Time.now}")
       rescue

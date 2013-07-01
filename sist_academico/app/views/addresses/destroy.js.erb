@@ -1,2 +1,8 @@
-$("#error").html('La direccion no puede ser eliminada porque esta siendo utilizada <button type="button" class="close" data-dismiss="alert" onClick="cerrar();">&times;</button>');
-$("#error").show();
+<% unless @destruyo %>
+	$("#error").html('<i class="icon-warning-sign"></i> La direccion no puede ser eliminada porque esta siendo utilizada <button type="button" class="close" data-dismiss="alert" onClick="cerrar();">&times;</button>');
+	$("#error").show();
+<%else%>
+	refresh();
+	$("#correcto").html('<i class="icon-ok-sign"></i> La direccion se ha eliminado correctamente <button type="button" class="close" data-dismiss="alert" onClick="cerrar();">&times;</button>');
+	$("#correcto").show();
+<%end%>

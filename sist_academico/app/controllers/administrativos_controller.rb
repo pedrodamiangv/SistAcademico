@@ -117,9 +117,12 @@ class AdministrativosController < ApplicationController
   # DELETE /administrativos/1.json
   def destroy
     @administrativo = Administrativo.find(params[:id])
+    @destruyo = false
     respond_to do |format|
       begin
-        @administrativo.destroy
+        if @administrativo.destroy
+            @destruyo = true
+        end
         notice = "El administrativo y sus demas atributos han sido eliminado correctamente"
         CustomLogger.info("Administrativo: #{@administrativo.user_nombre.inspect} ,Apellido: #{@administrativo.user_apellido.inspect} ,Cedula de Identidad: #{@administrativo.user_CINro.inspect} ,Sexo: #{@administrativo.user_sexo.inspect} ,Telefono:#{@administrativo.user_telefono.inspect} ,Correo Electronico: #{@administrativo.user_email.inspect} ,Fecha de Nacimiento:#{@administrativo.user_fecha_nacimiento.inspect} ,Lugar de Nacimiento: #{@administrativo.user_lugar_nacimiento.inspect} ,Cargo: #{@administrativo.cargo.inspect} ,Titulo: #{@administrativo.titulo.inspect} ,Direccion: #{@administrativo.user.address.direccion.inspect} ,Nombre de Usuario: #{@administrativo.user_username.inspect} han sido eliminados por el usuario: #{current_user.full_name.inspect} ,#{Time.now}")
       rescue
@@ -128,6 +131,7 @@ class AdministrativosController < ApplicationController
       ensure
         format.html { redirect_to administrativos_url, notice: notice }
         format.json { head :no_content }
+        format.js
       end
     end
   end

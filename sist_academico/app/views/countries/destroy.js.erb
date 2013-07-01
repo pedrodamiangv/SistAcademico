@@ -1,0 +1,8 @@
+<% unless @destruyo %>
+	$("#error").html('<i class="icon-warning-sign"></i> El pais seleccionado no puede ser eliminado porque esta siendo utilizado. <button type="button" class="close" data-dismiss="alert" onClick="cerrar();">&times;</button>');
+	$("#error").show();
+<%else%>
+	refresh();
+	$("#correcto").html('<i class="icon-ok-sign"></i> El pais se ha eliminado correctamente. <button type="button" class="close" data-dismiss="alert" onClick="cerrar();">&times;</button>');
+	$("#correcto").show();
+<%end%>

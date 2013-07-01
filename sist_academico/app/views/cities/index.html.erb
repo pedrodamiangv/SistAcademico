@@ -1,3 +1,5 @@
+<label class="alert alert-error" style="display: none;" id="error"></label>
+<label class="Sample ui-state-highlight style." style="display: none;" id="correcto"></label>
 <div class="container">
   <div class="row">
     <legend>Lista de Ciudades</legend>
@@ -23,7 +25,7 @@
               <td class="selection <%= id %>"><%= city.country_pais %></td>
               <% if current_user.is_administrativo %>
                 <td class="selection <%= id %>"><%= link_to 'Editar', edit_city_path(city) %> |
-                <%= link_to 'Eliminar', city, :action => 'destroy', method: :delete , data: { confirm: 'Estas seguro?' } %></td>
+                <%= link_to 'Eliminar', city, :action => 'destroy', method: :delete , data: { confirm: 'Estas seguro?', remote: true } %></td>
               <% end %>
             </tr>
           <% end %>
@@ -51,5 +53,15 @@
         cssStyle: 'light-theme',
         onPageClick: function(pageNumber){test(((pageNumber-1)*10))}
     });
+
+    function cerrar(){
+               $("#error").hide();
+
+       }
+
+       function refresh()
+        {
+                location.reload(true);
+        }
 </script>
 

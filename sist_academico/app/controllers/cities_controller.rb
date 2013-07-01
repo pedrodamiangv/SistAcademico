@@ -86,9 +86,12 @@ class CitiesController < ApplicationController
   # DELETE /cities/1.json
   def destroy
     @city = City.find(params[:id])
+    @destruyo = false
     respond_to do |format|
       begin
-        @city.destroy
+        if @city.destroy
+          @destruyo = true
+        end
         notice= "La ciudad ha sido eliminada"
         CustomLogger.info("Ciudad #{@city.city.inspect} del pais #{@city.country_pais.inspect} eliminada por #{current_user.full_name.inspect}, #{Time.now}")
       rescue
@@ -97,6 +100,7 @@ class CitiesController < ApplicationController
       ensure
         format.html { redirect_to cities_url, notice: notice }
         format.json { head :no_content }
+        format.js
       end
     end
   end

@@ -92,9 +92,12 @@ class AddressesController < ApplicationController
   # DELETE /addresses/1.json
   def destroy
     @address = Address.find(params[:id])
+    @destruyo = false
     respond_to do |format|
       begin
-        @address.destroy
+        if @address.destroy
+           @destruyo = true
+        end
         notice = "La direccion ha sido eliminada correctamente"
         CustomLogger.info("Direccion: #{@address.direccion.inspect} ,Barrio: #{@address.barrio.inspect} ,Ciudad: #{@address.city_city.inspect} eliminados por el usuario: #{current_user.full_name.inspect}, #{Time.now}")
       rescue

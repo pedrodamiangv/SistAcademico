@@ -38,7 +38,7 @@ class MaterialesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to materiales_url }
-      format.js { render 'material_eliminado' }
+      format.js
       CustomLogger.info("Material #{@material.file.inspect} almacenado en la materia: #{@material.materia_materia.inspect} ha sido eliminado por el usuario: #{current_user.full_name.inspect}, #{Time.now}")
     end
   end

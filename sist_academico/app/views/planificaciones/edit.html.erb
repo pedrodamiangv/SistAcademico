@@ -53,7 +53,7 @@
 	              <td><%= p.object.alumno.full_name %></td>
 	              <%= p.text_field :alumno_id, value: p.object.alumno.id, style: 'display: none;' %>
 	              <%= p.text_field :planificacion_id, value: @planificacion.id, style: 'display: none;' %>
-	              <td><%= p.text_field :puntaje, :maxlength => 3, onblur: "validar(this)" %></td>
+	              <td><%= p.text_field :puntaje, :maxlength => 3, onblur: "validarCIN(this)" %></td>
 	              <td><%= p.text_field :descripcion, :maxlength => 100 %></td>
 	            </tr>
 
@@ -63,7 +63,7 @@
 	      </table>
 	  <div align="center">
 	    <%= f.submit "Guardar", class: "btn btn-large btn-primary" %>
-	    <%= link_to "Cancelar", planificaciones_path, class: "btn btn-large btn-primary", id: "colorBoton"%>
+	    <%= link_to "Cancelar", :back, class: "btn btn-large btn-inverse", id: "colorBoton"%>
 	  </div>
 	</div>
 <% end %>

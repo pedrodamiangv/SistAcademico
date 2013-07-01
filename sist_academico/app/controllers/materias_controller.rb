@@ -189,9 +189,12 @@ class MateriasController < ApplicationController
   # DELETE /materia/1.json
   def destroy
     @materia = Materia.find(params[:id])
+    @destruyo = false
     respond_to do |format|
       begin
-        @materia.destroy
+        if @materia.destroy
+           @destruyo = true
+        end
         notice = "La materia ha sido eliminado correctamente"
         CustomLogger.info("Materia: #{@materia.materia.inspect} ,Area: #{@materia.area.inspect} ,Curso: #{@materia.curso_curso.inspect} ,Docente: #{@materia.docente.full_name.inspect} han sido eliminados por el usuario: #{current_user.full_name.inspect}, #{Time.now}")
       rescue
@@ -200,6 +203,7 @@ class MateriasController < ApplicationController
       ensure
         format.html { redirect_to materias_url, notice: notice }
         format.json { head :no_content }
+        format.js
       end
     end
   end

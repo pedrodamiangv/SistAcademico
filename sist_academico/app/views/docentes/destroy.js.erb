@@ -1,2 +1,8 @@
-$("#error").html('El docente no se puede eliminar porque se encuentra relacionado <button type="button" class="close" data-dismiss="alert" onClick="cerrar();">&times;</button>');
-$("#error").show();
+<% unless @destruyo %>
+	$("#error").html('<i class="icon-warning-sign"></i> El docente no se puede eliminar porque se encuentra relacionado <button type="button" class="close" data-dismiss="alert" onClick="cerrar();">&times;</button>');
+	$("#error").show();
+<%else%>
+	refresh();
+	$("#correcto").html('<i class="icon-ok-sign"></i> El docente se ha eliminado correctamente <button type="button" class="close" data-dismiss="alert" onClick="cerrar();">&times;</button>');
+	$("#correcto").show();
+<%end%>

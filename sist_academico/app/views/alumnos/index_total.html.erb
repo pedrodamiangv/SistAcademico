@@ -1,4 +1,5 @@
 <label class="alert alert-error" style="display: none;" id="error"></label>
+<label class="Sample ui-state-highlight style." style="display: none;" id="correcto"></label>
 <div class="container">
   <div class="row">
     <legend>Lista de Alumnos registrados</legend>
@@ -66,5 +67,10 @@
     function cerrar(){
                $("#error").hide();
     }
+
+    function refresh()
+        {
+                location.reload(true);
+        }
 </script>
 

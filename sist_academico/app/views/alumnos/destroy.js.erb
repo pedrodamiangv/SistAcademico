@@ -1,9 +1,9 @@
 <% unless @destruyo %>
-	$("#error").html('El alumno no se puede eliminar porque se encuentra relacionado <button type="button" class="close" data-dismiss="alert" onClick="cerrar();">&times;</button>');
+	$("#error").html('<i class="icon-warning-sign"></i> El alumno no se puede eliminar porque se encuentra relacionado <button type="button" class="close" data-dismiss="alert" onClick="cerrar();">&times;</button>');
 	$("#error").show();
 <%else%>
 	refresh();
-	$("#correcto").html('El alumno se ha eliminado correctamente <button type="button" class="close" data-dismiss="alert" onClick="cerrar();">&times;</button>');
+	$("#correcto").html('<i class="icon-ok-sign"></i> El alumno se ha eliminado correctamente <button type="button" class="close" data-dismiss="alert" onClick="cerrar();">&times;</button>');
 	$("#correcto").show();
 <%end%>
 
