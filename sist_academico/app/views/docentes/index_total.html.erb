@@ -1,3 +1,4 @@
+<label class="alert alert-error" style="display: none;" id="error"></label>
 <div class="container">
   <div class="row">
     <legend>Lista de Docentes</legend>
@@ -31,7 +32,7 @@
               <td class="selection <%= id %>"><%= docente.created_at.to_s.slice(0,10); %></td>
               <% if current_user.is_administrativo %>
                 <td class="selection <%= id %>"><%= link_to 'Editar', edit_docente_path(docente) %>
-                <%= link_to 'Eliminar', docente, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
+                <%= link_to 'Eliminar', docente, method: :delete, data: { confirm: 'Estas seguro?' }, remote: true %></td>
               <% end %>
             </tr>
           <% end %>
@@ -60,4 +61,9 @@
         cssStyle: 'light-theme',
         onPageClick: function(pageNumber){test(((pageNumber-1)*10))}
     });
+
+    function cerrar(){
+               $("#error").hide();
+
+    }
 </script>

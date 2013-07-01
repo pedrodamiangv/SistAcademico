@@ -26,7 +26,7 @@
               <%= d.text_field :email, :maxlength => 30 %>
 
               <%= d.label :CINro, "C.I.Número" %>
-              <%= d.text_field :CINro, :maxlength => 9, onblur: "validar(this)", class:  "span2" %>
+              <%= d.text_field :CINro, :maxlength => 9, onblur: "validarCIN(this)", class:  "span2" %>
 
               <%= d.label :telefono, "Teléfono" %>
               <%= d.text_field :telefono, :maxlength => 13, :placeholder => "(xxxx) xxxxxx",  class:  "span2"%>

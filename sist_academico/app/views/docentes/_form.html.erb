@@ -15,7 +15,7 @@
               <%= d.text_field :apellido, :maxlength => 50, class: "span4" %>
 
               <%= d.label :CINro, "C.I.Número" %>
-              <%= d.text_field :CINro, :maxlength => 9, onblur: "validar(this)", class: "span2" %>
+              <%= d.text_field :CINro, :maxlength => 9, onblur: "validarCIN(this)", class: "span2" %>
 
               <%= d.label :sexo %>
               <%= d.select(:sexo, ['Masculino', 'Femenino' ],{},{class: "span2"})%>
@@ -36,7 +36,7 @@
             <div class="span4">
 
               <%= f.label :matricula, "Matricula Número" %>
-              <%= f.text_field :matricula, :maxlength => 15, onblur: "validar(this)", class: "span2" %>
+              <%= f.text_field :matricula, :maxlength => 15, onblur: "validarCIN(this)", class: "span2" %>
 
               <%= f.label :titulo, "Título Obtenido" %>
               <%= f.text_field :titulo, :maxlength => 50, class:"span4" %>

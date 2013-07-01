@@ -101,21 +101,12 @@ function validar(obj) {
     }
   }
 }
-
-function validarFechaMenorActual (obj)
-  {
-        date2= obj.value
-        var today = Date.today;
-        if (date2>today)
-        {
-            alert('Debe ser menor a la fecha actual');
-        }
-          else
-          {
-              return true;
-          }
+function validarCIN(obj) {
+  txt = obj.value;
+  if(parseInt(txt) != parseFloat(txt)) {
+    alert('Solo debe ser número entero');
   }
-
+}
 function change_data_by_select(path){
   $('#select_type').on('change', function(){
     var _type = $("#select_type").val();

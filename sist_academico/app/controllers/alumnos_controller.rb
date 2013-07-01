@@ -202,9 +202,12 @@ class AlumnosController < ApplicationController
   # DELETE /alumnos/1.json
   def destroy
     @alumno = Alumno.find(params[:id])
+    @destruyo = false
     respond_to do |format|
       begin
-        @alumno.destroy
+        if @alumno.destroy
+          @destruyo = true
+        end
         notice = "El alumnos y sus demas atributos han sido eliminados correctamente. "
         CustomLogger.info("Nombre del alumno: #{@alumno.user_nombre.inspect} ,Apellido: #{@alumno.user_apellido.inspect} ,Cedula de Identidad: #{@alumno.user_CINro.inspect} ,Sexo: #{@alumno.user_sexo.inspect} ,Telefono:#{@alumno.user_telefono.inspect} ,Correo Electronico: #{@alumno.user_email.inspect} ,Fecha de Nacimiento:#{@alumno.user_fecha_nacimiento.inspect} ,Lugar de Nacimiento: #{@alumno.user_lugar_nacimiento.inspect} ,Nombre del Responsable: #{@alumno.responsable.inspect} ,Telefono del Responsable: #{@alumno.telefono_responsable.inspect} ,Direccion: #{@alumno.user.address.direccion.inspect} ,Documentos Personales: Certificado de Estudio: #{@alumno.doc_cert_estudios.inspect} ,Cedula: #{@alumno.doc_cedula.inspect} ,Certificado de Nacimiento: #{@alumno.doc_cert_nacimiento.inspect} ,Foto Tipo Carnet: #{@alumno.doc_foto.inspect} ,Nombre de Usuario: #{@alumno.user_username.inspect} han sido eliminados por el usuario: #{current_user.full_name.inspect} ,#{Time.now}")
       rescue
@@ -213,6 +216,7 @@ class AlumnosController < ApplicationController
       ensure
         format.html { redirect_to alumnos_url, notice: notice }
         format.json { head :no_content }
+        format.js
       end
     end
   end

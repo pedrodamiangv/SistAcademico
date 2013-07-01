@@ -103,6 +103,7 @@ class AddressesController < ApplicationController
       ensure
         format.html { redirect_to addresses_url, notice: notice }
         format.json { head :no_content }
+        format.js
       end
     end
   end

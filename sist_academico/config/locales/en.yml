@@ -12,4 +12,4 @@ en:
       too_short: "*es muy corto (minimo es %{count} caracteres)"
       unique: "*ya existe, debe ser nuevo"
       less_than_or_equal_to: "El Total de puntos establecido fue de %{count}"
-      taken: "has already been taken"
+      taken: "Este valor ya existe"

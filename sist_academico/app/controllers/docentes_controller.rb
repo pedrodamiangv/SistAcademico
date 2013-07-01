@@ -148,6 +148,7 @@ class DocentesController < ApplicationController
       ensure
         format.html { redirect_to docentes_url, notice: notice }
         format.json { head :no_content }
+        format.js
       end
     end
   end
