@@ -1,6 +1,6 @@
 <label id="bien" class="alert alert-success" style="display: none;"></label>
 <label id="mal" class="alert alert-error" style="display: none;"></label>
-<%= form_for noticia, remote: true, controller: 'noticias' do |form| %>
+<%= form_for noticia, remote: true, controller: 'noticias', action: 'create' do |form| %>
   <%= form.label :noticia, 'Publicar Noticia' %>
   <%= form.text_field :noticia, id: "txt-noticia", :maxlength => 100 %>
   <div id="btn-noticia">

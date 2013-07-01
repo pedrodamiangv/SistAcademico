@@ -6,7 +6,7 @@
     <% end %>
   </fieldset>
   <div class="row" align="right">
-      Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido search-query"/> 
+    Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido search-query"/> 
   </div>
 
 <div class="row">
@@ -19,22 +19,19 @@
       </tr>
     </thead>
     <tbody>
-      <% @auditorias.each_with_index do |array, i| %>
+      <% @objects.each_with_index do |array, i| %>
         <% id = "page-" + i.to_s %>
           <tr>
-            <% @objects.each do |array| %>
-              <td class="selection <%= id %>"><td>  <%= array[1] %> </td>
-              <td class="selection <%= id %>"><td>  <%= array[2] %>  </td>
-              <td class="selection <%= id %>"><td>  <%= array[3] %>  </td>
+              <td class="selection <%= id %>">  <%= array[1] %> </td>
+              <td class="selection <%= id %>"> <%= array[2] %>  </td>
+              <td class="selection <%= id %>">  <%= array[3] %>  </td>
           </tr>
-            <% end %>
-        <% end %>
       <% end %>
     </tbody>
   </table>
-  <% if @auditorias.size > 9 %>
+  <% if @objects.size > 9 %>
     <div id="selector"></div>
-<% end %>
+  <% end %>
 </div>
 
 <script type="text/javascript">
@@ -42,7 +39,7 @@
       test(0);
     });
     $('#selector').pagination({
-        items: <%= @auditorias.size %>,
+        items: <%= @objects.size %>,
         itemsOnPage: 10,
         cssStyle: 'light-theme',
         onPageClick: function(pageNumber){test(((pageNumber-1)*10))}

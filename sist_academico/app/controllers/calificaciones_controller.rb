@@ -28,10 +28,61 @@ class CalificacionesController < ApplicationController
   # GET /calificaciones/new.json
   def new
     @calificacion = Calificacion.new
+    year = Date.today.year
+    @anos = ['-Selecccione-', year.to_s, (year-1).to_s, (year-2).to_s]
+    @cursos = Curso.by_year(year)
+    @alumnos = @cursos.first.alumnos
+    @materias = @cursos.first.materias
 
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @calificacion }
+    end
+  end
+
+  def change_data
+    ano = params[:ano]
+    curso_s = params[:curso]
+    @cursos = Curso.by_year(ano.to_i).all
+    curso_seleccionado = @cursos.first
+    @cursos.each do |curso|
+      if curso.id == curso_s.to_i
+        curso_seleccionado = curso
+      end
+    end
+    if curso_seleccionado
+      @materias = curso_seleccionado.materias
+      @alumnos = curso_seleccionado.alumnos
+    else
+      @materias = []
+      @alumnos = []
+    end
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def change_select
+    ano = params[:ano]
+    curso_s = params[:curso]
+    @cursos = Curso.by_year(ano.to_i).all
+    curso_seleccionado = @cursos.first
+    @cursos.each do |curso|
+      if curso.id == curso_s.to_i
+        curso_seleccionado = curso
+      end
+    end
+    if curso_seleccionado
+      @materias = curso_seleccionado.materias
+      @alumnos = curso_seleccionado.alumnos
+    else
+      @materias = []
+      @alumnos = []
+    end
+
+    respond_to do |format|
+      format.js
     end
   end
 
@@ -51,6 +102,11 @@ class CalificacionesController < ApplicationController
         CustomLogger.info("Se ha registrado una nueva calificacion: #{@calificacion.calificacion.inspect} ,Materia: #{@calificacion.materia_materia.inspect} ,Puntos Correctos: #{@calificacion.puntos_correctos.inspect} ,Total de Puntos: #{@calificacion.total_puntos.inspect} ,Etapa: #{@calificacion.etapa.inspect} creados por el usuario: #{current_user.full_name.inspect}, #{Time.now}")
         format.json { render json: @calificacion, status: :created, location: @calificacion }
       else
+        year = Date.today.year
+        @anos = [year, year-1, year-2]
+        @cursos = Curso.by_year(year)
+        @alumnos = @cursos.first.alumnos
+        @materias = @cursos.first.materias
         format.html { render action: "new" }
         CustomLogger.error("Error al querer registrar una nueva calificacion: #{@calificacion.calificacion.inspect} y sus demas atributos, por el usuario: #{current_user.full_name.inspect}, #{Time.now} ")
         format.json { render json: @calificacion.errors, status: :unprocessable_entity }

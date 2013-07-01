@@ -136,6 +136,33 @@ function change_data_by_tipo(path){
   });
 }
 
+function change_data_calificaciones(path){
+  $('#curso_curso').on('change', function(){
+    var _type = $("#curso_curso").val();
+    $.ajax({
+      url: path,
+      data: { "ano": _type },
+      async: true,
+      dataType: 'script'
+     });
+     return false;
+  });
+}
+
+function change_select_calificaciones(path){
+  $('#calificaciones_curso').on('change', function(){
+    var _type = $("#curso_curso").val();
+    var _curso = $("#calificaciones_curso").val();
+    $.ajax({
+      url: path,
+      data: { "ano": _type, "curso": _curso },
+      async: true,
+      dataType: 'script'
+     });
+     return false;
+  });
+}
+
 function change_data_by_note(path){
   $('.btn').on('click', function(){
     $("#6").val($(this).val());

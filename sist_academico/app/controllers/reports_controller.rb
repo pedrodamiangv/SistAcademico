@@ -5,8 +5,8 @@ class ReportsController < ApplicationController
   	@cursos = Curso.by_year(Date.today.year)
     @cursos << Curso.new(curso: "Colegio")
     @cant_alumnos = @cursos.first.alumnos.count
-    data_table = generate_data_table "5", "Primer Curso"
-    @chart = generate_graphic data_table, "Primer Curso", "Materia"
+    data_table = generate_data_table "5", "Primer Curso A"
+    @chart = generate_graphic data_table, "Primer Curso A", "Materia"
     @table = generate_table data_table
 
     
@@ -27,8 +27,8 @@ class ReportsController < ApplicationController
     @cursos = Curso.by_year(Date.today.year)
     @cursos << Curso.new(curso: "Colegio")
     @cant_alumnos = @cursos.first.alumnos.count
-    data_table = generate_data_table "Sexo", "Primer Curso"
-    @chart = generate_graphic data_table, "Primer Curso", "Porcentaje"
+    data_table = generate_data_table "Sexo", "Primer Curso A"
+    @chart = generate_graphic data_table, "Primer Curso A", "Porcentaje"
     @table = generate_table data_table
 
     

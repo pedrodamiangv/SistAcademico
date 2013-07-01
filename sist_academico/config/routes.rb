@@ -21,7 +21,14 @@ SistAcademico::Application.routes.draw do
     end
   end
 
-  resources :calificaciones
+  resources :calificaciones do
+    collection do
+      get :change_data
+    end
+    collection do
+      get :change_select
+    end
+  end
 
 
   resources :puntajes

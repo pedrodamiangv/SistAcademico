@@ -1,26 +1,39 @@
 <%= form_for(@calificacion) do |f| %>
-
-  <div class="field">
-    <%= f.label :alumno_id %><br />
-    <%= f.number_field :alumno_id %>
+    <%= f.label 'Año' %><br />
+    <%= select "curso", :curso, @anos, {},{class: 'input-medium seguido'} %>
+  <div id="anos" style="display: none;">
+    <%= render 'select_anos', cursos: @cursos %>
   </div>
-  <div class="field">
-    <%= f.label :materia_id %><br />
-    <%= f.number_field :materia_id %>
-  </div>
-  <div class="field">
-    <%= f.label :calificacion %><br />
-    <%= f.number_field :calificacion, onblur: "validar(this)" %>
-  </div>
-  <div class="field">
-    <%= f.label :total_puntos %><br />
-    <%= f.number_field :total_puntos, onblur: "validar(this)" %>
-  </div>
-  <div class="field">
-    <%= f.label :puntos_correctos %><br />
-    <%= f.text_field :puntos_correctos, onblur: "validar(this)" %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <div id="oculto" style="display: none;">
+      <div id="cursos">
+        <%= render 'select_cursos', alumnos: @alumnos, materias: @materias %>
+      </div>
+      <%= f.label :calificacion %><br />
+      <%= f.number_field :calificacion, onblur: "validar(this)" %>
+      <%= f.label :total_puntos %><br />
+      <%= f.number_field :total_puntos, onblur: "validar(this)" %>
+      <%= f.label :puntos_correctos %><br />
+      <%= f.text_field :puntos_correctos, onblur: "validar(this)" %>
+      <%= f.submit "Guardar",class: "btn btn-large btn-primary" %>
+    </div>
 <% end %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    var path = '<%= change_data_calificaciones_path %>';
+    var path2 = '<%= change_select_calificaciones_path %>';
+    change_data_calificaciones(path);
+    change_select_calificaciones(path2);
+    $('#calificaciones_curso').on('change', function(){
+    var _type = $("#curso_curso").val();
+    var _curso = $("#calificaciones_curso").val();
+    $.ajax({
+      url: path2,
+      data: { "ano": _type, "curso": _curso },
+      async: true,
+      dataType: 'script'
+     });
+     return false;
+  });
+  });
+</script>

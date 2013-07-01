@@ -31,7 +31,7 @@
     <div class="span6">
       <% unless current_user.is_alumno? %>
         <div id="new_edit">
-          <%= render 'noticias/form', noticia: :noticia %>
+          <%= render 'noticias/form', noticia: Noticia.new %>
         </div>
       <% end %>
       <br/>

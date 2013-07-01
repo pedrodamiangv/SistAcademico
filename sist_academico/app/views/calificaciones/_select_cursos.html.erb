@@ -1,0 +1,6 @@
+
+<label>Alumno</label>
+<%= collection_select 'calificacion',:alumno_id , alumnos,:id, :full_name,{},{class: "span2"}  %>
+
+<label>Materia</label>
+<%= collection_select 'calificacion', :materia_id , materias,:id, :materia,{},{class: "span2"}  %>
