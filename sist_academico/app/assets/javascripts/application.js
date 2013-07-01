@@ -137,8 +137,8 @@ function change_data_by_tipo(path){
 }
 
 function change_data_calificaciones(path){
-  $('#curso_curso').on('change', function(){
-    var _type = $("#curso_curso").val();
+  $('#x_ano').on('change', function(){
+    var _type = $("#x_ano").val();
     $.ajax({
       url: path,
       data: { "ano": _type },
@@ -150,9 +150,9 @@ function change_data_calificaciones(path){
 }
 
 function change_select_calificaciones(path){
-  $('#calificaciones_curso').on('change', function(){
-    var _type = $("#curso_curso").val();
-    var _curso = $("#calificaciones_curso").val();
+  $('#x_curso').on('change', function(){
+    var _type = $("#x_ano").val();
+    var _curso = $("#x_curso").val();
     $.ajax({
       url: path,
       data: { "ano": _type, "curso": _curso },

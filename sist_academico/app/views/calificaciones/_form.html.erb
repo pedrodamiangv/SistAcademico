@@ -1,10 +1,10 @@
 <%= form_for(@calificacion) do |f| %>
     <%= f.label 'Año' %><br />
-    <%= select "curso", :curso, @anos, {},{class: 'input-medium seguido'} %>
+    <%= select "x", 'ano', @anos, {},{class: 'input-medium'} %>
   <div id="anos" style="display: none;">
     <%= render 'select_anos', cursos: @cursos %>
   </div>
-  <div id="oculto" style="display: none;">
+  <div id="oculto" style="display: none;" class="span2">
       <div id="cursos">
         <%= render 'select_cursos', alumnos: @alumnos, materias: @materias %>
       </div>
@@ -24,16 +24,5 @@
     var path2 = '<%= change_select_calificaciones_path %>';
     change_data_calificaciones(path);
     change_select_calificaciones(path2);
-    $('#calificaciones_curso').on('change', function(){
-    var _type = $("#curso_curso").val();
-    var _curso = $("#calificaciones_curso").val();
-    $.ajax({
-      url: path2,
-      data: { "ano": _type, "curso": _curso },
-      async: true,
-      dataType: 'script'
-     });
-     return false;
-  });
   });
 </script>
