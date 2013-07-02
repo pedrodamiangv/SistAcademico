@@ -2,12 +2,17 @@
 
 <p>
   <b>Alumno:</b>
-  <%= @calificacion.alumno_id %>
+  <%= @calificacion.alumno.full_name %>
+</p>
+
+<p>
+  <b>Curso:</b>
+  <%= @calificacion.materia.curso.curso_grado %>
 </p>
 
 <p>
   <b>Materia:</b>
-  <%= @calificacion.materia_id %>
+  <%= @calificacion.materia.materia %>
 </p>
 
 <p>

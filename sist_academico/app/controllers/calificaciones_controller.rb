@@ -86,6 +86,27 @@ class CalificacionesController < ApplicationController
     end
   end
 
+  def change_etapa
+    ano = params[:ano]
+    curso_s = params[:curso]
+    materia_s = params[:materia]
+    etapa_s = params[:etapa]
+
+    curso = Curso.where("id = ?",curso_s.to_i)
+    alumnos_curso = curso.first.alumnos
+    @alumnos = []
+    alumnos_curso.each do |alumno|
+      calificacion = Calificacion.where("alumno_id = ? AND materia_id = ? AND etapa = ?", alumno.id, materia_s.to_i, etapa_s)
+      unless calificacion.first
+         @alumnos << alumno
+      end
+    end
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   # GET /calificaciones/1/edit
   def edit
     @calificacion = Calificacion.find(params[:id])
@@ -95,22 +116,46 @@ class CalificacionesController < ApplicationController
   # POST /calificaciones.json
   def create
     @calificacion = Calificacion.new(params[:calificacion])
-
-    respond_to do |format|
-      if @calificacion.save
-        format.html { redirect_to @calificacion, notice: 'La calificacion ha sido registrado con exito.' }
-        CustomLogger.info("Se ha registrado una nueva calificacion: #{@calificacion.calificacion.inspect} ,Materia: #{@calificacion.materia_materia.inspect} ,Puntos Correctos: #{@calificacion.puntos_correctos.inspect} ,Total de Puntos: #{@calificacion.total_puntos.inspect} ,Etapa: #{@calificacion.etapa.inspect} creados por el usuario: #{current_user.full_name.inspect}, #{Time.now}")
-        format.json { render json: @calificacion, status: :created, location: @calificacion }
+    calificacion_buscar = Calificacion.where("alumno_id = ? AND materia_id = ? AND etapa = ?", @calificacion.alumno.id, @calificacion.materia.id, @calificacion.etapa)
+    unless calificacion_buscar.first
+      respond_to do |format|
+        if @calificacion.save
+          format.html { redirect_to @calificacion, notice: 'La calificacion ha sido registrado con exito.' }
+          CustomLogger.info("Se ha registrado una nueva calificacion: #{@calificacion.calificacion.inspect} ,Materia: #{@calificacion.materia_materia.inspect} ,Puntos Correctos: #{@calificacion.puntos_correctos.inspect} ,Total de Puntos: #{@calificacion.total_puntos.inspect} ,Etapa: #{@calificacion.etapa.inspect} creados por el usuario: #{current_user.full_name.inspect}, #{Time.now}")
+          format.json { render json: @calificacion, status: :created, location: @calificacion }
+        else
+          year = Date.today.year
+          @anos = [year, year-1, year-2]
+          @cursos = Curso.by_year(year)
+          @alumnos = @cursos.first.alumnos
+          @materias = @cursos.first.materias
+          format.html { render action: "new" }
+          CustomLogger.error("Error al querer registrar una nueva calificacion: #{@calificacion.calificacion.inspect} y sus demas atributos, por el usuario: #{current_user.full_name.inspect}, #{Time.now} ")
+          format.json { render json: @calificacion.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      @calificacion = calificacion_buscar.first
+      calificacion_antigua = @calificacion.calificacion
+      materia_antigua = @calificacion.materia_materia
+      puntos_correctos_antiguo = @calificacion.puntos_correctos
+      total_puntos_antiguo = @calificacion.total_puntos
+      etapa_antigua = @calificacion.etapa
+      respond_to do |format|
+      if @calificacion.update_attributes(params[:calificacion])
+        calificacion_nueva = @calificacion.calificacion
+        materia_nueva = @calificacion.materia_materia
+        puntos_correctos_nueva = @calificacion.puntos_correctos
+        total_puntos_nueva = @calificacion.total_puntos
+        etapa_nueva = @calificacion.etapa
+        CustomLogger.info("Los datos antes de ser actualizados son: calificacion: #{calificacion_antigua.inspect} ,Materia: #{materia_antigua.inspect} ,Puntos Correctos: #{puntos_correctos_antiguo.inspect} ,Total de Puntos: #{total_puntos_antiguo.inspect} ,Etapa: #{etapa_antigua.inspect} .Los datos actualizados por el usuario: #{current_user.full_name.inspect} son los siguientes: calificacion: #{calificacion_nueva.inspect} ,Materia: #{materia_nueva.inspect} ,Puntos Correctos: #{puntos_correctos_nueva.inspect} ,Total de Puntos: #{total_puntos_nueva.inspect} ,Etapa: #{etapa_nueva.inspect}, #{Time.now} ")
+        format.html { redirect_to @calificacion, notice: 'La calificacion ya existia entonces fue actualizada. ' }
+        format.json { head :no_content }
       else
-        year = Date.today.year
-        @anos = [year, year-1, year-2]
-        @cursos = Curso.by_year(year)
-        @alumnos = @cursos.first.alumnos
-        @materias = @cursos.first.materias
         format.html { render action: "new" }
-        CustomLogger.error("Error al querer registrar una nueva calificacion: #{@calificacion.calificacion.inspect} y sus demas atributos, por el usuario: #{current_user.full_name.inspect}, #{Time.now} ")
         format.json { render json: @calificacion.errors, status: :unprocessable_entity }
       end
+    end
     end
   end
 

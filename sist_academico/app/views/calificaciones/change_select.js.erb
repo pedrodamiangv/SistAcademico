@@ -1,2 +1,3 @@
-$('#cursos').html("<%= escape_javascript( render 'select_cursos', alumnos: @alumnos, materias: @materias ) %>");
-$('#oculto').show();
+$('#cursos').html("<%= escape_javascript( render 'select_cursos', materias: @materias ) %>");
+$('#cursos').show();
+$('#x_ano').attr("disabled", "disabled");

@@ -28,6 +28,9 @@ SistAcademico::Application.routes.draw do
     collection do
       get :change_select
     end
+    collection do
+      get :change_etapa
+    end
   end
 
 

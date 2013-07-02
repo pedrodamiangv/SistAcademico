@@ -1,2 +1,9 @@
 <label>Curso</label>
-<%= collection_select 'x', 'curso' , cursos,:id, :curso_grado,{prompt: '-Seleccione-' },{class: "span2"} %>
+<%= collection_select 'x', 'curso' , cursos,:id, :curso_grado,{prompt: '-Seleccione-' },{class: "span2", disabled: false} %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    var path2 = '<%= change_select_calificaciones_path %>';
+    change_select_calificaciones(path2);
+  });
+</script>

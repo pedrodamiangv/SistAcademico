@@ -164,12 +164,28 @@ function change_data_calificaciones(path){
 }
 
 function change_select_calificaciones(path){
-  $('#x_curso').on('change', function(){
+  $('select#x_curso').on('change', function(){
     var _type = $("#x_ano").val();
     var _curso = $("#x_curso").val();
     $.ajax({
       url: path,
       data: { "ano": _type, "curso": _curso },
+      async: true,
+      dataType: 'script'
+     });
+     return false;
+  });
+}
+
+function change_etapa_calificaciones(path){
+  $('select#calificacion_etapa').on('change', function(){
+    var _ano = $("#x_ano").val();
+    var _curso = $("#x_curso").val();
+    var _materia = $("#calificacion_materia_id").val();
+    var _etapa = $("#calificacion_etapa").val();
+    $.ajax({
+      url: path,
+      data: { "ano": _ano, "curso": _curso, "materia": _materia, "etapa": _etapa },
       async: true,
       dataType: 'script'
      });

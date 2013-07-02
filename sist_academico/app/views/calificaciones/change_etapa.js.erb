@@ -1,0 +1,5 @@
+$('#alumnos').html("<%= escape_javascript( render 'select_alumnos', alumnos: @alumnos ) %>");
+$('#alumnos').show();
+$('#oculto').show();
+$('#boton').show();
+$('#x_curso').attr("disabled", "disabled");
