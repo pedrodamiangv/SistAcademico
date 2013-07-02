@@ -129,7 +129,7 @@ class AlumnosController < ApplicationController
   def change_curso 
     @alumno = Alumno.find(params[:id])
     curso = Curso.find(params[:curso_id])
-    @alumno.update_attribute(:curso_id, curso.id )
+    @alumno.update_attribute(:curso_seleccionado_id, curso.id )
     respond_to do |f|
       f.html { redirect_to @alumno, notice: curso.curso_grado}
     end

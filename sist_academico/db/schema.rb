@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130701143206) do
+ActiveRecord::Schema.define(:version => 20130702160852) do
 
   create_table "addresses", :force => true do |t|
     t.string   "direccion"
@@ -41,10 +41,11 @@ ActiveRecord::Schema.define(:version => 20130701143206) do
     t.boolean  "doc_cert_estudios"
     t.boolean  "doc_foto"
     t.boolean  "doc_cert_nacimiento"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
-    t.string   "responsable"
-    t.string   "telefono_responsable"
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.string   "responsable",           :limit => 30, :null => false
+    t.string   "telefono_responsable",  :limit => 15, :null => false
+    t.integer  "curso_seleccionado_id"
   end
 
   add_index "alumnos", ["curso_id"], :name => "alumnos_curso_id_fk"
@@ -180,7 +181,6 @@ ActiveRecord::Schema.define(:version => 20130701143206) do
     t.string   "telefono"
     t.string   "fecha_nacimiento"
     t.string   "lugar_nacimiento"
-    t.string   "direccion"
     t.integer  "edad"
     t.string   "username",                     :null => false
     t.string   "email"

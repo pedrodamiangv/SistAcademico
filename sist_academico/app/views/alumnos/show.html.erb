@@ -34,7 +34,7 @@
           <hr/>
           <label class="label">Materias</label>
           <ul class="nav nav-tabs nav-stacked">
-            <% materias = @alumno.curso.materias %>
+            <% materias = @alumno.curso_seleccionado.materias %>
             <% materias.each do |materia| %>
               <li class="li"><%= link_to materia.materia + " | " + materia.docente.full_name , materia%> </li>
             <% end %>
@@ -58,10 +58,10 @@
     <p><b>--------Nivel:</b> <%= @alumno.curso_actual.nivel %></p>
     <p><b>--------Enfasis:</b> <%= @alumno.curso_actual.enfasis %></p>
     <p><b>--------Turno:</b> <%= @alumno.curso_actual.turno %></p>
-    <p><b>Curso Seleccionado:</b> <%= @alumno.curso_curso_grado %></p>
-    <p><b>--------Nivel:</b> <%= @alumno.curso_nivel %></p>
-    <p><b>--------Enfasis:</b> <%= @alumno.curso_enfasis %></p>
-    <p><b>--------Turno:</b> <%= @alumno.curso_turno %></p>
+    <p><b>Curso Seleccionado:</b> <%= @alumno.curso_seleccionado.curso_grado %></p>
+    <p><b>--------Nivel:</b> <%= @alumno.curso_seleccionado.nivel %></p>
+    <p><b>--------Enfasis:</b> <%= @alumno.curso_seleccionado.enfasis %></p>
+    <p><b>--------Turno:</b> <%= @alumno.curso_seleccionado.turno %></p>
     <hr>
     <% if @alumno.doc_cedula || @alumno.doc_foto || @alumno.doc_cert_nacimiento || @alumno.doc_cert_estudios %>
       <p><b> Documentos Presentados:</b> <p/>
@@ -100,7 +100,7 @@
     <label class="label"> Próximas Tareas </label>
     <ul class="nav nav-tabs nav-stacked">
       <% materias.each do |materia| %>
-        <% materia.planificaciones.where(:fecha_entrega => Date.today..(Date.today + 7)).each do |tarea| %>
+        <% materia.planificaciones.where(:fecha_entrega => Date.today..(Date.today + 10)).each do |tarea| %>
           <li><b>Tarea:</b> <%= tarea.tarea %>
             <br/>&nbsp;&nbsp;<b>Materia:</b> <%= materia.materia %>
             <br/>&nbsp;&nbsp;<b>Fecha de Entrega:</b> <%= time_ago_in_words(tarea.fecha_entrega) %></li> 
@@ -119,7 +119,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @alumno.puntajes.by_month(Date.today.month).each do |puntaje| %>
+          <% @alumno.puntajes.where(:created_at => (Date.today - 30)..(Date.today)).each do |puntaje| %>
             <tr>
               <td><%= puntaje.planificacion.tarea %></td>
               <td><%= puntaje.planificacion.total_puntos %></td>

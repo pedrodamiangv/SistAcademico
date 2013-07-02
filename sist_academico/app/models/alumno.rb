@@ -1,5 +1,5 @@
 class Alumno < ActiveRecord::Base
-  attr_accessible :user_attributes, :responsable, :telefono_responsable, :curso_id, :doc_cedula, :doc_cert_estudios, :doc_cert_nacimiento, :doc_foto, :user_id
+  attr_accessible :curso_seleccionado_id, :user_attributes, :responsable, :telefono_responsable, :curso_id, :doc_cedula, :doc_cert_estudios, :doc_cert_nacimiento, :doc_foto, :user_id
   belongs_to :user, :autosave => true
   belongs_to :curso
   has_and_belongs_to_many :cursos, join_table: :alumnos_cursos, :autosave => true
@@ -27,4 +27,15 @@ class Alumno < ActiveRecord::Base
   def curso_actual
     self.cursos.last
   end
+
+  def curso_seleccionado
+    curso_elegido = self.curso_actual
+    self.cursos.each do |curso|
+      if curso.id == self.curso_seleccionado_id
+        curso_elegido = curso
+      end
+    end
+    curso_elegido
+  end
+
 end
