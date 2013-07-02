@@ -2,7 +2,7 @@
 <%= collection_select 'calificacion', :materia_id , materias,:id, :materia,{prompt: '-Seleccione-' },{class: "span3"}  %>
 
 <label>Etapa</label>
-<%= select( 'calificacion', :etapa, ['Primera', 'Segunda', 'Tercera', 'Extraordinario', 'Regularizacion' ],{prompt: '-Seleccione-' },{class: "span2"}) %>
+<%= select( 'calificacion', :etapa, ['Primera', 'Segunda', 'Tercera', 'Complementario', 'Extraordinario' ],{prompt: '-Seleccione-' },{class: "span2"}) %>
 
 <script type="text/javascript">
   $(document).ready(function(){

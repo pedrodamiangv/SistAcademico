@@ -39,6 +39,8 @@ class AlumnosController < ApplicationController
     @calificaciones_primera_etapa = []
     @calificaciones_segunda_etapa = []
     @calificaciones_tercera_etapa = []
+    @calificaciones_complementario = []
+    @calificaciones_extraordinario = []
     @materias.each do |materia|
       calificacion = []
       calificacion << materia.materia
@@ -65,6 +67,23 @@ class AlumnosController < ApplicationController
       else
         calificacion << "--"
       end 
+
+      calificacion_etapa_complementario = materia.calificaciones.where(:etapa => 'Complementario', :alumno_id => @alumno.id)
+      unless calificacion_etapa_complementario.count == 0
+        @calificaciones_complementario << calificacion_etapa_complementario.first 
+        calificacion << calificacion_etapa_complementario.first.calificacion
+      else
+        calificacion << "--"
+      end
+
+      calificacion_etapa_extraordinario = materia.calificaciones.where(:etapa => 'Extraordinario', :alumno_id => @alumno.id)
+      unless calificacion_etapa_extraordinario.count == 0
+        @calificaciones_extraordinario << calificacion_etapa_extraordinario.first 
+        calificacion << calificacion_etapa_extraordinario.first.calificacion
+      else
+        calificacion << "--"
+      end  
+
       @calificaciones_general << calificacion
     end
     respond_to do |format|

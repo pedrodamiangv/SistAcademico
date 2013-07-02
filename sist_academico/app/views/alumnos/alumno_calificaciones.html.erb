@@ -3,10 +3,17 @@
   <div class="row" align="right">
     Buscar:<input type="text" id="kwd_search" value="" class="span3 seguido search-query"/> 
   </div>
-  	<legend>Calificaciones</legend>
-	<label class="label">Primera Etapa<small class="direccion"> <%= @alumno.full_name %></small></label>
-    <% if @calificaciones_primera_etapa.count !=0 %>
-    	<table id="my-table" class="table table-bordered">
+
+  <legend>Calificaciones
+  	<small class="direccion" id="vinculos">
+		  <i class="icon-arrow-left"></i><%= link_to 'Volver ', alumno_path %>
+		  <i class="icon-file"></i><%= link_to 'Boletin de calificaciones en pdf', alumno_calificaciones_alumno_path( format: 'pdf') %>
+		</small>
+  </legend>
+
+  <label class="label">Primera Etapa<small class="direccion"> <%= @alumno.full_name %></small></label>
+  <% if @calificaciones_primera_etapa.size !=0 %>
+		<table id="my-table" class="table table-bordered">
 				<thead class="table-title">
 				  <tr>
 				    <th>Materia</th>
@@ -25,65 +32,115 @@
 					</tr>
 					<% end %>
 				</tbody>
-	    </table>
-		<% else %>
-			<label class="label-info"> No se ha cargado estas calificaciones aun! </label>
-		<% end %>
-		<hr/>
-		<label class="label">Segunda Etapa</label>
-		<% if @calificaciones_segunda_etapa.count !=0 %>
-		  <table id="my-table" class="table table-bordered">
-				<thead class="table-title">
-				  <tr>
-				    <th>Alumno</th>
-				    <th>Puntaje Alcanzado</th>
-				    <th>Calificacion</th>
-				    <th>Fecha de Actualizacion</th>
-				   </tr>
-				</thead>
-				<tbody>
-				  <% @calificaciones_segunda_etapa.each do |p| %>
-					 <tr>
-						<td><%= p.materia_materia %></td>
-						<td><%= p.total_puntos %></td>
-						<td><%= p.puntos_correctos %></td>
-						<td><%= p.calificacion %></td>
-					</tr>
-					<% end %>
-				</tbody>
-	    </table>
-	  <% else %>
-			<label class="label-info"> No se ha cargado estas calificaciones aun! </label>
-		<% end %>
-		<hr/>
-		<label class="label">Tercera Etapa</label>
-		<% if @calificaciones_tercera_etapa.count !=0 %>
-		  <table id="my-table" class="table table-bordered">
-				<thead class="table-title">
-				  <tr>
-				    <th>Alumno</th>
-				    <th>Puntaje Alcanzado</th>
-				    <th>Calificacion</th>
-				    <th>Fecha de Actualizacion</th>
-				   </tr>
-				</thead>
-				<tbody>
-				  <% @calificaciones_tercera_etapa.each do |p| %>
-					 <tr>
-						<td><%= p.materia_materia %></td>
-						<td><%= p.total_puntos %></td>
-						<td><%= p.puntos_correctos %></td>
-						<td><%= p.calificacion %></td>
-					 </tr>
-					<% end %>
-				</tbody>
-	    </table>
-		<% else %>
-			<label class="label-info"> No se ha cargado estas calificaciones aun! </label>
+		</table>
+	<% else %>
+		<label class="label-info"> No se ha cargado estas calificaciones aun! </label>
+	<% end %>
+	<hr/>
 
-	<div align="center" id="vinculos">
-	  <i class="icon-arrow-left"></i><%= link_to 'Volver ', alumno_path %>
-	  <i class="icon-file"></i><%= link_to 'Boletin de calificaciones en pdf', alumno_calificaciones_alumno_path( format: 'pdf') %>
-	</div>
-		<% end %>
+	<label class="label">Segunda Etapa</label>
+	<% if @calificaciones_segunda_etapa.size !=0 %>
+	  <table id="my-table" class="table table-bordered">
+			<thead class="table-title">
+			  <tr>
+			    <th>Alumno</th>
+			    <th>Puntaje Alcanzado</th>
+			    <th>Calificacion</th>
+			    <th>Fecha de Actualizacion</th>
+			   </tr>
+			</thead>
+			<tbody>
+			  <% @calificaciones_segunda_etapa.each do |p| %>
+				 <tr>
+					<td><%= p.materia_materia %></td>
+					<td><%= p.total_puntos %></td>
+					<td><%= p.puntos_correctos %></td>
+					<td><%= p.calificacion %></td>
+				</tr>
+				<% end %>
+			</tbody>
+    </table>
+  <% else %>
+		<label class="label-info"> No se ha cargado estas calificaciones aun! </label>
+	<% end %>
+	<hr/>
+
+	<label class="label">Tercera Etapa</label>
+	<% if @calificaciones_tercera_etapa.size !=0 %>
+	  <table id="my-table" class="table table-bordered">
+			<thead class="table-title">
+			  <tr>
+			    <th>Alumno</th>
+			    <th>Puntaje Alcanzado</th>
+			    <th>Calificacion</th>
+			    <th>Fecha de Actualizacion</th>
+			   </tr>
+			</thead>
+			<tbody>
+			  <% @calificaciones_tercera_etapa.each do |p| %>
+				 <tr>
+					<td><%= p.materia_materia %></td>
+					<td><%= p.total_puntos %></td>
+					<td><%= p.puntos_correctos %></td>
+					<td><%= p.calificacion %></td>
+				 </tr>
+				<% end %>
+			</tbody>
+    </table>
+	<% else %>
+		<label class="label-info"> No se ha cargado estas calificaciones aun! </label>
+	<% end %>
+
+	<% if @calificaciones_complementario.size !=0 %>
+	  <label class="label">Complementarios</label>
+	  <table id="my-table" class="table table-bordered">
+			<thead class="table-title">
+			  <tr>
+			    <th>Alumno</th>
+			    <th>Puntaje Alcanzado</th>
+			    <th>Calificacion</th>
+			    <th>Fecha de Actualizacion</th>
+			   </tr>
+			</thead>
+			<tbody>
+			  <% @calificaciones_complementario.each do |p| %>
+				 <tr>
+					<td><%= p.materia_materia %></td>
+					<td><%= p.total_puntos %></td>
+					<td><%= p.puntos_correctos %></td>
+					<td><%= p.calificacion %></td>
+				 </tr>
+				<% end %>
+			</tbody>
+    </table>
+	<% else %>
+		<label class="label-success"> No posee examenes complementarios! </label>
+	<% end %>
+
+	<% if @calificaciones_extraordinario.size !=0 %>
+	  <label class="label">Extraordinarios</label>
+	  <table id="my-table" class="table table-bordered">
+			<thead class="table-title">
+			  <tr>
+			    <th>Alumno</th>
+			    <th>Puntaje Alcanzado</th>
+			    <th>Calificacion</th>
+			    <th>Fecha de Actualizacion</th>
+			   </tr>
+			</thead>
+			<tbody>
+			  <% @calificaciones_extraordinario.each do |p| %>
+				 <tr>
+					<td><%= p.materia_materia %></td>
+					<td><%= p.total_puntos %></td>
+					<td><%= p.puntos_correctos %></td>
+					<td><%= p.calificacion %></td>
+				 </tr>
+				<% end %>
+			</tbody>
+    </table>
+	<% else %>
+		<label class="label-success"> No posee examenes Extraordinarios! </label>
+	<% end %>
+
 </div>
