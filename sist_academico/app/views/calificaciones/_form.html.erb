@@ -1,21 +1,21 @@
 <%= form_for(@calificacion) do |f| %>
-    <%= f.label 'Año' %><br />
-    <%= select "x", 'ano', @anos, {},{class: 'input-medium'} %>
+  <%= f.label 'Año' %><br />
+  <%= select "x", 'ano', @anos, {},{class: 'input-medium'} %>
   <div id="anos" style="display: none;">
     <%= render 'select_anos', cursos: @cursos %>
   </div>
   <div id="oculto" style="display: none;" class="span2">
-      <div id="cursos">
-        <%= render 'select_cursos', alumnos: @alumnos, materias: @materias %>
-      </div>
-      <%= f.label :calificacion %><br />
-      <%= f.number_field :calificacion, onblur: "validar(this)" %>
-      <%= f.label :total_puntos %><br />
-      <%= f.number_field :total_puntos, onblur: "validar(this)" %>
-      <%= f.label :puntos_correctos %><br />
-      <%= f.text_field :puntos_correctos, onblur: "validar(this)" %>
-      <%= f.submit "Guardar",class: "btn btn-large btn-primary" %>
+    <div id="cursos">
+      <%= render 'select_cursos', alumnos: @alumnos, materias: @materias %>
     </div>
+    <%= f.label :calificacion %><br />
+    <%= f.number_field :calificacion, onblur: "validar(this)" %>
+    <%= f.label :total_puntos %><br />
+    <%= f.number_field :total_puntos, onblur: "validar(this)" %>
+    <%= f.label :puntos_correctos %><br />
+    <%= f.text_field :puntos_correctos, onblur: "validar(this)" %>
+    <%= f.submit "Guardar",class: "btn btn-large btn-primary" %>
+  </div>
 <% end %>
 
 <script type="text/javascript">

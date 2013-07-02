@@ -107,6 +107,20 @@ function validarCIN(obj) {
     alert('Solo debe ser número entero');
   }
 }
+
+function validarCedula(campo) {
+    var RegExPattern = /^\d{1}\s?\d{3}\s?\d{3}$/;
+    var RegExPattern2 = /^\d{3}\s?\d{3}$/;
+    if ((campo.value.match(RegExPattern)) && (campo.value!='')) {
+         
+    } else if ((campo.value.match(RegExPattern2)) && (campo.value!='')){
+      
+    }else {
+        alert('El Numero de cedula es incorrecto');
+        campo.focus();
+    } 
+}
+
 function change_data_by_select(path){
   $('#select_type').on('change', function(){
     var _type = $("#select_type").val();

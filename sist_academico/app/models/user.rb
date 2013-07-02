@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 
   #VALIDACIONES DE LOS CAMPOS
   validates :username, presence: true, length: { maximum: 30, minimum:2 }, :format => { :with => /\A[a-zA-Z\d]+\z/ }, :uniqueness => { :message => "Este nombre de usuario ya existe. "}
-  validates :CINro, presence: true, length: { maximum: 9, minimum:6 }, :format => { :with => /\d/}, :uniqueness => { :message => "Ya existe un usuario con ese numero de documento"}
+  validates :CINro, presence: true, length: { maximum: 9, minimum:6 }, :format => { :with => /^\d{1}\s?\d{3}\s?\d{3}$/ || /^\d{3}\s?\d{3}$/ }, :uniqueness => { :message => "Ya existe un usuario con ese numero de documento"}
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
  validates :email, presence:   true,
                     format:     { with: VALID_EMAIL_REGEX }
