@@ -34,7 +34,7 @@ class AlumnosController < ApplicationController
 
   def alumno_calificaciones
     @alumno = Alumno.find(params[:id])
-    @materias = @alumno.curso.materias
+    @materias = @alumno.curso_seleccionado.materias
     @calificaciones_general = []
     @calificaciones_primera_etapa = []
     @calificaciones_segunda_etapa = []

@@ -8,6 +8,7 @@ class Alumno < ActiveRecord::Base
   accepts_nested_attributes_for :user
   delegate :created_at, :CINro, :nombre, :apellido, :sexo, :telefono, :fecha_nacimiento, :lugar_nacimiento, :edad, :username, :email, :password, :password_confirmation, :address_id, to: :user, prefix: true
   delegate :curso_grado, :curso, :turno, :nivel, :enfasis, to: :curso, prefix: true
+  #validates :user_username, uniqueness: { message: "Este nombre de usuario ya existe. " }
   validates :responsable, presence: true, length: {minimum: 5, maximum: 50}, :format => { :with => /\A[a-zA-Z\s]+\z/ }
   validates :telefono_responsable, presence: true, length: {minimum: 5, maximum: 13}, :format => { :with => /^\(\d{3,4}\)\s\d{6}$/ }
   before_save { build_user unless user }
