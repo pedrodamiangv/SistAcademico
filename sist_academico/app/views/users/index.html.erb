@@ -1,3 +1,5 @@
+<label class="alert alert-error" style="display: none;" id="error"></label>
+<label class="Sample ui-state-highlight style." style="display: none;" id="correcto"></label>
 <div class="container">
   <div class="row">
     <legend>Lista de Usuarios</legend>
@@ -33,7 +35,7 @@
           <td class="selection <%= id %>"><%= user.email %></td>
           <% if current_user.is_administrativo %>
             <td class="selection <%= id %>"><%= link_to 'Editar', edit_user_path(user) %>
-            <%= link_to 'Eliminar', user, method: :delete, data: { confirm: 'Estas seguro?'} %></td>
+            <%= link_to 'Eliminar', user, method: :delete, data: { confirm: 'Estas seguro?'},remote: true %></td>
           <% end %>
         </tr>
       <% end %>
@@ -42,11 +44,6 @@
       <% if @users.size > 9 %>
         <div id="selector"></div>
       <% end %>
-      <div align="center" id="vinculos">
-        <% if current_user.is_administrativo %>
-          <%= link_to 'Registrar nuevo ->', new_user_path %>
-        <% end %>
-      </div>
     </div>
   </div>
 </div>
@@ -61,4 +58,14 @@
         cssStyle: 'light-theme',
         onPageClick: function(pageNumber){test(((pageNumber-1)*10))}
     });
+
+    function cerrar(){
+               $("#error").hide();
+
+       }
+
+       function refresh()
+        {
+                location.reload(true);
+        }
 </script>

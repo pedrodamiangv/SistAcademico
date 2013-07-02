@@ -87,9 +87,12 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
+    @destruyo = false
     respond_to do |format|
       begin
-        @user.destroy
+        if @user.destroy
+          @destruyo = true
+        end
         notice = "El usuario y sus demas atributos han sido eliminado correctamente. "
         CustomLogger.info("Usuario: #{@user_nombre.inspect} ,Apellido: #{@user_apellido.inspect} ,Cedula de Identidad: #{@user_CINro.inspect} ,Sexo: #{@user_sexo.inspect} ,Telefono:#{@user_telefono.inspect} ,Correo Electronico: #{@user_email.inspect} ,Fecha de Nacimiento:#{@user_fecha_nacimiento.inspect} ,Lugar de Nacimiento: #{@user_lugar_nacimiento.inspect} ,Direccion: #{@user.address.direccion.inspect} ,Nombre de Usuario: #{@user_username.inspect} han sido eliminados por el usuario: #{current_user.full_name.inspect} ,#{Time.now}")
       rescue
@@ -98,6 +101,7 @@ class UsersController < ApplicationController
       ensure
         format.html { redirect_to users_url, notice: notice }
         format.json { head :no_content }
+        format.js
       end
     end
   end
