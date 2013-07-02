@@ -3,6 +3,6 @@ class City < ActiveRecord::Base
   belongs_to :country
   delegate :pais, to: :country, prefix: true
   has_many :addresses
-  validates :city, presence: true, length: { maximum: 50, minimum:3 }, :format => { :with => /\A[a-zA-Z\s]+\z/ }
+  validates :city, presence: true, length: { maximum: 50, minimum:3 }, :format => { :with => /\A[a-zA-Z\s]+\z/ }, :uniqueness => { :message => "Esta ciudad ya se ha almacenado"}
   validates :country_id, presence: true
 end
