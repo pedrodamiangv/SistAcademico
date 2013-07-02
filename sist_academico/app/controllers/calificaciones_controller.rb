@@ -116,7 +116,11 @@ class CalificacionesController < ApplicationController
   # POST /calificaciones.json
   def create
     @calificacion = Calificacion.new(params[:calificacion])
-    calificacion_buscar = Calificacion.where("alumno_id = ? AND materia_id = ? AND etapa = ?", @calificacion.alumno.id, @calificacion.materia.id, @calificacion.etapa)
+    if @calificacion.alumno && @calificacion.materia && @calificacion.etapa
+      calificacion_buscar = Calificacion.where("alumno_id = ? AND materia_id = ? AND etapa = ?", @calificacion.alumno.id, @calificacion.materia.id, @calificacion.etapa)
+    else
+      calificacion_buscar = []
+    end
     unless calificacion_buscar.first
       respond_to do |format|
         if @calificacion.save

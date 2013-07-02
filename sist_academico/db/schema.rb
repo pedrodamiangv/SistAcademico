@@ -43,8 +43,8 @@ ActiveRecord::Schema.define(:version => 20130702160852) do
     t.boolean  "doc_cert_nacimiento"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
-    t.string   "responsable"
-    t.string   "telefono_responsable"
+    t.string   "responsable", :limit => 30, :null => false
+    t.string   "telefono_responsable", :limit => 15, :null => false
     t.integer  "curso_seleccionado_id"
   end
 
