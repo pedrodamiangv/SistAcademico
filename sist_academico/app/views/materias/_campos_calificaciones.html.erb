@@ -18,11 +18,37 @@
 			<%= text_field name, :puntos_correctos, value: p.puntos_correctos, style: 'display: none;' %>
 			<td><%= p.puntos_correctos %></td>
 			<% if p.calificacion != nil %>
-			  <td><%= text_field name, :calificacion, value: p.calificacion, :maxlength => 1, onblur: "validar(this)", class: 'input-small' %></td>
+			  <td><%= text_field name, :calificacion, value: p.calificacion, :maxlength => 1, :id => "num_identify", class: 'input-small' %></td>
 			<% else %>
-			  <td><%= text_field name, :calificacion, :maxlength => 1, onchange: "validar(this)",class: 'input-small calificacion' %></td>
+			  <td><%= text_field name, :calificacion, :maxlength => 1, :id => "num_identify2",class: 'input-small calificacion' %></td>
 			<% end %>
 		</tr>
 	<% end %>
 	</tbody>
 </table>
+
+<script type="text/javascript">
+$(document).ready(function(){
+      //Comprueba que se teclee solo numeros
+    $("#num_identify").keypress(function (e)
+    {
+      //if the letter is not digit then display error and don't type anything
+      if( e.which!=8 && e.which!=0 && (e.which<48 || e.which>57))
+      {
+        return false;
+      }
+    });
+
+    $("#num_identify2").keypress(function (e)
+    {
+      //if the letter is not digit then display error and don't type anything
+      if( e.which!=8 && e.which!=0 && (e.which<48 || e.which>57))
+      {
+        return false;
+      }
+    });
+  });
+
+    
+  
+</script>

@@ -1,4 +1,4 @@
-<%= form_for(@alumno) do |f| %>
+<%= form_for(@alumno, :validate => true)  do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="container">
     <div class="row">
@@ -10,7 +10,7 @@
           <div class="container cuadro">
             <div class="span3">
               <%= d.label :nombre %>
-              <%= d.text_field :nombre, :maxlength => 50, class: "span4" %>
+              <%= d.text_field :nombre, :maxlength => 50, :id =>"i_name", class: "span4" %>
 
               <%= d.label :apellido %>
               <%= d.text_field :apellido, :maxlength => 50, class: "span4" %>
@@ -26,7 +26,7 @@
               <%= d.text_field :email, :maxlength => 30 %>
 
               <%= d.label :CINro, "C.I.Número" %>
-              <%= d.text_field :CINro, :maxlength => 9, onblur: "validarCedula(this)", class:  "span2" %>
+              <%= d.text_field :CINro, :maxlength => 9, :id => "num_identify", class:  "span2" %>
 
               <%= d.label :telefono, "Teléfono" %>
               <%= d.text_field :telefono, :maxlength => 13, :placeholder => "(xxxx) xxxxxx",  class:  "span2"%>
@@ -109,6 +109,7 @@
 <% end %>
 
 <script type="text/javascript">
+ $("form:not(.filter) :input:visible:enabled:first").focus();
 
 $(function() { 
 $( "#datepicker" ).datepicker({
@@ -120,4 +121,19 @@ $(function(){
 $( "#datepicker" ).datepicker({ maxDate: '+0d' });
 });
 
+
+$(document).ready(function(){
+      //Comprueba que se teclee solo numeros
+    $("#num_identify").keypress(function (e)
+    {
+      //if the letter is not digit then display error and don't type anything
+      if( e.which!=8 && e.which!=0 && (e.which<48 || e.which>57))
+      {
+        return false;
+      }
+    });
+  });
+
+    
+  
 </script>
