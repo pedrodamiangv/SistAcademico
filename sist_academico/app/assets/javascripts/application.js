@@ -24,6 +24,7 @@
 //= require rails.validations
 
 
+
 function cerrar(){
   $("#error").hide();
 

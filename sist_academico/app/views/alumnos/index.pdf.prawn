@@ -3,9 +3,6 @@ pdf.page_count.times do |i|
   pdf.text "Pagina #{(i+1)} de #{pdf.page_count}", :size => 8
 end
 
-
-
-
 pdf.text "Colegio Monseñor Wiesen", :size => 20, :style => :bold, :align => :center
 pdf.text "Misiones e/ Cristophersen. Ciudad de Fram-Itapúa-Paraguay.", :size => 11, :style => :italic, :align => :center
 pdf.text "Teléfono/Fax: 0761265221. Email: cmjw.fram@gmail.com", :size => 11, :style => :italic, :align => :center

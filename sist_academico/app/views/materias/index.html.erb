@@ -10,12 +10,13 @@
       <table id="my-table" class="table table-bordered">
         <thead class="table-title">
           <tr>
-            <th>Materia</th>
-            <th>Area</th>
-            <th>Curso</th>
-            <th>Docente</th>
+            <th id="centrar">Cant</th>
+            <th id="centrar">Materia</th>
+            <th id="centrar">Area</th>
+            <th id="centrar">Curso</th>
+            <th id="centrar">Docente</th>
             <% if current_user.is_administrativo %>
-              <th></th>
+              <th id="centrar">Acciones</th>
             <% end %>
           </tr>
         </thead>
@@ -23,6 +24,7 @@
           <% @materias.each_with_index do |materia, i| %>
           <% id = "page-" + i.to_s %>
             <tr>
+              <td class="selection <%= id %>"><%= i+1 %></td>
               <td class="selection <%= id %>"><%= link_to materia.materia, materia %></td>
               <td class="selection <%= id %>"><%= materia.area %></td>
               <td class="selection <%= id %>"><%= materia.curso_curso %></td>

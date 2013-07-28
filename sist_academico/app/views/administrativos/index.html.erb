@@ -10,14 +10,17 @@
       <table id="my-table" class="table table-bordered">
         <thead class="table-title">
           <tr>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Cargo</th>
-            <th>Telefono</th>
-            <th>Titulo</th>
-            <th>Fecha de Registro</th>
+            <th id="centrar">Cant</th>
+            <th id="centrar">Nombre</th>
+            <th id="centrar">Apellido</th>
+            <th id="centrar">Cargo</th>
+            <th id="centrar">Telefono</th>
+            <th id="centrar">Titulo</th>
+            <th id="centrar">Fecha de Registro</th>
+            
             <% if current_user.is_administrativo %>
-              <th></th>
+            <th id="centrar">Acciones</th>
+              
             <% end %>
           </tr>
         </thead>
@@ -25,6 +28,7 @@
           <% @administrativos.each_with_index do |administrativo, i| %>
           <% id = "page-" + i.to_s %>
             <tr>
+              <td class="selection <%= id %>"><%= i+1 %></td>
               <td class="selection <%= id %>"><%= link_to administrativo.user_nombre, administrativo %></td>
               <td class="selection <%= id %>"><%= administrativo.user_apellido %></td>
               <td class="selection <%= id %>"><%= administrativo.cargo %></td>

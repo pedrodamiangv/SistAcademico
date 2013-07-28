@@ -10,11 +10,13 @@
       <table id="my-table" class="table table-bordered">
         <thead class="table-title">
           <tr>
-            <th>Direccion</th>
-            <th>Barrio</th>
-            <th>Ciudad</th>
+            <th class="span1" id="centrar">Cant</th>
+            <th id="centrar">Direccion</th>
+            <th id="centrar">Barrio</th>
+            <th id="centrar">Ciudad</th>
+            
             <% if current_user.is_administrativo %>
-              <th></th>
+            <th class="span2" id="centrar">Acciones</th>
             <% end %>
           </tr>
         </thead>
@@ -22,6 +24,7 @@
           <% @addresses.each_with_index do |address, i| %>
           <% id = "page-" + i.to_s %>
             <tr>
+              <td class="selection <%= id %>"><%= i+1 %></td>
               <td class="selection <%= id %>"><%= link_to address.direccion, address %></td>
               <td class="selection <%= id %>"><%= address.barrio %></td>
               <td class="selection <%= id %>"><%= address.city_city %></td>

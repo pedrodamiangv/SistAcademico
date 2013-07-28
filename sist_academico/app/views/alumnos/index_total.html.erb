@@ -10,15 +10,17 @@
       <table id="my-table" class="table table-bordered">
         <thead class="table-title">
           <tr>
-            <th class="span2">Nombre</th>
-            <th class="span2">Apellido</th>
-            <th>CINro</th>
-            <th>Curso</th>
-            <th>Nivel</th>
-            <th>Fecha Registro</th>
-            <th class="span3">Responsable | Telefono </th>
+            <th id="centrar">Cant</th>
+            <th class="span2" id="centrar">Nombre</th>
+            <th class="span2" id="centrar">Apellido</th>
+            <th id="centrar">CINro</th>
+            <th id="centrar">Curso</th>
+            <th id="centrar">Nivel</th>
+            <th id="centrar">Fecha Registro</th>
+            <th class="span3" id="centrar">Responsable | Telefono </th>
+            <th id="centrar">Acciones</th>
             <% if current_user.is_administrativo %>
-              <th></th>
+              
             <% end %>
           </tr>
         </thead>
@@ -26,6 +28,7 @@
           <% @alumnos.each_with_index do |alumno, i| %>
           <% id = "page-" + i.to_s %>
             <tr>
+              <td class="selection <%= id %>"><%= i+1 %></td>
               <td class="selection <%= id %>"><%= link_to alumno.user_nombre, alumno %></td>
               <td class="selection <%= id %>"><%= alumno.user_apellido %></td>
               <td class="selection <%= id %>"><%= alumno.user_CINro %></td>
