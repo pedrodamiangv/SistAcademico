@@ -3,7 +3,8 @@
     <div class="container">
       <%= link_to "Colegio Mons. Juan Wiesen", root_path, id: "logo" %>
       <nav>
-        <ul class="nav pull-right">   
+        <ul class="nav pull-right">
+        <% if current_user %>   
              <% if current_user.is_administrativo %>
 
              <li class="dropdown" data-dropdown="dropdown" >
@@ -134,6 +135,7 @@
           <% else %>
             <li><%= link_to "Sesión", signup_path %></li>
           <% end %>
+      <% end %>
         </ul>
       </nav>
     </div>
