@@ -34,8 +34,17 @@
                   <a href="#" class="dropdown-toggle">Calificaciones<b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li><%= link_to "Cargar Calificacion manualmente", new_calificacion_path %></li>
+                    <li class="dropdown-submenu">
+                      <a tabindex="-1" href="#">Ver calificacion de</a>
+                      <ul class="dropdown-menu">
+                        <% Curso.by_year(Date.today.year).each do |curso| %>
+                          <li><%= link_to curso.curso_grado, calificaciones_path%></li>
+                        <%end%>
+                      </ul>
+                    </li>
                   </ul>
-                </li>
+                
+              </li>
 
                 <li class="dropdown" data-dropdown="dropdown" >
                   <a href="#" class="dropdown-toggle">Usuarios<b class="caret"></b></a>
@@ -90,6 +99,16 @@
               <li class="dropdown" data-dropdown="dropdown" >
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-wrench"></i>
                 <ul class="dropdown-menu">
+                  <% if current_user.is_administrativo %>
+                    <li><%= link_to "Configuracion del Sistema" %></li>
+                  <% end %>
+                  <li><%= link_to "Ayuda", helps_path %></li>
+                </ul>
+              </li>
+
+                <li class="dropdown" data-dropdown="dropdown" >
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>
+                <ul class="dropdown-menu">
                   <% if current_user.is_alumno %>
                     <li><%= link_to "Perfil", current_user.alumno %></li>
                     <li><%= link_to "Editar Perfil", edit_alumno_path(current_user.alumno) %></li>
@@ -98,7 +117,6 @@
                   <% if current_user.is_administrativo %>
                     <li><%= link_to "Perfil", current_user.administrativo %></li>
                     <li><%= link_to "Editar Perfil", edit_administrativo_path(current_user.administrativo) %></li>
-                    <li><%= link_to "Ayuda", helps_path %></li>
                   <% end %>
                   <% if current_user.is_docente %>
                     <li><%= link_to "Perfil", current_user.docente %></li>
