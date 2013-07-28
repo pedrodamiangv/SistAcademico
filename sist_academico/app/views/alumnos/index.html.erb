@@ -10,6 +10,7 @@
       <table id="my-table" class="table table-bordered">
         <thead class="table-title">
           <tr>
+            <th>Cant</th>
             <th class="span2">Nombre</th>
             <th class="span2">Apellido</th>
             <th>CINro</th>
@@ -22,9 +23,11 @@
           </tr>
         </thead>
         <tbody>
+          
           <% @alumnos.each_with_index do |alumno, i| %>
           <% id = "page-" + i.to_s %>
             <tr>
+              <td class="selection <%= id %>"><%= i+1 %></td>
               <td class="selection <%= id %>"><%= link_to alumno.user_nombre, alumno %></td>
               <td class="selection <%= id %>"><%= alumno.user_apellido %></td>
               <td class="selection <%= id %>"><%= alumno.user_CINro %></td>
