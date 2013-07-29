@@ -30,14 +30,76 @@ class MateriasController < ApplicationController
     end
   end
 
+ 
+
   def materias_calificaciones
     @materia = Materia.find(params[:id])
+    @calificaciones_generales = []
     @puntaje_total_uno = @materia.planificaciones.where(:etapa => 'Primera').sum(:total_puntos)
     @calificaciones_etapa_uno = @materia.calificaciones.where(:etapa => 'Primera')
     @puntaje_total_dos = @materia.planificaciones.where(:etapa => 'Segunda').sum(:total_puntos)
     @calificaciones_etapa_dos = @materia.calificaciones.where(:etapa => 'Segunda')
     @puntaje_total_tres = @materia.planificaciones.where(:etapa => 'Tercera').sum(:total_puntos)
     @calificaciones_etapa_tres = @materia.calificaciones.where(:etapa => 'Tercera')
+
+    @calificaciones_etapa_cuatro = @materia.calificaciones.where(:etapa => 'Complementario')
+    unless @calificaciones_etapa_cuatro.size == 0
+      @puntaje_total_cuatro = @materia.calificaciones.where(:etapa => 'Complementario').first.total_puntos
+    else
+      @puntaje_total_cuatro = 0
+    end
+    
+    @calificaciones_etapa_cinco = @materia.calificaciones.where(:etapa => 'Extraordinario')
+    unless @calificaciones_etapa_cinco.size == 0
+      @puntaje_total_cinco = @materia.calificaciones.where(:etapa => 'Extraordinario').first.total_puntos
+    else
+      @puntaje_total_cinco = 0
+    end
+    
+    @materia.curso.alumnos.each_with_index do |alumno, i|
+      calificacion = []
+      j = i+1
+      calificacion << j
+      calificacion << alumno.full_name
+
+      nota = encontrar_nota @calificaciones_etapa_uno, alumno
+      if nota == 0
+        calificacion << "--"
+      else
+        calificacion << nota
+      end
+
+      nota2 = encontrar_nota @calificaciones_etapa_dos, alumno
+      if nota2 == 0
+        calificacion << "--"
+      else
+        calificacion << nota2
+      end
+
+      nota3 = encontrar_nota @calificaciones_etapa_tres, alumno
+      if nota3 == 0
+        calificacion << "--"
+      else
+        calificacion << nota3
+      end
+
+      unless @calificaciones_etapa_cuatro.size == 0
+        calificacion << nota
+      else
+        calificacion << "--"
+      end
+
+      unless @calificaciones_etapa_cinco.size == 0
+        calificacion << nota
+      else
+        calificacion << "--"
+      end
+      @calificaciones_generales << calificacion
+    end
+    respond_to do |format|
+      format.html # index.html.erb
+      format.pdf { render :layout => false }
+    end
   end
 
   # GET /materia/1
@@ -209,6 +271,17 @@ class MateriasController < ApplicationController
   end
 
   private
+
+    def encontrar_nota array, alumno
+      nota = 0
+      array.each do |calificacion|
+        if calificacion.alumno == alumno
+          nota = calificacion.calificacion
+        end
+      end
+      nota
+    end
+
     def correct_user_for_show
       @materia = Materia.find(params[:id])
       if current_user.is_docente?
