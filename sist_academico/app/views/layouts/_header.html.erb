@@ -1,11 +1,11 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="navbar-inner">
-    <div class="container">
+    <div style="margin-left: 130px; margin-right: 130px;">
       <%= link_to "Colegio Mons. Juan Wiesen", root_path, id: "logo" %>
       <nav>
         <ul class="nav pull-right">
           <% if current_user %>
-             <li><%= link_to "Inicio",  root_path %></li>
+             <li><input type="text" id="buscar_buscar" class="input-medium search-query" placeholder="Search a Customer" style="margin-top: 6px;"></li>
              <% if current_user.is_administrativo %>
 
              <li class="dropdown" data-dropdown="dropdown" >
