@@ -1,3 +1,5 @@
+<label class="alert alert-error" style="display: none;" id="error"></label>
+<label class="Sample ui-state-highlight style." style="display: none;" id="correcto"></label>
 <div class="container">
   <div class="row">
     <legend>Lista de Calificaciones</legend>
@@ -31,7 +33,7 @@
               <td class="selection <%= id %>"><%= calificacion.total_puntos %></td>
               <td class="selection <%= id %>"><%= calificacion.puntos_correctos %></td>
               <% if current_user.is_administrativo %>
-                <td class="selection <%= id %>"><%= link_to 'Eliminar', calificacion, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
+                <td class="selection <%= id %>"><%= link_to 'Eliminar', calificacion, method: :delete, data: { confirm: 'Estas seguro?' }, remote: true %></td>
               <% end %>
             </tr>
           <% end %>

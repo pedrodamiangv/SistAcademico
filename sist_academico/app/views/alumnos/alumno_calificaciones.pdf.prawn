@@ -13,7 +13,7 @@ pdf.text "Alumno: #{@alumno.full_name}", :size => 11, :style => :italic
 pdf.text "Curso: #{@alumno.curso_curso_grado}", :size => 11, :style => :italic
 pdf.move_down(20)  
 
-items = [ ["<b>Materia</b>", "<b>Primera Etapa</b>", "<b>Segunda Etapa</b>", "<b>Tercera Etapa</b>", "<b>Complementario</b>", "<b>Extraordinario</b>"]  ]
+items = [ [<b>Materia</b>", "<b>Primera Etapa</b>", "<b>Segunda Etapa</b>", "<b>Tercera Etapa</b>", "<b>Complementario</b>", "<b>Extraordinario</b>"]  ]
 items += @calificaciones_general 
 
 pdf.table(items, 

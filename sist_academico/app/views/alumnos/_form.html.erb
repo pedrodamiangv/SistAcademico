@@ -10,10 +10,10 @@
           <div class="container cuadro">
             <div class="span3">
               <%= d.label :nombre %>
-              <%= d.text_field :nombre, :maxlength => 50, :id =>"i_name", class: "span4" %>
+              <%= d.text_field :nombre, :maxlength => 50, :id =>"i_name", class: "span4", :onkeypress => "return validarText(event,this.value)" %>
 
               <%= d.label :apellido %>
-              <%= d.text_field :apellido, :maxlength => 50, class: "span4" %>
+              <%= d.text_field :apellido, :maxlength => 50, class: "span4", :onkeypress => "return validarText(event,this.value)" %>
               
               <%= d.label :fecha_nacimiento, "Fecha de Nacimiento" %> 
               <%= d.text_field :fecha_nacimiento, :id=> "fecha", id:"fechaNacAlumn" %>
@@ -36,7 +36,7 @@
             </div>
             <div class="span3">
               <%= f.label :responsable, "Nombre del Responsable" %>
-              <%= f.text_field :responsable, :maxlength => 50, class: "span4" %>
+              <%= f.text_field :responsable, :maxlength => 50, class: "span4", :onkeypress => "return validarText(event,this.value)" %>
 
               <%= f.label :telefono_responsable, "Teléfono del Responsable" %>
               <%= f.text_field :telefono_responsable, :maxlength => 13, :placeholder => "(xxxx) xxxxxx", class:  "span2" %>

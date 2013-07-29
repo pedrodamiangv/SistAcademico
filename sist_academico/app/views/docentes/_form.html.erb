@@ -9,10 +9,10 @@
           <%= f.fields_for :user do |d| %>
             <div class="span3">
               <%= d.label :nombre %>
-              <%= d.text_field :nombre, :maxlength => 50, class: "span4" %>
+              <%= d.text_field :nombre, :maxlength => 50, class: "span4",:onkeypress => "return validarText(event,this.value)" %>
 
               <%= d.label :apellido %>
-              <%= d.text_field :apellido, :maxlength => 50, class: "span4" %>
+              <%= d.text_field :apellido, :maxlength => 50, class: "span4",:onkeypress => "return validarText(event,this.value)" %>
 
               <%= d.label :CINro, "C.I.Número" %>
               <%= d.text_field :CINro, :maxlength => 9, :id => "num_identify", class: "span2" %>
@@ -39,7 +39,7 @@
               <%= f.text_field :matricula, :maxlength => 15, :id => "num_identify2", class: "span2" %>
 
               <%= f.label :titulo, "Título Obtenido" %>
-              <%= f.text_field :titulo, :maxlength => 50, class:"span4" %>
+              <%= f.text_field :titulo, :maxlength => 50, class:"span4", :onkeypress => "return validarText(event,this.value)" %>
 
               <a data-toggle="modal" href="#example" class="direccion">Ingresar nueva direccion</a>
               <%= d.label :direccion, "Dirección" %>
