@@ -33,7 +33,7 @@ pdf.table(items,
           :row_colors => ["F0F0F0", "FFFFCC"],
           :cell_style => { :inline_format => true, :font => "Times-Roman", :font_style => :italic })
  
-pdf.move_down(480)
+pdf.move_down(20)
 
 pdf.text "Autor: #{current_user.full_name.inspect}", :size => 8, :align => :center
 pdf.text "Fecha y Hora: #{Time.now}", :size => 8, :align => :center
