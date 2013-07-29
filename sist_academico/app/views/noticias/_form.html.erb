@@ -2,7 +2,7 @@
 <label id="mal" class="alert alert-error" style="display: none;"></label>
 <%= form_for noticia, remote: true, controller: 'noticias', action: 'create' do |form| %>
   <%= form.label :noticia, 'Publicar Noticia' %>
-  <%= form.text_field :noticia, id: "txt-noticia", :maxlength => 100 %>
+  <%= form.text_field :noticia, id: "txt-noticia", :maxlength => 100, :onkeypress => "return validarText(event,this.value)" %>
   <div id="btn-noticia">
     <%= form.submit "Publicar", :class => 'direccion btn btn-info btn-small' %> 
     <a href="#" onclick="limpiar();" class="direccion btn btn-small">Cancelar</a>

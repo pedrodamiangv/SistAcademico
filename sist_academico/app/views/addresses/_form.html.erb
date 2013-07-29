@@ -8,9 +8,9 @@
    			   <p id="notice"><%= notice %></p>
      			 <p class="error"><%= flash[:error] %></p>
     			 <%= f.label :direccion, "Dirección" %>
-    			 <%= f.text_field :direccion, :maxlength => 50, class: "span4" %>
+    			 <%= f.text_field :direccion, :maxlength => 50, class: "span4", :onkeypress => "return validarText(event,this.value)" %>
     			 <%= f.label :barrio %>
-   			   <%= f.text_field :barrio, :maxlength => 30 %>
+   			   <%= f.text_field :barrio, :maxlength => 30, :onkeypress => "return validarText(event,this.value)" %>
     			 <%= f.label :ciudad %>
     			 <%= f.collection_select :city_id ,@cities,:id,:city %>
            <div class="row" align="center">
