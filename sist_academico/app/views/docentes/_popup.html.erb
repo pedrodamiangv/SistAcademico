@@ -4,7 +4,7 @@
   </div>  
   <div class="modal-body">  
     <p id="error" class="error"></p>
-    <%= form_for direccion, remote: true do |f| %>
+    <%= form_for direccion, :validate => true, remote: true do |f| %>
     <%= f.text_field :tipo, value: 'docentes', style: 'display: none;'  %>
     <%= f.label :direccion %><br />
     <%= f.text_field :direccion %>

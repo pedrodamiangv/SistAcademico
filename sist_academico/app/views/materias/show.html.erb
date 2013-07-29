@@ -52,7 +52,7 @@
           <%= f.label :fecha_entrega %>
           <%= f.text_field :fecha_entrega, class: 'search-query', :id=> "fecha", :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;', id:"fechaTarea" %>
           <%= f.label :total_puntos %>
-          <%= f.text_field :total_puntos, class: 'input-medium', :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;', onblur: "validarCIN(this)", :maxlength =>  2 %>
+          <%= f.text_field :total_puntos, class: 'input-medium', :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;', :id => "num_identify", :maxlength =>  2 %>
           <%= f.label :descripcion %>
           <%= f.text_area :descripcion, rows: 3, :style => 'padding: 5px; font:normal 9px verdana, arial, helvetica, sans-serif;' %>
           <%= f.submit "Guardar", class: "btn btn-large btn-primary", :name => 'test_button' %>
@@ -123,4 +123,16 @@
         {
                 location.reload(true);
         }
+
+        $(document).ready(function(){
+      //Comprueba que se teclee solo numeros
+    $("#num_identify").keypress(function (e)
+    {
+      //if the letter is not digit then display error and don't type anything
+      if( e.which!=8 && e.which!=0 && (e.which<48 || e.which>57))
+      {
+        return false;
+      }
+    });
+  });
 </script>

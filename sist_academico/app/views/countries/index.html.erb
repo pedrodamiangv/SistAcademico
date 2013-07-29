@@ -10,9 +10,11 @@
       <table id="my-table" class="table table-bordered">
         <thead class="table-title">
           <tr>
-            <th class="span5">Pais</th>
-            <th class="span3"></th>
+            <th class="span1" id="centrar">Cant</th>
+            <th class="span5" id="centrar">Pais</th>
+            
             <% if current_user.is_administrativo %>
+            <th class="span3" id="centrar">Acciones</th>
             <% end %>
           </tr>
         </thead>
@@ -20,6 +22,7 @@
           <% @countries.each_with_index do |country, i| %>
           <% id = "page-" + i.to_s %>
             <tr>
+              <td><%= i+1 %></td>
               <td class="selection <%= id %>"><%= country.pais %></td>
               <% if current_user.is_administrativo %>
                 <td class="selection <%= id %>"><%= link_to 'Editar', edit_country_path(country) %> |
@@ -51,15 +54,5 @@
         cssStyle: 'light-theme',
         onPageClick: function(pageNumber){test(((pageNumber-1)*10))}
     });
-
-    function cerrar(){
-               $("#error").hide();
-
-       }
-
-       function refresh()
-        {
-                location.reload(true);
-        }
 </script>
 

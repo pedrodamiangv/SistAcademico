@@ -5,25 +5,49 @@
       <nav>
         <ul class="nav pull-right">
           <% if current_user %>
-             <li><input type="text" id="buscar_buscar" class="input-medium search-query" placeholder="Search a Customer" style="margin-top: 6px;"></li>
+             <li><input type="text" id="buscar_buscar" class="input-medium search-query" placeholder="Search a Customer" style="margin-top: 6px;"></li>  
              <% if current_user.is_administrativo %>
 
              <li class="dropdown" data-dropdown="dropdown" >
                   <a href="#" class="dropdown-toggle">Materias<b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><%= link_to "Listar Materias", materias_path %></li>
-                    <li><%= link_to "Registrar Nueva Materia", new_materia_path %></li>
-                    <li><%= link_to "Cargar Calificacion manualmente", new_calificacion_path %></li>
+                    <li class="dropdown-submenu">
+                        <li><%= link_to "Registrar Nueva Materia", new_materia_path %></li>
+                        <li><%= link_to "Listar Materias", materias_path %></li>
                   </ul>
               </li>
 
                 <li class="dropdown" data-dropdown="dropdown" >
                   <a href="#" class="dropdown-toggle">Cursos<b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><%= link_to "Listar Cursos", cursos_path %></li>
+                    <li class="dropdown-submenu">
+                      <a tabindex="-1" href="#">Ir a</a>
+                      <ul class="dropdown-menu">
+                        <% Curso.by_year(Date.today.year).each do |curso| %>
+                          <li><%= link_to curso.curso_grado, curso%></li>
+                        <%end%>
+                      </ul>
                     <li><%= link_to "Registrar Nuevo Curso", new_curso_path %></li>
+                    <li><%= link_to "Listar Cursos", cursos_path %></li>
                   </ul>
                 </li>
+
+                <li class="dropdown" data-dropdown="dropdown" >
+                  <a href="#" class="dropdown-toggle">Calificaciones<b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><%= link_to "Cargar Calificacion manualmente", new_calificacion_path %></li>
+                    <li class="dropdown-submenu">
+                      <a tabindex="-1" href="#">Ver calificacion de</a>
+                      <ul class="dropdown-menu">
+                        <% Curso.by_year(Date.today.year).each do |curso| %>
+                          <li><%= link_to curso.curso_grado, calificaciones_path%></li>
+                        <%end%>
+                      </ul>
+                    </li>
+                  </ul>
+                
+              </li>
+
                 <li class="dropdown" data-dropdown="dropdown" >
                   <a href="#" class="dropdown-toggle">Usuarios<b class="caret"></b></a>
                   <ul class="dropdown-menu">
@@ -72,8 +96,20 @@
                   </ul>
                 </li>
               <% end %>
+              <% if current_user %>
+                <li><%= link_to '<i class="icon-home"></i>'.html_safe,root_path %></li> 
               <li class="dropdown" data-dropdown="dropdown" >
-                <a href="#" class="dropdown-toggle">Cuenta<b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-wrench"></i>
+                <ul class="dropdown-menu">
+                  <% if current_user.is_administrativo %>
+                    <li><%= link_to "Configuracion del Sistema" %></li>
+                  <% end %>
+                  <li><%= link_to "Ayuda", helps_path %></li>
+                </ul>
+              </li>
+
+                <li class="dropdown" data-dropdown="dropdown" >
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>
                 <ul class="dropdown-menu">
                   <% if current_user.is_alumno %>
                     <li><%= link_to "Perfil", current_user.alumno %></li>
@@ -83,7 +119,6 @@
                   <% if current_user.is_administrativo %>
                     <li><%= link_to "Perfil", current_user.administrativo %></li>
                     <li><%= link_to "Editar Perfil", edit_administrativo_path(current_user.administrativo) %></li>
-                    <li><%= link_to "Ayuda", helps_path %></li>
                   <% end %>
                   <% if current_user.is_docente %>
                     <li><%= link_to "Perfil", current_user.docente %></li>
@@ -101,6 +136,7 @@
           <% else %>
             <li><%= link_to "Sesión", signup_path %></li>
           <% end %>
+      <% end %>
         </ul>
       </nav>
     </div>

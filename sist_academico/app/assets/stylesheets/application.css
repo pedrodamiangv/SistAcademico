@@ -12,6 +12,9 @@
  *= require_tree .
  */
 
+#centrar{
+  text-align: center;
+}
 .selection {
   display: none;
 }

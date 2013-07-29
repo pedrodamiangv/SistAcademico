@@ -21,7 +21,26 @@
 //= require jquery.corner
 //= require simple_pagination
 //= require_tree .
+//= require rails.validations
 
+
+
+
+function validarText(e,txt) {
+  tecla = (document.all) ? e.keyCode : e.which;
+  tecla = String.fromCharCode(tecla);
+  return (txt.indexOf(tecla)==-1);
+}
+
+
+function cerrar(){
+  $("#error").hide();
+
+}
+
+function refresh(){
+  location.reload(true);
+}
 function test(pageNumber)
 {
   $('.selection').hide();
@@ -101,12 +120,7 @@ function validar(obj) {
     }
   }
 }
-function validarCIN(obj) {
-  txt = obj.value;
-  if(parseInt(txt) != parseFloat(txt)) {
-    alert('Solo debe ser número entero');
-  }
-}
+
 
 function validarCedula(campo) {
     var RegExPattern = /^\d{1}\s?\d{3}\s?\d{3}$/;

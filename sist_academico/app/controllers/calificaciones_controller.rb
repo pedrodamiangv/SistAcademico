@@ -4,6 +4,7 @@ class CalificacionesController < ApplicationController
   before_filter :admin_user
   # GET /calificaciones
   # GET /calificaciones.json
+
   def index
     @calificaciones = Calificacion.order('created_at DESC').all
 

@@ -10,12 +10,13 @@
       <table id="my-table" class="table table-bordered">
         <thead class="table-title">
           <tr>
-            <th>Curso</th>
-            <th>Turno</th>
-            <th>Nivel</th>
-            <th>Enfasis</th>
+            <th id="centrar">Cant</th>
+            <th id="centrar">Curso</th>
+            <th id="centrar">Turno</th>
+            <th id="centrar">Nivel</th>
+            <th id="centrar">Enfasis</th>
             <% if current_user.is_administrativo %>
-              <th></th>
+              <th id="centrar">Acciones</th>
             <% end %>
           </tr>
         </thead>
@@ -23,6 +24,7 @@
           <% @cursos.each_with_index do |curso, i| %>
           <% id = "page-" + i.to_s %>
             <tr>
+              <td class="selection <%= id %>"><%= i+1 %></td>
               <td class="selection <%= id %>"><%= link_to curso.curso_grado, curso %></td>
               <td class="selection <%= id %>"><%= curso.turno %></td>
               <td class="selection <%= id %>"><%= curso.nivel %></td>
@@ -60,13 +62,4 @@
         onPageClick: function(pageNumber){test(((pageNumber-1)*10))}
     });
 
-    function cerrar(){
-               $("#error").hide();
-
-       }
-
-       function refresh()
-        {
-                location.reload(true);
-        }
 </script>

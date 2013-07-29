@@ -57,19 +57,22 @@
     <table id="my-table" class="table table-bordered">
       <thead class="table-title">
         <tr>
+          <th>Cant</th>
           <th>Alumnos</th>
           <th>Edad</th>
           <th>Fecha de Inscripcion</th>
         </tr>
       </thead>
       <tbody>
-        <% @curso.alumnos.order("created_at desc").each do |alumno| %>
+        <% @curso.alumnos.order("created_at desc").each_with_index do |alumno, i| %>
           <tr>
+            <td><%= i+1 %></td>
             <td><%= link_to alumno.full_name, alumno %></td>
             <td><%= alumno.user_edad %> </td>
             <td><%= alumno.user_created_at.strftime("%d/%m/%Y") %></td>
           </tr>
         <% end %>
+   
       </tbody>
     </table>
     <div align="right" id="vinculos">
