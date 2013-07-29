@@ -25,6 +25,14 @@
 
 
 
+
+function validarText(e,txt) {
+  tecla = (document.all) ? e.keyCode : e.which;
+  tecla = String.fromCharCode(tecla);
+  return (txt.indexOf(tecla)==-1);
+}
+
+
 function cerrar(){
   $("#error").hide();
 
