@@ -27,9 +27,12 @@
 
 
 function validarText(e,txt) {
-  tecla = (document.all) ? e.keyCode : e.which;
-  tecla = String.fromCharCode(tecla);
-  return (txt.indexOf(tecla)==-1);
+  if (txt.length > 1){
+    chart_one = txt.charAt(txt.length - 1);
+    chart_two = txt.charAt(txt.length - 2);
+    return !(chart_one == chart_two);
+  }
+  return true;
 }
 
 
