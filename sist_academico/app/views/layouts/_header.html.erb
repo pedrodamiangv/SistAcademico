@@ -1,7 +1,9 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="navbar-inner">
     <div style="margin-left: 100px; margin-right: 100px;">
-      <%= link_to "Colegio Mons. Juan Wiesen", root_path, id: "logo" %>
+      <% config = Configuracion.first %>
+      <p style="float: left; margin-top: 10px;"><%= image_tag config.logo_url(:small_thumb) if config.logo? %></p>
+      <%= link_to config.nombre.capitalize, root_path, id: "logo" %>
       <nav>
         <ul class="nav pull-right">
           <% if current_user %>
@@ -40,7 +42,7 @@
                       <a tabindex="-1" href="#">Ver calificacion de</a>
                       <ul class="dropdown-menu">
                         <% Curso.by_year(Date.today.year).each do |curso| %>
-                          <li><%= link_to curso.curso_grado, calificaciones_path%></li>
+                          <li><%= link_to curso.curso_grado, calificaciones_path %></li>
                         <%end%>
                       </ul>
                     </li>

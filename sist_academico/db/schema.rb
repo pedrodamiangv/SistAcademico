@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130702160852) do
+ActiveRecord::Schema.define(:version => 20130729191141) do
 
   create_table "addresses", :force => true do |t|
     t.string   "direccion"
@@ -41,10 +41,10 @@ ActiveRecord::Schema.define(:version => 20130702160852) do
     t.boolean  "doc_cert_estudios"
     t.boolean  "doc_foto"
     t.boolean  "doc_cert_nacimiento"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
-    t.string   "responsable", :limit => 30, :null => false
-    t.string   "telefono_responsable", :limit => 15, :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.string   "responsable",           :limit => 30, :null => false
+    t.string   "telefono_responsable",  :limit => 15, :null => false
     t.integer  "curso_seleccionado_id"
   end
 
@@ -81,6 +81,18 @@ ActiveRecord::Schema.define(:version => 20130702160852) do
   end
 
   add_index "cities", ["country_id"], :name => "cities_country_id_fk"
+
+  create_table "configuraciones", :force => true do |t|
+    t.string   "nombre",       :limit => 100, :null => false
+    t.string   "direccion",    :limit => 50,  :null => false
+    t.string   "telefono",     :limit => 13,  :null => false
+    t.string   "ciudad",       :limit => 30,  :null => false
+    t.string   "departamento", :limit => 30,  :null => false
+    t.string   "email",        :limit => 40,  :null => false
+    t.string   "logo",                        :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+  end
 
   create_table "countries", :force => true do |t|
     t.string   "pais"
@@ -181,7 +193,6 @@ ActiveRecord::Schema.define(:version => 20130702160852) do
     t.string   "telefono"
     t.string   "fecha_nacimiento"
     t.string   "lugar_nacimiento"
-    t.string   "direccion"
     t.integer  "edad"
     t.string   "username",                     :null => false
     t.string   "email"

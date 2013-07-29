@@ -1,6 +1,8 @@
 <% provide(:title, 'Reportes') %>
 <div id="fondo" class="fondo">
-    <h3 align="center">Colegio Parroquial Privado Subvencionado "Monseñor Juan Wiesen"</h3>
+    <% config = Configuracion.first %>
+	<p style="float: left;"><%= image_tag config.logo_url(:thumb) if config.logo? %></p>
+    <h3 align="center" style="padding-top: 10px;"><%= config.nombre %></h3>
     <h5 align="center"> Pagina de Reportes </h5>
 </div>
 <br/>

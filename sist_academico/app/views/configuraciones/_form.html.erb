@@ -1,0 +1,36 @@
+<%= form_for(@configuracion) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div id="registro">
+    <fieldset>
+      <div class="row">
+        <div class="span3">
+          <%= f.label :nombre %>
+          <%= f.text_field :nombre, :maxlength => 100, :onkeypress => "return validarText(event,this.value)"  %>
+          <%= f.label :direccion %>
+          <%= f.text_field :direccion, :maxlength => 50, :onkeypress => "return validarText(event,this.value)"  %>
+          <%= f.label :telefono %>
+          <%= f.text_field :telefono, :maxlength => 13  %>
+        </div>
+        <div class="span3 offset1">
+          <%= f.label :ciudad %>
+          <%= f.text_field :ciudad, :maxlength => 30, :onkeypress => "return validarText(event,this.value)"  %>
+          <%= f.label :departamento %>
+          <%= f.text_field :departamento, :maxlength => 30, :onkeypress => "return validarText(event,this.value)"  %>
+          <%= f.label :email %>
+          <%= f.text_field :email, :maxlength => 30  %>
+        </div>
+        <div class="span3 offset1">
+          <%= f.label :logo %>
+          <%= image_tag @configuracion.logo_url(:thumb) if @configuracion.logo? %>
+          <%= f.file_field :logo %>
+        </div>
+      </div>
+      <div class="row">
+        <div align="center">
+          <%= f.submit "Guardar", class: "btn btn-large btn-primary" %>
+          <%= link_to "Cancelar", :back, class: "btn btn-large btn-inverse" %>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+<% end %>

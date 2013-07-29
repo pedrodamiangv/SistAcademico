@@ -1,5 +1,8 @@
 SistAcademico::Application.routes.draw do
 
+  resources :configuraciones
+
+
   resources :helps
   resources :noticias 
 

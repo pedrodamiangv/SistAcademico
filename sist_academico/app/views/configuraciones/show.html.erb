@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Nombre:</b>
+  <%= @configuracion.nombre %>
+</p>
+
+<p>
+  <b>Direccion:</b>
+  <%= @configuracion.direccion %>
+</p>
+
+<p>
+  <b>Telefono:</b>
+  <%= @configuracion.telefono %>
+</p>
+
+<p>
+  <b>Ciudad:</b>
+  <%= @configuracion.ciudad %>
+</p>
+
+<p>
+  <b>Departamento:</b>
+  <%= @configuracion.departamento %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @configuracion.email %>
+</p>
+
+<p>
+  <b>Logo:</b><br/>
+  <%= image_tag @configuracion.logo_url(:thumb) if @configuracion.logo? %>
+</p>
+
+
+<%= link_to 'Editar', edit_configuracion_path(@configuracion) %>

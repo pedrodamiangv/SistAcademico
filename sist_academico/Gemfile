@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.11'
 gem 'bootstrap-sass', '2.1'
 gem 'calendar_date_select'
+gem "mini_magick", "3.5.0"
 gem "carrierwave"
 gem "google_visualr", ">= 2.1"
 gem 'foreigner'
