@@ -35,5 +35,8 @@
   <%= image_tag @configuracion.logo_url(:thumb) if @configuracion.logo? %>
 </p>
 
-
-<%= link_to 'Editar', edit_configuracion_path(@configuracion) %>
+<div id="vinculos">
+  <% if current_user.is_administrativo %>
+    <i class="icon-edit"></i><%= link_to 'Editar', edit_configuracion_path(@configuracion) %>
+  <% end %>
+</div>
