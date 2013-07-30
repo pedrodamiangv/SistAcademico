@@ -57,20 +57,70 @@
         <fieldset>
           <legend>Datos del Usuario Administrativo</legend>
         <div class="container cuadro">
-          <div class="span3">
-            <%= d.label :username, "Nombre de Usuario" %>
-            <%= d.text_field :username, :maxlength => 30 %>
-          </div>
+          <div class="row">
+            <div class="span3">
+              <%= d.label :username, "Nombre de Usuario" %>
+              <%= d.text_field :username, :maxlength => 30 %>
+            </div>
 
-          <div class="span3 offset1">
-            <%= d.label :password, "Contraseña" %>
-            <%= d.password_field :password, :maxlength => 20 %>
-          </div>
+            <div class="span3 offset1">
+              <%= d.label :password, "Contraseña" %>
+              <%= d.password_field :password, :maxlength => 20 %>
+            </div>
 
-          <div class="span3 offset1">
-            <%= d.label :password_confirmation, "Confirmación" %>
-            <%= d.password_field :password_confirmation, :maxlength => 20 %></br></br></br></br>
+            <div class="span3 offset1">
+              <%= d.label :password_confirmation, "Confirmación" %>
+              <%= d.password_field :password_confirmation, :maxlength => 20 %></br></br></br></br>
+            </div>
           </div>
+          <% if @administrativo.id %>
+            <span><%= d.label "Agregar Roles", class: "label" %></span>
+            <div class="row" style= "margin-left: 6px;">
+              <div class="abajo">
+                <%= d.check_box :is_alumno, class: "seguido" %>
+                <%= d.label "Alumno", class: "seguido-espaciado" %>
+              </div>
+              <div class="abajo">
+                <%= d.check_box :is_docente, class: "seguido" %>
+                <%= d.label "Docente", class: "seguido-espaciado" %>
+              </div>
+              <div class="abajo">
+                <%= d.check_box :is_administrativo, class: "seguido" %>
+                <%= d.label "Administrativo", class: "seguido-espaciado" %>
+              </div>
+            </div>
+            <div id="campos_docente" class="row" style="margin-left: 6px; display: none;">
+              <%= label_tag(:label_matricula, "Matricula") %>
+              <%= text_field_tag(:matricula, params[:matricula], :maxlength => 15, id: "num_identify2", class: "span2 seguido-espaciado", :onkeypress => "return validarNumero(this)" ) %>
+              <%= label_tag(:label_titulo, "Titulo") %>
+              <%= text_field_tag(:titulo, params[:titulo], :maxlength => 50, id: "docente_titulo", class: "span4 seguido", :onkeypress => "return validarText(event,this.value)") %>
+            </div>
+            <div id="campos_alumno" class="row" style="margin-left: 6px; display: none;">
+              <%= label_tag :responsable, "Nombre del Responsable" %>
+              <%= text_field_tag :responsable, params[:responsable], :maxlength => 50, class: "span4", :onkeypress => "return validarText(event,this.value)" %>
+              <%= label_tag :telefono_responsable, "Teléfono del Responsable" %>
+              <%= text_field_tag :telefono_responsable, params[:telefono_responsable], :maxlength => 13, :placeholder => "(xxxx) xxxxxx", class:  "span2" %>
+              <%= label_tag :curso_id %>
+              <%= collection_select :curso_id, params[:curso_id] ,Curso.by_year(Date.today.year),:id, :curso_grado,{},{class: "span2"}  %>
+              <%= label_tag :x, "Documentos del Alumno", class: "label" %>
+              <div class="abajo">
+                <%= label_tag :x, "Fotocopia de Cédula", class: "seguido-espaciado" %>
+                <%= check_box_tag :doc_cedula, params[:doc_cedula], class: "seguido" %>
+              </div>
+              <div class="abajo">
+                <%= label_tag :x, "Fotocopia de Certificado de Estudio", class: "seguido-espaciado" %>
+                <%= check_box_tag :doc_cert_estudios, params[:doc_cert_estudios], class: "seguido" %>
+              </div>
+              <div class="abajo">
+                <%= label_tag :x, "Foto Tipo Carnet", class: "seguido-espaciado" %>
+                <%= check_box_tag :doc_foto, params[:doc_foto], class: "seguido" %>
+              </div>
+              <div class="abajo">
+                <%= label_tag :x, "Certificado de Nacimiento", class: "seguido-espaciado" %>
+                <%= check_box_tag :doc_cert_nacimiento, params[:doc_cert_nacimiento], class: "seguido" %>
+              </div>
+            </div>
+          <% end %>
           <div class="row" align="center">
             <%= f.submit "Guardar", class: "btn btn-large btn-primary" %>
             <%= link_to "Cancelar", :back, class: "btn btn-large btn-inverse" %>
@@ -89,6 +139,7 @@
 $("form:not(.filter) :input:visible:enabled:first").focus();
 
 $(document).ready(function(){
+    aparecer_en_administrativo();
       //Comprueba que se teclee solo numeros
     $("#num_identify").keypress(function (e)
     {

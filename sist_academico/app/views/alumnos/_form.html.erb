@@ -70,7 +70,7 @@
               <%= d.label :password_confirmation, "Confirmación" %>
               <%= d.password_field :password_confirmation, :maxlength => 20 %>            
             </div>
-          <% end %>
+
             <% if current_user.is_administrativo %>
               <div class="span4 offset1">
                 <div class="">
@@ -93,7 +93,24 @@
                   <%= f.label "Certificado de Nacimiento", class: "seguido-espaciado" %>
                 </div>
               </div>
-
+              <% if @alumno.id %>
+                <div class="row" style= "margin-left: 6px;">
+                  <div class="abajo">
+                    <span><%= d.label "Agregar Roles", class: "label" %></span>
+                    <%= d.check_box :is_alumno, class: "seguido" %>
+                    <%= d.label "Alumno", class: "seguido-espaciado" %>
+                  </div>
+                  <div class="abajo">
+                    <%= d.check_box :is_docente, class: "seguido" %>
+                    <%= d.label "Docente", class: "seguido-espaciado" %>
+                  </div>
+                  <div class="abajo">
+                    <%= d.check_box :is_administrativo, class: "seguido" %>
+                    <%= d.label "Administrativo", class: "seguido-espaciado" %>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
               <div class="abajo" align="center">
                 <%= f.submit "Guardar", class: "btn btn-large btn-primary" %>
                 <%= link_to "Cancelar", :back, class: "btn btn-large btn-inverse" %>

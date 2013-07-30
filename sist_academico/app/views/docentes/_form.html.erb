@@ -73,7 +73,25 @@
               <%= d.password_field :password_confirmation, :maxlength => 20 %>
             </br></br></br>
             </div>
-            
+
+            <% if @docente.id %>
+              <div class="row" style= "margin-left: 6px;">
+                <div class="abajo">
+                  <span><%= d.label "Agregar Roles", class: "label" %></span>
+                  <%= d.check_box :is_alumno, class: "seguido" %>
+                  <%= d.label "Alumno", class: "seguido-espaciado" %>
+                </div>
+                <div class="abajo">
+                  <%= d.check_box :is_docente, class: "seguido" %>
+                  <%= d.label "Docente", class: "seguido-espaciado" %>
+                </div>
+                <div class="abajo">
+                  <%= d.check_box :is_administrativo, class: "seguido" %>
+                  <%= d.label "Administrativo", class: "seguido-espaciado" %>
+                </div>
+              </div>
+            <% end %>
+
             <div class="row" align="center">
                 <%= f.submit "Guardar", class: "btn btn-large btn-primary" %>
                 <%= link_to "Cancelar", :back, class: "btn btn-large btn-inverse" %>

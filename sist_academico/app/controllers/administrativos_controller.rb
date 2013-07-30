@@ -100,9 +100,39 @@ class AdministrativosController < ApplicationController
         cargo_nuevo = @administrativo.cargo
         titulo_nuevo = @administrativo.titulo
         nombreUsuario_nuevo = @administrativo.user_username
-        
+        user = @administrativo.user
+        if user.is_docente
+          unless user.docente
+            d = Docente.new
+            d.user_id = user.id
+            d.titulo = params[:titulo]
+            d.matricula = params[:matricula]
+            unless d.save
+              user.update_attribute(:is_docente, false);
+            end
+          end
+        end
+        if user.is_alumno
+          unless user.alumno
+            a = Alumno.new
+            a.user_id = user.id
+            a.responsable = params[:responsable]
+            a.telefono_responsable = params[:telefono_responsable]
+            a.curso_id = params[:curso_id].first.to_i
+            a.doc_cedula = params[:doc_cedula]
+            a.doc_cert_estudios = params[:doc_cert_estudios]
+            a.doc_foto = params[:doc_foto]
+            a.doc_cert_nacimiento = params[:doc_cert_nacimiento]
+            unless a.save
+              user.update_attribute(:is_alumno, false);
+            else
+              a.cursos << a.curso
+            end
+          end
+        end
+
         CustomLogger.info("Los datos antes de ser actualizados son: Nombre de administrativo: #{nombre_antiguo.inspect} ,Apellido: #{apellido_antiguo.inspect} ,Cedula de Identidad: #{cedula_antiguo.inspect} ,Sexo: #{sexo_antiguo.inspect} ,Telefono:#{telefono_antiguo.inspect} ,Correo Electronico: #{correo_antiguo.inspect} ,Fecha de Nacimiento:#{fechaNac_antiguo.inspect} ,Lugar de Nacimiento: #{lugarNac_antiguo.inspect} ,Cargo: #{cargo_antiguo.inspect} ,Titulo: #{titulo_antiguo.inspect} ,Direccion: #{direccion_antiguo.inspect} ,Nombre de Usuario: #{nombreUsuario_antiguo.inspect} .Los datos actualizados por el usuario: #{current_user.full_name.inspect} son los siguientes: Nombre de administrativo: #{nombre_nuevo.inspect} ,Apellido: #{apellido_nuevo.inspect} ,Cedula de Identidad: #{cedula_nuevo.inspect} ,Sexo: #{sexo_nuevo.inspect} ,Telefono:#{telefono_nuevo.inspect} ,Correo Electronico: #{correo_nuevo.inspect} ,Fecha de Nacimiento:#{fechaNac_nuevo.inspect} ,Lugar de Nacimiento: #{lugarNac_nuevo.inspect} ,Cargo: #{cargo_nuevo.inspect} ,Titulo: #{titulo_nuevo.inspect} ,Direccion: #{direccion_nuevo.inspect} ,Nombre de Usuario: #{nombreUsuario_nuevo.inspect}, #{Time.now} ")
-        format.html { redirect_to @administrativo, notice: 'El administrativo ha sido actualizado con exito.' }
+        format.html { redirect_to @administrativo, notice: "El administrativo ha sido actualizado con exito." }
         format.json { head :no_content }
       else
         @new = false

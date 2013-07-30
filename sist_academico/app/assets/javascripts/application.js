@@ -124,6 +124,15 @@ function validar(obj) {
   }
 }
 
+function validarNumero(obj){
+  txt = obj.value;
+  if (!/^([0-9])*$/.test(txt)){
+    return false;
+  } else {
+    return true;
+  }
+}
+
 
 function validarCedula(campo) {
     var RegExPattern = /^\d{1}\s?\d{3}\s?\d{3}$/;
@@ -164,6 +173,15 @@ function change_data_by_tipo(path){
       dataType: 'script'
      });
      return false;
+  });
+}
+
+function aparecer_en_administrativo(){
+  $('#administrativo_user_attributes_is_docente').on('change', function(){
+      muestra_oculta('campos_docente');
+  });
+  $('#administrativo_user_attributes_is_alumno').on('change', function(){
+      muestra_oculta('campos_alumno');
   });
 }
 

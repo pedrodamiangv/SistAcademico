@@ -3,7 +3,7 @@
     <div style="margin-left: 100px; margin-right: 100px;">
       <% config = Configuracion.first %>
       <p style="float: left; margin-top: 10px;"><%= image_tag config.logo_url(:small_thumb) if config.logo? %></p>
-      <%= link_to config.nombre.capitalize, root_path, id: "logo" %>
+      <%= link_to config.nombre, root_path, id: "logo" %>
       <nav>
         <ul class="nav pull-right">
           <% if current_user %>
@@ -123,17 +123,17 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>
                 <ul class="dropdown-menu">
                   <% if current_user.is_alumno %>
-                    <li><%= link_to "Perfil", current_user.alumno %></li>
-                    <li><%= link_to "Editar Perfil", edit_alumno_path(current_user.alumno) %></li>
+                    <li><%= link_to "Perfil Alumno", current_user.alumno %></li>
+                    <li><%= link_to "Editar Perfil Alumno", edit_alumno_path(current_user.alumno) %></li>
                     <li><%= link_to "Ayuda", helps_path %></li>
                   <% end %>
                   <% if current_user.is_administrativo %>
-                    <li><%= link_to "Perfil", current_user.administrativo %></li>
-                    <li><%= link_to "Editar Perfil", edit_administrativo_path(current_user.administrativo) %></li>
+                    <li><%= link_to "Perfil Administrativo", current_user.administrativo %></li>
+                    <li><%= link_to "Editar Perfil Administrativo", edit_administrativo_path(current_user.administrativo) %></li>
                   <% end %>
                   <% if current_user.is_docente %>
-                    <li><%= link_to "Perfil", current_user.docente %></li>
-                    <li><%= link_to "Editar Perfil", edit_docente_path(current_user.docente) %></li>
+                    <li><%= link_to "Perfil Docente", current_user.docente %></li>
+                    <li><%= link_to "Editar Perfil Docente", edit_docente_path(current_user.docente) %></li>
                     <li><%= link_to "Ayuda", helps_path %></li>
                   <% end %>
                   <li class="divider"></li>
