@@ -1,6 +1,8 @@
 # encoding: utf-8
 
-class MaterialUploader < CarrierWave::Uploader::Base
+class ImageUploader < CarrierWave::Uploader::Base
+  include CarrierWave::MiniMagick
+
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
@@ -36,6 +38,20 @@ class MaterialUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
+  process :scale => [200, 300]
+  #
+  def scale(width, height)
+  #   # do something
+  end
+
+  # Create different versions of your uploaded files
+  version :thumb do
+    process resize_to_fill: [90, 90]
+  end
+
+  version :small_thumb, :from_version => :thumb do
+    process resize_to_fill: [20, 20]
+  end
   # version :thumb do
   #   process :scale => [50, 50]
   # end

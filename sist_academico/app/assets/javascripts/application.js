@@ -28,11 +28,11 @@
 
 function validarText(e,div) {
   txt = $(div).val();
-  if (txt.length > 2){
+  if (txt.length > 1){
     chart_one = txt.charAt(txt.length - 1);
     chart_two = txt.charAt(txt.length - 2);
     chart_three = txt.charAt(txt.length - 3);
-    if (chart_one == chart_two && chart_one == chart_three){
+    if (chart_one == chart_two && chart_two == chart_three){
       $(div).val(txt.substring(0, txt.length-1));
     }
   }
