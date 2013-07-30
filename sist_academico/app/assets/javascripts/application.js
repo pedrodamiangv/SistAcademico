@@ -176,13 +176,43 @@ function change_data_by_tipo(path){
   });
 }
 
-function aparecer_en_administrativo(){
-  $('#administrativo_user_attributes_is_docente').on('change', function(){
-      muestra_oculta('campos_docente');
-  });
-  $('#administrativo_user_attributes_is_alumno').on('change', function(){
-      muestra_oculta('campos_alumno');
-  });
+function aparecer_en_administrativo(alumno, docente){
+  if (!alumno){
+    $('#administrativo_user_attributes_is_docente').on('change', function(){
+        muestra_oculta('campos_docente');
+    });
+  }
+  if (!docente){
+    $('#administrativo_user_attributes_is_alumno').on('change', function(){
+        muestra_oculta('campos_alumno');
+    });
+  }
+}
+
+function aparecer_en_alumno(docente, administrativo){
+  if (!docente){
+    $('#alumno_user_attributes_is_docente').on('change', function(){
+        muestra_oculta('campos_docente');
+    });
+  }
+  if (!administrativo){
+    $('#alumno_user_attributes_is_administrativo').on('change', function(){
+        muestra_oculta('campos_administrativo');
+    });
+  }
+}
+
+function aparecer_en_docente(administrativo, alumno){
+  if (!administrativo){
+    $('#docente_user_attributes_is_administrativo').on('change', function(){
+        muestra_oculta('campos_administrativo');
+    });
+  }
+  if (!alumno){
+    $('#docente_user_attributes_is_alumno').on('change', function(){
+        muestra_oculta('campos_alumno');
+    });
+  }
 }
 
 function change_data_calificaciones(path){

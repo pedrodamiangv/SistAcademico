@@ -109,6 +109,7 @@ class AdministrativosController < ApplicationController
             d.matricula = params[:matricula]
             unless d.save
               user.update_attribute(:is_docente, false);
+              format.html { redirect_to edit_docente_path(@docente), notice: 'No se pudo colocar el rol de Docente al Administrativo, verifique sus datos.' }
             end
           end
         end
@@ -125,6 +126,7 @@ class AdministrativosController < ApplicationController
             a.doc_cert_nacimiento = params[:doc_cert_nacimiento]
             unless a.save
               user.update_attribute(:is_alumno, false);
+              format.html { redirect_to edit_docente_path(@docente), notice: 'No se pudo colocar el rol de Alumno al Administrativo, verifique sus datos.' }
             else
               a.cursos << a.curso
             end

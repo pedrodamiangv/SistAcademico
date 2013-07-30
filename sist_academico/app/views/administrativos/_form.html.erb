@@ -93,7 +93,7 @@
               <%= label_tag(:label_matricula, "Matricula") %>
               <%= text_field_tag(:matricula, params[:matricula], :maxlength => 15, id: "num_identify2", class: "span2 seguido-espaciado", :onkeypress => "return validarNumero(this)" ) %>
               <%= label_tag(:label_titulo, "Titulo") %>
-              <%= text_field_tag(:titulo, params[:titulo], :maxlength => 50, id: "docente_titulo", class: "span4 seguido", :onkeypress => "return validarText(event,this.value)") %>
+              <%= text_field_tag(:titulo, params[:titulo], :maxlength => 50, value: @administrativo.titulo, class: "span4 seguido", :onkeypress => "return validarText(event,this.value)") %>
             </div>
             <div id="campos_alumno" class="row" style="margin-left: 6px; display: none;">
               <%= label_tag :responsable, "Nombre del Responsable" %>
@@ -139,7 +139,9 @@
 $("form:not(.filter) :input:visible:enabled:first").focus();
 
 $(document).ready(function(){
-    aparecer_en_administrativo();
+    var alumno = <%= @administrativo.user.is_alumno || false %>
+    var docente = <%= @administrativo.user.is_docente || false %>
+    aparecer_en_administrativo(alumno, docente);
       //Comprueba que se teclee solo numeros
     $("#num_identify").keypress(function (e)
     {

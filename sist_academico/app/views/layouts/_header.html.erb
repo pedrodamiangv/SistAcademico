@@ -117,7 +117,6 @@
                   <% if current_user.is_alumno %>
                     <li><%= link_to "Perfil Alumno", current_user.alumno %></li>
                     <li><%= link_to "Editar Perfil Alumno", edit_alumno_path(current_user.alumno) %></li>
-                    <li><%= link_to "Ayuda", helps_path %></li>
                   <% end %>
                   <% if current_user.is_administrativo %>
                     <li><%= link_to "Perfil Administrativo", current_user.administrativo %></li>
@@ -126,7 +125,6 @@
                   <% if current_user.is_docente %>
                     <li><%= link_to "Perfil Docente", current_user.docente %></li>
                     <li><%= link_to "Editar Perfil Docente", edit_docente_path(current_user.docente) %></li>
-                    <li><%= link_to "Ayuda", helps_path %></li>
                   <% end %>
                   <li class="divider"></li>
                   <li>

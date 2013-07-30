@@ -204,6 +204,32 @@ class AlumnosController < ApplicationController
         unless @alumno.cursos.exists? curso_nuevo
           @alumno.cursos << curso_nuevo
         end
+        user = @alumno.user
+        if user.is_docente
+          unless user.docente
+            d = Docente.new
+            d.user_id = user.id
+            d.titulo = params[:titulo]
+            d.matricula = params[:matricula]
+            unless d.save
+              user.update_attribute(:is_docente, false);
+              format.html { redirect_to edit_docente_path(@docente), notice: 'No se pudo colocar el rol de Docente al Alumno, verifique sus datos.' }
+            end
+          end
+        end
+        if user.is_administrativo
+          unless user.administrativo
+            a = Administrativo.new
+            a.user_id = user.id
+            a.cargo = params[:cargo]
+            a.titulo = params[:titulo]
+            unless a.save
+              user.update_attribute(:is_administrativo, false)
+              format.html { redirect_to edit_docente_path(@docente), notice: 'No se pudo colocar el rol de Administrativo al Alumno, verifique sus datos.' }
+            end
+          end
+        end
+
         CustomLogger.info("Los datos antes de ser actualizados son: Nombre del alumno: #{nombre_antiguo.inspect} ,Apellido: #{apellido_antiguo.inspect} ,Cedula de Identidad: #{cedula_antiguo.inspect} ,Sexo: #{sexo_antiguo.inspect} ,Telefono:#{telefono_antiguo.inspect} ,Correo Electronico: #{correo_antiguo.inspect} ,Fecha de Nacimiento:#{fechaNac_antiguo.inspect} ,Lugar de Nacimiento: #{lugarNac_antiguo.inspect} ,Nombre del Responsable: #{responsable_antiguo.inspect} ,Telefono del Responsable: #{telefonoRespon_antiguo.inspect} ,Direccion: #{direccion_antiguo.inspect} ,Documentos Personales: Foto Tipo Carnet: #{doc_foto_antiguo.inspect} ,Cedula: #{doc_cedula_antiguo.inspect} ,Certificado de Nacimiento: #{doc_cert_nacimiento_antiguo.inspect} ,Certificado de Estudio: #{doc_cert_estudios_antiguo.inspect} ,Nombre de Usuario: #{nombreUsuario_antiguo.inspect} .Los datos actualizados por el usuario: #{current_user.full_name.inspect} son los siguientes: Nombre del alumno: #{nombre_nuevo.inspect} ,Apellido: #{apellido_nuevo.inspect} ,Cedula de Identidad: #{cedula_nuevo.inspect} ,Sexo: #{sexo_nuevo.inspect} ,Telefono:#{telefono_nuevo.inspect} ,Correo Electronico: #{correo_nuevo.inspect} ,Fecha de Nacimiento:#{fechaNac_nuevo.inspect} ,Lugar de Nacimiento: #{lugarNac_nuevo.inspect} ,Nombre del Responsable: #{responsable_nuevo.inspect} ,Telefono del Responsable: #{telefonoRespon_nuevo.inspect} ,Direccion: #{direccion_nuevo.inspect} ,Documentos Personales: Foto Tipo Carnet: #{doc_foto_nuevo.inspect} ,Cedula: #{doc_cedula_nuevo.inspect} ,Certificado de Nacimiento: #{doc_cert_nacimiento_nuevo.inspect} ,Certificado de Estudio: #{doc_cert_estudios_nuevo.inspect} ,Nombre de Usuario: #{nombreUsuario_nuevo.inspect} ,#{Time.now} ")
         format.html { redirect_to @alumno, notice: 'El alumno ha sido actualizado.' }
         format.json { head :no_content }

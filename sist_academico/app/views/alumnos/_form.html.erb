@@ -109,6 +109,19 @@
                     <%= d.label "Administrativo", class: "seguido-espaciado" %>
                   </div>
                 </div>
+                <div id="campos_docente" class="row" style="margin-left: 6px; display: none;">
+                  <%= label_tag(:label_matricula, "Matricula") %>
+                  <%= text_field_tag(:matricula, params[:matricula], :maxlength => 15, id: "num_identify2", class: "span2 seguido-espaciado", :onkeypress => "return validarNumero(this)" ) %>
+                  <%= label_tag(:label_titulo, "Titulo") %>
+                  <%= text_field_tag(:titulo, params[:titulo], :maxlength => 50, id: "docente_titulo", class: "span4 seguido", :onkeypress => "return validarText(event,this.value)") %>
+                </div>
+                <div id="campos_administrativo" class="row" style="margin-left: 6px; display: none;">
+                  <%= label_tag :cargo, "Cargo" %>
+                  <%= text_field_tag :cargo, params[:cargo], :maxlength => 30, class: "span3",:onkeypress => "return validarText(event,this.value)" %>
+            
+                  <%= label_tag :titulo, "Titulo" %>
+                  <%= text_field_tag :titulo, params[:titulo], :maxlength => 50, class: "span4",:onkeypress => "return validarText(event,this.value)" %>
+                </div>
               <% end %>
             <% end %>
               <div class="abajo" align="center">
@@ -140,6 +153,9 @@ $( "#datepicker" ).datepicker({ maxDate: '+0d' });
 
 
 $(document).ready(function(){
+    var administrativo = <%= @alumno.user.is_administrativo || false %>
+    var docente = <%= @alumno.user.is_docente || false %>
+    aparecer_en_alumno(docente, administrativo);
       //Comprueba que se teclee solo numeros
     $("#num_identify").keypress(function (e)
     {
