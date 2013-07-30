@@ -28,7 +28,7 @@
 
 function validarText(e,div) {
   txt = $(div).val();
-  if (txt.length > 1){
+  if (txt.length > 2){
     chart_one = txt.charAt(txt.length - 1);
     chart_two = txt.charAt(txt.length - 2);
     chart_three = txt.charAt(txt.length - 3);
