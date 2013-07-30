@@ -7,9 +7,9 @@
     <%= form_for direccion, :validate => true, remote: true do |f| %>
     <%= f.text_field :tipo, value: 'docentes', style: 'display: none;'  %>
     <%= f.label :direccion %><br />
-    <%= f.text_field :direccion %>
+    <%= f.text_field :direccion, :maxlength => 50, class: "span4", :onkeypress => "return validarText(event,this)" %>
     <%= f.label :barrio %><br />
-    <%= f.text_field :barrio %>
+    <%= f.text_field :barrio, :maxlength => 50, class: "span4", :onkeypress => "return validarText(event,this)" %>
     <%= f.label :city, "Ciudad" %>
     <%= f.collection_select :city_id ,@cities,:id,:city %>
   </div>  

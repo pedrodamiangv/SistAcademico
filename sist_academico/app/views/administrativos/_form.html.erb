@@ -9,10 +9,10 @@
           <%= f.fields_for :user do |d| %>
         <div class="span3">
           <%= d.label :nombre %>
-          <%= d.text_field :nombre, :maxlength => 50, class: "span4", :onkeypress => "return validarText(event,this.value)" %>
+          <%= d.text_field :nombre, :maxlength => 50, class: "span4", :onkeypress => "return validarText(event,this)" %>
 
           <%= d.label :apellido %>
-          <%= d.text_field :apellido, :maxlength => 50, class: "span4", :onkeypress => "return validarText(event,this.value)" %>
+          <%= d.text_field :apellido, :maxlength => 50, class: "span4", :onkeypress => "return validarText(event,this)" %>
 
           <%= d.label :CINro, "C.I.Número" %>
           <%= d.text_field :CINro, :maxlength => 9, :id => "num_identify", class: "span2" %>
@@ -35,10 +35,10 @@
         </div>
         <div class="span4">
           <%= f.label :cargo %>
-          <%= f.text_field :cargo, :maxlength => 30, class: "span3",:onkeypress => "return validarText(event,this.value)" %>
+          <%= f.text_field :cargo, :maxlength => 30, class: "span3",:onkeypress => "return validarText(event,this)" %>
     
           <%= f.label :titulo %>
-          <%= f.text_field :titulo, :maxlength => 50, class: "span4",:onkeypress => "return validarText(event,this.value)" %>
+          <%= f.text_field :titulo, :maxlength => 50, class: "span4",:onkeypress => "return validarText(event,this)" %>
 
           <a data-toggle="modal" href="#example" class="direccion">Ingresar nueva direccion</a>
           <%= d.label :direccion %>
@@ -93,11 +93,11 @@
               <%= label_tag(:label_matricula, "Matricula") %>
               <%= text_field_tag(:matricula, params[:matricula], :maxlength => 15, id: "num_identify2", class: "span2 seguido-espaciado", :onkeypress => "return validarNumero(this)" ) %>
               <%= label_tag(:label_titulo, "Titulo") %>
-              <%= text_field_tag(:titulo, params[:titulo], :maxlength => 50, value: @administrativo.titulo, class: "span4 seguido", :onkeypress => "return validarText(event,this.value)") %>
+              <%= text_field_tag(:titulo, params[:titulo], :maxlength => 50, value: @administrativo.titulo, class: "span4 seguido", :onkeypress => "return validarText(event,this)") %>
             </div>
             <div id="campos_alumno" class="row" style="margin-left: 6px; display: none;">
               <%= label_tag :responsable, "Nombre del Responsable" %>
-              <%= text_field_tag :responsable, params[:responsable], :maxlength => 50, class: "span4", :onkeypress => "return validarText(event,this.value)" %>
+              <%= text_field_tag :responsable, params[:responsable], :maxlength => 50, class: "span4", :onkeypress => "return validarText(event,this)" %>
               <%= label_tag :telefono_responsable, "Teléfono del Responsable" %>
               <%= text_field_tag :telefono_responsable, params[:telefono_responsable], :maxlength => 13, :placeholder => "(xxxx) xxxxxx", class:  "span2" %>
               <%= label_tag :curso_id %>

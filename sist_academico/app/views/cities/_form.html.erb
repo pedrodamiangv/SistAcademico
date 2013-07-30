@@ -6,7 +6,7 @@
         <fieldset>
     <div class="span3 offset4">
   			<%= f.label :ciudad %>
-  			<%= f.text_field :city, :maxlength => 50, class: "span4", :onkeypress => "return validarText(event,this.value)" %><br/>
+  			<%= f.text_field :city, :maxlength => 50, class: "span4", :onkeypress => "return validarText(event,this)" %><br/>
   			<%= f.label :pais %>
   			<%= f.collection_select :country_id ,@countries,:id,:pais %><br/>
   			<%= submit_tag "Guardar", class: "btn btn-large btn-primary" %>

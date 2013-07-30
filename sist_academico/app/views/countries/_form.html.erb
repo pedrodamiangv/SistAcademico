@@ -6,7 +6,7 @@
         <fieldset>
       <div class="span3 offset4">
   				<%= f.label :pais %>
- 				  <%= f.text_field :pais, :maxlength => 30, :onkeypress => "return validarText(event,this.value)" %>
+ 				  <%= f.text_field :pais, :maxlength => 30, :onkeypress => "return validarText(event,this)" %>
   				<%= f.submit "Guardar", class: "btn btn-large btn-primary" %>
           <%= link_to "Cancelar", :back, class: "btn btn-large btn-inverse" %>
 				<% end %>

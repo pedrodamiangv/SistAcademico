@@ -10,10 +10,10 @@
           <div class="container cuadro">
             <div class="span3">
               <%= d.label :nombre %>
-              <%= d.text_field :nombre, :maxlength => 50, :id =>"i_name", class: "span4", :onkeypress => "return validarText(event,this.value)" %>
+              <%= d.text_field :nombre, :maxlength => 50, :id =>"i_name", class: "span4", :onkeypress => "return validarText(event,this)" %>
 
               <%= d.label :apellido %>
-              <%= d.text_field :apellido, :maxlength => 50, class: "span4", :onkeypress => "return validarText(event,this.value)" %>
+              <%= d.text_field :apellido, :maxlength => 50, class: "span4", :onkeypress => "return validarText(event,this)" %>
               
               <%= d.label :fecha_nacimiento, "Fecha de Nacimiento" %> 
               <%= d.text_field :fecha_nacimiento, :id=> "fecha", id:"fechaNacAlumn" %>
@@ -36,7 +36,7 @@
             </div>
             <div class="span3">
               <%= f.label :responsable, "Nombre del Responsable" %>
-              <%= f.text_field :responsable, :maxlength => 50, class: "span4", :onkeypress => "return validarText(event,this.value)" %>
+              <%= f.text_field :responsable, :maxlength => 50, class: "span4", :onkeypress => "return validarText(event,this)" %>
 
               <%= f.label :telefono_responsable, "Teléfono del Responsable" %>
               <%= f.text_field :telefono_responsable, :maxlength => 13, :placeholder => "(xxxx) xxxxxx", class:  "span2" %>
@@ -113,14 +113,14 @@
                   <%= label_tag(:label_matricula, "Matricula") %>
                   <%= text_field_tag(:matricula, params[:matricula], :maxlength => 15, id: "num_identify2", class: "span2 seguido-espaciado", :onkeypress => "return validarNumero(this)" ) %>
                   <%= label_tag(:label_titulo, "Titulo") %>
-                  <%= text_field_tag(:titulo, params[:titulo], :maxlength => 50, id: "docente_titulo", class: "span4 seguido", :onkeypress => "return validarText(event,this.value)") %>
+                  <%= text_field_tag(:titulo, params[:titulo], :maxlength => 50, id: "docente_titulo", class: "span4 seguido", :onkeypress => "return validarText(event,this)") %>
                 </div>
                 <div id="campos_administrativo" class="row" style="margin-left: 6px; display: none;">
                   <%= label_tag :cargo, "Cargo" %>
-                  <%= text_field_tag :cargo, params[:cargo], :maxlength => 30, class: "span3",:onkeypress => "return validarText(event,this.value)" %>
+                  <%= text_field_tag :cargo, params[:cargo], :maxlength => 30, class: "span3",:onkeypress => "return validarText(event,this)" %>
             
                   <%= label_tag :titulo, "Titulo" %>
-                  <%= text_field_tag :titulo, params[:titulo], :maxlength => 50, class: "span4",:onkeypress => "return validarText(event,this.value)" %>
+                  <%= text_field_tag :titulo, params[:titulo], :maxlength => 50, class: "span4",:onkeypress => "return validarText(event,this)" %>
                 </div>
               <% end %>
             <% end %>

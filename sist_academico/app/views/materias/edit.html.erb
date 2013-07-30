@@ -19,7 +19,7 @@
   <div id="campos_edicion" class="row" style=" display:none;">
     <div class="span4">
 	  <%= f.label :materia %>
-      <%= f.text_field :materia, :maxlength => 30 %>
+      <%= f.text_field :materia, :maxlength => 50, class: "span4", :onkeypress => "return validarText(event,this)" %>
       <%= f.label :area %>
       <%= f.select( :area, ['Lenguas y sus Tecnolog.', 'Matemática y sus Tecnolog.', 'Ciencias Naturales', 'Ciencias Sociales', 'Artes y sus Tecnolog.', 'Plan Especifico', 'Plan Optativo'])%>
               
