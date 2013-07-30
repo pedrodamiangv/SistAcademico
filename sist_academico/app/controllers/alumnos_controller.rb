@@ -32,6 +32,13 @@ class AlumnosController < ApplicationController
     end
   end
 
+  def find_alumnos
+    nombre = params[:term]
+    @alumnos = Alumno.find(:all, :joins => :user, :conditions => ["nombre LIKE ?","%#{nombre}%" ] ).map { |c| {id: c.id, label: c.full_name, value: c.full_name} }
+    # Retorno la lista de Alumnos que encuentra.
+    render json: @alumnos
+  end
+
   def alumno_calificaciones
     @alumno = Alumno.find(params[:id])
     @materias = @alumno.curso_seleccionado.materias

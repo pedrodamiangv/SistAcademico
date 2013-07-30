@@ -20,5 +20,13 @@
   $(document).ready(function(){
     <% actual_page = request.original_url %>
     <% ApplicationController.save_preference("last_page", current_user, actual_page) %>
+    $("#buscar_buscar").autocomplete({
+      source: "<%= find_alumnos_alumnos_path %>",
+      minLength: 2,
+      appendTo: "#menu-admin",
+      select: function( event, ui ) {
+        window.location = "/alumnos/"+ui.item.id;
+      }
+    });
   });
 </script>

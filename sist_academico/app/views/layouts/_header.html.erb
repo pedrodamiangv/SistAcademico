@@ -5,9 +5,9 @@
       <p style="float: left; margin-top: 10px;"><%= image_tag config.logo_url(:small_thumb) if config.logo? %></p>
       <%= link_to config.nombre, root_path, id: "logo" %>
       <nav>
-        <ul class="nav pull-right">
+        <ul id="menu-admin" class="nav pull-right">
           <% if current_user %>
-             <li><input type="text" id="buscar_buscar" class="input-medium search-query" placeholder="Search a Customer" style="margin-top: 6px;"></li>  
+             <li><input type="text" id="buscar_buscar" class="input-medium search-query" placeholder="Buscar un alumno" style="margin-top: 6px;"></li>  
              <% if current_user.is_administrativo %>
 
              <li class="dropdown" data-dropdown="dropdown" >
