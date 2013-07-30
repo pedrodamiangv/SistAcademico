@@ -31,8 +31,7 @@ function validarText(e,div) {
   if (txt.length > 2){
     chart_one = txt.charAt(txt.length - 1);
     chart_two = txt.charAt(txt.length - 2);
-    chart_three = txt.charAt(txt.length - 3);
-    if (chart_one == chart_two && chart_one == chart_three){
+    if (chart_one == chart_two){
       $(div).val(txt.substring(0, txt.length-1));
     }
   }
