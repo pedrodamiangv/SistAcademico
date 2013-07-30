@@ -14,6 +14,7 @@
             <th id="centrar">Alumno</th>
             <th id="centrar">Materia</th>
             <th id="centrar">Calificacion</th>
+            <th id="centrar">Etapa</th>
             <th id="centrar">Total puntos</th>
             <th id="centrar">Puntos correctos</th>
             <% if current_user.is_administrativo %>
@@ -30,6 +31,7 @@
               <td class="selection <%= id %>"><%= calificacion.alumno.full_name %></td>
               <td class="selection <%= id %>"><%= calificacion.materia.materia %></td>
               <td class="selection <%= id %>"><%= calificacion.calificacion %></td>
+              <td class="selection <%= id %>"><%= calificacion.etapa %></td>
               <td class="selection <%= id %>"><%= calificacion.total_puntos %></td>
               <td class="selection <%= id %>"><%= calificacion.puntos_correctos %></td>
               <% if current_user.is_administrativo %>

@@ -284,13 +284,13 @@ class MateriasController < ApplicationController
 
     def correct_user_for_show
       @materia = Materia.find(params[:id])
-      if current_user.is_docente?
+      if current_user.is_administrativo?
+
+      elsif current_user.is_docente?
         redirect_to(root_path) unless ( @materia.docente == current_user.docente)
       elsif current_user.is_alumno?
         redirect_to(root_path) unless ( @materia.curso == current_user.alumno.curso )
-      else
-       redirect_to(root_path) unless ( current_user.is_administrativo?)
-     end
+      end
     end
 
     def correct_user
